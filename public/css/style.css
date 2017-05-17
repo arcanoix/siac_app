@@ -1,4 +1,4 @@
-html {
+body {
   /*background: url(http://cdn.magdeleine.co/wp-content/uploads/2014/05/3jPYgeVCTWCMqjtb7Dqi_IMG_8251-1400x933.jpg) no-repeat center center fixed;*/
   background-image: url(../../img/background1.jpg);
   background-repeat: no-repeat;
@@ -232,7 +232,7 @@ a:hover{
 
 /* El tooltip */
 .cssToolTip span {
-  background: rgba(20,20,20,0.9) url('img/info.gif') center left 5px no-repeat;
+  background: rgba(20,20,20,0.9)  center left 5px no-repeat;
   border: 2px solid #87cefa;
   border-radius: 5px;
   box-shadow: 5px 5px 5px #333;

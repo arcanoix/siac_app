@@ -4,6 +4,8 @@ import VueResource from 'vue-resource'
 
 import HomeComponent from './components/home.vue'
 import LoginComponent from './components/login.vue'
+import acceso from './components/acceso.vue'
+import menu from './components/menu.vue'
 import auth from './auth.js'
 
 
@@ -22,7 +24,16 @@ const routes = [
 	{
 		path : '/login',  
 		component : LoginComponent 
+	},
+	{
+		path: '/acceso',
+		component : acceso
+	},
+	{
+		path:'/menu',
+		component: menu
 	}
+	
 ]
 
 export const router = new VueRouter({

@@ -18,3 +18,24 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+//rutas ejemplo
+
+Route::get('/login',function(){
+		return view('admin.login');
+});
+Route::get('/menu',function(){
+	return view('admin.menu');
+});
+Route::get('/registro',function(){
+	return view('admin.registro.registro');
+});
+Route::get('/registro/cliente',function(){
+	return view('admin.registro.registro_cliente');
+});
+Route::get('/registro/falla',function(){
+	return view('admin.registro.registro_falla');
+});
+Route::get('/registro/tecnico',function(){
+	return view('admin.registro.registro_tecnico');
+});

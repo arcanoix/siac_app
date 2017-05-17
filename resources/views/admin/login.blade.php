@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css?family=Hind:300" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet" type="text/css">
 
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="{{ asset('css/style.css')}}">
 
   </head>
 
@@ -58,10 +58,12 @@
 </div>
 </div>
 
-    <script src="js/TweenMax.min.js"></script>
-<script src="js/jquery.min.js"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
 
-        <script src="js/index.js"></script>
+    <script src="{{ asset('js/TweenMax.min.js') }}"></script>
+    
+
+        <script src="{{ asset('js/index.js') }}"></script>
 
 
 

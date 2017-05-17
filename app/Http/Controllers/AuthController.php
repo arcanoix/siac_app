@@ -28,6 +28,7 @@ class AuthController extends Controller
 	 */
 	public function signin(Request $request)
 	{
+		dd("hola");
 		$credentials = $request->only('email', 'password');
 		try {
 			$token = JWTAuth::attempt(              $credentials);
