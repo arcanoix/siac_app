@@ -27,27 +27,22 @@
                             <a class="navbar-brand" href="#">SIAC</a>
 
                         </div>
-                
+
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                             <ul class="nav navbar-nav">
-                                <li class="active">
-                                    <router-link to="/acceso">Acceso</router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/register">Registro</router-link>
-                                </li>
-                               
                                 
-                                
+
+
+
                             </ul>
                             <h3 style="text-align: right;">Sistema de Identificación de Averias | CANTV</h3>
                         </div><!-- /.navbar-collapse -->
                     </div>
                 </nav>
                 <div class="wrapper">
+
                     
-                    <router-view></router-view>
                 </div>
             </div>
         </div>

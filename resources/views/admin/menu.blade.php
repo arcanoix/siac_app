@@ -43,9 +43,9 @@ a:hover {
 }
 
 body {
-    
+
     background: url(../img/original1.jpg)no-repeat center fixed;
-    
+
     background-position: center;
     background-size: cover;
     font: 14px "Open Sans",Helvetica,Arial,sans-serif;
@@ -355,6 +355,8 @@ a.homer {
   <li>  <a  style="text-align:right;">Cerrar Sesión</a></li>
 
   </ul>
+
+  
 
 
   </nav>

@@ -14,14 +14,14 @@
 
   <body>
 
-      <div id="">
+      <div>
           <h1 style="text-align: center;">Sistema de Identificación de Averias para CANTV</h1>
       </div>
 
       <div class="cssToolTip">
              <div id="login-button">
 
-                <img src="../img/Logo_Siac.png" >
+                <img src="{{ asset('/img/Logo_Siac.png') }}" >
              </div>
             <span>Haga click para iniciar seccion </span>
       </div>
@@ -29,14 +29,27 @@
 <div id="container">
   <h1>Acceso</h1>
   <span class="close-btn" >
-    <img src="image/circle_close_delete_-128.png">
+    <img src="{{ asset('image/circle_close_delete_-128.png')}}">
   </span>
 
-  <form>
-    <input type="email" name="email" placeholder="Usuario" required/>
-    <input type="password" name="pass" placeholder="Contraseña" required/>
-    <a href="menu.html">Accesar</a>
-    <div id="remember-container">
+  <form  class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
+      {{ csrf_field() }}
+    <input type="email" name="email" placeholder="Usuario" value="{{ old('email') }}" required autofocus/>
+    @if ($errors->has('email'))
+        <span class="help-block">
+            <strong>{{ $errors->first('email') }}</strong>
+        </span>
+    @endif
+
+    <input type="password" name="password" placeholder="Contraseña" required/>
+    @if ($errors->has('password'))
+        <span class="help-block">
+            <strong>{{ $errors->first('password') }}</strong>
+        </span>
+    @endif
+
+    <a href="">Accesar</a>
+    <div id="remember-container" style="display:none;">
       <input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked"/>
       <span id="remember">Recordar</span>
       <span id="forgotten">Olvide contraseña</span>
@@ -60,10 +73,10 @@
 
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 
-    <script src="{{ asset('js/TweenMax.min.js') }}"></script>
-    
+<script src="{{ asset('js/TweenMax.min.js') }}"></script>
+<script src="{{ asset('js/index1.js') }}"></script>
 
-        <script src="{{ asset('js/index.js') }}"></script>
+<script src="{{ asset('js/index.js') }}"></script>
 
 
 
