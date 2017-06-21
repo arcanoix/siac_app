@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+window.Vue = require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -12,9 +13,23 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
- Vue.component('example', require('./components/Example.vue'));
+ var VueResource = require('vue-resource');
+
+ Vue.use(VueResource);
+
+ import Users from './components/Users.vue';
+
+
+ Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
+
 
 
 const app = new Vue({
     el: '#app',
+    components: {
+        Users
+     },
+     showModal: function() {
+            alert("It's working!");
+        }
 });

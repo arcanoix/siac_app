@@ -44,7 +44,8 @@ a:hover {
 
 body {
 
-    background: url(../img/original1.jpg)no-repeat center fixed;
+  /*  background: url(../img/original1.jpg)no-repeat center fixed;*/
+    background-image: url(../img/Fondos01.jpg);
 
     background-position: center;
     background-size: cover;
@@ -356,7 +357,7 @@ a.homer {
 
   </ul>
 
-  
+
 
 
   </nav>

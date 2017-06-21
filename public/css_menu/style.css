@@ -45,7 +45,8 @@ body {
     background: -ms-linear-gradient(-45deg, #333133 0%, #499aeb 100%);
     background: linear-gradient(135deg, #333133 0%, #499aeb 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333133', endColorstr='#499aeb', GradientType=1 );*/
-    background-image: url(../../img/original1.jpg);
+  /*  background-image: url(../../img/original1.jpg);*/
+    background-image: url(../../img/Fondos01.jpg);
 }
 
 

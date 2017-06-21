@@ -21,9 +21,14 @@ Route::get('/home', 'HomeController@index');
 
 //rutas ejemplo
 
-Route::get('/logeo',function(){
-		return view('admin.login');
+Route::get('/site',function(){
+		return view('admin.site');
 });
+
+
+
+
+Route::get('/users', 'UserController@index');
 
 Route::get('/menu',function(){
 	return view('admin.menu');

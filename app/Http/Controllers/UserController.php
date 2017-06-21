@@ -1,12 +1,22 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\User;
+
+
 class UserController extends Controller
 {
     //
-    public function index(Request $request)
+    public function index()
     {
-    	return 'valid user';
-    	
+        $users = User::all();
+
+    return response()->json([
+        'users' => $users
+        ]);
+    
+
     }
+
+
 }

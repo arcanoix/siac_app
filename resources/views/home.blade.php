@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+ @extends('admin.partials.base')
 
-        <title>SIAC | Sistema de averias Cantv</title>
-
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
-          <link rel="stylesheet" href="{{ asset('css/style.css')}}">
-    </head>
-    <body>
-        <div id="app">
+ @section('content')
             <div class="container">
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
@@ -31,7 +20,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                             <ul class="nav navbar-nav">
-                                
+
 
 
 
@@ -40,18 +29,13 @@
                         </div><!-- /.navbar-collapse -->
                     </div>
                 </nav>
-                <div class="wrapper">
 
-                    
+
+                <div class="wrapper">
+                  <Users></Users>
+
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-         <script src="{{ aseet('js/TweenMax.min.js')}}"></script>
-         <script src="{{ asset('js/jquery.min.js')}}"></script>
 
-        <script src="{{ asset('js/index.js')}}"></script>
-
-
-    </body>
-</html>
+ @endsection

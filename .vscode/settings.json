@@ -1,0 +1,8 @@
+// Coloque su configuración en este archivo para sobrescribir la configuración predeterminada y de usuario.
+{
+    
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.fontFamily": "Fira Code",
+    "editor.fontSize": 14
+
+}
