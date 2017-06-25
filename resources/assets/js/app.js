@@ -13,23 +13,45 @@ window.Vue = require('vue');
  * the application, or feel free to tweak this setup for your needs.
  */
 
- var VueResource = require('vue-resource');
+ /*var VueResource = require('vue-resource');*/
+ var axios = require('axios');
 
- Vue.use(VueResource);
+
+ 
 
  import Users from './components/Users.vue';
+ import Dashboard from './components/Dashboard.vue';
+ import Modal from './components/Modal.vue';
+ import VueRouter from 'vue-router'
+
+ 
+ import Router from './routes.js'
 
 
- Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
+ Vue.component('dashboard', Dashboard)
+ Vue.component('users', Users)
+ Vue.component('modal', Modal)
+
+
+ axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 
 
 const app = new Vue({
     el: '#app',
+    router : Router,
     components: {
-        Users
+        Users,
+        Modal
      },
-     showModal: function() {
-            alert("It's working!");
-        }
+     data:{
+     	showModal:false,
+     	hasError: true,
+    	hasDeleted: true,
+     	newUser:{
+     		name:'',
+     		pass:'',
+     		email:''
+     	}
+     }
 });

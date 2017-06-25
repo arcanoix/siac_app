@@ -7,7 +7,9 @@
 
     <div style="padding: 5px">
       <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
-      <a class="btn-t btn-primary pull-left" href="#" @click="showModal"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Usuario</a>
+      <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
+      ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Usuario</a>
+      
     </div>
 
     <!-- For markup truncated -->
@@ -20,6 +22,7 @@
         <th>Email</th>
         <th>Editar</th>
         <th>Eliminar</th>
+       
       </tr>
       <tr v-for="b in users"  class="row-content">
         <td>{{ b.id }}</td>
@@ -31,34 +34,107 @@
         <td v-on:click.prevent="onEdit(index)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
         <td v-on:click.prevent="onDelete(index)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
       </tr>
+
     </table>
     <br>
+     
+    
 
-    <div>
+      <modal :display="showModal" @close="showModal = false">
+        <div slot="header">
+          <i class="fa fa-user"></i> Registro de Usuario
+          <p class="text-center alert alert-danger" 
+            v-bind:class="{ hidden: hasError }">Please enter some value!</p>
+            <p class="text-center alert alert-success" 
+            v-bind:class="{ hidden: hasDeleted }">Deleted Successfully!</p>
+        </div>
+        <div slot="body">
+          <form class="form">
+              
+            <div class="form-group inner-addon left-addon">
+               <i class="fa fa-user" aria-hidden="true"></i>
+              <input v-model="newUser.name" type="text" class="form-control" placeholder="Nombre de Usuario">
+             
+            </div>
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-envelope" aria-hidden="true"></i>
+              <input v-model="newUser.email" type="text" class="form-control" placeholder="Correo Electronico">
+             
+            </div>
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="newUser.pass" type="password" class="form-control" placeholder="Contraseña">
+              
+            </div>
+          </form>
+          
+        </div>  
+        <div slot="footer">
+          
+        <a href="#" class="btn btn-primary" v-on:click.prevent="saveUser()">Guardar</a>
+       
+          <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
 
-    </div>
-
+        </div>    
+      </modal>
+     
   </div>
 
 </template>
 
+
 <script>
+var getUsers = '/users';
+var postUsers = '/users_save';
+
+
+
 export default {
 
   data(){
       return {
         users: [],
-
+        showModal:false,
+        hasError: true,
+        hasDeleted: true,
+        newUser:{
+          name:'',
+          pass:'',
+          email:''
+        }
+        
       }
   },
-  created(){
+  created: function(){
     this.fetchUsers();
+
   },
   methods:{
-      fetchUsers(){
-        this.$http.get('/users').then(response => {
+      fetchUsers: function(){
+         axios.get(getUsers).then(response => {
+          
             this.users = response.data.users;
         });
+
+      },
+      saveUser: function(newUser){
+        var input = this.newUser;
+        if(input['name'] == ''){
+          this.hasError =false;
+          this.hasDeleted = true;
+        }
+        else
+        {
+              this.hasError=true;
+               axios.post(postUsers, this.newUser).then(response => {
+                  
+               this.fetchUsers();
+               });
+
+        }
+       
+
+
       }
   }
 }
@@ -66,6 +142,26 @@ export default {
 
 
 <style>
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .fa {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .fa  { left:  0px;}
+.right-addon .fa { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
 
 .tabled{
     background-color: white;

@@ -68,5 +68,6 @@
 <script src="{{ asset('js/index1.js') }}"></script>
 
 <script src="{{ asset('js/index.js') }}"></script>
+
 </body>
 </html>

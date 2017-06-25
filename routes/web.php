@@ -27,8 +27,9 @@ Route::get('/site',function(){
 
 
 
-
+/* Ruta modulo usuarios */
 Route::get('/users', 'UserController@index');
+Route::post('/users_save', 'UserController@store');
 
 Route::get('/menu',function(){
 	return view('admin.menu');
