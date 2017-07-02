@@ -25,14 +25,23 @@ img{
   bottom: 0;
   padding: 30px;
   margin: auto;
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   background: rgba(3,3,3,.8);
   overflow: hidden;
   opacity: 0.7;
   box-shadow: 10px 10px 30px #000;
 }
+
+
+#login-button:hover {
+  width: 190px;
+  height: 190px;
+  box-shadow: 10px 10px 30px #fff;
+  border:1px;
+}
+
 
 /* Login container */
 #container{

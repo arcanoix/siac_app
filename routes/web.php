@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('admin.login');
 });
@@ -30,6 +31,16 @@ Route::get('/site',function(){
 /* Ruta modulo usuarios */
 Route::get('/users', 'UserController@index');
 Route::post('/users_save', 'UserController@store');
+
+
+/* Ruta modulo empresas */
+Route::get('/business', 'UserController@index');
+Route::post('/business_save', 'UserController@store');
+
+
+
+
+
 
 Route::get('/menu',function(){
 	return view('admin.menu');

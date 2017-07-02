@@ -3,12 +3,12 @@
 <div class="tabled">
     <br>
 
-    <h3 style="text-align: center;">Usuarios</h3>
+    <h3 style="text-align: center;">ADS</h3>
 
     <div style="padding: 5px">
       <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
-      ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Usuario</a>
+      ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nueva ADS</a>
       
     </div>
 

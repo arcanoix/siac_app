@@ -94,7 +94,7 @@
           </div>
         </div>
 
-        <!-- search form (Optional) -->
+        <!-- search form (Optional) 
         <form action="#" method="get" class="sidebar-form">
           <div class="input-group">
             <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -104,30 +104,50 @@
                 </span>
           </div>
         </form>
-        <!-- /.search form -->
+         /.search form -->
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-          <li class="header">HEADER</li>
+          <li class="header"></li>
           <!-- Menus enlazados con las rutas del front vuejs  -->
-         
+          
+           
+            <router-link tag="li" to="/tablero">
+                <a><i class="fa fa-tachometer"></i> <span>Tablero</span></a>
+            </router-link>
+
             <router-link tag="li" to="/users">
                 <a><i class="fa fa-user"></i> <span>Usuarios</span></a>
             </router-link>
           
-            <router-link tag="li" to="/tecnicos">
-               <a> <i class="fa fa-user"></i> <span>Tecnicos</span></a>
+            <router-link tag="li" to="/empresas">
+               <a> <i class="fa fa-building"></i> <span>Empresas</span></a>
             </router-link>
           
             <router-link tag="li" to="/clientes">
-              <a> <i class="fa fa-link"></i> <span>Clientes</span></a>
+              <a> <i class="fa fa-users"></i> <span>Clientes</span></a>
             </router-link>
           
+          <router-link tag="li" to="/ads">
+              <a> <i class="fa fa-font"></i> <span>Ads</span></a>
+            </router-link>
           
+          <router-link tag="li" to="/servicios">
+              <a> <i class="fa fa-suitcase"></i> <span>Servicios</span></a>
+            </router-link>
          
+         <router-link tag="li" to="/numero_telefonico">
+              <a> <i class="fa fa-tty"></i> <span>Numero Telefonico</span></a>
+            </router-link>
+
+        <router-link tag="li" to="/fallas">
+              <a> <i class="fa fa-link"></i> <span>Fallas</span></a>
+            </router-link>
+            
+
       <!-- -->
           <li class="treeview">
-            <a href="#"><i class="fa fa-link"></i> <span>Fallas</span>
+            <a href="#"><i class="fa fa-cogs"></i> <span>Configuracion</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -137,7 +157,7 @@
               <li><a href="#">Linea</a></li>
             </ul>
           </li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Configuracion</span></a></li>
+            
         </ul>
         <!-- /.sidebar-menu -->
       </section>
@@ -147,16 +167,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          Page Header
-          <small>Optional description</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-          <li class="active">Home</li>
-        </ol>
-      </section>
+     
 
       <!-- Main content -->
       <section class="content">

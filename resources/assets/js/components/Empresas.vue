@@ -3,13 +3,13 @@
 <div class="tabled">
     <br>
 
-    <h3 style="text-align: center;">Usuarios</h3>
+    <h3 style="text-align: center;">Empresas</h3>
 
     <div style="padding: 5px">
       <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
-      ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Usuario</a>
-      
+      ="showModal=true"> <i class="fa fa-industry" aria-hidden="true"></i>Nueva Empresa</a>
+
     </div>
 
     <!-- For markup truncated -->
@@ -17,14 +17,14 @@
     <table class="table table-striped">
       <tr  class="row-name">
         <th>#</th>
-        <th>Usuario</th>
-        <th>Rol</th>
+        <th>Nombre</th>
+        <th>Rif</th>
         <th>Email</th>
         <th>Editar</th>
         <th>Eliminar</th>
-       
+
       </tr>
-      <tr v-for="b in users"  class="row-content">
+      <tr v-for="b in business"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
         <td> - </td>
@@ -37,83 +37,118 @@
 
     </table>
     <br>
-     
-    
+
+
 
       <modal :display="showModal" @close="showModal = false">
         <div slot="header">
-          <i class="fa fa-user"></i> Registro de Usuario
-          
+          <i class="fa fa-industry"></i> Registro de Empresa
+
         </div>
         <div slot="body">
           <form class="form">
-              
+
             <div class="form-group inner-addon left-addon">
-               <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('name') }">
+               <i class="fa fa-industry" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="newBusiness.name" type="text" class="form-control" placeholder="Nombre de la empresa" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
-             
+
             </div>
              <div class="form-group inner-addon left-addon">
-               <i class="fa fa-envelope" aria-hidden="true"></i>
-              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" v-model="newUser.email" type="text" class="form-control" placeholder="Correo Electronico" name="email">
+               <i class="fa fa-asterisk" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="newBusiness.rif" type="text" class="form-control" placeholder="Rif" :class="{'input': true, 'is-danger': errors.has('rif') }">
+             <span v-show="errors.has('rif')" class="help is-danger">{{ errors.first('rif') }}</span>
+
+            </div>
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-address-card" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="newBusiness.address" type="text" class="form-control" placeholder="Direccion" :class="{'input': true, 'is-danger': errors.has('address') }">
+             <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
+
+            </div>
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-envelope-o" aria-hidden="true"></i>
+              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" v-model="newBusiness.email" type="text" class="form-control" placeholder="Correo Electronico" name="email">
              <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
-             
+
+            </div>
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-phone" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="newBusiness.numbertelephone" type="text" class="form-control" placeholder="Numero telefonico" :class="{'input': true, 'is-danger': errors.has('numbertelephone_id') }">
+             <span v-show="errors.has('numbertelephone_id')" class="help is-danger">{{ errors.first('numbertelephone_id') }}</span>
+
+            </div>
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-phone" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="newBusiness.numbercontact" type="text" class="form-control" placeholder="Numero de contacto" :class="{'input': true, 'is-danger': errors.has('numbercontact') }">
+             <span v-show="errors.has('numbercontact')" class="help is-danger">{{ errors.first('numbercontact') }}</span>
+
+            </div>
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-global" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="newBusiness.state_id" type="text" class="form-control" placeholder="Estado" :class="{'input': true, 'is-danger': errors.has('state_id') }">
+             <span v-show="errors.has('state_id')" class="help is-danger">{{ errors.first('state_id') }}</span>
+
             </div>
             <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newUser.pass" type="password" class="form-control" placeholder="Contraseña">
-              
+
+
             </div>
           </form>
-          
-        </div>  
+
+        </div>
         <div slot="footer">
-          
-        <a href="#" class="btn btn-primary" v-on:click.prevent="saveUser()">Guardar</a>
-       
+
+        <a href="#" class="btn btn-primary" v-on:click.prevent="saveBusiness()">Guardar</a>
+
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
 
-        </div>    
+        </div>
       </modal>
-     
+
   </div>
 
 </template>
 
 
 <script>
-var getUsers = '/users';
-var postUsers = '/users_save';
- 
+var getBusiness = '/business';
+var postBusiness = '/business_save';
+
 export default {
 
   data(){
       return {
-        users: [],
+        business: [],
         showModal:false,
-        newUser:{
+        newBusiness:{
           name:'',
-          pass:'',
-          email:''
+          rif:'',
+          adress:'',
+          email:'',
+          numberthelephone_id:'',
+          state_id:'',
+          municipality_id:'',
+          parish_id:'',
+          sector_id:''
         }
-        
+
       }
   },
   created: function(){
-    this.fetchUsers();
+    this.fetchBusiness();
 
   },
   methods:{
-      fetchUsers: function(){
-         axios.get(getUsers).then(response => {
-          
-            this.users = response.data.users;
+      fetchBusiness: function(){
+         axios.get(getBusiness).then(response => {
+
+            //this.users = response.data.users;
         });
 
       },
-      saveUser: function(newUser){
-        var input = this.newUser;
+      saveBusiness: function(newBusiness){
+        var input = this.newBusiness;
         if(input['name'] == ''){
           this.hasError =false;
           this.hasDeleted = true;
@@ -121,13 +156,13 @@ export default {
         else
         {
               this.hasError=true;
-               axios.post(postUsers, this.newUser).then(response => {
-                  
-               this.fetchUsers();
+               axios.post(postBusiness, this.newBusiness).then(response => {
+
+               this.fetchBusiness();
                });
 
         }
-       
+
 
 
       }
@@ -153,8 +188,8 @@ export default {
 
 
 /* enable absolute positioning */
-.inner-addon { 
-    position: relative; 
+.inner-addon {
+    position: relative;
 }
 
 /* style icon */

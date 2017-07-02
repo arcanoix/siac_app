@@ -24,6 +24,11 @@ window.Vue = require('vue');
  import Modal from './components/Modal.vue';
  import VueRouter from 'vue-router'
 
+
+import VeeValidate from 'vee-validate';
+
+Vue.use(VeeValidate);
+
  
  import Router from './routes.js'
 
@@ -46,8 +51,6 @@ const app = new Vue({
      },
      data:{
      	showModal:false,
-     	hasError: true,
-    	hasDeleted: true,
      	newUser:{
      		name:'',
      		pass:'',
