@@ -9,7 +9,7 @@
       <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Numero Telefonico</a>
-      
+
     </div>
 
     <!-- For markup truncated -->
@@ -22,7 +22,7 @@
         <th>Email</th>
         <th>Editar</th>
         <th>Eliminar</th>
-       
+
       </tr>
       <tr v-for="b in users"  class="row-content">
         <td>{{ b.id }}</td>
@@ -37,46 +37,70 @@
 
     </table>
     <br>
-     
-    
+
+
 
       <modal :display="showModal" @close="showModal = false">
         <div slot="header">
           <i class="fa fa-user"></i> Registro de Numero Telefonico
-          
+
         </div>
         <div slot="body">
           <form class="form">
-              
+
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Codigo" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
-             
+
             </div>
              <div class="form-group inner-addon left-addon">
-               <i class="fa fa-envelope" aria-hidden="true"></i>
-              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" v-model="newUser.email" type="text" class="form-control" placeholder="Correo Electronico" name="email">
+               <i class="fa fa-phone" aria-hidden="true"></i>
+              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" v-model="newUser.email" type="text" class="form-control" placeholder="Numero Telefonico" name="email">
              <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
-             
+
             </div>
             <div class="form-group inner-addon left-addon">
              <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newUser.pass" type="password" class="form-control" placeholder="Contraseña">
-              
+             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Estatus">
+
             </div>
+
+            <div  class="form-group col-xs-3">
+              <input v-model="newUser.pass" type="text" class="form-control" placeholder="cc">
+            </div>
+
+            <div class="form-group col-xs-3">
+              <input v-model="newUser.pass" type="text" class="form-control" placeholder="cl">
+            </div>
+
+            <div class="form-group col-xs-3">
+             <input v-model="newUser.pass" type="text" class="form-control" placeholder="pc">
+            </div>
+
+            <div class="form-group col-xs-3">
+             <input v-model="newUser.pass" type="text" class="form-control" placeholder="pl">
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Manga">
+
+            </div>
+
+
           </form>
-          
-        </div>  
+
+        </div>
         <div slot="footer">
-          
+
         <a href="#" class="btn btn-primary" v-on:click.prevent="saveUser()">Guardar</a>
-       
+
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
 
-        </div>    
+        </div>
       </modal>
-     
+
   </div>
 
 </template>
@@ -85,7 +109,7 @@
 <script>
 var getUsers = '/users';
 var postUsers = '/users_save';
- 
+
 export default {
 
   data(){
@@ -97,7 +121,7 @@ export default {
           pass:'',
           email:''
         }
-        
+
       }
   },
   created: function(){
@@ -107,7 +131,7 @@ export default {
   methods:{
       fetchUsers: function(){
          axios.get(getUsers).then(response => {
-          
+
             this.users = response.data.users;
         });
 
@@ -122,12 +146,12 @@ export default {
         {
               this.hasError=true;
                axios.post(postUsers, this.newUser).then(response => {
-                  
+
                this.fetchUsers();
                });
 
         }
-       
+
 
 
       }
@@ -153,8 +177,8 @@ export default {
 
 
 /* enable absolute positioning */
-.inner-addon { 
-    position: relative; 
+.inner-addon {
+    position: relative;
 }
 
 /* style icon */

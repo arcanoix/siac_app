@@ -24,30 +24,30 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
-            
-          
+
+
             <!-- Tasks Menu -->
-           
+
             <!-- User Account Menu -->
             <li class="dropdown user user-menu">
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="user-image" alt="User Image">
+                <img src="{{ asset("/img/myAvatar.png") }}" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs">{{ Auth::user()->name }}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
-                  <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
+                  <img src="{{ asset("/img/myAvatar.png") }}" class="img-circle" alt="User Image">
 
                   <p>
                     {{ Auth::user()->name }} - Web Developer
                     <small>Member since Nov. 2012</small>
                   </p>
                 </li>
-               
+
                 <li class="user-footer">
                   <div class="pull-left">
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
@@ -85,7 +85,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="{{ asset("/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image">
+            <img src="{{ asset("/img/myAvatar.png") }}" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
             <p>{{ Auth::user()->name }}</p>
@@ -94,7 +94,7 @@
           </div>
         </div>
 
-        <!-- search form (Optional) 
+        <!-- search form (Optional)
         <form action="#" method="get" class="sidebar-form">
           <div class="input-group">
             <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -110,8 +110,8 @@
         <ul class="sidebar-menu">
           <li class="header"></li>
           <!-- Menus enlazados con las rutas del front vuejs  -->
-          
-           
+
+
             <router-link tag="li" to="/tablero">
                 <a><i class="fa fa-tachometer"></i> <span>Tablero</span></a>
             </router-link>
@@ -119,23 +119,23 @@
             <router-link tag="li" to="/users">
                 <a><i class="fa fa-user"></i> <span>Usuarios</span></a>
             </router-link>
-          
+
             <router-link tag="li" to="/empresas">
                <a> <i class="fa fa-building"></i> <span>Empresas</span></a>
             </router-link>
-          
+
             <router-link tag="li" to="/clientes">
               <a> <i class="fa fa-users"></i> <span>Clientes</span></a>
             </router-link>
-          
+
           <router-link tag="li" to="/ads">
               <a> <i class="fa fa-font"></i> <span>Ads</span></a>
             </router-link>
-          
+
           <router-link tag="li" to="/servicios">
               <a> <i class="fa fa-suitcase"></i> <span>Servicios</span></a>
             </router-link>
-         
+
          <router-link tag="li" to="/numero_telefonico">
               <a> <i class="fa fa-tty"></i> <span>Numero Telefonico</span></a>
             </router-link>
@@ -143,7 +143,7 @@
         <router-link tag="li" to="/fallas">
               <a> <i class="fa fa-link"></i> <span>Fallas</span></a>
             </router-link>
-            
+
 
       <!-- -->
           <li class="treeview">
@@ -157,7 +157,7 @@
               <li><a href="#">Linea</a></li>
             </ul>
           </li>
-            
+
         </ul>
         <!-- /.sidebar-menu -->
       </section>
@@ -167,16 +167,16 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-     
+
 
       <!-- Main content -->
       <section class="content">
 
         <!-- Your Page Content Here -->
-      
+
       <router-view></router-view>
-       
-       
+
+
       </section>
       <!-- /.content -->
     </div>

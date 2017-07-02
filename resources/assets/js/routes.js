@@ -16,6 +16,10 @@ Vue.use(VueRouter)
 const router = new VueRouter({
 	routes: [
 		{
+			path:"/",
+			component: Tablero
+		},
+		{
 			path: "/tablero",
 			component: Tablero
 		},

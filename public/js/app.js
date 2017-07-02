@@ -14386,6 +14386,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getUsers = '/users';
 var postUsers = '/users_save';
@@ -14990,6 +15044,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getUsers = '/users';
 var postUsers = '/users_save';
@@ -15114,6 +15178,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -15607,6 +15695,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 /* Rutas de acceso para el panel del menu */
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 	routes: [{
+		path: "/",
+		component: __WEBPACK_IMPORTED_MODULE_9__components_Dashboard_vue___default.a
+	}, {
 		path: "/tablero",
 		component: __WEBPACK_IMPORTED_MODULE_9__components_Dashboard_vue___default.a
 	}, {
@@ -18024,7 +18115,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.simple-root {\n  margin-top: 20%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.help.is-danger {\n  color: red;\n}\n.form-control.is-danger {\n  border: 1px solid red;\n}\n\n\n\n/* enable absolute positioning */\n.inner-addon { \n    position: relative;\n}\n\n/* style icon */\n.inner-addon .fa {\n  position: absolute;\n  padding: 10px;\n  pointer-events: none;\n}\n\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\n\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\n    background-color: white;\n     opacity:0.9; /* Opacidad 90% */\n     border-radius: 2px;\n     border-bottom: 2px;\n}\n/* Table css Start */\na.del\n{\n    background:#d9534f;\n    border-radius: 2px;\n    width: 35px;\n    height:28px;\n    padding-left:12px;\n    line-height:10px;\n}\na.edit\n{\n    padding-left:10px;\n    background:#337ab7;\n    color:#fff;\n    border-radius:2px;\n    border:none;\n}\ntr.row-name\n{\n    font-size: 18px;\n    color:#448aff;\n}\ntr.row-content\n{\n    color:#6c7173;\n}\nth  {\n   text-align: center;\n  padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntd  {\n  text-align: center;\n padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntable\n{\n    border-bottom: 8px solid #448aff;\n}\ntd.check\n{\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\n{\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\n{\n    background: #de6c69;\n}\na.btn-danger\n{\n    background:#d9534f;\n}\na.btn-top\n{\n    /*background:#448aff;*/\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n}\na.btn-top:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\na.btn-t\n{\n\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n    width: 20%;\n}\na.btn-t:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\n/* Table css End */\n\n/*modal*/\n.Modal__container {\n    max-width: 700px;\n    width: 90%;\n    background: white;\n    border-radius: 2px;\n    -webkit-animation-duration: 0.3s;\n            animation-duration: 0.3s;\n    -webkit-animation-delay: 0s;\n            animation-delay: 0s;\n}\n.Modal__header {\n    border-bottom: 1px solid white;\n    padding: 15px 10px;\n    background-color: silver;\n    color: white;\n    border-radius: 2px;\n}\n.Modal__header > h1 {\n    font-size: 27px;\n    font-weight: normal;\n    margin: 0;\n}\n.Modal__content {\n    padding: 10px;\n}\n.Modal__footer {\n    padding: 5px;\n}\n.u-overlay {\n    position: fixed;\n    z-index: 1000;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0,0.8);\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.naked-link {\n    color: inherit;\n    text-decoration: inherit;\n}\n\n", ""]);
+exports.push([module.i, "\n.simple-root {\n  margin-top: 20%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.help.is-danger {\n  color: red;\n}\n.form-control.is-danger {\n  border: 1px solid red;\n}\n\n\n\n/* enable absolute positioning */\n.inner-addon {\n    position: relative;\n}\n\n/* style icon */\n.inner-addon .fa {\n  position: absolute;\n  padding: 10px;\n  pointer-events: none;\n}\n\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\n\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\n    background-color: white;\n     opacity:0.9; /* Opacidad 90% */\n     border-radius: 2px;\n     border-bottom: 2px;\n}\n/* Table css Start */\na.del\n{\n    background:#d9534f;\n    border-radius: 2px;\n    width: 35px;\n    height:28px;\n    padding-left:12px;\n    line-height:10px;\n}\na.edit\n{\n    padding-left:10px;\n    background:#337ab7;\n    color:#fff;\n    border-radius:2px;\n    border:none;\n}\ntr.row-name\n{\n    font-size: 18px;\n    color:#448aff;\n}\ntr.row-content\n{\n    color:#6c7173;\n}\nth  {\n   text-align: center;\n  padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntd  {\n  text-align: center;\n padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntable\n{\n    border-bottom: 8px solid #448aff;\n}\ntd.check\n{\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\n{\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\n{\n    background: #de6c69;\n}\na.btn-danger\n{\n    background:#d9534f;\n}\na.btn-top\n{\n    /*background:#448aff;*/\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n}\na.btn-top:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\na.btn-t\n{\n\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n    width: 20%;\n}\na.btn-t:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\n/* Table css End */\n\n/*modal*/\n.Modal__container {\n    max-width: 700px;\n    width: 90%;\n    background: white;\n    border-radius: 2px;\n    -webkit-animation-duration: 0.3s;\n            animation-duration: 0.3s;\n    -webkit-animation-delay: 0s;\n            animation-delay: 0s;\n}\n.Modal__header {\n    border-bottom: 1px solid white;\n    padding: 15px 10px;\n    background-color: silver;\n    color: white;\n    border-radius: 2px;\n}\n.Modal__header > h1 {\n    font-size: 27px;\n    font-weight: normal;\n    margin: 0;\n}\n.Modal__content {\n    padding: 10px;\n}\n.Modal__footer {\n    padding: 5px;\n}\n.u-overlay {\n    position: fixed;\n    z-index: 1000;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0,0.8);\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.naked-link {\n    color: inherit;\n    text-decoration: inherit;\n}\n\n", ""]);
 
 /***/ }),
 /* 48 */
@@ -18038,7 +18129,7 @@ exports.push([module.i, "\n.modal-mask[data-v-181f856f] {\n  position: fixed;\n 
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.simple-root {\n  margin-top: 20%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.help.is-danger {\n  color: red;\n}\n.form-control.is-danger {\n  border: 1px solid red;\n}\n\n\n\n/* enable absolute positioning */\n.inner-addon { \n    position: relative;\n}\n\n/* style icon */\n.inner-addon .fa {\n  position: absolute;\n  padding: 10px;\n  pointer-events: none;\n}\n\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\n\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\n    background-color: white;\n     opacity:0.9; /* Opacidad 90% */\n     border-radius: 2px;\n     border-bottom: 2px;\n}\n/* Table css Start */\na.del\n{\n    background:#d9534f;\n    border-radius: 2px;\n    width: 35px;\n    height:28px;\n    padding-left:12px;\n    line-height:10px;\n}\na.edit\n{\n    padding-left:10px;\n    background:#337ab7;\n    color:#fff;\n    border-radius:2px;\n    border:none;\n}\ntr.row-name\n{\n    font-size: 18px;\n    color:#448aff;\n}\ntr.row-content\n{\n    color:#6c7173;\n}\nth  {\n   text-align: center;\n  padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntd  {\n  text-align: center;\n padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntable\n{\n    border-bottom: 8px solid #448aff;\n}\ntd.check\n{\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\n{\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\n{\n    background: #de6c69;\n}\na.btn-danger\n{\n    background:#d9534f;\n}\na.btn-top\n{\n    /*background:#448aff;*/\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n}\na.btn-top:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\na.btn-t\n{\n\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n    width: 20%;\n}\na.btn-t:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\n/* Table css End */\n\n/*modal*/\n.Modal__container {\n    max-width: 700px;\n    width: 90%;\n    background: white;\n    border-radius: 2px;\n    -webkit-animation-duration: 0.3s;\n            animation-duration: 0.3s;\n    -webkit-animation-delay: 0s;\n            animation-delay: 0s;\n}\n.Modal__header {\n    border-bottom: 1px solid white;\n    padding: 15px 10px;\n    background-color: silver;\n    color: white;\n    border-radius: 2px;\n}\n.Modal__header > h1 {\n    font-size: 27px;\n    font-weight: normal;\n    margin: 0;\n}\n.Modal__content {\n    padding: 10px;\n}\n.Modal__footer {\n    padding: 5px;\n}\n.u-overlay {\n    position: fixed;\n    z-index: 1000;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0,0.8);\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.naked-link {\n    color: inherit;\n    text-decoration: inherit;\n}\n\n", ""]);
+exports.push([module.i, "\n.simple-root {\n  margin-top: 20%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.help.is-danger {\n  color: red;\n}\n.form-control.is-danger {\n  border: 1px solid red;\n}\n\n\n\n/* enable absolute positioning */\n.inner-addon {\n    position: relative;\n}\n\n/* style icon */\n.inner-addon .fa {\n  position: absolute;\n  padding: 10px;\n  pointer-events: none;\n}\n\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\n\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\n    background-color: white;\n     opacity:0.9; /* Opacidad 90% */\n     border-radius: 2px;\n     border-bottom: 2px;\n}\n/* Table css Start */\na.del\n{\n    background:#d9534f;\n    border-radius: 2px;\n    width: 35px;\n    height:28px;\n    padding-left:12px;\n    line-height:10px;\n}\na.edit\n{\n    padding-left:10px;\n    background:#337ab7;\n    color:#fff;\n    border-radius:2px;\n    border:none;\n}\ntr.row-name\n{\n    font-size: 18px;\n    color:#448aff;\n}\ntr.row-content\n{\n    color:#6c7173;\n}\nth  {\n   text-align: center;\n  padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntd  {\n  text-align: center;\n padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntable\n{\n    border-bottom: 8px solid #448aff;\n}\ntd.check\n{\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\n{\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\n{\n    background: #de6c69;\n}\na.btn-danger\n{\n    background:#d9534f;\n}\na.btn-top\n{\n    /*background:#448aff;*/\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n}\na.btn-top:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\na.btn-t\n{\n\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n    width: 20%;\n}\na.btn-t:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\n/* Table css End */\n\n/*modal*/\n.Modal__container {\n    max-width: 700px;\n    width: 90%;\n    background: white;\n    border-radius: 2px;\n    -webkit-animation-duration: 0.3s;\n            animation-duration: 0.3s;\n    -webkit-animation-delay: 0s;\n            animation-delay: 0s;\n}\n.Modal__header {\n    border-bottom: 1px solid white;\n    padding: 15px 10px;\n    background-color: silver;\n    color: white;\n    border-radius: 2px;\n}\n.Modal__header > h1 {\n    font-size: 27px;\n    font-weight: normal;\n    margin: 0;\n}\n.Modal__content {\n    padding: 10px;\n}\n.Modal__footer {\n    padding: 5px;\n}\n.u-overlay {\n    position: fixed;\n    z-index: 1000;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0,0.8);\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.naked-link {\n    color: inherit;\n    text-decoration: inherit;\n}\n\n", ""]);
 
 /***/ }),
 /* 50 */
@@ -18073,7 +18164,7 @@ exports.push([module.i, "\n.simple-root {\n  margin-top: 20%;\n  margin-left: au
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.simple-root {\n  margin-top: 20%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.help.is-danger {\n  color: red;\n}\n.form-control.is-danger {\n  border: 1px solid red;\n}\n\n\n\n/* enable absolute positioning */\n.inner-addon { \n    position: relative;\n}\n\n/* style icon */\n.inner-addon .fa {\n  position: absolute;\n  padding: 10px;\n  pointer-events: none;\n}\n\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\n\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\n    background-color: white;\n     opacity:0.9; /* Opacidad 90% */\n     border-radius: 2px;\n     border-bottom: 2px;\n}\n/* Table css Start */\na.del\n{\n    background:#d9534f;\n    border-radius: 2px;\n    width: 35px;\n    height:28px;\n    padding-left:12px;\n    line-height:10px;\n}\na.edit\n{\n    padding-left:10px;\n    background:#337ab7;\n    color:#fff;\n    border-radius:2px;\n    border:none;\n}\ntr.row-name\n{\n    font-size: 18px;\n    color:#448aff;\n}\ntr.row-content\n{\n    color:#6c7173;\n}\nth  {\n   text-align: center;\n  padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntd  {\n  text-align: center;\n padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntable\n{\n    border-bottom: 8px solid #448aff;\n}\ntd.check\n{\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\n{\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\n{\n    background: #de6c69;\n}\na.btn-danger\n{\n    background:#d9534f;\n}\na.btn-top\n{\n    /*background:#448aff;*/\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n}\na.btn-top:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\na.btn-t\n{\n\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n    width: 20%;\n}\na.btn-t:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\n/* Table css End */\n\n/*modal*/\n.Modal__container {\n    max-width: 700px;\n    width: 90%;\n    background: white;\n    border-radius: 2px;\n    -webkit-animation-duration: 0.3s;\n            animation-duration: 0.3s;\n    -webkit-animation-delay: 0s;\n            animation-delay: 0s;\n}\n.Modal__header {\n    border-bottom: 1px solid white;\n    padding: 15px 10px;\n    background-color: silver;\n    color: white;\n    border-radius: 2px;\n}\n.Modal__header > h1 {\n    font-size: 27px;\n    font-weight: normal;\n    margin: 0;\n}\n.Modal__content {\n    padding: 10px;\n}\n.Modal__footer {\n    padding: 5px;\n}\n.u-overlay {\n    position: fixed;\n    z-index: 1000;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0,0.8);\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.naked-link {\n    color: inherit;\n    text-decoration: inherit;\n}\n\n", ""]);
+exports.push([module.i, "\n.simple-root {\n  margin-top: 20%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.help.is-danger {\n  color: red;\n}\n.form-control.is-danger {\n  border: 1px solid red;\n}\n\n\n\n/* enable absolute positioning */\n.inner-addon {\n    position: relative;\n}\n\n/* style icon */\n.inner-addon .fa {\n  position: absolute;\n  padding: 10px;\n  pointer-events: none;\n}\n\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\n\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\n    background-color: white;\n     opacity:0.9; /* Opacidad 90% */\n     border-radius: 2px;\n     border-bottom: 2px;\n}\n/* Table css Start */\na.del\n{\n    background:#d9534f;\n    border-radius: 2px;\n    width: 35px;\n    height:28px;\n    padding-left:12px;\n    line-height:10px;\n}\na.edit\n{\n    padding-left:10px;\n    background:#337ab7;\n    color:#fff;\n    border-radius:2px;\n    border:none;\n}\ntr.row-name\n{\n    font-size: 18px;\n    color:#448aff;\n}\ntr.row-content\n{\n    color:#6c7173;\n}\nth  {\n   text-align: center;\n  padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntd  {\n  text-align: center;\n padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntable\n{\n    border-bottom: 8px solid #448aff;\n}\ntd.check\n{\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\n{\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\n{\n    background: #de6c69;\n}\na.btn-danger\n{\n    background:#d9534f;\n}\na.btn-top\n{\n    /*background:#448aff;*/\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n}\na.btn-top:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\na.btn-t\n{\n\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n    width: 20%;\n}\na.btn-t:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\n/* Table css End */\n\n/*modal*/\n.Modal__container {\n    max-width: 700px;\n    width: 90%;\n    background: white;\n    border-radius: 2px;\n    -webkit-animation-duration: 0.3s;\n            animation-duration: 0.3s;\n    -webkit-animation-delay: 0s;\n            animation-delay: 0s;\n}\n.Modal__header {\n    border-bottom: 1px solid white;\n    padding: 15px 10px;\n    background-color: silver;\n    color: white;\n    border-radius: 2px;\n}\n.Modal__header > h1 {\n    font-size: 27px;\n    font-weight: normal;\n    margin: 0;\n}\n.Modal__content {\n    padding: 10px;\n}\n.Modal__footer {\n    padding: 5px;\n}\n.u-overlay {\n    position: fixed;\n    z-index: 1000;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0,0.8);\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.naked-link {\n    color: inherit;\n    text-decoration: inherit;\n}\n\n", ""]);
 
 /***/ }),
 /* 55 */
@@ -49638,7 +49729,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Registro de Numero Telefonico\n          \n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de Numero Telefonico\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -49667,7 +49758,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Nombre de Usuario"
+      "placeholder": "Codigo"
     },
     domProps: {
       "value": (_vm.newUser.name)
@@ -49689,7 +49780,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
-    staticClass: "fa fa-envelope",
+    staticClass: "fa fa-phone",
     attrs: {
       "aria-hidden": "true"
     }
@@ -49711,7 +49802,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Correo Electronico",
+      "placeholder": "Numero Telefonico",
       "name": "email"
     },
     domProps: {
@@ -49747,8 +49838,128 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "password",
-      "placeholder": "Contraseña"
+      "type": "text",
+      "placeholder": "Estatus"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "cc"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "cl"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "pc"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "pl"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Manga"
     },
     domProps: {
       "value": (_vm.newUser.pass)
@@ -50083,7 +50294,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Registro de Usuario\n          \n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de ADS\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -50112,7 +50323,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Nombre de Usuario"
+      "placeholder": "Nombre"
     },
     domProps: {
       "value": (_vm.newUser.name)
@@ -50156,7 +50367,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Correo Electronico",
+      "placeholder": "Tipo de Ads",
       "name": "email"
     },
     domProps: {
@@ -50178,6 +50389,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('email')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Direccion"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-key",
     attrs: {
@@ -50192,8 +50426,258 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "password",
-      "placeholder": "Contraseña"
+      "type": "text",
+      "placeholder": "Manga"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Estado"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Municipio"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Parroquia"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Sector"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon col-xs-6"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Coordenada X"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon col-xs-6"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Coordenada y"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "cc"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "cl"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "pc"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "pl"
     },
     domProps: {
       "value": (_vm.newUser.pass)
@@ -51398,7 +51882,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
-    staticClass: "fa fa-user",
+    staticClass: "fa fa-phone",
     attrs: {
       "aria-hidden": "true"
     }
@@ -51838,7 +52322,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Registro de Usuario\n          \n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de Fallas\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -51867,7 +52351,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Nombre de Usuario"
+      "placeholder": "Numero telefonico"
     },
     domProps: {
       "value": (_vm.newUser.name)
@@ -51911,7 +52395,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Correo Electronico",
+      "placeholder": "Tipo de falla",
       "name": "email"
     },
     domProps: {
@@ -51947,8 +52431,64 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "password",
-      "placeholder": "Contraseña"
+      "type": "text",
+      "placeholder": "Estatus"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Cliente"
+    },
+    domProps: {
+      "value": (_vm.newUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newUser.pass = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newUser.pass),
+      expression: "newUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Direccion"
     },
     domProps: {
       "value": (_vm.newUser.pass)

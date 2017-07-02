@@ -110,7 +110,7 @@
 
             </div>
             <div class="form-group inner-addon left-addon">
-               <i class="fa fa-user" aria-hidden="true"></i>
+               <i class="fa fa-phone" aria-hidden="true"></i>
               <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Numero Telefono" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
