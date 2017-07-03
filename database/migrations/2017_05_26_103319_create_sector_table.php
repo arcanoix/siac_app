@@ -16,9 +16,11 @@ class CreateSectorTable extends Migration
         Schema::create('sector', function (Blueprint $sector) {
             //tabla sector
             $sector->increments('id');
-            $sector->string('name');
             $sector->integer('parish_id')->unsigned();
             $sector->foreign('parish_id')->references('id')->on('parish');
+            $sector->string('name');
+            $sector->string('codigo_postal');
+
             $sector->timestamps();
         });
     }
