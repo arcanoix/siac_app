@@ -15937,6 +15937,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getUsers = '/users';
 var postUsers = '/users_save';
@@ -15946,6 +15985,12 @@ var postUsers = '/users_save';
     return {
       users: [],
       showModal: false,
+      showModal1: false,
+      editUser: {
+        name: '',
+        pass: '',
+        email: ''
+      },
       newUser: {
         name: '',
         pass: '',
@@ -15976,10 +16021,41 @@ var postUsers = '/users_save';
         this.hasDeleted = true;
       } else {
         this.hasError = true;
+        this.showModal = true;
         axios.post(postUsers, this.newUser).then(function (response) {
           _this2.fetchUsers();
+          _this2.showModal = false;
         });
       }
+    },
+    onDelete: function onDelete(b) {
+      var that = this;
+      var delUsers = '/users_del/';
+      //console.log(delUsers + "/"+ b.id);
+
+      swal({
+        title: '¿Estas seguro de eliminar el registro?',
+        text: 'Luego de eliminar no podras recuperar el registro',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+      }).then(function () {
+        axios.delete(delUsers + b.id).then(function (response) {
+          //console.log("eliminado");
+          that.fetchUsers();
+        });
+      });
+    },
+    onEdit: function onEdit(b) {
+      var _this3 = this;
+
+      var showUser = '/showUser/';
+      var that = this;
+      that.showModal1 = true;
+      axios.get(showUser + b.id).then(function (response) {
+        _this3.editUser = response.data;
+      });
     }
   }
 });
@@ -18531,7 +18607,7 @@ exports.push([module.i, "\n.simple-root {\n  margin-top: 20%;\n  margin-left: au
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.simple-root {\n  margin-top: 20%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.help.is-danger {\n  color: red;\n}\n.form-control.is-danger {\n  border: 1px solid red;\n}\n\n\n\n/* enable absolute positioning */\n.inner-addon {\n    position: relative;\n}\n\n/* style icon */\n.inner-addon .fa {\n  position: absolute;\n  padding: 10px;\n  pointer-events: none;\n}\n\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\n\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\n    background-color: white;\n     opacity:0.9; /* Opacidad 90% */\n     border-radius: 2px;\n     border-bottom: 2px;\n}\n/* Table css Start */\na.del\n{\n    background:#d9534f;\n    border-radius: 2px;\n    width: 35px;\n    height:28px;\n    padding-left:12px;\n    line-height:10px;\n}\na.edit\n{\n    padding-left:10px;\n    background:#337ab7;\n    color:#fff;\n    border-radius:2px;\n    border:none;\n}\ntr.row-name\n{\n    font-size: 18px;\n    color:#448aff;\n}\ntr.row-content\n{\n    color:#6c7173;\n}\nth  {\n   text-align: center;\n  padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntd  {\n  text-align: center;\n padding-top: 10px;\npadding-right: 10px;\npadding-bottom: 10px;\npadding-left: 30px;\n}\ntable\n{\n    border-bottom: 8px solid #448aff;\n}\ntd.check\n{\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\n{\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\n{\n    background: #de6c69;\n}\na.btn-danger\n{\n    background:#d9534f;\n}\na.btn-top\n{\n    /*background:#448aff;*/\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n}\na.btn-top:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\na.btn-t\n{\n\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n    width: 20%;\n}\na.btn-t:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\n/* Table css End */\n\n/*modal*/\n.Modal__container {\n    max-width: 700px;\n    width: 90%;\n    background: white;\n    border-radius: 2px;\n    -webkit-animation-duration: 0.3s;\n            animation-duration: 0.3s;\n    -webkit-animation-delay: 0s;\n            animation-delay: 0s;\n}\n.Modal__header {\n    border-bottom: 1px solid white;\n    padding: 15px 10px;\n    background-color: silver;\n    color: white;\n    border-radius: 2px;\n}\n.Modal__header > h1 {\n    font-size: 27px;\n    font-weight: normal;\n    margin: 0;\n}\n.Modal__content {\n    padding: 10px;\n}\n.Modal__footer {\n    padding: 5px;\n}\n.u-overlay {\n    position: fixed;\n    z-index: 1000;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0,0.8);\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.naked-link {\n    color: inherit;\n    text-decoration: inherit;\n}\n\n", ""]);
+exports.push([module.i, "\n.simple-root {\n  margin-top: 20%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.help.is-danger {\n  color: red;\n}\n.form-control.is-danger {\n  border: 1px solid red;\n}\n\n\n\n/* enable absolute positioning */\n.inner-addon {\n    position: relative;\n}\n\n/* style icon */\n.inner-addon .fa {\n  position: absolute;\n  padding: 10px;\n  pointer-events: none;\n}\n\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\n\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\n    background-color: white;\n     opacity:0.9; /* Opacidad 90% */\n     border-radius: 2px;\n     border-bottom: 2px;\n}\n/* Table css Start */\na.del\n{\n    background:#d9534f;\n    border-radius: 2px;\n    width: 35px;\n    height:28px;\n    padding-left:12px;\n    line-height:10px;\n}\na.edit\n{\n    padding-left:10px;\n    background:#337ab7;\n    color:#fff;\n    border-radius:2px;\n    border:none;\n}\ntr.row-name\n{\n    font-size: 18px;\n    color:#448aff;\n}\ntr.row-content\n{\n    color:#6c7173;\n}\nth  {\n   text-align: center;\n  padding-top: 10px;\n  padding-right: 10px;\n  padding-bottom: 10px;\n  padding-left: 30px;\n}\ntd  {\n  text-align: center;\n padding-top: 10px;\n padding-right: 10px;\n padding-bottom: 10px;\n padding-left: 30px;\n}\ntable\n{\n    border-bottom: 8px solid #448aff;\n}\ntd.check\n{\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\n{\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\n{\n    background: #de6c69;\n}\na.btn-danger\n{\n    background:#d9534f;\n}\na.btn-top\n{\n    /*background:#448aff;*/\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n}\na.btn-top:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\na.btn-t\n{\n\n    color:#fff;\n    border:1px solid #448aff;\n    padding: 7px 10px;\n    border-radius:4px;\n    width: 20%;\n}\na.btn-t:hover\n{\n    text-decoration: none;\n    box-shadow:3px 3px 5px #222;\n    transition:box-shadow 0.5s;\n}\n/* Table css End */\n\n/*modal*/\n.Modal__container {\n    max-width: 700px;\n    width: 90%;\n    background: white;\n    border-radius: 2px;\n    -webkit-animation-duration: 0.3s;\n            animation-duration: 0.3s;\n    -webkit-animation-delay: 0s;\n            animation-delay: 0s;\n}\n.Modal__header {\n    border-bottom: 1px solid white;\n    padding: 15px 10px;\n    background-color: silver;\n    color: white;\n    border-radius: 2px;\n}\n.Modal__header > h1 {\n    font-size: 27px;\n    font-weight: normal;\n    margin: 0;\n}\n.Modal__content {\n    padding: 10px;\n}\n.Modal__footer {\n    padding: 5px;\n}\n.u-overlay {\n    position: fixed;\n    z-index: 1000;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0,0.8);\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.naked-link {\n    color: inherit;\n    text-decoration: inherit;\n}\n\n", ""]);
 
 /***/ }),
 /* 54 */
@@ -52397,21 +52473,33 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.users), function(b) {
     return _c('tr', {
       staticClass: "row-content"
-    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(" - ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', {
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(" - ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', [_c('a', {
+      staticClass: "btn-top  btn btn-primary pull-right",
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onEdit(_vm.index)
+          _vm.onEdit(b)
         }
       }
-    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
+    }, [_c('i', {
+      staticClass: "fa fa-pencil-square-o",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    })])]), _vm._v(" "), _c('td', [_c('a', {
+      staticClass: "btn-top btn btn-danger  pull-right",
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onDelete(_vm.index)
+          _vm.onDelete(b)
         }
       }
-    }, [_vm._m(3, true)])])
+    }, [_c('i', {
+      staticClass: "fa fa-trash",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    })])])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -52453,6 +52541,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'input': true, 'is-danger': _vm.errors.has('name')
     },
     attrs: {
+      "data-vv-name": "name",
       "type": "text",
       "placeholder": "Nombre de Usuario"
     },
@@ -52497,6 +52586,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'input': true, 'is-danger': _vm.errors.has('email')
     },
     attrs: {
+      "data-vv-name": "email",
       "type": "text",
       "placeholder": "Correo Electronico",
       "name": "email"
@@ -52570,6 +52660,166 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal = false
       }
     }
+  }, [_vm._v("Cerrar")])])]), _vm._v(" "), _c('modal', {
+    attrs: {
+      "display": _vm.showModal1
+    },
+    on: {
+      "close": function($event) {
+        _vm.showModal1 = false
+      }
+    }
+  }, [_c('div', {
+    slot: "header"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  }), _vm._v(" Editar Usuario\n\n        ")]), _vm._v(" "), _c('div', {
+    slot: "body"
+  }, [_c('form', {
+    staticClass: "form"
+  }, [_c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-user",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editUser.name),
+      expression: "editUser.name"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('name')
+    },
+    attrs: {
+      "data-vv-name": "name",
+      "type": "text",
+      "placeholder": "Nombre de Usuario"
+    },
+    domProps: {
+      "value": (_vm.editUser.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editUser.name = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('name')),
+      expression: "errors.has('name')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-envelope",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required|email'),
+      expression: "'required|email'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editUser.email),
+      expression: "editUser.email"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('email')
+    },
+    attrs: {
+      "data-vv-name": "email",
+      "type": "text",
+      "placeholder": "Correo Electronico",
+      "name": "email"
+    },
+    domProps: {
+      "value": (_vm.editUser.email)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editUser.email = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('email')),
+      expression: "errors.has('email')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('email')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editUser.pass),
+      expression: "editUser.pass"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "password",
+      "placeholder": "Contraseña"
+    },
+    domProps: {
+      "value": (_vm.editUser.pass)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editUser.pass = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
+    slot: "footer"
+  }, [_c('a', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.saveUser()
+      }
+    }
+  }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showModal1 = false
+      }
+    }
   }, [_vm._v("Cerrar")])])])], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
@@ -52587,24 +52837,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('tr', {
     staticClass: "row-name"
   }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Usuario")]), _vm._v(" "), _c('th', [_vm._v("Rol")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Editar")]), _vm._v(" "), _c('th', [_vm._v("Eliminar")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "btn-top  btn btn-primary pull-right"
-  }, [_c('i', {
-    staticClass: "fa fa-pencil-square-o",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "btn-top btn btn-danger  pull-right"
-  }, [_c('i', {
-    staticClass: "fa fa-trash",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {

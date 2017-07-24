@@ -31,14 +31,14 @@
         <td>{{ b.email }}</td>
 
 
-        <td v-on:click.prevent="onEdit(index)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(index)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        <td><a class="btn-top  btn btn-primary pull-right"  v-on:click.prevent="onEdit(b)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td><a class="btn-top btn btn-danger  pull-right"  v-on:click.prevent="onDelete(b)"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
       </tr>
 
     </table>
     <br>
 
-
+<!-- Modal Create User -->
 
       <modal :display="showModal" @close="showModal = false">
         <div slot="header">
@@ -50,13 +50,13 @@
 
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+              <input v-validate="'required'" data-vv-name="name" v-model="newUser.name" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('name') }">
+             <span v-show="errors.has('name')"  class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-envelope" aria-hidden="true"></i>
-              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" v-model="newUser.email" type="text" class="form-control" placeholder="Correo Electronico" name="email">
+              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" data-vv-name="email" v-model="newUser.email" type="text" class="form-control" placeholder="Correo Electronico" name="email">
              <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
 
             </div>
@@ -77,6 +77,45 @@
         </div>
       </modal>
 
+      <!-- end form modal create user -->
+
+      <!-- form edit user data modal -->
+      <modal :display="showModal1" @close="showModal1 = false">
+        <div slot="header">
+          <i class="fa fa-user"></i> Editar Usuario
+
+        </div>
+        <div slot="body">
+          <form class="form">
+
+            <div class="form-group inner-addon left-addon">
+               <i class="fa fa-user" aria-hidden="true"></i>
+               <input v-validate="'required'" data-vv-name="name" v-model="editUser.name" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('name') }">
+             <span v-show="errors.has('name')"  class="help is-danger">{{ errors.first('name') }}</span>
+            </div>
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-envelope" aria-hidden="true"></i>
+               <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" data-vv-name="email" v-model="editUser.email" type="text" class="form-control" placeholder="Correo Electronico" name="email">
+             <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+            </div>
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editUser.pass" type="password" class="form-control" placeholder="Contraseña">
+            </div>
+          </form>
+
+        </div>
+        <div slot="footer">
+
+        <a href="#" class="btn btn-primary" v-on:click.prevent="saveUser()">Guardar</a>
+
+          <a href="#" class="btn btn-default" v-on:click.prevent="showModal1=false">Cerrar</a>
+
+        </div>
+      </modal>
+      <!-- end form modal edit -->
+
+
   </div>
 
 </template>
@@ -86,12 +125,19 @@
 var getUsers = '/users';
 var postUsers = '/users_save';
 
+
 export default {
 
   data(){
       return {
         users: [],
         showModal:false,
+        showModal1:false,
+        editUser:{
+            name:'',
+            pass:'',
+            email:''
+        },
         newUser:{
           name:'',
           pass:'',
@@ -105,14 +151,16 @@ export default {
 
   },
   methods:{
-      fetchUsers: function(){
+      fetchUsers: function()
+      {
          axios.get(getUsers).then(response => {
 
             this.users = response.data.users;
         });
 
       },
-      saveUser: function(newUser){
+      saveUser: function(newUser)
+      {
         var input = this.newUser;
         if(input['name'] == ''){
           this.hasError =false;
@@ -121,13 +169,45 @@ export default {
         else
         {
                this.hasError=true;
+               this.showModal=true;
                axios.post(postUsers, this.newUser).then(response => {
                  this.fetchUsers();
+                 this.showModal=false;
                });
         }
 
+      },
+      onDelete(b)
+      {
+        var that = this;
+        var delUsers = '/users_del/';
+        //console.log(delUsers + "/"+ b.id);
+
+        swal({
+          title: '¿Estas seguro de eliminar el registro?',
+          text: 'Luego de eliminar no podras recuperar el registro',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No'
+        }).then(function(){
+          axios.delete(delUsers +  b.id).then(response => {
+            //console.log("eliminado");
+            that.fetchUsers();
+          });
+        })
+
+      },
+      onEdit(b){
+        var showUser = '/showUser/';
+        var that = this;
+        that.showModal1 = true;
+        axios.get(showUser + b.id).then(response => {
+            this.editUser = response.data;
+        })
+
       }
-  }
+    }
 }
 </script>
 
@@ -210,17 +290,17 @@ tr.row-content
  th  {
    text-align: center;
   padding-top: 10px;
-padding-right: 10px;
-padding-bottom: 10px;
-padding-left: 30px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
 }
 
 td  {
   text-align: center;
  padding-top: 10px;
-padding-right: 10px;
-padding-bottom: 10px;
-padding-left: 30px;
+ padding-right: 10px;
+ padding-bottom: 10px;
+ padding-left: 30px;
 }
 
 table
