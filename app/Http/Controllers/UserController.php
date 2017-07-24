@@ -49,8 +49,24 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-      $find_user = User::find($id);
-      dd($find_user);
+       //dd($request->pass);
+        if($find_user = User::find($id)){
+            if($find_user->name != trim($request->name)){
+            //
+                  $find_user->name = $request->name;
+                  $find_user->email = $request->email;
+
+                  if(is_null($request->pass)){
+                    $find_user->password;
+                  }else{
+                    $find_user->password = $request->pass;
+                  }
+                $find_user->save();
+            }
+            return $find_user;
+        }else{
+          return response()->json(['error' => 'Error al actualizar']);
+        }
     }
 
     public function show($id){

@@ -15976,6 +15976,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 var getUsers = '/users';
 var postUsers = '/users_save';
@@ -16055,6 +16056,24 @@ var postUsers = '/users_save';
       that.showModal1 = true;
       axios.get(showUser + b.id).then(function (response) {
         _this3.editUser = response.data;
+      });
+    },
+    updateUser: function updateUser(editUser) {
+      var _this4 = this;
+
+      var input = this.editUser;
+      var update = '/update_user/' + input.id;
+
+      axios.put(update, input).then(function (response) {
+        swal({
+          title: "Success",
+          text: 'Mailing List updated',
+          type: 'success',
+          animation: 'slide-from-bottom',
+          timer: 3000
+        });
+        _this4.fetchUsers();
+        _this4.showModal1 = false;
       });
     }
   }
@@ -52677,7 +52696,26 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
-  }, [_c('div', {
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editUser.id),
+      expression: "editUser.id"
+    }],
+    attrs: {
+      "type": "hidden"
+    },
+    domProps: {
+      "value": (_vm.editUser.id)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editUser.id = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-user",
@@ -52806,7 +52844,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {
         $event.preventDefault();
-        _vm.saveUser()
+        _vm.updateUser()
       }
     }
   }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {

@@ -87,6 +87,7 @@
         </div>
         <div slot="body">
           <form class="form">
+              <input v-model="editUser.id" type="hidden">
 
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
@@ -107,7 +108,7 @@
         </div>
         <div slot="footer">
 
-        <a href="#" class="btn btn-primary" v-on:click.prevent="saveUser()">Guardar</a>
+        <a href="#" class="btn btn-primary" v-on:click.prevent="updateUser()">Guardar</a>
 
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal1=false">Cerrar</a>
 
@@ -124,6 +125,7 @@
 <script>
 var getUsers = '/users';
 var postUsers = '/users_save';
+
 
 
 export default {
@@ -204,7 +206,25 @@ export default {
         that.showModal1 = true;
         axios.get(showUser + b.id).then(response => {
             this.editUser = response.data;
-        })
+        });
+
+      },
+      updateUser(editUser){
+        var input = this.editUser;
+        var update = '/update_user/' + input.id;
+
+        axios.put(update, input).then(response => {
+          swal({
+                title: "Success",
+                text: 'Mailing List updated',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+            this.fetchUsers();
+            this.showModal1= false;
+
+        });
 
       }
     }
