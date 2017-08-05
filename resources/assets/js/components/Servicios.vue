@@ -1,5 +1,15 @@
 <template>
+  <div class="container">
+    <section class="content-header">
+         <h1>
 
+           <small></small>
+         </h1>
+         <ol class="breadcrumb">
+           <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+           <li class="active">Cliente</li>
+         </ol>
+       </section>
 <div class="tabled">
     <br>
 
@@ -9,7 +19,7 @@
       <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Servicio</a>
-      
+
     </div>
 
     <!-- For markup truncated -->
@@ -17,103 +27,99 @@
     <table class="table table-striped">
       <tr  class="row-name">
         <th>#</th>
-        <th>Usuario</th>
-        <th>Rol</th>
-        <th>Email</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Fecha</th>
         <th>Editar</th>
         <th>Eliminar</th>
-       
+
       </tr>
-      <tr v-for="b in users"  class="row-content">
+      <tr v-for="b in servicio"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
-        <td> - </td>
-        <td>{{ b.email }}</td>
+        <td>{{b.description}} </td>
+        <td>{{ b.created_at }}</td>
 
 
-        <td v-on:click.prevent="onEdit(index)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(index)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
       </tr>
 
     </table>
     <br>
-     
-    
+
+
 
       <modal :display="showModal" @close="showModal = false">
         <div slot="header">
           <i class="fa fa-user"></i> Registro de Usuario
-          
+
         </div>
         <div slot="body">
           <form class="form">
-              
+
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newServicio.name" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
-             
+
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-envelope" aria-hidden="true"></i>
-              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" v-model="newUser.email" type="text" class="form-control" placeholder="Correo Electronico" name="email">
-             <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
-             
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('description') }" v-model="newServicio.description" type="text" class="form-control" placeholder="Correo Electronico" name="description">
+             <span v-show="errors.has('description')" class="help is-danger">{{ errors.first('description') }}</span>
+
             </div>
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newUser.pass" type="password" class="form-control" placeholder="Contraseña">
-              
-            </div>
+
           </form>
-          
-        </div>  
+
+        </div>
         <div slot="footer">
-          
-        <a href="#" class="btn btn-primary" v-on:click.prevent="saveUser()">Guardar</a>
-       
+
+        <a href="#" class="btn btn-primary" v-on:click.prevent="saveServicio()">Guardar</a>
+
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
 
-        </div>    
+        </div>
       </modal>
-     
+
   </div>
+</div>
 
 </template>
 
 
 <script>
-var getUsers = '/users';
-var postUsers = '/users_save';
- 
+var getServicio = 'servicios';
+var postServicio = 'servicios_save';
+
 export default {
 
   data(){
       return {
-        users: [],
+        servicio: [],
         showModal:false,
-        newUser:{
+        newServicio:{
           name:'',
-          pass:'',
-          email:''
+          description:''
         }
-        
+
       }
   },
-  created: function(){
-    this.fetchUsers();
+  created(){
+    this.fetchServicio();
 
   },
   methods:{
-      fetchUsers: function(){
-         axios.get(getUsers).then(response => {
-          
-            this.users = response.data.users;
+      fetchServicio(){
+         axios.get(getServicio).then(response => {
+
+            this.servicio = response.data.servicio;
         });
 
       },
-      saveUser: function(newUser){
-        var input = this.newUser;
+      saveServicio(newServicio){
+        var input = this.newServicio;
         if(input['name'] == ''){
           this.hasError =false;
           this.hasDeleted = true;
@@ -121,15 +127,32 @@ export default {
         else
         {
               this.hasError=true;
-               axios.post(postUsers, this.newUser).then(response => {
-                  
-               this.fetchUsers();
+               axios.post(postUsers, this.newServicio).then(response => {
+
+               this.fetchServicio();
+               this.showModal=false;
                });
 
         }
-       
+      },
+      onDelete(b){
+        var that = this;
+        var delServicio = '/servicio_del/';
+        //console.log(delServicio + "/"+ b.id);
 
-
+        swal({
+          title: '¿Estas seguro de eliminar el registro?',
+          text: 'Luego de eliminar no podras recuperar el registro',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No'
+        }).then(function(){
+          axios.delete(delServicio +  b.id).then(response => {
+            //console.log("eliminado");
+            that.fetchUsers();
+          });
+        })
       }
   }
 }
@@ -153,8 +176,8 @@ export default {
 
 
 /* enable absolute positioning */
-.inner-addon { 
-    position: relative; 
+.inner-addon {
+    position: relative;
 }
 
 /* style icon */

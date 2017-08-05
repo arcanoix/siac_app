@@ -51,10 +51,26 @@ Route::get('numero_telefonico', 'NumeroTController@index');
 Route::post('numero_save','NumeroTController@store');
 Route::delete('/numero_delete/{id}','NumeroTController@destroy');
 
-
+//rutas para clientes
 Route::get('clientes', 'ClientesController@index');
 Route::post('clientes_save','ClientesController@store');
 Route::delete('/cliente_delete/{id}','ClientesController@destroy');
+
+//rutas para ads
+Route::get('ads', 'AdsController@index');
+Route::post('ads_save','AdsController@store');
+Route::delete('/ads_delete/{id}','AdsController@destroy');
+
+//rutas para servicios
+Route::get('servicios','ServicioController@index');
+Route::post('servicio_save','ServicioController@store');
+Route::delete('/servicio_del/{id}','ServicioController@destroy');
+
+//rutas para las falla_save
+Route::get('fallas','FallaController@index');
+Route::post('falla_save','FallaController@store');
+Route::delete('/falla_del/{id}','FallaController@destroy');
+
 
 Route::get('/menu',function(){
 	return view('admin.menu');

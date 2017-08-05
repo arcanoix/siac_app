@@ -1,5 +1,15 @@
 <template>
+  <div class="container">
+    <section class="content-header">
+         <h1>
 
+           <small></small>
+         </h1>
+         <ol class="breadcrumb">
+           <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+           <li class="active">ADS</li>
+         </ol>
+       </section>
 <div class="tabled">
     <br>
 
@@ -17,22 +27,31 @@
     <table class="table table-striped">
       <tr  class="row-name">
         <th>#</th>
-        <th>Usuario</th>
-        <th>Rol</th>
-        <th>Email</th>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Cable Central</th>
+        <th>Cable Local</th>
+        <th>Par Central</th>
+        <th>Par Local</th>
+        <th>Direccion</th>
+
         <th>Editar</th>
         <th>Eliminar</th>
 
       </tr>
-      <tr v-for="b in users"  class="row-content">
+      <tr v-for="b in ads"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
-        <td> - </td>
-        <td>{{ b.email }}</td>
+        <td>{{b.type_ads}} </td>
+        <td>{{ b.cc }}</td>
+        <td>{{b.cl}}</td>
+        <td>{{b.pc}}</td>
+        <td>{{b.pl}}</td>
+        <td>{{b.address}}</td>
 
 
-        <td v-on:click.prevent="onEdit(index)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(index)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
       </tr>
 
     </table>
@@ -50,7 +69,7 @@
 
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Nombre" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newAds.name" type="text" class="form-control" placeholder="Nombre" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
@@ -58,66 +77,66 @@
 
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-envelope" aria-hidden="true"></i>
-              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" v-model="newUser.email" type="text" class="form-control" placeholder="Tipo de Ads" name="email">
-             <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_ads') }" v-model="newAds.type_ads" type="text" class="form-control" placeholder="Tipo de Ads" name="type_ads">
+             <span v-show="errors.has('type_ads')" class="help is-danger">{{ errors.first('type_ads') }}</span>
 
             </div>
 
 
             <div class="form-group inner-addon left-addon">
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Direccion">
+             <input v-model="newAds.cc" type="text" class="form-control" placeholder="Cable central">
             </div>
 
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Manga">
-
-            </div>
             <div class="form-group inner-addon left-addon">
              <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Estado">
+             <input v-model="newAds.cl" type="text" class="form-control" placeholder="cable local">
 
             </div>
             <div class="form-group inner-addon left-addon">
              <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Municipio">
+             <input v-model="newAds.pc" type="text" class="form-control" placeholder="Par central">
 
             </div>
             <div class="form-group inner-addon left-addon">
              <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Parroquia">
+             <input v-model="newAds.pl" type="text" class="form-control" placeholder="Par local">
 
             </div>
             <div class="form-group inner-addon left-addon">
              <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Sector">
+             <input v-model="newAds.address" type="text" class="form-control" placeholder="Direccion">
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="newAds.sleeve_id" type="text" class="form-control" placeholder="ID Manga">
 
             </div>
             <div class="form-group inner-addon left-addon col-xs-6">
 
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Coordenada X">
+             <input v-model="newAds.state_id" type="text" class="form-control" placeholder="ID estado">
 
             </div>
             <div class="form-group inner-addon left-addon col-xs-6">
-             
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Coordenada y">
+
+             <input v-model="newAds.municipality_id" type="text" class="form-control" placeholder="ID Municipio">
 
             </div>
 
             <div  class="form-group col-xs-3">
-              <input v-model="newUser.pass" type="text" class="form-control" placeholder="cc">
+              <input v-model="newAds.parish_id" type="text" class="form-control" placeholder="ID parroquia">
             </div>
 
             <div class="form-group col-xs-3">
-              <input v-model="newUser.pass" type="text" class="form-control" placeholder="cl">
+              <input v-model="newAds.sector_id" type="text" class="form-control" placeholder="ID Sector">
             </div>
 
             <div class="form-group col-xs-3">
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="pc">
+             <input v-model="newAds.coord_x" type="text" class="form-control" placeholder="coordenada x">
             </div>
 
             <div class="form-group col-xs-3">
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="pl">
+             <input v-model="newAds.coord_y" type="text" class="form-control" placeholder="coordenada y">
             </div>
           </form>
 
@@ -132,42 +151,54 @@
       </modal>
 
   </div>
+</div>
 
 </template>
 
 
 <script>
-var getUsers = '/users';
-var postUsers = '/users_save';
+var getAds = 'ads';
+var postAds = 'ads_save';
 
 export default {
 
   data(){
       return {
-        users: [],
+        ads: [],
         showModal:false,
-        newUser:{
+        newAds:{
           name:'',
-          pass:'',
-          email:''
+          type_ads:'',
+          cc:'',
+          cl:'',
+          pc:'',
+          pl:'',
+          address:'',
+          sleeve_id:'',
+          state_id:'',
+          municipality_id:'',
+          parish_id:'',
+          sector_id:'',
+          coord_x:'',
+          coord_y:''
         }
 
       }
   },
-  created: function(){
-    this.fetchUsers();
+  created(){
+    this.fetchAds();
 
   },
   methods:{
-      fetchUsers: function(){
-         axios.get(getUsers).then(response => {
+      fetchAds(){
+         axios.get(getAds).then(response => {
 
-            this.users = response.data.users;
+            this.ads = response.data.ads;
         });
 
       },
-      saveUser: function(newUser){
-        var input = this.newUser;
+      saveUser(newAds){
+        var input = this.newAds;
         if(input['name'] == ''){
           this.hasError =false;
           this.hasDeleted = true;
@@ -175,15 +206,31 @@ export default {
         else
         {
               this.hasError=true;
-               axios.post(postUsers, this.newUser).then(response => {
+               axios.post(postAds, this.newAds).then(response => {
 
-               this.fetchUsers();
+               this.fetchAds();
+               this.showModal = false;
                });
-
         }
+      },
+      onDelete(b){
+        var that = this;
+        var delAds = '/ads_delete/';
+        //console.log(delUsers + "/"+ b.id);
 
-
-
+        swal({
+          title: '¿Estas seguro de eliminar el registro?',
+          text: 'Luego de eliminar no podras recuperar el registro',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No'
+        }).then(function(){
+          axios.delete(delAds +  b.id).then(response => {
+            //console.log("eliminado");
+            that.fetchAds();
+          });
+        })
       }
   }
 }

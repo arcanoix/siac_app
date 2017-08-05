@@ -14836,50 +14836,101 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-var getUsers = '/users';
-var postUsers = '/users_save';
+var getAds = 'ads';
+var postAds = 'ads_save';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      users: [],
+      ads: [],
       showModal: false,
-      newUser: {
+      newAds: {
         name: '',
-        pass: '',
-        email: ''
+        type_ads: '',
+        cc: '',
+        cl: '',
+        pc: '',
+        pl: '',
+        address: '',
+        sleeve_id: '',
+        state_id: '',
+        municipality_id: '',
+        parish_id: '',
+        sector_id: '',
+        coord_x: '',
+        coord_y: ''
       }
 
     };
   },
-
   created: function created() {
-    this.fetchUsers();
+    this.fetchAds();
   },
+
   methods: {
-    fetchUsers: function fetchUsers() {
+    fetchAds: function fetchAds() {
       var _this = this;
 
-      axios.get(getUsers).then(function (response) {
+      axios.get(getAds).then(function (response) {
 
-        _this.users = response.data.users;
+        _this.ads = response.data.ads;
       });
     },
-    saveUser: function saveUser(newUser) {
+    saveUser: function saveUser(newAds) {
       var _this2 = this;
 
-      var input = this.newUser;
+      var input = this.newAds;
       if (input['name'] == '') {
         this.hasError = false;
         this.hasDeleted = true;
       } else {
         this.hasError = true;
-        axios.post(postUsers, this.newUser).then(function (response) {
+        axios.post(postAds, this.newAds).then(function (response) {
 
-          _this2.fetchUsers();
+          _this2.fetchAds();
+          _this2.showModal = false;
         });
       }
+    },
+    onDelete: function onDelete(b) {
+      var that = this;
+      var delAds = '/ads_delete/';
+      //console.log(delUsers + "/"+ b.id);
+
+      swal({
+        title: '¿Estas seguro de eliminar el registro?',
+        text: 'Luego de eliminar no podras recuperar el registro',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+      }).then(function () {
+        axios.delete(delAds + b.id).then(function (response) {
+          //console.log("eliminado");
+          that.fetchAds();
+        });
+      });
     }
   }
 });
@@ -15328,6 +15379,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getBusiness = 'business';
 var postBusiness = 'business_save';
@@ -15502,6 +15564,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getUsers = '/users';
 var postUsers = '/users_save';
@@ -15556,6 +15629,18 @@ var postUsers = '/users_save';
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -15895,6 +15980,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getnumber = 'numero_telefonico';
 var postnumber = 'numero_save';
@@ -16058,50 +16154,76 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
-var getUsers = '/users';
-var postUsers = '/users_save';
+var getServicio = 'servicios';
+var postServicio = 'servicios_save';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      users: [],
+      servicio: [],
       showModal: false,
-      newUser: {
+      newServicio: {
         name: '',
-        pass: '',
-        email: ''
+        description: ''
       }
 
     };
   },
-
   created: function created() {
-    this.fetchUsers();
+    this.fetchServicio();
   },
+
   methods: {
-    fetchUsers: function fetchUsers() {
+    fetchServicio: function fetchServicio() {
       var _this = this;
 
-      axios.get(getUsers).then(function (response) {
+      axios.get(getServicio).then(function (response) {
 
-        _this.users = response.data.users;
+        _this.servicio = response.data.servicio;
       });
     },
-    saveUser: function saveUser(newUser) {
+    saveServicio: function saveServicio(newServicio) {
       var _this2 = this;
 
-      var input = this.newUser;
+      var input = this.newServicio;
       if (input['name'] == '') {
         this.hasError = false;
         this.hasDeleted = true;
       } else {
         this.hasError = true;
-        axios.post(postUsers, this.newUser).then(function (response) {
+        axios.post(postUsers, this.newServicio).then(function (response) {
 
-          _this2.fetchUsers();
+          _this2.fetchServicio();
+          _this2.showModal = false;
         });
       }
+    },
+    onDelete: function onDelete(b) {
+      var that = this;
+      var delServicio = '/servicio_del/';
+      //console.log(delServicio + "/"+ b.id);
+
+      swal({
+        title: '¿Estas seguro de eliminar el registro?',
+        text: 'Luego de eliminar no podras recuperar el registro',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+      }).then(function () {
+        axios.delete(delServicio + b.id).then(function (response) {
+          //console.log("eliminado");
+          that.fetchUsers();
+        });
+      });
     }
   }
 });
@@ -16112,6 +16234,17 @@ var postUsers = '/users_save';
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -18870,7 +19003,7 @@ exports.push([module.i, "\n.simple-root {\r\n  margin-top: 20%;\r\n  margin-left
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.simple-root {\r\n  margin-top: 20%;\r\n  margin-left: auto;\r\n  margin-right: auto;\n}\n.help.is-danger {\r\n  color: red;\n}\n.form-control.is-danger {\r\n  border: 1px solid red;\n}\r\n\r\n\r\n\r\n/* enable absolute positioning */\n.inner-addon { \r\n    position: relative;\n}\r\n\r\n/* style icon */\n.inner-addon .fa {\r\n  position: absolute;\r\n  padding: 10px;\r\n  pointer-events: none;\n}\r\n\r\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\r\n\r\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\r\n    background-color: white;\r\n     opacity:0.9; /* Opacidad 90% */\r\n     border-radius: 2px;\r\n     border-bottom: 2px;\n}\r\n/* Table css Start */\na.del\r\n{\r\n    background:#d9534f;\r\n    border-radius: 2px;\r\n    width: 35px;\r\n    height:28px;\r\n    padding-left:12px;\r\n    line-height:10px;\n}\na.edit\r\n{\r\n    padding-left:10px;\r\n    background:#337ab7;\r\n    color:#fff;\r\n    border-radius:2px;\r\n    border:none;\n}\ntr.row-name\r\n{\r\n    font-size: 18px;\r\n    color:#448aff;\n}\ntr.row-content\r\n{\r\n    color:#6c7173;\n}\nth  {\r\n   text-align: center;\r\n  padding-top: 10px;\r\npadding-right: 10px;\r\npadding-bottom: 10px;\r\npadding-left: 30px;\n}\ntd  {\r\n  text-align: center;\r\n padding-top: 10px;\r\npadding-right: 10px;\r\npadding-bottom: 10px;\r\npadding-left: 30px;\n}\ntable\r\n{\r\n    border-bottom: 8px solid #448aff;\n}\ntd.check\r\n{\r\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\r\n{\r\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\r\n{\r\n    background: #de6c69;\n}\na.btn-danger\r\n{\r\n    background:#d9534f;\n}\na.btn-top\r\n{\r\n    /*background:#448aff;*/\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\n}\na.btn-top:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\na.btn-t\r\n{\r\n\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\r\n    width: 20%;\n}\na.btn-t:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\r\n/* Table css End */\r\n\r\n/*modal*/\n.Modal__container {\r\n    max-width: 700px;\r\n    width: 90%;\r\n    background: white;\r\n    border-radius: 2px;\r\n    -webkit-animation-duration: 0.3s;\r\n            animation-duration: 0.3s;\r\n    -webkit-animation-delay: 0s;\r\n            animation-delay: 0s;\n}\n.Modal__header {\r\n    border-bottom: 1px solid white;\r\n    padding: 15px 10px;\r\n    background-color: silver;\r\n    color: white;\r\n    border-radius: 2px;\n}\n.Modal__header > h1 {\r\n    font-size: 27px;\r\n    font-weight: normal;\r\n    margin: 0;\n}\n.Modal__content {\r\n    padding: 10px;\n}\n.Modal__footer {\r\n    padding: 5px;\n}\n.u-overlay {\r\n    position: fixed;\r\n    z-index: 1000;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(0,0,0,0.8);\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n        -ms-flex-align: center;\r\n            align-items: center;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\n}\n.naked-link {\r\n    color: inherit;\r\n    text-decoration: inherit;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.simple-root {\r\n  margin-top: 20%;\r\n  margin-left: auto;\r\n  margin-right: auto;\n}\n.help.is-danger {\r\n  color: red;\n}\n.form-control.is-danger {\r\n  border: 1px solid red;\n}\r\n\r\n\r\n\r\n/* enable absolute positioning */\n.inner-addon {\r\n    position: relative;\n}\r\n\r\n/* style icon */\n.inner-addon .fa {\r\n  position: absolute;\r\n  padding: 10px;\r\n  pointer-events: none;\n}\r\n\r\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\r\n\r\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\r\n    background-color: white;\r\n     opacity:0.9; /* Opacidad 90% */\r\n     border-radius: 2px;\r\n     border-bottom: 2px;\n}\r\n/* Table css Start */\na.del\r\n{\r\n    background:#d9534f;\r\n    border-radius: 2px;\r\n    width: 35px;\r\n    height:28px;\r\n    padding-left:12px;\r\n    line-height:10px;\n}\na.edit\r\n{\r\n    padding-left:10px;\r\n    background:#337ab7;\r\n    color:#fff;\r\n    border-radius:2px;\r\n    border:none;\n}\ntr.row-name\r\n{\r\n    font-size: 18px;\r\n    color:#448aff;\n}\ntr.row-content\r\n{\r\n    color:#6c7173;\n}\nth  {\r\n   text-align: center;\r\n  padding-top: 10px;\r\npadding-right: 10px;\r\npadding-bottom: 10px;\r\npadding-left: 30px;\n}\ntd  {\r\n  text-align: center;\r\n padding-top: 10px;\r\npadding-right: 10px;\r\npadding-bottom: 10px;\r\npadding-left: 30px;\n}\ntable\r\n{\r\n    border-bottom: 8px solid #448aff;\n}\ntd.check\r\n{\r\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\r\n{\r\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\r\n{\r\n    background: #de6c69;\n}\na.btn-danger\r\n{\r\n    background:#d9534f;\n}\na.btn-top\r\n{\r\n    /*background:#448aff;*/\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\n}\na.btn-top:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\na.btn-t\r\n{\r\n\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\r\n    width: 20%;\n}\na.btn-t:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\r\n/* Table css End */\r\n\r\n/*modal*/\n.Modal__container {\r\n    max-width: 700px;\r\n    width: 90%;\r\n    background: white;\r\n    border-radius: 2px;\r\n    -webkit-animation-duration: 0.3s;\r\n            animation-duration: 0.3s;\r\n    -webkit-animation-delay: 0s;\r\n            animation-delay: 0s;\n}\n.Modal__header {\r\n    border-bottom: 1px solid white;\r\n    padding: 15px 10px;\r\n    background-color: silver;\r\n    color: white;\r\n    border-radius: 2px;\n}\n.Modal__header > h1 {\r\n    font-size: 27px;\r\n    font-weight: normal;\r\n    margin: 0;\n}\n.Modal__content {\r\n    padding: 10px;\n}\n.Modal__footer {\r\n    padding: 5px;\n}\n.u-overlay {\r\n    position: fixed;\r\n    z-index: 1000;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(0,0,0,0.8);\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n        -ms-flex-align: center;\r\n            align-items: center;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\n}\n.naked-link {\r\n    color: inherit;\r\n    text-decoration: inherit;\n}\r\n\r\n", ""]);
 
 /***/ }),
 /* 52 */
@@ -50333,6 +50466,8 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "container"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "tabled"
   }, [_c('br'), _vm._v(" "), _c('h3', {
     staticStyle: {
@@ -50342,7 +50477,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(0), _vm._v(" "), _c('a', {
+  }, [_vm._m(1), _vm._v(" "), _c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -50360,7 +50495,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nuevo Numero Telefonico")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.numberT), function(b) {
+  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.numberT), function(b) {
     return _c('tr', {
       staticClass: "row-content"
     }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.code))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.number) + "  ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.status))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.cc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.cl))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.pc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.pl))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.sleeve_id))]), _vm._v(" "), _c('td', {
@@ -50370,14 +50505,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.onEdit(b)
         }
       }
-    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.onDelete(b)
         }
       }
-    }, [_vm._m(3, true)])])
+    }, [_vm._m(4, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -50391,7 +50526,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Registro de Numero Telefonico\r\n\r\n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de Numero Telefonico\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -50748,8 +50883,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal = false
       }
     }
-  }, [_vm._v("Cerrar")])])])], 1)
+  }, [_vm._v("Cerrar")])])])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_c('small')]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-dashboard"
+  }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
+    staticClass: "active"
+  }, [_vm._v("Cliente")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-t btn btn-success pull-right",
     attrs: {
@@ -50990,6 +51139,8 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "container"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "tabled"
   }, [_c('br'), _vm._v(" "), _c('h3', {
     staticStyle: {
@@ -50999,7 +51150,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(0), _vm._v(" "), _c('a', {
+  }, [_vm._m(1), _vm._v(" "), _c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -51017,24 +51168,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nueva ADS")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.users), function(b) {
+  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.ads), function(b) {
     return _c('tr', {
       staticClass: "row-content"
-    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(" - ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', {
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.type_ads) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.cc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.cl))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.pc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.pl))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address))]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onEdit(_vm.index)
+          _vm.onEdit(b)
         }
       }
-    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onDelete(_vm.index)
+          _vm.onDelete(b)
         }
       }
-    }, [_vm._m(3, true)])])
+    }, [_vm._m(4, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -51048,7 +51199,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Registro de ADS\r\n\r\n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de ADS\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -51068,8 +51219,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newAds.name),
+      expression: "newAds.name"
     }],
     staticClass: "form-control",
     class: {
@@ -51080,12 +51231,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Nombre"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newAds.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newAds.name = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -51107,48 +51258,160 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "validate",
       rawName: "v-validate",
-      value: ('required|email'),
-      expression: "'required|email'"
+      value: ('required'),
+      expression: "'required'"
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.email),
-      expression: "newUser.email"
+      value: (_vm.newAds.type_ads),
+      expression: "newAds.type_ads"
     }],
     staticClass: "form-control",
     class: {
-      'input': true, 'is-danger': _vm.errors.has('email')
+      'input': true, 'is-danger': _vm.errors.has('type_ads')
     },
     attrs: {
       "type": "text",
       "placeholder": "Tipo de Ads",
-      "name": "email"
+      "name": "type_ads"
     },
     domProps: {
-      "value": (_vm.newUser.email)
+      "value": (_vm.newAds.type_ads)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.email = $event.target.value
+        _vm.newAds.type_ads = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.errors.has('email')),
-      expression: "errors.has('email')"
+      value: (_vm.errors.has('type_ads')),
+      expression: "errors.has('type_ads')"
     }],
     staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('email')))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('type_ads')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newAds.cc),
+      expression: "newAds.cc"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Cable central"
+    },
+    domProps: {
+      "value": (_vm.newAds.cc)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newAds.cc = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newAds.cl),
+      expression: "newAds.cl"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "cable local"
+    },
+    domProps: {
+      "value": (_vm.newAds.cl)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newAds.cl = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newAds.pc),
+      expression: "newAds.pc"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Par central"
+    },
+    domProps: {
+      "value": (_vm.newAds.pc)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newAds.pc = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newAds.pl),
+      expression: "newAds.pl"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Par local"
+    },
+    domProps: {
+      "value": (_vm.newAds.pl)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newAds.pl = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newAds.address),
+      expression: "newAds.address"
     }],
     staticClass: "form-control",
     attrs: {
@@ -51156,12 +51419,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Direccion"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newAds.address)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newAds.address = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -51175,133 +51438,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newAds.sleeve_id),
+      expression: "newAds.sleeve_id"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "Manga"
+      "placeholder": "ID Manga"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newAds.sleeve_id)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "Estado"
-    },
-    domProps: {
-      "value": (_vm.newUser.pass)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "Municipio"
-    },
-    domProps: {
-      "value": (_vm.newUser.pass)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "Parroquia"
-    },
-    domProps: {
-      "value": (_vm.newUser.pass)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
-      }
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "Sector"
-    },
-    domProps: {
-      "value": (_vm.newUser.pass)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newAds.sleeve_id = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -51310,21 +51461,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newAds.state_id),
+      expression: "newAds.state_id"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "Coordenada X"
+      "placeholder": "ID estado"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newAds.state_id)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newAds.state_id = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -51333,21 +51484,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newAds.municipality_id),
+      expression: "newAds.municipality_id"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "Coordenada y"
+      "placeholder": "ID Municipio"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newAds.municipality_id)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newAds.municipality_id = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -51356,21 +51507,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newAds.parish_id),
+      expression: "newAds.parish_id"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "cc"
+      "placeholder": "ID parroquia"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newAds.parish_id)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newAds.parish_id = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -51379,21 +51530,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newAds.sector_id),
+      expression: "newAds.sector_id"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "cl"
+      "placeholder": "ID Sector"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newAds.sector_id)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newAds.sector_id = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -51402,21 +51553,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newAds.coord_x),
+      expression: "newAds.coord_x"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "pc"
+      "placeholder": "coordenada x"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newAds.coord_x)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newAds.coord_x = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -51425,21 +51576,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newAds.coord_y),
+      expression: "newAds.coord_y"
     }],
     staticClass: "form-control",
     attrs: {
       "type": "text",
-      "placeholder": "pl"
+      "placeholder": "coordenada y"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newAds.coord_y)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newAds.coord_y = $event.target.value
       }
     }
   })])])]), _vm._v(" "), _c('div', {
@@ -51466,8 +51617,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal = false
       }
     }
-  }, [_vm._v("Cerrar")])])])], 1)
+  }, [_vm._v("Cerrar")])])])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_c('small')]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-dashboard"
+  }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
+    staticClass: "active"
+  }, [_vm._v("ADS")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-t btn btn-success pull-right",
     attrs: {
@@ -51482,7 +51647,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"
-  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Usuario")]), _vm._v(" "), _c('th', [_vm._v("Rol")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Editar")]), _vm._v(" "), _c('th', [_vm._v("Eliminar")])])
+  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Tipo")]), _vm._v(" "), _c('th', [_vm._v("Cable Central")]), _vm._v(" "), _c('th', [_vm._v("Cable Local")]), _vm._v(" "), _c('th', [_vm._v("Par Central")]), _vm._v(" "), _c('th', [_vm._v("Par Local")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Editar")]), _vm._v(" "), _c('th', [_vm._v("Eliminar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-top  btn btn-primary pull-right"
@@ -51516,6 +51681,8 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "container"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "tabled"
   }, [_c('br'), _vm._v(" "), _c('h3', {
     staticStyle: {
@@ -51525,7 +51692,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(0), _vm._v(" "), _c('a', {
+  }, [_vm._m(1), _vm._v(" "), _c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -51543,24 +51710,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nuevo Servicio")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.users), function(b) {
+  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.servicio), function(b) {
     return _c('tr', {
       staticClass: "row-content"
-    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(" - ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', {
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.description) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.created_at))]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onEdit(_vm.index)
+          _vm.onEdit(b)
         }
       }
-    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onDelete(_vm.index)
+          _vm.onDelete(b)
         }
       }
-    }, [_vm._m(3, true)])])
+    }, [_vm._m(4, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -51574,7 +51741,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Registro de Usuario\r\n          \r\n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de Usuario\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -51594,8 +51761,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newServicio.name),
+      expression: "newServicio.name"
     }],
     staticClass: "form-control",
     class: {
@@ -51606,12 +51773,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Nombre de Usuario"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newServicio.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newServicio.name = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -51633,69 +51800,41 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "validate",
       rawName: "v-validate",
-      value: ('required|email'),
-      expression: "'required|email'"
+      value: ('required'),
+      expression: "'required'"
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.email),
-      expression: "newUser.email"
+      value: (_vm.newServicio.description),
+      expression: "newServicio.description"
     }],
     staticClass: "form-control",
     class: {
-      'input': true, 'is-danger': _vm.errors.has('email')
+      'input': true, 'is-danger': _vm.errors.has('description')
     },
     attrs: {
       "type": "text",
       "placeholder": "Correo Electronico",
-      "name": "email"
+      "name": "description"
     },
     domProps: {
-      "value": (_vm.newUser.email)
+      "value": (_vm.newServicio.description)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.email = $event.target.value
+        _vm.newServicio.description = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.errors.has('email')),
-      expression: "errors.has('email')"
+      value: (_vm.errors.has('description')),
+      expression: "errors.has('description')"
     }],
     staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('email')))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "password",
-      "placeholder": "Contraseña"
-    },
-    domProps: {
-      "value": (_vm.newUser.pass)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
-      }
-    }
-  })])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('description')))])])])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -51705,7 +51844,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {
         $event.preventDefault();
-        _vm.saveUser()
+        _vm.saveServicio()
       }
     }
   }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {
@@ -51719,8 +51858,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal = false
       }
     }
-  }, [_vm._v("Cerrar")])])])], 1)
+  }, [_vm._v("Cerrar")])])])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_c('small')]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-dashboard"
+  }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
+    staticClass: "active"
+  }, [_vm._v("Cliente")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-t btn btn-success pull-right",
     attrs: {
@@ -51735,7 +51888,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"
-  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Usuario")]), _vm._v(" "), _c('th', [_vm._v("Rol")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Editar")]), _vm._v(" "), _c('th', [_vm._v("Eliminar")])])
+  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Descripcion")]), _vm._v(" "), _c('th', [_vm._v("Fecha")]), _vm._v(" "), _c('th', [_vm._v("Editar")]), _vm._v(" "), _c('th', [_vm._v("Eliminar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-top  btn btn-primary pull-right"
@@ -51769,6 +51922,8 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "container"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "tabled"
   }, [_c('br'), _vm._v(" "), _c('h3', {
     staticStyle: {
@@ -51778,7 +51933,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(0), _vm._v(" "), _c('a', {
+  }, [_vm._m(1), _vm._v(" "), _c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -51796,7 +51951,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nueva Empresa")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.business), function(b) {
+  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.business), function(b) {
     return _c('tr', {
       staticClass: "row-content"
     }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.rif))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.number_telephone_id))]), _vm._v(" "), _c('td', {
@@ -51806,14 +51961,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.onEdit(b)
         }
       }
-    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.onDelete(b)
         }
       }
-    }, [_vm._m(3, true)])])
+    }, [_vm._m(4, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -51827,7 +51982,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-industry"
-  }), _vm._v(" Registro de Empresa\r\n\r\n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de Empresa\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -52166,8 +52321,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal = false
       }
     }
-  }, [_vm._v("Cerrar")])])])], 1)
+  }, [_vm._v("Cerrar")])])])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_c('small')]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-dashboard"
+  }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
+    staticClass: "active"
+  }, [_vm._v("Cliente")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-t btn btn-success pull-right",
     attrs: {
@@ -52765,6 +52934,8 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "container"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "tabled"
   }, [_c('br'), _vm._v(" "), _c('h3', {
     staticStyle: {
@@ -52774,7 +52945,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(0), _vm._v(" "), _c('a', {
+  }, [_vm._m(1), _vm._v(" "), _c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -52792,7 +52963,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nuevo Usuario")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.users), function(b) {
+  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.users), function(b) {
     return _c('tr', {
       staticClass: "row-content"
     }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(" - ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', [_c('a', {
@@ -52835,7 +53006,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Registro de Usuario\r\n\r\n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de Usuario\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -52995,7 +53166,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Editar Usuario\r\n\r\n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Editar Usuario\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -53161,8 +53332,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal1 = false
       }
     }
-  }, [_vm._v("Cerrar")])])])], 1)
+  }, [_vm._v("Cerrar")])])])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_c('small')]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-dashboard"
+  }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
+    staticClass: "active"
+  }, [_vm._v("Cliente")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-t btn btn-success pull-right",
     attrs: {
@@ -53193,6 +53378,8 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "container"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "tabled"
   }, [_c('br'), _vm._v(" "), _c('h3', {
     staticStyle: {
@@ -53202,7 +53389,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(0), _vm._v(" "), _c('a', {
+  }, [_vm._m(1), _vm._v(" "), _c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -53220,7 +53407,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nueva Falla")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.users), function(b) {
+  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.users), function(b) {
     return _c('tr', {
       staticClass: "row-content"
     }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(" - ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', {
@@ -53230,14 +53417,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.onEdit(_vm.index)
         }
       }
-    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.onDelete(_vm.index)
         }
       }
-    }, [_vm._m(3, true)])])
+    }, [_vm._m(4, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -53251,7 +53438,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Registro de Fallas\r\n\r\n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de Fallas\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -53452,8 +53639,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal = false
       }
     }
-  }, [_vm._v("Cerrar")])])])], 1)
+  }, [_vm._v("Cerrar")])])])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_c('small')]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-dashboard"
+  }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
+    staticClass: "active"
+  }, [_vm._v("Cliente")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-t btn btn-success pull-right",
     attrs: {
@@ -53502,6 +53703,8 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "container"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "tabled"
   }, [_c('br'), _vm._v(" "), _c('h3', {
     staticStyle: {
@@ -53511,7 +53714,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(0), _vm._v(" "), _c('a', {
+  }, [_vm._m(1), _vm._v(" "), _c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -53529,7 +53732,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nueva manga")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.manga), function(b) {
+  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.manga), function(b) {
     return _c('tr', {
       staticClass: "row-content"
     }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(b.description) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.created_at))]), _vm._v(" "), _c('td', {
@@ -53539,14 +53742,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.onEdit(b)
         }
       }
-    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.onDelete(b)
         }
       }
-    }, [_vm._m(3, true)])])
+    }, [_vm._m(4, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -53722,8 +53925,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal = false
       }
     }
-  }, [_vm._v("Cerrar")])])])], 1)
+  }, [_vm._v("Cerrar")])])])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_c('small')]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-dashboard"
+  }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
+    staticClass: "active"
+  }, [_vm._v("Cliente")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-t btn btn-success pull-right",
     attrs: {

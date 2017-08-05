@@ -132,9 +132,7 @@
               <a> <i class="fa fa-font"></i> <span>Ads</span></a>
             </router-link>
 
-          <router-link tag="li" to="/servicios">
-              <a> <i class="fa fa-suitcase"></i> <span>Servicios</span></a>
-            </router-link>
+
 
          <router-link tag="li" to="/numero_telefonico">
               <a> <i class="fa fa-tty"></i> <span>Numero Telefonico</span></a>
@@ -157,8 +155,9 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="#">Aba</a></li>
-              <li><a href="#">Linea</a></li>
+              <router-link tag="li" to="/servicios">
+                  <a> <i class="fa fa-suitcase"></i> <span>Servicios</span></a>
+                </router-link>
             </ul>
           </li>
 
