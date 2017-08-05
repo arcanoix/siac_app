@@ -140,8 +140,12 @@
               <a> <i class="fa fa-tty"></i> <span>Numero Telefonico</span></a>
             </router-link>
 
-        <router-link tag="li" to="/fallas">
+            <router-link tag="li" to="/fallas">
               <a> <i class="fa fa-link"></i> <span>Fallas</span></a>
+            </router-link>
+
+            <router-link tag="li" to="/mangas">
+              <a><i class="fa fa-link"></i><span>Mangas</span></a>
             </router-link>
 
 

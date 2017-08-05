@@ -17,9 +17,14 @@
     <table class="table table-striped">
       <tr  class="row-name">
         <th>#</th>
-        <th>Usuario</th>
-        <th>Rol</th>
-        <th>Email</th>
+        <th>Codigo</th>
+        <th>Numero</th>
+        <th>Estatus</th>
+        <th>Cable Central</th>
+        <th>Cable Local</th>
+        <th>Par Central</th>
+        <th>Par Local</th>
+        <th>IDManga</th>
         <th>Editar</th>
         <th>Eliminar</th>
 
@@ -28,6 +33,11 @@
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
         <td> - </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td>{{ b.email }}</td>
 
 

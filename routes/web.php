@@ -40,7 +40,10 @@ Route::put('/update_user/{id}', 'UserController@update');
 Route::get('/business', 'UserController@index');
 Route::post('/business_save', 'UserController@store');
 
-
+//rutas para mangas
+Route::get('manga','MangaController@index');
+Route::post('manga_save','MangaController@store');
+Route::delete('/manga_del/{id}','MangaController@destroy');
 
 
 

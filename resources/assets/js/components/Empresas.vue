@@ -19,7 +19,9 @@
         <th>#</th>
         <th>Nombre</th>
         <th>Rif</th>
+        <th>Direccion</th>
         <th>Email</th>
+        <th>Numero Telefonico</th>
         <th>Editar</th>
         <th>Eliminar</th>
 
@@ -27,8 +29,10 @@
       <tr v-for="b in business"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
-        <td> - </td>
+        <td>{{b.rif}}</td>
+        <td>{{ b.address }} </td>
         <td>{{ b.email }}</td>
+        <td>{{b.number_telephone_id}}</td>
 
 
         <td v-on:click.prevent="onEdit(index)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
