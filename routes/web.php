@@ -45,7 +45,10 @@ Route::get('manga','MangaController@index');
 Route::post('manga_save','MangaController@store');
 Route::delete('/manga_del/{id}','MangaController@destroy');
 
-
+//rutas para numero telefonico
+Route::get('numero_telefonico', 'NumeroTController@index');
+Route::post('numero_save','NumeroTController@store');
+Route::delete('/numero_delete/{id}','NumeroTController@destroy');
 
 
 Route::get('/menu',function(){

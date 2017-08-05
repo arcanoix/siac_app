@@ -15840,50 +15840,82 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
-var getUsers = '/users';
-var postUsers = '/users_save';
+var getnumber = 'numero_telefonico';
+var postnumber = 'numero_save';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      users: [],
+      numberT: [],
       showModal: false,
-      newUser: {
-        name: '',
-        pass: '',
-        email: ''
+      newNumber: {
+        code: '',
+        number: '',
+        status: '',
+        cc: '',
+        cl: '',
+        pc: '',
+        pl: '',
+        sleeve_id: ''
       }
 
     };
   },
-
   created: function created() {
-    this.fetchUsers();
+    this.fetchNumber();
   },
+
   methods: {
-    fetchUsers: function fetchUsers() {
+    fetchNumber: function fetchNumber() {
       var _this = this;
 
-      axios.get(getUsers).then(function (response) {
+      axios.get(getnumber).then(function (response) {
 
-        _this.users = response.data.users;
+        _this.numberT = response.data.numberT;
       });
     },
-    saveUser: function saveUser(newUser) {
+    saveNumber: function saveNumber(newNumber) {
       var _this2 = this;
 
-      var input = this.newUser;
-      if (input['name'] == '') {
+      var input = this.newNumber;
+      if (input['code'] == '') {
         this.hasError = false;
         this.hasDeleted = true;
       } else {
         this.hasError = true;
-        axios.post(postUsers, this.newUser).then(function (response) {
+        axios.post(postnumber, this.newNumber).then(function (response) {
 
-          _this2.fetchUsers();
+          _this2.fetchNumber();
+          _this2.showModal = false;
         });
       }
+    },
+    ondelete: function ondelete(b) {
+      var that = this;
+      var delNumber = '/numero_delete/';
+      //console.log(delUsers + "/"+ b.id);
+
+      swal({
+        title: '¿Estas seguro de eliminar el registro?',
+        text: 'Luego de eliminar no podras recuperar el registro',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+      }).then(function () {
+        axios.delete(delNumber + b.id).then(function (response) {
+          //console.log("eliminado");
+          that.fetchNumber();
+        });
+      });
     }
   }
 });
@@ -50280,21 +50312,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nuevo Numero Telefonico")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.users), function(b) {
+  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.numberT), function(b) {
     return _c('tr', {
       staticClass: "row-content"
-    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(" - ")]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', {
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.code))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.number) + "  ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.status))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.cc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.cl))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.pc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.pl))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.sleeve_id))]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onEdit(_vm.index)
+          _vm.onEdit(b)
         }
       }
     }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onDelete(_vm.index)
+          _vm.onDelete(b)
         }
       }
     }, [_vm._m(3, true)])])
@@ -50331,35 +50363,35 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newNumber.code),
+      expression: "newNumber.code"
     }],
     staticClass: "form-control",
     class: {
-      'input': true, 'is-danger': _vm.errors.has('name')
+      'input': true, 'is-danger': _vm.errors.has('code')
     },
     attrs: {
       "type": "text",
       "placeholder": "Codigo"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newNumber.code)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newNumber.code = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.errors.has('name')),
-      expression: "errors.has('name')"
+      value: (_vm.errors.has('code')),
+      expression: "errors.has('code')"
     }],
     staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('code')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-phone",
@@ -50370,189 +50402,281 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "validate",
       rawName: "v-validate",
-      value: ('required|email'),
-      expression: "'required|email'"
+      value: ('required'),
+      expression: "'required'"
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.email),
-      expression: "newUser.email"
+      value: (_vm.newNumber.number),
+      expression: "newNumber.number"
     }],
     staticClass: "form-control",
     class: {
-      'input': true, 'is-danger': _vm.errors.has('email')
+      'input': true, 'is-danger': _vm.errors.has('number')
     },
     attrs: {
       "type": "text",
       "placeholder": "Numero Telefonico",
-      "name": "email"
+      "name": "number"
     },
     domProps: {
-      "value": (_vm.newUser.email)
+      "value": (_vm.newNumber.number)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.email = $event.target.value
+        _vm.newNumber.number = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.errors.has('email')),
-      expression: "errors.has('email')"
+      value: (_vm.errors.has('number')),
+      expression: "errors.has('number')"
     }],
     staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('email')))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('number')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
+  }, [_c('input', {
     directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newNumber.status),
+      expression: "newNumber.status"
     }],
     staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('status')
+    },
     attrs: {
       "type": "text",
-      "placeholder": "Estatus"
+      "placeholder": "Status",
+      "name": "status"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newNumber.status)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newNumber.status = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('status')),
+      expression: "errors.has('status')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('status')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group col-xs-3"
   }, [_c('input', {
     directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newNumber.cc),
+      expression: "newNumber.cc"
     }],
     staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('cc')
+    },
     attrs: {
       "type": "text",
-      "placeholder": "cc"
+      "placeholder": "Cable Central",
+      "name": "cc"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newNumber.cc)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newNumber.cc = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('cc')),
+      expression: "errors.has('cc')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('cc')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group col-xs-3"
   }, [_c('input', {
     directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newNumber.cl),
+      expression: "newNumber.cl"
     }],
     staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('cl')
+    },
     attrs: {
       "type": "text",
-      "placeholder": "cl"
+      "placeholder": "Cable Local",
+      "name": "cl"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newNumber.cl)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newNumber.cl = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('cl')),
+      expression: "errors.has('cl')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('cl')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group col-xs-3"
   }, [_c('input', {
     directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newNumber.pc),
+      expression: "newNumber.pc"
     }],
     staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('pc')
+    },
     attrs: {
       "type": "text",
-      "placeholder": "pc"
+      "placeholder": "Par Central",
+      "name": "pc"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newNumber.pc)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newNumber.pc = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('pc')),
+      expression: "errors.has('pc')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('pc')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group col-xs-3"
   }, [_c('input', {
     directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newNumber.pl),
+      expression: "newNumber.pl"
     }],
     staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('pl')
+    },
     attrs: {
       "type": "text",
-      "placeholder": "pl"
+      "placeholder": "Par Local",
+      "name": "pl"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newNumber.pl)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newNumber.pl = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
+  }), _vm._v(" "), _c('span', {
     directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('pl')),
+      expression: "errors.has('pl')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('pl')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.pass),
-      expression: "newUser.pass"
+      value: (_vm.newNumber.sleeve_id),
+      expression: "newNumber.sleeve_id"
     }],
     staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('sleeve_id')
+    },
     attrs: {
       "type": "text",
-      "placeholder": "Manga"
+      "placeholder": "Manga",
+      "name": "sleeve_id"
     },
     domProps: {
-      "value": (_vm.newUser.pass)
+      "value": (_vm.newNumber.sleeve_id)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.pass = $event.target.value
+        _vm.newNumber.sleeve_id = $event.target.value
       }
     }
-  })])])]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('sleeve_id')),
+      expression: "errors.has('sleeve_id')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('sleeve_id')))])])])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -50562,7 +50686,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {
         $event.preventDefault();
-        _vm.saveUser()
+        _vm.saveNumber()
       }
     }
   }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {

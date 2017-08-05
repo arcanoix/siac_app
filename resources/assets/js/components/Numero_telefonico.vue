@@ -29,20 +29,20 @@
         <th>Eliminar</th>
 
       </tr>
-      <tr v-for="b in users"  class="row-content">
+      <tr v-for="b in numberT"  class="row-content">
         <td>{{ b.id }}</td>
-        <td>{{ b.name }}</td>
-        <td> - </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>{{ b.email }}</td>
+        <td>{{ b.code }}</td>
+        <td>{{b.number}}  </td>
+        <td>{{b.status}}</td>
+        <td>{{b.cc}}</td>
+        <td>{{b.cl}}</td>
+        <td>{{b.pc}}</td>
+        <td>{{b.pl}}</td>
+        <td>{{ b.sleeve_id }}</td>
 
 
-        <td v-on:click.prevent="onEdit(index)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(index)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
       </tr>
 
     </table>
@@ -60,43 +60,50 @@
 
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Codigo" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+              <input v-validate="'required'" v-model="newNumber.code" type="text" class="form-control" placeholder="Codigo" :class="{'input': true, 'is-danger': errors.has('code') }">
+             <span v-show="errors.has('code')" class="help is-danger">{{ errors.first('code') }}</span>
 
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
-              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" v-model="newUser.email" type="text" class="form-control" placeholder="Numero Telefonico" name="email">
-             <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('number') }" v-model="newNumber.number" type="text" class="form-control" placeholder="Numero Telefonico" name="number">
+             <span v-show="errors.has('number')" class="help is-danger">{{ errors.first('number') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Estatus">
+
+             <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('status') }" v-model="newNumber.status" type="text" class="form-control" placeholder="Status" name="status">
+            <span v-show="errors.has('status')" class="help is-danger">{{ errors.first('status') }}</span>
 
             </div>
 
             <div  class="form-group col-xs-3">
-              <input v-model="newUser.pass" type="text" class="form-control" placeholder="cc">
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cc') }" v-model="newNumber.cc" type="text" class="form-control" placeholder="Cable Central" name="cc">
+             <span v-show="errors.has('cc')" class="help is-danger">{{ errors.first('cc') }}</span>
             </div>
 
             <div class="form-group col-xs-3">
-              <input v-model="newUser.pass" type="text" class="form-control" placeholder="cl">
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cl') }" v-model="newNumber.cl" type="text" class="form-control" placeholder="Cable Local" name="cl">
+             <span v-show="errors.has('cl')" class="help is-danger">{{ errors.first('cl') }}</span>
             </div>
 
             <div class="form-group col-xs-3">
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="pc">
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('pc') }" v-model="newNumber.pc" type="text" class="form-control" placeholder="Par Central" name="pc">
+             <span v-show="errors.has('pc')" class="help is-danger">{{ errors.first('pc') }}</span>
             </div>
 
             <div class="form-group col-xs-3">
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="pl">
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('pl') }" v-model="newNumber.pl" type="text" class="form-control" placeholder="Par Local" name="pl">
+             <span v-show="errors.has('pl')" class="help is-danger">{{ errors.first('pl') }}</span>
             </div>
 
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newUser.pass" type="text" class="form-control" placeholder="Manga">
-
+            <div class="form-group col-xs-3">
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('sleeve_id') }" v-model="newNumber.sleeve_id" type="text" class="form-control" placeholder="Manga" name="sleeve_id">
+             <span v-show="errors.has('sleeve_id')" class="help is-danger">{{ errors.first('sleeve_id') }}</span>
             </div>
+
+
+
 
 
           </form>
@@ -104,7 +111,7 @@
         </div>
         <div slot="footer">
 
-        <a href="#" class="btn btn-primary" v-on:click.prevent="saveUser()">Guardar</a>
+        <a href="#" class="btn btn-primary" v-on:click.prevent="saveNumber()">Guardar</a>
 
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
 
@@ -117,53 +124,79 @@
 
 
 <script>
-var getUsers = '/users';
-var postUsers = '/users_save';
+var getnumber = 'numero_telefonico';
+var postnumber = 'numero_save';
 
 export default {
 
   data(){
       return {
-        users: [],
+        numberT: [],
         showModal:false,
-        newUser:{
-          name:'',
-          pass:'',
-          email:''
+        newNumber:{
+          code:'',
+          number:'',
+          status:'',
+          cc:'',
+          cl:'',
+          pc:'',
+          pl:'',
+          sleeve_id:''
         }
 
       }
   },
-  created: function(){
-    this.fetchUsers();
+  created(){
+    this.fetchNumber();
 
   },
   methods:{
-      fetchUsers: function(){
-         axios.get(getUsers).then(response => {
+      fetchNumber(){
+         axios.get(getnumber).then(response => {
 
-            this.users = response.data.users;
+            this.numberT = response.data.numberT;
         });
 
       },
-      saveUser: function(newUser){
-        var input = this.newUser;
-        if(input['name'] == ''){
+      saveNumber(newNumber){
+        var input = this.newNumber;
+        if(input['code'] == ''){
           this.hasError =false;
           this.hasDeleted = true;
         }
         else
         {
               this.hasError=true;
-               axios.post(postUsers, this.newUser).then(response => {
+               axios.post(postnumber, this.newNumber).then(response => {
 
-               this.fetchUsers();
+               this.fetchNumber();
+               this.showModal=false;
                });
 
         }
 
 
 
+      },
+      ondelete(b)
+      {
+        var that = this;
+        var delNumber = '/numero_delete/';
+        //console.log(delUsers + "/"+ b.id);
+
+        swal({
+          title: '¿Estas seguro de eliminar el registro?',
+          text: 'Luego de eliminar no podras recuperar el registro',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No'
+        }).then(function(){
+          axios.delete(delNumber +  b.id).then(response => {
+            //console.log("eliminado");
+            that.fetchNumber();
+          });
+        })
       }
   }
 }
