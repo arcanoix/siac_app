@@ -32,15 +32,25 @@ class BusinessController extends Controller
       $empresa->parish_id = $request->parish_id;
       $empresa->sector_id = $request->sector_id;
 
-  dd($empresa);
+//  dd($empresa);
   $empresa->save();
-  
+
   return response()->json([
       'empresa' =>  $empresa
   ]);
 
 
 	}
+
+  public function destroy($id)
+  {
+    $del_business = Business::find($id);
+    $del_business->delete();
+
+    return response()->json([
+      'success' => 'ELiminado'
+    ]);
+  }
 
 
 }

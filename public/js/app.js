@@ -15027,49 +15027,75 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var getUsers = '/users';
-var postUsers = '/users_save';
+var getCliente = 'clientes';
+var postCliente = 'clientes_save';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      users: [],
+      clientes: [],
       showModal: false,
-      newUser: {
+      newCliente: {
         name: '',
-        pass: '',
-        email: ''
+        last_name: '',
+        identification_card: '',
+        address: '',
+        email: '',
+        state_id: '',
+        municipality_id: '',
+        parish_id: '',
+        sector_id: '',
+        number_telephone_id: ''
       }
 
     };
   },
-
   created: function created() {
-    this.fetchUsers();
+    this.fetchCliente();
   },
+
   methods: {
-    fetchUsers: function fetchUsers() {
+    fetchCliente: function fetchCliente() {
       var _this = this;
 
-      axios.get(getUsers).then(function (response) {
+      axios.get(getCliente).then(function (response) {
 
-        _this.users = response.data.users;
+        _this.clientes = response.data.clientes;
       });
     },
-    saveUser: function saveUser(newUser) {
+    saveCliente: function saveCliente(newCliente) {
       var _this2 = this;
 
-      var input = this.newUser;
+      var input = this.newCliente;
       if (input['name'] == '') {
         this.hasError = false;
         this.hasDeleted = true;
       } else {
         this.hasError = true;
-        axios.post(postUsers, this.newUser).then(function (response) {
+        axios.post(postCliente, this.newCliente).then(function (response) {
 
-          _this2.fetchUsers();
+          _this2.fetchCliente();
         });
       }
+    },
+    onDelete: function onDelete(b) {
+      var that = this;
+      var delCliente = '/cliente_delete/';
+      //console.log(delUsers + "/"+ b.id);
+
+      swal({
+        title: '¿Estas seguro de eliminar el registro?',
+        text: 'Luego de eliminar no podras recuperar el registro',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+      }).then(function () {
+        axios.delete(delCliente + b.id).then(function (response) {
+          //console.log("eliminado");
+          that.fetchCliente();
+        });
+      });
     }
   }
 });
@@ -15303,8 +15329,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var getBusiness = '/business';
-var postBusiness = '/business_save';
+var getBusiness = 'business';
+var postBusiness = 'business_save';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -15325,19 +15351,21 @@ var postBusiness = '/business_save';
 
     };
   },
-
   created: function created() {
     this.fetchBusiness();
   },
+
   methods: {
     fetchBusiness: function fetchBusiness() {
+      var _this = this;
+
       axios.get(getBusiness).then(function (response) {
 
-        //this.users = response.data.users;
+        _this.business = response.data.business;
       });
     },
     saveBusiness: function saveBusiness(newBusiness) {
-      var _this = this;
+      var _this2 = this;
 
       var input = this.newBusiness;
       if (input['name'] == '') {
@@ -15347,9 +15375,29 @@ var postBusiness = '/business_save';
         this.hasError = true;
         axios.post(postBusiness, this.newBusiness).then(function (response) {
 
-          _this.fetchBusiness();
+          _this2.fetchBusiness();
+          _this2.showModal = false;
         });
       }
+    },
+    onDelete: function onDelete(b) {
+      var that = this;
+      var delBusiness = '/business_delete/';
+      //console.log(delUsers + "/"+ b.id);
+
+      swal({
+        title: '¿Estas seguro de eliminar el registro?',
+        text: 'Luego de eliminar no podras recuperar el registro',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+      }).then(function () {
+        axios.delete(delBusiness + b.id).then(function (response) {
+          //console.log("eliminado");
+          that.fetchNumber();
+        });
+      });
     }
   }
 });
@@ -51755,14 +51803,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onEdit(_vm.index)
+          _vm.onEdit(b)
         }
       }
     }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onDelete(_vm.index)
+          _vm.onDelete(b)
         }
       }
     }, [_vm._m(3, true)])])
@@ -52197,21 +52245,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nuevo Cliente")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.users), function(b) {
+  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.clientes), function(b) {
     return _c('tr', {
       staticClass: "row-content"
-    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(" - ")]), _vm._v(" "), _c('td'), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', {
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.last_name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.identification_card))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onEdit(_vm.index)
+          _vm.onEdit(b)
         }
       }
     }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.onDelete(_vm.index)
+          _vm.onDelete(b)
         }
       }
     }, [_vm._m(4, true)])])
@@ -52248,8 +52296,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newCliente.name),
+      expression: "newCliente.name"
     }],
     staticClass: "form-control",
     class: {
@@ -52260,12 +52308,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Nombre"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newCliente.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newCliente.name = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -52292,8 +52340,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newCliente.name),
+      expression: "newCliente.name"
     }],
     staticClass: "form-control",
     class: {
@@ -52304,12 +52352,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Apellido"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newCliente.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newCliente.name = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -52336,8 +52384,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newCliente.name),
+      expression: "newCliente.name"
     }],
     staticClass: "form-control",
     class: {
@@ -52348,12 +52396,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Cedula"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newCliente.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newCliente.name = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -52380,8 +52428,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newCliente.name),
+      expression: "newCliente.name"
     }],
     staticClass: "form-control",
     class: {
@@ -52392,12 +52440,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Direccion"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newCliente.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newCliente.name = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -52424,8 +52472,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.email),
-      expression: "newUser.email"
+      value: (_vm.newCliente.email),
+      expression: "newCliente.email"
     }],
     staticClass: "form-control",
     class: {
@@ -52437,12 +52485,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "email"
     },
     domProps: {
-      "value": (_vm.newUser.email)
+      "value": (_vm.newCliente.email)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.email = $event.target.value
+        _vm.newCliente.email = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -52469,8 +52517,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newCliente.name),
+      expression: "newCliente.name"
     }],
     staticClass: "form-control",
     class: {
@@ -52481,12 +52529,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Estado"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newCliente.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newCliente.name = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -52513,8 +52561,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newCliente.name),
+      expression: "newCliente.name"
     }],
     staticClass: "form-control",
     class: {
@@ -52525,12 +52573,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Municipio"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newCliente.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newCliente.name = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -52557,8 +52605,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newCliente.name),
+      expression: "newCliente.name"
     }],
     staticClass: "form-control",
     class: {
@@ -52569,12 +52617,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Sector"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newCliente.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newCliente.name = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -52601,8 +52649,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newCliente.name),
+      expression: "newCliente.name"
     }],
     staticClass: "form-control",
     class: {
@@ -52613,12 +52661,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Numero Telefono"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newCliente.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newCliente.name = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
@@ -52639,7 +52687,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {
         $event.preventDefault();
-        _vm.saveUser()
+        _vm.saveCliente()
       }
     }
   }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {

@@ -37,8 +37,9 @@ Route::put('/update_user/{id}', 'UserController@update');
 
 
 /* Ruta modulo empresas */
-Route::get('/business', 'UserController@index');
-Route::post('/business_save', 'UserController@store');
+Route::get('/business', 'BusinessController@index');
+Route::post('/business_save', 'BusinessController@store');
+Route::delete('/business_delete/{id}','BusinessController@destroy');
 
 //rutas para mangas
 Route::get('manga','MangaController@index');
@@ -50,6 +51,10 @@ Route::get('numero_telefonico', 'NumeroTController@index');
 Route::post('numero_save','NumeroTController@store');
 Route::delete('/numero_delete/{id}','NumeroTController@destroy');
 
+
+Route::get('clientes', 'ClientesController@index');
+Route::post('clientes_save','ClientesController@store');
+Route::delete('/cliente_delete/{id}','ClientesController@destroy');
 
 Route::get('/menu',function(){
 	return view('admin.menu');

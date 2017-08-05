@@ -35,8 +35,8 @@
         <td>{{b.number_telephone_id}}</td>
 
 
-        <td v-on:click.prevent="onEdit(index)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(index)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
       </tr>
 
     </table>
@@ -116,8 +116,8 @@
 
 
 <script>
-var getBusiness = '/business';
-var postBusiness = '/business_save';
+var getBusiness = 'business';
+var postBusiness = 'business_save';
 
 export default {
 
@@ -139,19 +139,19 @@ export default {
 
       }
   },
-  created: function(){
+  created(){
     this.fetchBusiness();
 
   },
   methods:{
-      fetchBusiness: function(){
+      fetchBusiness(){
          axios.get(getBusiness).then(response => {
 
-            //this.users = response.data.users;
+          this.business = response.data.business;
         });
 
       },
-      saveBusiness: function(newBusiness){
+      saveBusiness(newBusiness){
         var input = this.newBusiness;
         if(input['name'] == ''){
           this.hasError =false;
@@ -163,12 +163,32 @@ export default {
                axios.post(postBusiness, this.newBusiness).then(response => {
 
                this.fetchBusiness();
+               this.showModal= false;
                });
 
         }
 
 
 
+      },
+      onDelete(b){
+        var that = this;
+        var delBusiness = '/business_delete/';
+        //console.log(delUsers + "/"+ b.id);
+
+        swal({
+          title: '¿Estas seguro de eliminar el registro?',
+          text: 'Luego de eliminar no podras recuperar el registro',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No'
+        }).then(function(){
+          axios.delete(delBusiness +  b.id).then(response => {
+            //console.log("eliminado");
+            that.fetchNumber();
+          });
+        })
       }
   }
 }

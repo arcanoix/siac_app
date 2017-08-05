@@ -36,16 +36,16 @@
         <th>Eliminar</th>
 
       </tr>
-      <tr v-for="b in users"  class="row-content">
+      <tr v-for="b in clientes"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
-        <td> - </td>
-        <td></td>
+        <td>{{b.last_name}}</td>
+        <td>{{b.identification_card}}</td>
         <td>{{ b.email }}</td>
 
 
-        <td v-on:click.prevent="onEdit(index)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(index)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
       </tr>
 
     </table>
@@ -63,55 +63,55 @@
 
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Nombre" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Nombre" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Apellido" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Apellido" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Cedula" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Cedula" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Direccion" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Direccion" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-envelope" aria-hidden="true"></i>
-              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" v-model="newUser.email" type="text" class="form-control" placeholder="Correo Electronico" name="email">
+              <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" v-model="newCliente.email" type="text" class="form-control" placeholder="Correo Electronico" name="email">
              <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Estado" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Estado" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Municipio" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Municipio" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Sector" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Sector" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newUser.name" type="text" class="form-control" placeholder="Numero Telefono" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Numero Telefono" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
@@ -121,7 +121,7 @@
         </div>
         <div slot="footer">
 
-        <a href="#" class="btn btn-primary" v-on:click.prevent="saveUser()">Guardar</a>
+        <a href="#" class="btn btn-primary" v-on:click.prevent="saveCliente()">Guardar</a>
 
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
 
@@ -135,37 +135,44 @@
 
 
 <script>
-var getUsers = '/users';
-var postUsers = '/users_save';
+var getCliente = 'clientes';
+var postCliente = 'clientes_save';
 
 export default {
 
   data(){
       return {
-        users: [],
+        clientes: [],
         showModal:false,
-        newUser:{
+        newCliente:{
           name:'',
-          pass:'',
-          email:''
+          last_name:'',
+          identification_card:'',
+          address:'',
+          email:'',
+          state_id:'',
+          municipality_id:'',
+          parish_id:'',
+          sector_id:'',
+          number_telephone_id:''
         }
 
       }
   },
-  created: function(){
-    this.fetchUsers();
+  created(){
+    this.fetchCliente();
 
   },
   methods:{
-      fetchUsers: function(){
-         axios.get(getUsers).then(response => {
+      fetchCliente(){
+         axios.get(getCliente).then(response => {
 
-            this.users = response.data.users;
+            this.clientes = response.data.clientes;
         });
 
       },
-      saveUser: function(newUser){
-        var input = this.newUser;
+      saveCliente(newCliente){
+        var input = this.newCliente;
         if(input['name'] == ''){
           this.hasError =false;
           this.hasDeleted = true;
@@ -173,15 +180,34 @@ export default {
         else
         {
               this.hasError=true;
-               axios.post(postUsers, this.newUser).then(response => {
+               axios.post(postCliente, this.newCliente).then(response => {
 
-               this.fetchUsers();
+               this.fetchCliente();
                });
 
         }
 
 
 
+      },
+      onDelete(b){
+        var that = this;
+        var delCliente = '/cliente_delete/';
+        //console.log(delUsers + "/"+ b.id);
+
+        swal({
+          title: '¿Estas seguro de eliminar el registro?',
+          text: 'Luego de eliminar no podras recuperar el registro',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No'
+        }).then(function(){
+          axios.delete(delCliente +  b.id).then(response => {
+            //console.log("eliminado");
+            that.fetchCliente();
+          });
+        })
       }
   }
 }
