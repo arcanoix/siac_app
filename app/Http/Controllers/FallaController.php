@@ -37,7 +37,7 @@ class FallaController extends Controller
 
     public function destroy($id)
     {
-      $falla_del = Falla:find($id);
+      $falla_del = Falla::find($id);
       $falla_del->delete();
 
       return response()->json([

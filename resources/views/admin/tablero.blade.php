@@ -158,6 +158,9 @@
               <router-link tag="li" to="/servicios">
                   <a> <i class="fa fa-suitcase"></i> <span>Servicios</span></a>
                 </router-link>
+                <router-link tag="li" to="/tanque">
+                    <a> <i class="fa fa-suitcase"></i> <span>Tanque</span></a>
+                  </router-link>
             </ul>
           </li>
 

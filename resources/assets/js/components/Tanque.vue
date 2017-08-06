@@ -7,18 +7,18 @@
          </h1>
          <ol class="breadcrumb">
            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-           <li class="active">Cliente</li>
+           <li class="active">Tanque</li>
          </ol>
        </section>
 <div class="tabled">
     <br>
 
-    <h3 style="text-align: center;">Fallas</h3>
+    <h3 style="text-align: center;">Tanque</h3>
 
     <div style="padding: 5px">
       <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
-      ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nueva Falla</a>
+      ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Tanque</a>
 
     </div>
 
@@ -27,22 +27,18 @@
     <table class="table table-striped">
       <tr  class="row-name">
         <th>#</th>
-        <th>Numero telefonico</th>
-        <th>Tipo De Falla</th>
-        <th>Estatus</th>
-        <th>Cliente</th>
+        <th>Nombre</th>
         <th>Direccion</th>
+        <th>Ads</th>
         <th>Editar</th>
         <th>Eliminar</th>
 
       </tr>
-      <tr v-for="b in falla"  class="row-content">
+      <tr v-for="b in tanque"  class="row-content">
         <td>{{ b.id }}</td>
-        <td>{{ b.number_telephone_id }}</td>
-        <td>{{b.type_failure}} </td>
-        <td>{{ b.status }}</td>
-        <td>{{b.customer_id}}</td>
-        <td>{{b.address}}</td>
+        <td>{{ b.name }}</td>
+        <td>{{b.address}} </td>
+        <td>{{ b.ads_id }}</td>
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
@@ -64,37 +60,28 @@
 
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newFalla.number_telephone_id" type="text" class="form-control" placeholder="Numero telefonico" :class="{'input': true, 'is-danger': errors.has('number_telephone_id') }">
-             <span v-show="errors.has('number_telephone_id')" class="help is-danger">{{ errors.first('number_telephone_id') }}</span>
+              <input v-validate="'required'" v-model="newTanque.name" type="text" class="form-control" placeholder="Nombre" :class="{'input': true, 'is-danger': errors.has('name') }">
+             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-envelope" aria-hidden="true"></i>
-              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_failure') }" v-model="newFalla.type_failure" type="text" class="form-control" placeholder="Tipo de falla" name="type_failure">
-             <span v-show="errors.has('type_failure')" class="help is-danger">{{ errors.first('type_failure') }}</span>
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" v-model="newTanque.address" type="text" class="form-control" placeholder="Tipo de falla" name="address">
+             <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
              <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newFalla.status" type="text" class="form-control" placeholder="Estatus">
+             <input v-model="newTanque.ads_id" type="text" class="form-control" placeholder="ADS_ID">
 
             </div>
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newFalla.customer_id" type="text" class="form-control" placeholder="Cliente">
 
-            </div>
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newFalla.address" type="text" class="form-control" placeholder="Direccion">
-
-            </div>
           </form>
 
         </div>
         <div slot="footer">
 
-        <a href="#" class="btn btn-primary" v-on:click.prevent="saveFalla()">Guardar</a>
+        <a href="#" class="btn btn-primary" v-on:click.prevent="saveTanque()">Guardar</a>
 
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
 
@@ -106,41 +93,38 @@
 
 </template>
 
-
 <script>
-var getFalla = 'fallas';
-var postFalla = 'falla_save';
+var getTanque = 'tanques';
+var post_tanque = 'tanque_save';
 
 export default {
 
   data(){
       return {
-        falla: [],
+        tanque: [],
         showModal:false,
-        newFalla:{
-          number_telephone_id:'',
-          type_failure:'',
-          status:'',
-          customer_id:'',
-          address:''
+        newTanque:{
+          name:'',
+          address:'',
+          ads_id:''
         }
 
       }
   },
   created(){
-    this.fetchFallas();
+    this.fetchTanque();
 
   },
   methods:{
-      fetchFallas(){
-         axios.get(getFalla).then(response => {
+      fetchTanque(){
+         axios.get(getTanque).then(response => {
 
-            this.falla = response.data.falla;
+            this.tanque = response.data.tanque;
         });
 
       },
-      saveFalla(newFalla){
-        var input = this.newFalla;
+      saveFalla(newTanque){
+        var input = this.newTanque;
         if(input['name'] == ''){
           this.hasError =false;
           this.hasDeleted = true;
@@ -148,8 +132,8 @@ export default {
         else
         {
               this.hasError=true;
-               axios.post(postFalla, this.newFalla).then(response => {
-               this.fetchFallas();
+               axios.post(post_tanque, this.newTanque).then(response => {
+               this.fetchTanque();
                this.showModal= false;
                });
         }
@@ -157,8 +141,8 @@ export default {
       },
       onDelete(b){
         var that = this;
-        var delFalla = '/falla_del/';
-        //console.log(delFalla + "/"+ b.id);
+        var delTanque = '/tanque_del/';
+        //console.log(delTanque + "/"+ b.id);
 
         swal({
           title: '¿Estas seguro de eliminar el registro?',
@@ -168,16 +152,15 @@ export default {
           confirmButtonText: 'Si',
           cancelButtonText: 'No'
         }).then(function(){
-          axios.delete(delFalla +  b.id).then(response => {
+          axios.delete(delTanque +  b.id).then(response => {
             //console.log("eliminado");
-            that.fetchFallas();
+            that.fetchTanque();
           });
         })
       }
   }
 }
 </script>
-
 
 <style>
 
@@ -384,5 +367,4 @@ a.btn-t:hover
     color: inherit;
     text-decoration: inherit;
 }
-
 </style>

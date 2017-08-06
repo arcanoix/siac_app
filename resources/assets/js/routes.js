@@ -10,6 +10,7 @@ import Numero_telefonico from './components/Numero_telefonico.vue'
 import Fallas from './components/Fallas.vue'
 import Tablero from './components/Dashboard.vue'
 import Mangas from './components/Manga.vue'
+import Tanque from './components/Tanque.vue'
 
 
 Vue.use(VueRouter)
@@ -55,6 +56,10 @@ const router = new VueRouter({
 		{
 			path:"/mangas",
 			component:Mangas
+		},
+		{
+			path:"/tanque",
+			component:Tanque
 		}
 	],
 	linkActiveClass: 'active' /* <---- proceso para que el menu quede selected activo */

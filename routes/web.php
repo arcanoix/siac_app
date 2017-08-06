@@ -66,10 +66,15 @@ Route::get('servicios','ServicioController@index');
 Route::post('servicio_save','ServicioController@store');
 Route::delete('/servicio_del/{id}','ServicioController@destroy');
 
-//rutas para las falla_save
+//rutas para las fallas
 Route::get('fallas','FallaController@index');
 Route::post('falla_save','FallaController@store');
 Route::delete('/falla_del/{id}','FallaController@destroy');
+
+//rutas para tanques
+Route::get('tanques','TanqueController@index');
+Route::post('tanque_save','TanqueController@store');
+Route::delete('/tanque_del/{id}','TanqueController@destroy');
 
 
 Route::get('/menu',function(){
