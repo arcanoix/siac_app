@@ -76,6 +76,11 @@ Route::get('tanques','TanqueController@index');
 Route::post('tanque_save','TanqueController@store');
 Route::delete('/tanque_del/{id}','TanqueController@destroy');
 
+//Rutas para Central
+Route::get('central','CentralTController@index');
+Route::post('central_save','CentralTController@store');
+Route::delete('/central_del/{id}','CentralTController@destroy');
+
 
 Route::get('/menu',function(){
 	return view('admin.menu');

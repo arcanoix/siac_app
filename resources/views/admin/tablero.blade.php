@@ -161,6 +161,9 @@
                 <router-link tag="li" to="/tanque">
                     <a> <i class="fa fa-suitcase"></i> <span>Tanque</span></a>
                   </router-link>
+                  <router-link tag="li" to="/central">
+                      <a> <i class="fa fa-suitcase"></i> <span>Central</span></a>
+                    </router-link>
             </ul>
           </li>
 
