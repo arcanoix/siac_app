@@ -15254,7 +15254,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+var getDash = 'dashboard';
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			cliente: [],
+			user: [],
+			falla: [],
+			ads: []
+		};
+	},
+	created: function created() {
+		this.fetchDash();
+	},
+
+	methods: {
+		fetchDash: function fetchDash() {
+			var _this = this;
+
+			axios.get(getDash).then(function (response) {
+				_this.user = response.data.user;
+				_this.cliente = response.data.cliente;
+				_this.falla = response.data.falla;
+				_this.ads = response.data.ads;
+			});
+		}
+	}
+});
 
 /***/ }),
 /* 38 */
@@ -51034,8 +51060,6 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "container"
   }, [_c('div', {
@@ -51048,29 +51072,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-heading"
   }, [_c('div', {
     staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-3"
-  }, [_c('i', {
-    staticClass: "fa fa-user fa-5x"
-  })]), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "col-xs-9 text-right"
   }, [_c('div', {
     staticClass: "huge"
-  }, [_vm._v("26")]), _vm._v(" "), _c('div', [_vm._v("Usuarios!")])])])]), _vm._v(" "), _c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('div', {
-    staticClass: "panel-footer"
-  }, [_c('span', {
-    staticClass: "pull-left"
-  }, [_vm._v("View Details")]), _vm._v(" "), _c('span', {
-    staticClass: "pull-right"
-  }, [_c('i', {
-    staticClass: "fa fa-arrow-circle-right"
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  })])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.user))]), _vm._v(" "), _c('div', [_vm._v("Usuarios!")])])])]), _vm._v(" "), _vm._m(1)])]), _vm._v(" "), _c('div', {
     staticClass: "col-lg-3 col-md-6"
   }, [_c('div', {
     staticClass: "panel panel-green"
@@ -51078,29 +51084,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-heading"
   }, [_c('div', {
     staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-3"
-  }, [_c('i', {
-    staticClass: "fa fa-users fa-5x"
-  })]), _vm._v(" "), _c('div', {
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "col-xs-9 text-right"
   }, [_c('div', {
     staticClass: "huge"
-  }, [_vm._v("12")]), _vm._v(" "), _c('div', [_vm._v("Clientes")])])])]), _vm._v(" "), _c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('div', {
-    staticClass: "panel-footer"
-  }, [_c('span', {
-    staticClass: "pull-left"
-  }, [_vm._v("View Details")]), _vm._v(" "), _c('span', {
-    staticClass: "pull-right"
-  }, [_c('i', {
-    staticClass: "fa fa-arrow-circle-right"
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  })])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.cliente))]), _vm._v(" "), _c('div', [_vm._v("Clientes")])])])]), _vm._v(" "), _vm._m(3)])]), _vm._v(" "), _c('div', {
     staticClass: "col-lg-3 col-md-6"
   }, [_c('div', {
     staticClass: "panel panel-yellow"
@@ -51108,29 +51096,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-heading"
   }, [_c('div', {
     staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-3"
-  }, [_c('i', {
-    staticClass: "fa fa-link fa-5x"
-  })]), _vm._v(" "), _c('div', {
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
     staticClass: "col-xs-9 text-right"
   }, [_c('div', {
     staticClass: "huge"
-  }, [_vm._v("124")]), _vm._v(" "), _c('div', [_vm._v("Fallas!")])])])]), _vm._v(" "), _c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('div', {
-    staticClass: "panel-footer"
-  }, [_c('span', {
-    staticClass: "pull-left"
-  }, [_vm._v("View Details")]), _vm._v(" "), _c('span', {
-    staticClass: "pull-right"
-  }, [_c('i', {
-    staticClass: "fa fa-arrow-circle-right"
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "clearfix"
-  })])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.falla))]), _vm._v(" "), _c('div', [_vm._v("Fallas!")])])])]), _vm._v(" "), _vm._m(5)])]), _vm._v(" "), _c('div', {
     staticClass: "col-lg-3 col-md-6"
   }, [_c('div', {
     staticClass: "panel panel-red"
@@ -51138,15 +51108,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-heading"
   }, [_c('div', {
     staticClass: "row"
-  }, [_c('div', {
-    staticClass: "col-xs-3"
-  }, [_c('i', {
-    staticClass: "fa fa-font fa-5x"
-  })]), _vm._v(" "), _c('div', {
+  }, [_vm._m(6), _vm._v(" "), _c('div', {
     staticClass: "col-xs-9 text-right"
   }, [_c('div', {
     staticClass: "huge"
-  }, [_vm._v("13")]), _vm._v(" "), _c('div', [_vm._v("ADS")])])])]), _vm._v(" "), _c('a', {
+  }, [_vm._v(_vm._s(_vm.ads))]), _vm._v(" "), _c('div', [_vm._v("ADS")])])])]), _vm._v(" "), _vm._m(7)])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-xs-3"
+  }, [_c('i', {
+    staticClass: "fa fa-user fa-5x"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
     attrs: {
       "href": "#"
     }
@@ -51160,7 +51134,73 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-arrow-circle-right"
   })]), _vm._v(" "), _c('div', {
     staticClass: "clearfix"
-  })])])])])])])
+  })])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-xs-3"
+  }, [_c('i', {
+    staticClass: "fa fa-users fa-5x"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('div', {
+    staticClass: "panel-footer"
+  }, [_c('span', {
+    staticClass: "pull-left"
+  }, [_vm._v("View Details")]), _vm._v(" "), _c('span', {
+    staticClass: "pull-right"
+  }, [_c('i', {
+    staticClass: "fa fa-arrow-circle-right"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  })])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-xs-3"
+  }, [_c('i', {
+    staticClass: "fa fa-link fa-5x"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('div', {
+    staticClass: "panel-footer"
+  }, [_c('span', {
+    staticClass: "pull-left"
+  }, [_vm._v("View Details")]), _vm._v(" "), _c('span', {
+    staticClass: "pull-right"
+  }, [_c('i', {
+    staticClass: "fa fa-arrow-circle-right"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  })])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-xs-3"
+  }, [_c('i', {
+    staticClass: "fa fa-font fa-5x"
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('div', {
+    staticClass: "panel-footer"
+  }, [_c('span', {
+    staticClass: "pull-left"
+  }, [_vm._v("View Details")]), _vm._v(" "), _c('span', {
+    staticClass: "pull-right"
+  }, [_c('i', {
+    staticClass: "fa fa-arrow-circle-right"
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "clearfix"
+  })])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

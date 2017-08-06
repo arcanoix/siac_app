@@ -81,6 +81,9 @@ Route::get('central','CentralTController@index');
 Route::post('central_save','CentralTController@store');
 Route::delete('/central_del/{id}','CentralTController@destroy');
 
+//Rutas Dashboard
+Route::get('dashboard','DashboardController@index');
+
 
 Route::get('/menu',function(){
 	return view('admin.menu');

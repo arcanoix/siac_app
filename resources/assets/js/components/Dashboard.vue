@@ -9,7 +9,7 @@
                                         <i class="fa fa-user fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
+                                        <div class="huge">{{ user }}</div>
                                         <div>Usuarios!</div>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                         <i class="fa fa-users fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
+                                        <div class="huge">{{ cliente }}</div>
                                         <div>Clientes</div>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                         <i class="fa fa-link fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
+                                        <div class="huge">{{ falla }}</div>
                                         <div>Fallas!</div>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                         <i class="fa fa-font fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">13</div>
+                                        <div class="huge">{{ ads}}</div>
                                         <div>ADS</div>
                                     </div>
                                 </div>
@@ -91,11 +91,33 @@
                     </div>
                 </div>
 	</div>
-	
+
 </template>
 
 <script>
+var getDash = 'dashboard';
 	export default {
-		
+		data(){
+			return{
+					cliente:[],
+					user:[],
+					falla:[],
+					ads:[]
+			}
+		},
+		created(){
+			this.fetchDash();
+		},
+		methods:{
+			fetchDash(){
+				axios.get(getDash).then(response => {
+						this.user = response.data.user;
+						this.cliente = response.data.cliente;
+						this.falla = response.data.falla;
+						this.ads = response.data.ads;
+
+				});
+			}
+		}
 	}
 </script>
