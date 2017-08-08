@@ -84,6 +84,11 @@ Route::delete('/central_del/{id}','CentralTController@destroy');
 //Rutas Dashboard
 Route::get('dashboard','DashboardController@index');
 
+//Ruta chat
+Route::get('chat', function(){
+  return view('admin.chat');
+});
+
 
 Route::get('/menu',function(){
 	return view('admin.menu');

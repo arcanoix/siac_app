@@ -17,19 +17,21 @@ window.Vue = require('vue');
  var axios = require('axios');
 
 
- 
+
 
  import Users from './components/Users.vue';
  import Dashboard from './components/Dashboard.vue';
  import Modal from './components/Modal.vue';
- import VueRouter from 'vue-router'
+ import VueRouter from 'vue-router';
+ 
 
 
 import VeeValidate from 'vee-validate';
 
 Vue.use(VeeValidate);
 
- 
+
+
  import Router from './routes.js'
 
 
