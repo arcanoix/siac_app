@@ -16771,6 +16771,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getUsers = '/users';
 var postUsers = '/users_save';
@@ -16779,6 +16788,11 @@ var postUsers = '/users_save';
   data: function data() {
     return {
       users: [],
+      role: {
+        id: '',
+        rol: ''
+      },
+      ur: '',
       showModal: false,
       showModal1: false,
       editUser: {
@@ -16794,10 +16808,11 @@ var postUsers = '/users_save';
 
     };
   },
-
   created: function created() {
     this.fetchUsers();
+    this.fetchRole();
   },
+
   methods: {
     fetchUsers: function fetchUsers() {
       var _this = this;
@@ -16807,8 +16822,17 @@ var postUsers = '/users_save';
         _this.users = response.data.users;
       });
     },
-    saveUser: function saveUser(newUser) {
+    fetchRole: function fetchRole() {
       var _this2 = this;
+
+      axios.get(getUsers).then(function (response) {
+        _this2.role = response.data.role;
+        _this2.ur = response.data.ur;
+      });
+    },
+
+    saveUser: function saveUser(newUser) {
+      var _this3 = this;
 
       var input = this.newUser;
       if (input['name'] == '') {
@@ -16818,8 +16842,8 @@ var postUsers = '/users_save';
         this.hasError = true;
         this.showModal = true;
         axios.post(postUsers, this.newUser).then(function (response) {
-          _this2.fetchUsers();
-          _this2.showModal = false;
+          _this3.fetchUsers();
+          _this3.showModal = false;
         });
       }
     },
@@ -16843,17 +16867,17 @@ var postUsers = '/users_save';
       });
     },
     onEdit: function onEdit(b) {
-      var _this3 = this;
+      var _this4 = this;
 
       var showUser = '/showUser/';
       var that = this;
       that.showModal1 = true;
       axios.get(showUser + b.id).then(function (response) {
-        _this3.editUser = response.data;
+        _this4.editUser = response.data;
       });
     },
     updateUser: function updateUser(editUser) {
-      var _this4 = this;
+      var _this5 = this;
 
       var input = this.editUser;
       var update = '/update_user/' + input.id;
@@ -16866,8 +16890,8 @@ var postUsers = '/users_save';
           animation: 'slide-from-bottom',
           timer: 3000
         });
-        _this4.fetchUsers();
-        _this4.showModal1 = false;
+        _this5.fetchUsers();
+        _this5.showModal1 = false;
       });
     }
   }
@@ -53753,7 +53777,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.users), function(b) {
     return _c('tr', {
       staticClass: "row-content"
-    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(" - ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', [_c('a', {
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', {
+      model: {
+        value: (_vm.ur),
+        callback: function($$v) {
+          _vm.ur = $$v
+        },
+        expression: "ur"
+      }
+    }, [_vm._v(_vm._s(_vm.ur))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', [_c('a', {
       staticClass: "btn-top  btn btn-primary pull-right",
       on: {
         "click": function($event) {
@@ -54095,7 +54127,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.editUser.pass = $event.target.value
       }
     }
-  })])])]), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editUser.role),
+      expression: "editUser.role"
+    }],
+    staticClass: "form-control",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.editUser.role = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((_vm.role), function(rol) {
+    return _c('option', {
+      domProps: {
+        "value": rol.id
+      }
+    }, [_vm._v(_vm._s(rol.rol))])
+  }))])])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",

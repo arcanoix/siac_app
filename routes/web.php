@@ -35,6 +35,8 @@ Route::delete('/users_del/{id}', 'UserController@destroy');
 Route::get('/showUser/{id}', 'UserController@show');
 Route::put('/update_user/{id}', 'UserController@update');
 
+/*----*/
+
 
 /* Ruta modulo empresas */
 Route::get('/business', 'BusinessController@index');

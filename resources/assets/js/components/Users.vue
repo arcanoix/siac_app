@@ -37,7 +37,7 @@
       <tr v-for="b in users"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
-        <td> - </td>
+        <td v-model="ur">{{ur}}</td>
         <td>{{ b.email }}</td>
 
 
@@ -75,6 +75,8 @@
              <input v-model="newUser.pass" type="password" class="form-control" placeholder="Contraseña">
 
             </div>
+
+
           </form>
 
         </div>
@@ -113,6 +115,13 @@
              <i class="fa fa-key" aria-hidden="true"></i>
              <input v-model="editUser.pass" type="password" class="form-control" placeholder="Contraseña">
             </div>
+
+            <div class="form-group inner-addon left-addon">
+              <select class="form-control" v-model="editUser.role">
+                  <option  v-for="rol in role" :value="rol.id">{{rol.rol}}</option>
+
+              </select>
+            </div>
           </form>
 
         </div>
@@ -137,13 +146,16 @@
 var getUsers = '/users';
 var postUsers = '/users_save';
 
-
-
 export default {
 
   data(){
       return {
         users: [],
+        role:{
+          id:'',
+          rol:''
+        },
+        ur:'',
         showModal:false,
         showModal1:false,
         editUser:{
@@ -159,18 +171,26 @@ export default {
 
       }
   },
-  created: function(){
+  created(){
     this.fetchUsers();
+    this.fetchRole();
+
 
   },
   methods:{
-      fetchUsers: function()
+      fetchUsers()
       {
          axios.get(getUsers).then(response => {
 
             this.users = response.data.users;
         });
 
+      },
+      fetchRole(){
+        axios.get(getUsers).then(response => {
+              this.role = response.data.role;
+              this.ur = response.data.ur;
+        });
       },
       saveUser: function(newUser)
       {

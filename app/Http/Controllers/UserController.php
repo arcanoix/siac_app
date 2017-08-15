@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
 
 
 class UserController extends Controller
@@ -10,9 +11,24 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        $roles =Role::all();
+
+        //$ur = $users->role();
+
+        foreach ($users as $u) {
+          $usuario= $u->name;
+          foreach ($roles as $r) {
+            $ur = $r->rol;
+          }
+        }
+
+
 
     return response()->json([
-        'users' => $users
+        'users' => $users,
+        'role' => $roles,
+        'ur' => $ur,
+        'usuario' => $usuario
         ]);
 
 
@@ -25,9 +41,8 @@ class UserController extends Controller
     		$user->email = $request->email;
     		$user->password = bcrypt($request->pass);
 
-
-
     		$user->save();
+        $user->roles()->attach((2));
 
     		return response()->json([
     			'users' => $user ]);
@@ -55,12 +70,16 @@ class UserController extends Controller
             //
                   $find_user->name = $request->name;
                   $find_user->email = $request->email;
+                  $find_user->roles()->detach();
 
                   if(is_null($request->pass)){
                     $find_user->password;
                   }else{
                     $find_user->password = $request->pass;
                   }
+                  $role_id = $request->input('role_id');
+                  $find_user->roles()->attach(($role_id));
+
                 $find_user->save();
             }
             return $find_user;

@@ -179,6 +179,8 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        Laratrust\LaratrustServiceProvider::class,
+
     ],
 
     /*
@@ -228,6 +230,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+        'Laratrust'   => Laratrust\LaratrustFacade::class,
     ],
 
 ];
