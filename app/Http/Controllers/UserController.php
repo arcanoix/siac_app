@@ -10,25 +10,12 @@ class UserController extends Controller
     //
     public function index()
     {
-        $users = User::all();
-        $roles =Role::all();
-
-        //$ur = $users->role();
-
-        foreach ($users as $u) {
-          $usuario= $u->name;
-          foreach ($roles as $r) {
-            $ur = $r->rol;
-          }
-        }
-
-
+        $users = User::with('roles')->get();
+        $role = Role::all();       
 
     return response()->json([
         'users' => $users,
-        'role' => $roles,
-        'ur' => $ur,
-        'usuario' => $usuario
+        'role' => $role
         ]);
 
 
@@ -40,6 +27,7 @@ class UserController extends Controller
     		$user->name = $request->name;
     		$user->email = $request->email;
     		$user->password = bcrypt($request->pass);
+        $user->status = $request->status;
 
     		$user->save();
         $user->roles()->attach((2));
@@ -65,11 +53,14 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
        //dd($request->pass);
-        if($find_user = User::find($id)){
-            if($find_user->name != trim($request->name)){
+        
+       if($find_user = User::find($id)){
+         
+           
             //
                   $find_user->name = $request->name;
                   $find_user->email = $request->email;
+                  $find_user->status = $request->status;
                   $find_user->roles()->detach();
 
                   if(is_null($request->pass)){
@@ -79,9 +70,10 @@ class UserController extends Controller
                   }
                   $role_id = $request->input('role_id');
                   $find_user->roles()->attach(($role_id));
-
+                             
+                              //dd($find_user->status , $role_id);
                 $find_user->save();
-            }
+          
             return $find_user;
         }else{
           return response()->json(['error' => 'Error al actualizar']);

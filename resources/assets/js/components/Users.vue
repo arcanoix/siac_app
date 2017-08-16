@@ -7,7 +7,7 @@
          </h1>
          <ol class="breadcrumb">
            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-           <li class="active">Cliente</li>
+           <li class="active">Usuarios</li>
          </ol>
        </section>
 <div class="tabled">
@@ -16,7 +16,7 @@
     <h3 style="text-align: center;">Usuarios</h3>
 
     <div style="padding: 5px">
-      <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
+      
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Usuario</a>
 
@@ -29,20 +29,25 @@
         <th>#</th>
         <th>Usuario</th>
         <th>Rol</th>
+        <th>Estatus</th>
         <th>Email</th>
         <th>Editar</th>
-        <th>Eliminar</th>
+       
 
       </tr>
       <tr v-for="b in users"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
-        <td v-model="ur">{{ur}}</td>
+        <td v-if="b.roles[0]">{{ b.roles[0].rol }}</td>
+        <td v-else>Sin rol Asignado</td>
+        <td>{{ b.status }}</td>
         <td>{{ b.email }}</td>
 
 
-        <td><a class="btn-top  btn btn-primary pull-right"  v-on:click.prevent="onEdit(b)"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td><a class="btn-top btn btn-danger  pull-right"  v-on:click.prevent="onDelete(b)"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        <td><a class="btn-top  btn btn-primary pull-right"  v-on:click.prevent="onEdit(b)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+       <!-- <td>
+          <a class="btn-top btn btn-danger  pull-right"  v-on:click.prevent="onDelete(b)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        </td>-->
       </tr>
 
     </table>
@@ -74,6 +79,14 @@
              <i class="fa fa-key" aria-hidden="true"></i>
              <input v-model="newUser.pass" type="password" class="form-control" placeholder="Contraseña">
 
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+              <i class="fa fa-circle" aria-hidden="true"></i>
+              <select v-model="newUser.status" class="form-control">
+                <option>Activo</option>                
+                <option>Inactivo</option>
+              </select>
             </div>
 
 
@@ -117,11 +130,19 @@
             </div>
 
             <div class="form-group inner-addon left-addon">
-              <select class="form-control" v-model="editUser.role">
+             <select class="form-control" v-model="editUser.role_id">
                   <option  v-for="rol in role" :value="rol.id">{{rol.rol}}</option>
 
               </select>
             </div>
+              <div class="form-group inner-addon left-addon">
+              <i class="fa fa-circle" aria-hidden="true"></i>
+              <select v-model="editUser.status" class="form-control">
+                <option value="Activo">Activo</option>                
+                <option value="Inactivo">Inactivo</option>
+              </select>
+            </div>
+            
           </form>
 
         </div>
@@ -151,53 +172,56 @@ export default {
   data(){
       return {
         users: [],
+        roles:[],
         role:{
           id:'',
           rol:''
-        },
-        ur:'',
+       },
+       
         showModal:false,
         showModal1:false,
         editUser:{
             name:'',
             pass:'',
-            email:''
+            email:'',
+            status:'',
+            role_id:''
         },
         newUser:{
           name:'',
           pass:'',
-          email:''
+          email:'',
+          status:''
         }
 
       }
   },
   created(){
     this.fetchUsers();
-    this.fetchRole();
-
+    
+  },
+  computed:{
 
   },
   methods:{
       fetchUsers()
       {
          axios.get(getUsers).then(response => {
-
             this.users = response.data.users;
+            this.role = response.data.role;
+            //console.log(response.data.role);
+            
         });
 
       },
-      fetchRole(){
-        axios.get(getUsers).then(response => {
-              this.role = response.data.role;
-              this.ur = response.data.ur;
-        });
-      },
-      saveUser: function(newUser)
+      saveUser(newUser)
       {
         var input = this.newUser;
-        if(input['name'] == ''){
-          this.hasError =false;
+        console.log(input.email);
+        if(input.name === ""){
+          this.hasError = false;
           this.hasDeleted = true;
+          alert("Error no debe dejar casillero en blanco");
         }
         else
         {
@@ -264,6 +288,9 @@ export default {
 
 
 <style>
+
+.rojo { background: red; }
+.azul { background: blue; }
 
 .simple-root {
   margin-top: 20%;
