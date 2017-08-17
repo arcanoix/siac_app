@@ -17,6 +17,12 @@ class NumeroTController extends Controller
         ]);
     }
 
+    public function numeroE(){
+      $numero_e = NumeroT::where('status','En Espera')->get();
+
+      return $numero_e;
+    }
+
     public function store(Request $request)
     {
       $numeroN = new NumeroT();

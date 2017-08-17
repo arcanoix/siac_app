@@ -7,7 +7,7 @@
          </h1>
          <ol class="breadcrumb">
            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-           <li class="active">Cliente</li>
+           <li class="active">Empresa</li>
          </ol>
        </section>
 <div class="tabled">
@@ -16,7 +16,7 @@
     <h3 style="text-align: center;">Empresas</h3>
 
     <div style="padding: 5px">
-      <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
+    
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-industry" aria-hidden="true"></i>Nueva Empresa</a>
 
@@ -39,10 +39,11 @@
       <tr v-for="b in business"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
-        <td>{{b.rif}}</td>
+        <td>{{ b.rif }}</td>
         <td>{{ b.address }} </td>
         <td>{{ b.email }}</td>
-        <td>{{b.number_telephone_id}}</td>
+        <td>{{ b.number }}</td>
+        
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
@@ -88,26 +89,49 @@
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newBusiness.numbertelephone" type="text" class="form-control" placeholder="Numero telefonico" :class="{'input': true, 'is-danger': errors.has('numbertelephone_id') }">
-             <span v-show="errors.has('numbertelephone_id')" class="help is-danger">{{ errors.first('numbertelephone_id') }}</span>
+              <select v-model="newBusiness.number_telephone_id" class="form-control">
+                <option v-for="num in numberT" :value="num.id">{{ num.code }} - {{ num.number }}</option>
+                
+              </select>
+            
 
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newBusiness.numbercontact" type="text" class="form-control" placeholder="Numero de contacto" :class="{'input': true, 'is-danger': errors.has('numbercontact') }">
-             <span v-show="errors.has('numbercontact')" class="help is-danger">{{ errors.first('numbercontact') }}</span>
+              <input v-validate="'required'" v-model="newBusiness.number_contact" type="text" class="form-control" placeholder="Numero de contacto" :class="{'input': true, 'is-danger': errors.has('number_contact') }">
+             <span v-show="errors.has('number_contact')" class="help is-danger">{{ errors.first('number_contact') }}</span>
 
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-global" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newBusiness.state_id" type="text" class="form-control" placeholder="Estado" :class="{'input': true, 'is-danger': errors.has('state_id') }">
+             
+              <select v-model="newBusiness.state_id" class="form-control" style="display:none;">
+                <option :value="e.id"  v-for="e in estado">{{ e.name }}</option>
+                
+              </select>
              <span v-show="errors.has('state_id')" class="help is-danger">{{ errors.first('state_id') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
-
+                  <select v-model="newBusiness.municipality_id" class="form-control">
+                    <option :value="m.id"  v-for="m in municipality">{{ m.name }}</option>
+                    
+                  </select>
 
             </div>
+
+            <div class="form-group inner-addon left-addon">
+                  <select v-model="newBusiness.parish_id" class="form-control">
+                    <option :value="p.id"  v-for="p in parish">{{ p.name }}</option>
+                    
+                  </select>
+
+            </div>
+
+          <div class="form-group inner-addon left-addon">
+            <input type="text" v-model="newBusiness.sector" class="form-control" placeholder="Sector donde reside">
+          </div>
+
           </form>
 
         </div>
@@ -136,31 +160,77 @@ export default {
       return {
         business: [],
         showModal:false,
+        estado:{
+          id:7,
+          name:'Carabobo'
+        },
+        municipality:{
+            id:'',
+            name:''
+        },
+        parish:{
+          id:'',
+          name:''
+        },
+        numberT:{
+            id:'',
+            code:'',
+            number:''
+        },
         newBusiness:{
           name:'',
           rif:'',
-          adress:'',
+          address:'',
           email:'',
-          numberthelephone_id:'',
-          state_id:'',
+          number_telephone_id:'',
+          number_contact:'',
+          state_id:'7',
           municipality_id:'',
           parish_id:'',
-          sector_id:''
+          sector:''
         }
 
       }
   },
   created(){
     this.fetchBusiness();
+    this.fetchEstado();
+    this.fetchMunicipio();
+    this.fetchParish();
+    this.fetchN();
 
   },
   methods:{
       fetchBusiness(){
          axios.get(getBusiness).then(response => {
 
-          this.business = response.data.business;
+          this.business = response.data;
+
         });
 
+      },
+      fetchN(){
+          axios.get('numero_espera').then(response => {
+            this.numberT = response.data;
+          });
+      },
+      fetchMunicipio(){
+          axios.get('municipio').then(response => {
+
+          this.municipality = response.data.municipio;
+          console.log(this.municipality);
+        });
+      },
+      fetchEstado(){
+          axios.get('estado').then(response => {
+            this.estado = response.data.estado;
+            
+          });
+      },
+      fetchParish(){
+          axios.get('parroquia').then(response => {
+            this.parish = response.data;
+          });
       },
       saveBusiness(newBusiness){
         var input = this.newBusiness;
@@ -197,7 +267,7 @@ export default {
         }).then(function(){
           axios.delete(delBusiness +  b.id).then(response => {
             //console.log("eliminado");
-            that.fetchNumber();
+            that.fetchBusiness();
           });
         })
       }

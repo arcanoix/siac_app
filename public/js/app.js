@@ -15599,6 +15599,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getBusiness = 'business';
 var postBusiness = 'business_save';
@@ -15608,22 +15632,44 @@ var postBusiness = 'business_save';
     return {
       business: [],
       showModal: false,
+      estado: {
+        id: 7,
+        name: 'Carabobo'
+      },
+      municipality: {
+        id: '',
+        name: ''
+      },
+      parish: {
+        id: '',
+        name: ''
+      },
+      numberT: {
+        id: '',
+        code: '',
+        number: ''
+      },
       newBusiness: {
         name: '',
         rif: '',
-        adress: '',
+        address: '',
         email: '',
-        numberthelephone_id: '',
-        state_id: '',
+        number_telephone_id: '',
+        number_contact: '',
+        state_id: '7',
         municipality_id: '',
         parish_id: '',
-        sector_id: ''
+        sector: ''
       }
 
     };
   },
   created: function created() {
     this.fetchBusiness();
+    this.fetchEstado();
+    this.fetchMunicipio();
+    this.fetchParish();
+    this.fetchN();
   },
 
   methods: {
@@ -15632,11 +15678,41 @@ var postBusiness = 'business_save';
 
       axios.get(getBusiness).then(function (response) {
 
-        _this.business = response.data.business;
+        _this.business = response.data;
+      });
+    },
+    fetchN: function fetchN() {
+      var _this2 = this;
+
+      axios.get('numero_espera').then(function (response) {
+        _this2.numberT = response.data;
+      });
+    },
+    fetchMunicipio: function fetchMunicipio() {
+      var _this3 = this;
+
+      axios.get('municipio').then(function (response) {
+
+        _this3.municipality = response.data.municipio;
+        console.log(_this3.municipality);
+      });
+    },
+    fetchEstado: function fetchEstado() {
+      var _this4 = this;
+
+      axios.get('estado').then(function (response) {
+        _this4.estado = response.data.estado;
+      });
+    },
+    fetchParish: function fetchParish() {
+      var _this5 = this;
+
+      axios.get('parroquia').then(function (response) {
+        _this5.parish = response.data;
       });
     },
     saveBusiness: function saveBusiness(newBusiness) {
-      var _this2 = this;
+      var _this6 = this;
 
       var input = this.newBusiness;
       if (input['name'] == '') {
@@ -15646,8 +15722,8 @@ var postBusiness = 'business_save';
         this.hasError = true;
         axios.post(postBusiness, this.newBusiness).then(function (response) {
 
-          _this2.fetchBusiness();
-          _this2.showModal = false;
+          _this6.fetchBusiness();
+          _this6.showModal = false;
         });
       }
     },
@@ -15666,7 +15742,7 @@ var postBusiness = 'business_save';
       }).then(function () {
         axios.delete(delBusiness + b.id).then(function (response) {
           //console.log("eliminado");
-          that.fetchNumber();
+          that.fetchBusiness();
         });
       });
     }
@@ -52763,7 +52839,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(1), _vm._v(" "), _c('a', {
+  }, [_c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -52781,24 +52857,24 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nueva Empresa")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.business), function(b) {
+  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.business), function(b) {
     return _c('tr', {
       staticClass: "row-content"
-    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.rif))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.number_telephone_id))]), _vm._v(" "), _c('td', {
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.rif))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.number))]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.onEdit(b)
         }
       }
-    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.onDelete(b)
         }
       }
-    }, [_vm._m(4, true)])])
+    }, [_vm._m(3, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -53000,44 +53076,32 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" "), _c('input', {
+  }), _vm._v(" "), _c('select', {
     directives: [{
-      name: "validate",
-      rawName: "v-validate",
-      value: ('required'),
-      expression: "'required'"
-    }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newBusiness.numbertelephone),
-      expression: "newBusiness.numbertelephone"
+      value: (_vm.newBusiness.number_telephone_id),
+      expression: "newBusiness.number_telephone_id"
     }],
     staticClass: "form-control",
-    class: {
-      'input': true, 'is-danger': _vm.errors.has('numbertelephone_id')
-    },
-    attrs: {
-      "type": "text",
-      "placeholder": "Numero telefonico"
-    },
-    domProps: {
-      "value": (_vm.newBusiness.numbertelephone)
-    },
     on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newBusiness.numbertelephone = $event.target.value
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.newBusiness.number_telephone_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }), _vm._v(" "), _c('span', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.errors.has('numbertelephone_id')),
-      expression: "errors.has('numbertelephone_id')"
-    }],
-    staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('numbertelephone_id')))])]), _vm._v(" "), _c('div', {
+  }, _vm._l((_vm.numberT), function(num) {
+    return _c('option', {
+      domProps: {
+        "value": num.id
+      }
+    }, [_vm._v(_vm._s(num.code) + " - " + _vm._s(num.number))])
+  }))]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-phone",
@@ -53053,71 +53117,70 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newBusiness.numbercontact),
-      expression: "newBusiness.numbercontact"
+      value: (_vm.newBusiness.number_contact),
+      expression: "newBusiness.number_contact"
     }],
     staticClass: "form-control",
     class: {
-      'input': true, 'is-danger': _vm.errors.has('numbercontact')
+      'input': true, 'is-danger': _vm.errors.has('number_contact')
     },
     attrs: {
       "type": "text",
       "placeholder": "Numero de contacto"
     },
     domProps: {
-      "value": (_vm.newBusiness.numbercontact)
+      "value": (_vm.newBusiness.number_contact)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newBusiness.numbercontact = $event.target.value
+        _vm.newBusiness.number_contact = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.errors.has('numbercontact')),
-      expression: "errors.has('numbercontact')"
+      value: (_vm.errors.has('number_contact')),
+      expression: "errors.has('number_contact')"
     }],
     staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('numbercontact')))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('number_contact')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-global",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" "), _c('input', {
+  }), _vm._v(" "), _c('select', {
     directives: [{
-      name: "validate",
-      rawName: "v-validate",
-      value: ('required'),
-      expression: "'required'"
-    }, {
       name: "model",
       rawName: "v-model",
       value: (_vm.newBusiness.state_id),
       expression: "newBusiness.state_id"
     }],
     staticClass: "form-control",
-    class: {
-      'input': true, 'is-danger': _vm.errors.has('state_id')
-    },
-    attrs: {
-      "type": "text",
-      "placeholder": "Estado"
-    },
-    domProps: {
-      "value": (_vm.newBusiness.state_id)
+    staticStyle: {
+      "display": "none"
     },
     on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newBusiness.state_id = $event.target.value
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.newBusiness.state_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }), _vm._v(" "), _c('span', {
+  }, _vm._l((_vm.estado), function(e) {
+    return _c('option', {
+      domProps: {
+        "value": e.id
+      }
+    }, [_vm._v(_vm._s(e.name))])
+  })), _vm._v(" "), _c('span', {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -53127,7 +53190,82 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('state_id')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  })])]), _vm._v(" "), _c('div', {
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newBusiness.municipality_id),
+      expression: "newBusiness.municipality_id"
+    }],
+    staticClass: "form-control",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.newBusiness.municipality_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((_vm.municipality), function(m) {
+    return _c('option', {
+      domProps: {
+        "value": m.id
+      }
+    }, [_vm._v(_vm._s(m.name))])
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newBusiness.parish_id),
+      expression: "newBusiness.parish_id"
+    }],
+    staticClass: "form-control",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.newBusiness.parish_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((_vm.parish), function(p) {
+    return _c('option', {
+      domProps: {
+        "value": p.id
+      }
+    }, [_vm._v(_vm._s(p.name))])
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newBusiness.sector),
+      expression: "newBusiness.sector"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Sector donde reside"
+    },
+    domProps: {
+      "value": (_vm.newBusiness.sector)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newBusiness.sector = $event.target.value
+      }
+    }
+  })])])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -53165,19 +53303,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-dashboard"
   }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
     staticClass: "active"
-  }, [_vm._v("Cliente")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "btn-t btn btn-success pull-right",
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-chevron-left",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v("Regresar")])
+  }, [_vm._v("Empresa")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"

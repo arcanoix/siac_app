@@ -53,6 +53,8 @@ Route::get('numero_telefonico', 'NumeroTController@index');
 Route::post('numero_save','NumeroTController@store');
 Route::delete('/numero_delete/{id}','NumeroTController@destroy');
 
+Route::get('numero_espera','NumeroTController@numeroE');
+
 //rutas para clientes
 Route::get('clientes', 'ClientesController@index');
 Route::post('clientes_save','ClientesController@store');
@@ -107,3 +109,9 @@ Route::get('/registro/falla',function(){
 Route::get('/registro/tecnico',function(){
 	return view('admin.registro.registro_tecnico');
 });
+
+Route::get('estado', 'EstateController@index');
+Route::get('municipio','EstateController@getM');
+Route::get('M','EstateController@getMID');
+Route::get('/parish/{id}','EstateController@getParish');
+Route::get('parroquia','EstateController@getP');

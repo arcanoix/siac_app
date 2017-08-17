@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Business;
+use DB;
 
 class BusinessController extends Controller
 {
@@ -11,11 +12,10 @@ class BusinessController extends Controller
 
     public function index()
     {
-     	$business = Business::all();
+     	//$business = Business::with('numeroTelefono')->get();
+      $business = DB::table('number_telephone')->join('business','number_telephone.id','=','business.number_telephone_id')->select('business.*','number_telephone.number')->get();
 
-     	return response()->json([
-     			'business' => $business
-     		]);
+     	return $business;
     }
 
 	public function store(Request $request)
@@ -28,9 +28,9 @@ class BusinessController extends Controller
       $empresa->number_telephone_id = $request->number_telephone_id;
       $empresa->number_contact = $request->number_contact;
       $empresa->state_id = $request->state_id;
-      $empresa->municipality_id = $request->mumicipality_id;
+      $empresa->municipality_id = $request->municipality_id;
       $empresa->parish_id = $request->parish_id;
-      $empresa->sector_id = $request->sector_id;
+      $empresa->sector = $request->sector;
 
 //  dd($empresa);
   $empresa->save();
