@@ -28,7 +28,9 @@ window.Vue = require('vue');
 
 import VeeValidate from 'vee-validate';
 
+
 Vue.use(VeeValidate);
+
 
 
 
@@ -38,6 +40,12 @@ Vue.use(VeeValidate);
  Vue.component('dashboard', Dashboard)
  Vue.component('users', Users)
  Vue.component('modal', Modal)
+
+//VueGoogleMap.load({key:'AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0'});
+
+ 
+
+ //Vue.component('map', require('./components/Dashboard.vue'));
 
 
  axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

@@ -95,8 +95,19 @@ desired effect
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.min.js">
 
 </script>
+<!--
+<script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
 
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0&callback=initMap"
+    async defer></script>-->
 
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

@@ -7,6 +7,7 @@ use App\User;
 use App\Falla;
 use App\Ads;
 use App\Clientes;
+//use Mapper;
 
 class DashboardController extends Controller
 {
@@ -17,6 +18,9 @@ class DashboardController extends Controller
         $falla = Falla::all()->count();
         $cliente = Clientes::all()->count();
         $ads = Ads::all()->count();
+
+        // Show Map
+       // Mapper::map(10.153395, -67.942244, ['eventBeforeLoad' => 'console.log("before load");']);
 
         return response()->json([
           'user' => $user,

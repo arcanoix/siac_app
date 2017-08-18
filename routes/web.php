@@ -20,6 +20,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('mapa', function(){
+	return view('map');
+});
+
 //rutas ejemplo
 
 Route::get('/site',function(){

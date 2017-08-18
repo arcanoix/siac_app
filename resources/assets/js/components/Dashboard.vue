@@ -89,6 +89,26 @@
                             </a>
                         </div>
                     </div>
+
+                     <div class="col-lg-12">
+                        
+                            
+                                <div class="row">
+                                    <div class="col-xs-12">
+
+                                       <gmap-map
+  :center="{lat:10, lng:10}"
+  :zoom="7"
+  map-type-id="terrain"
+  style="width: 500px; height: 300px"
+></gmap-map>
+                                    </div>
+                                    
+                                </div>
+                           
+                        
+                      </div>
+
                 </div>
 	</div>
 
@@ -96,19 +116,46 @@
 
 <script>
 var getDash = 'dashboard';
+import Vue from 'vue';
+//import {load, Map, Marker} from 'vue2-google-maps';
+//
+import * as VueGoogleMaps from 'vue2-google-maps';
+
+Vue.use(VueGoogleMaps, {
+    load:{ 
+        key: 'AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0'
+    }
+});
+
+
+
+
 	export default {
 		data(){
 			return{
 					cliente:[],
+                    mapName:'',
 					user:[],
 					falla:[],
-					ads:[]
+					ads:[],
+                    zoom:7,
+                    center:{
+                        lat:10.0,
+                        lng:10.0
+                    },
+                     markers: [{
+          position: {lat: 10.0, lng: 10.0}
+        }, {
+          position: {lat: 11.0, lng: 11.0}
+        }]
 			}
 		},
+
 		created(){
 			this.fetchDash();
 		},
 		methods:{
+           
 			fetchDash(){
 				axios.get(getDash).then(response => {
 						this.user = response.data.user;
@@ -117,7 +164,15 @@ var getDash = 'dashboard';
 						this.ads = response.data.ads;
 
 				});
-			}
-		}
+			},
+                
+        }      
 	}
 </script>
+<style>
+map {
+    width: 100%;
+    height: 600px;
+    display: block;
+}    
+</style>

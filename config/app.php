@@ -181,6 +181,8 @@ return [
 
         Laratrust\LaratrustServiceProvider::class,
 
+        Cornford\Googlmapper\MapperServiceProvider::class,
+
     ],
 
     /*
@@ -232,6 +234,8 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
         'Laratrust'   => Laratrust\LaratrustFacade::class,
+
+        'Mapper'      => Cornford\Googlmapper\Facades\MapperFacade::class,
     ],
 
 ];
