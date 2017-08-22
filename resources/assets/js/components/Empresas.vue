@@ -16,7 +16,7 @@
     <h3 style="text-align: center;">Empresas</h3>
 
     <div style="padding: 5px">
-    
+
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-industry" aria-hidden="true"></i>Nueva Empresa</a>
 
@@ -42,8 +42,8 @@
         <td>{{ b.rif }}</td>
         <td>{{ b.address }} </td>
         <td>{{ b.email }}</td>
-        <td>{{ b.number }}</td>
-        
+        <td>{{ b.num.code }} - {{ b.num.number }}</td>
+
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
@@ -55,7 +55,7 @@
 
 
 
-      <modal :display="showModal" @close="showModal = false">
+      <modal :display="showModal" @close="showModal = false" ref="modal">
         <div slot="header">
           <i class="fa fa-industry"></i> Registro de Empresa
 
@@ -76,7 +76,7 @@
 
             </div>
              <div class="form-group inner-addon left-addon">
-               <i class="fa fa-address-card" aria-hidden="true"></i>
+               <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
               <input v-validate="'required'" v-model="newBusiness.address" type="text" class="form-control" placeholder="Direccion" :class="{'input': true, 'is-danger': errors.has('address') }">
              <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
 
@@ -90,10 +90,10 @@
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
               <select v-model="newBusiness.number_telephone_id" class="form-control">
-                <option v-for="num in numberT" :value="num.id">{{ num.code }} - {{ num.number }}</option>
-                
+                <option v-for="num in numberT" :value="num.id">&nbsp; {{ num.code }} - {{ num.number }}</option>
+
               </select>
-            
+
 
             </div>
              <div class="form-group inner-addon left-addon">
@@ -103,33 +103,39 @@
 
             </div>
              <div class="form-group inner-addon left-addon">
-               <i class="fa fa-global" aria-hidden="true"></i>
-             
+               <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
+
               <select v-model="newBusiness.state_id" class="form-control" style="display:none;">
-                <option :value="e.id"  v-for="e in estado">{{ e.name }}</option>
-                
+                <option :value="e.id"  v-for="e in estado">&nbsp;{{ e.name }}</option>
+
               </select>
              <span v-show="errors.has('state_id')" class="help is-danger">{{ errors.first('state_id') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
+               <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
                   <select v-model="newBusiness.municipality_id" class="form-control">
-                    <option :value="m.id"  v-for="m in municipality">{{ m.name }}</option>
-                    
+                    <option :value="m.id"  v-for="m in municipality">&nbsp; {{ m.name }}</option>
+
                   </select>
+                   <span v-show="errors.has('municipality_id')" class="help is-danger">{{ errors.first('municipality_id') }}</span>
 
             </div>
 
             <div class="form-group inner-addon left-addon">
+               <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
                   <select v-model="newBusiness.parish_id" class="form-control">
-                    <option :value="p.id"  v-for="p in parish">{{ p.name }}</option>
-                    
+                    <option :value="p.id"  v-for="p in parish">&nbsp; {{ p.name }}</option>
+
                   </select>
+                   <span v-show="errors.has('parish_id')" class="help is-danger">{{ errors.first('parish_id') }}</span>
 
             </div>
 
           <div class="form-group inner-addon left-addon">
+             <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
             <input type="text" v-model="newBusiness.sector" class="form-control" placeholder="Sector donde reside">
+             <span v-show="errors.has('sector')" class="help is-danger">{{ errors.first('sector') }}</span>
           </div>
 
           </form>
@@ -175,7 +181,8 @@ export default {
         numberT:{
             id:'',
             code:'',
-            number:''
+            number:'',
+            status:''
         },
         newBusiness:{
           name:'',
@@ -218,13 +225,13 @@ export default {
           axios.get('municipio').then(response => {
 
           this.municipality = response.data.municipio;
-          console.log(this.municipality);
+          //console.log(this.municipality);
         });
       },
       fetchEstado(){
           axios.get('estado').then(response => {
             this.estado = response.data.estado;
-            
+
           });
       },
       fetchParish(){
@@ -242,9 +249,9 @@ export default {
         {
               this.hasError=true;
                axios.post(postBusiness, this.newBusiness).then(response => {
-
                this.fetchBusiness();
                this.showModal= false;
+
                });
 
         }
@@ -311,6 +318,18 @@ export default {
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
 .right-addon input { padding-right: 30px; }
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
 
 
 .tabled{

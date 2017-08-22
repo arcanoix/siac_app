@@ -12,7 +12,11 @@ class Business extends Model
 
     protected $fillable = ['name','rif','address','email','number_telephone_id','number_contact','state_id','municipality_id','parish_id','sector'];
 
-    
 
-   
+
+    public function num(){
+      return $this->belongsTo(NumeroT::class,'number_telephone_id','id');
+    }
+
+
 }

@@ -24,9 +24,7 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
-            <li class="active">
-              <a href="#" id="fecha">Fecha</a>
-            </li>
+          
             <li class="active">
               <a href="#" id="reloj">Hora</a>
             </li>

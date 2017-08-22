@@ -92,19 +92,17 @@ desired effect
 <!-- Bootstrap 3.3.6 -->
 <script src="{{ asset("/admin-lte/bootstrap/js/bootstrap.min.js") }}"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.min.js">
-
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.min.js"></script>
+<script src="{{asset('js/moment.js')}}"></script>
+<script src="{{asset('js/moment-with-locales.js')}}"></script>
     <script>
         function reloj(){
-          time_act = new Date();
-          hora = time_act.getHours();
-          minuto = time_act.getMinutes();
-          segundo = time_act.getSeconds();
-          time = hora + ":" + minuto + ":" + segundo;
-          //console.log(time);
-          document.getElementById('reloj').innerHTML= time;
-           setTimeout('reloj()',1000);
+          time_act = moment().locale('es');
+          time = time_act.format('MMMM Do YYYY, h:mm:ss a');
+        //  console.log(time);
+         document.getElementById('reloj').innerHTML= time;
+          setTimeout('reloj()',1000);
+
         }
 
         window.onload = function(){
@@ -112,14 +110,7 @@ desired effect
 
         }
     </script>
-    <script type="text/javascript">
-         var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-         var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
-         var f=new Date();
-
-         document.getElementById('fecha').innerHTML= (diasSemana[f.getDay()] + " " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
-
-     </script>
+  
 
 </body>
 </html>

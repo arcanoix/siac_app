@@ -91,8 +91,6 @@
                     </div>
 
                      <div class="col-lg-12">
-
-
                                 <div class="row">
                                     <div class="col-xs-12">
 
@@ -103,10 +101,7 @@
 																			  style="width: 900px; height: 300px"
 																			></gmap-map>
                                     </div>
-
                                 </div>
-
-
                       </div>
 
                 </div>

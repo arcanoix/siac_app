@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Business;
+use App\NumeroT;
 use DB;
 
 class BusinessController extends Controller
@@ -12,8 +13,8 @@ class BusinessController extends Controller
 
     public function index()
     {
-     	//$business = Business::with('numeroTelefono')->get();
-      $business = DB::table('number_telephone')->join('business','number_telephone.id','=','business.number_telephone_id')->select('business.*','number_telephone.number')->get();
+     	$business = Business::with('num')->get();
+      //$business = DB::table('number_telephone')->join('business','number_telephone.id','=','business.number_telephone_id')->select('business.*','number_telephone.number')->get();
 
      	return $business;
     }
@@ -32,12 +33,28 @@ class BusinessController extends Controller
       $empresa->parish_id = $request->parish_id;
       $empresa->sector = $request->sector;
 
-//  dd($empresa);
-  $empresa->save();
+          //  dd($empresa);
+          if($find_number = NumeroT::find($request->number_telephone_id))
+          {
+              $valor = $find_number->status;
 
-  return response()->json([
-      'empresa' =>  $empresa
-  ]);
+                if($valor != "Activo")
+                {
+                  $find_number->status = "Activo";
+                }else{
+                  $find_number->status = $valor;
+                return  response()->json([
+                    "error" => "Error al asignar numero telefonico"
+                  ]);
+                }
+                $find_number->save();
+           }
+
+          $empresa->save();
+
+          return response()->json([
+              'empresa' =>  $empresa
+          ]);
 
 
 	}
