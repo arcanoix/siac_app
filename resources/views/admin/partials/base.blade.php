@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Siac') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -49,13 +49,13 @@
             background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
             text-decoration: none;
             }
-    
+
     </style>
 </head>
 <body>
     <div id="app">
-        
-            
+
+
         @yield('content')
     </div>
 

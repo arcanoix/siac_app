@@ -9,7 +9,7 @@
       <!-- Logo -->
       <a href="" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>S</b>AC</span>
+        <span class="logo-mini"><b>SI</b>AC</span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">{{ config('app.name', 'Siac') }}</span>
       </a>
@@ -24,7 +24,12 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
-
+            <li class="active">
+              <a href="#" id="fecha">Fecha</a>
+            </li>
+            <li class="active">
+              <a href="#" id="reloj">Hora</a>
+            </li>
 
             <!-- Tasks Menu -->
 
@@ -43,16 +48,14 @@
                   <img src="{{ asset("/img/myAvatar.png") }}" class="img-circle" alt="User Image">
 
                   <p>
-                    {{ Auth::user()->name }} - Web Developer
-                    <small>Member since Nov. 2012</small>
+                    {{ Auth::user()->name }} - {{ Auth::user()->role }}
+                    <small>Miembro desde: {{ Auth::user()->created_at }}</small>
                   </p>
                 </li>
 
                 <li class="user-footer">
-                  <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                  </div>
-                  <div class="pull-right">
+
+                  <div class="col-xs-8">
 
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
@@ -68,10 +71,10 @@
                 </li>
               </ul>
             </li>
-            <!-- Control Sidebar Toggle Button -->
+            <!-- Control Sidebar Toggle Button
             <li>
               <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-            </li>
+            </li>-->
           </ul>
         </div>
       </nav>
@@ -191,16 +194,16 @@
     </div>
     <!-- /.content-wrapper -->
 
-  
+
 
     <!-- Main Footer -->
     <footer class="main-footer">
       <!-- To the right -->
       <div class="pull-right hidden-xs">
-        Anything you want
+      <b>SIAC</b>
       </div>
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2017 <a href="#">Siac</a>.</strong> All rights reserved.
+      <strong>2017 <a href="#">Sistema de Identificación de Averias | CANTV</h3></a>.</strong> Todos los derechos reservados.
     </footer>
 
     <!-- Control Sidebar -->

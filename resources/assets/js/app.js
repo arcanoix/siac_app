@@ -25,14 +25,20 @@ window.Vue = require('vue');
  import VueRouter from 'vue-router';
  
 
-
-import VeeValidate from 'vee-validate';
+import es from 'vee-validate/dist/locale/es';
+ import VeeValidate, { Validator } from 'vee-validate';
 
 
 Vue.use(VeeValidate);
 
 
+// Add locale helper.
+Validator.addLocale(es);
 
+// Install the Plugin and set the locale.
+Vue.use(VeeValidate, {
+  locale: 'es'
+});
 
  import Router from './routes.js'
 

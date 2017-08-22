@@ -70,7 +70,7 @@ desired effect
 
 
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="skin-blue sidebar-mini sidebar-collapse" style="height: auto;">
 
 <div id="app">
 
@@ -95,24 +95,31 @@ desired effect
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.min.js">
 
 </script>
-<!--
-<script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
-        });
-      }
+    <script>
+        function reloj(){
+          time_act = new Date();
+          hora = time_act.getHours();
+          minuto = time_act.getMinutes();
+          segundo = time_act.getSeconds();
+          time = hora + ":" + minuto + ":" + segundo;
+          //console.log(time);
+          document.getElementById('reloj').innerHTML= time;
+           setTimeout('reloj()',1000);
+        }
+
+        window.onload = function(){
+          reloj();
+
+        }
     </script>
+    <script type="text/javascript">
+         var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+         var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+         var f=new Date();
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0&callback=initMap"
-    async defer></script>-->
+         document.getElementById('fecha').innerHTML= (diasSemana[f.getDay()] + " " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
 
+     </script>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. Slimscroll is required when using the
-     fixed layout. -->
 </body>
 </html>

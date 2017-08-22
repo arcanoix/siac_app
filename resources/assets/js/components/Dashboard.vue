@@ -91,22 +91,22 @@
                     </div>
 
                      <div class="col-lg-12">
-                        
-                            
+
+
                                 <div class="row">
                                     <div class="col-xs-12">
 
                                        <gmap-map
-  :center="{lat:10, lng:10}"
-  :zoom="7"
-  map-type-id="terrain"
-  style="width: 500px; height: 300px"
-></gmap-map>
+																			  :center="{lat:10.1, lng:-67.9}"
+																			  :zoom="8"
+																			  map-type-id="terrain"
+																			  style="width: 900px; height: 300px"
+																			></gmap-map>
                                     </div>
-                                    
+
                                 </div>
-                           
-                        
+
+
                       </div>
 
                 </div>
@@ -122,7 +122,7 @@ import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
 
 Vue.use(VueGoogleMaps, {
-    load:{ 
+    load:{
         key: 'AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0'
     }
 });
@@ -155,7 +155,7 @@ Vue.use(VueGoogleMaps, {
 			this.fetchDash();
 		},
 		methods:{
-           
+
 			fetchDash(){
 				axios.get(getDash).then(response => {
 						this.user = response.data.user;
@@ -165,8 +165,8 @@ Vue.use(VueGoogleMaps, {
 
 				});
 			},
-                
-        }      
+
+        }
 	}
 </script>
 <style>
@@ -174,5 +174,5 @@ map {
     width: 100%;
     height: 600px;
     display: block;
-}    
+}
 </style>
