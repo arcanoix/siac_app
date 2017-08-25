@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Role;
+use DB;
 
 
 class UserController extends Controller
@@ -11,7 +12,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('roles')->get();
-        $role = Role::all();       
+        $role = Role::all();
 
     return response()->json([
         'users' => $users,
@@ -19,6 +20,17 @@ class UserController extends Controller
         ]);
 
 
+    }
+
+    public function getTecnicos(){
+
+     $users = DB::table('role_user')
+     ->join('users','role_user.user_id','=','users.id')
+     ->join('roles','role_user.role_id','=','roles.id')
+     ->where('roles.rol','Tecnico')
+     ->get();
+
+      return $users;
     }
 
     public function store(Request $request)
@@ -53,10 +65,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
        //dd($request->pass);
-        
+
        if($find_user = User::find($id)){
-         
-           
+
+
             //
                   $find_user->name = $request->name;
                   $find_user->email = $request->email;
@@ -70,10 +82,10 @@ class UserController extends Controller
                   }
                   $role_id = $request->input('role_id');
                   $find_user->roles()->attach(($role_id));
-                             
+
                               //dd($find_user->status , $role_id);
                 $find_user->save();
-          
+
             return $find_user;
         }else{
           return response()->json(['error' => 'Error al actualizar']);

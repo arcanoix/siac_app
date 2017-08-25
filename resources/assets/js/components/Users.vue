@@ -16,7 +16,7 @@
     <h3 style="text-align: center;">Usuarios</h3>
 
     <div style="padding: 5px">
-      
+
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Usuario</a>
 
@@ -32,7 +32,7 @@
         <th>Estatus</th>
         <th>Email</th>
         <th>Editar</th>
-       
+
 
       </tr>
       <tr v-for="b in users"  class="row-content">
@@ -84,7 +84,7 @@
             <div class="form-group inner-addon left-addon">
               <i class="fa fa-circle" aria-hidden="true"></i>
               <select v-model="newUser.status" class="form-control">
-                <option>Activo</option>                
+                <option>Activo</option>
                 <option>Inactivo</option>
               </select>
             </div>
@@ -138,11 +138,11 @@
               <div class="form-group inner-addon left-addon">
               <i class="fa fa-circle" aria-hidden="true"></i>
               <select v-model="editUser.status" class="form-control">
-                <option value="Activo">Activo</option>                
+                <option value="Activo">Activo</option>
                 <option value="Inactivo">Inactivo</option>
               </select>
             </div>
-            
+
           </form>
 
         </div>
@@ -177,7 +177,7 @@ export default {
           id:'',
           rol:''
        },
-       
+
         showModal:false,
         showModal1:false,
         editUser:{
@@ -198,7 +198,7 @@ export default {
   },
   created(){
     this.fetchUsers();
-    
+
   },
   computed:{
 
@@ -210,7 +210,7 @@ export default {
             this.users = response.data.users;
             this.role = response.data.role;
             //console.log(response.data.role);
-            
+
         });
 
       },

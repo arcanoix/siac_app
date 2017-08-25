@@ -23,6 +23,8 @@ class CreateFailureTable extends Migration
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->string('address');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -34,6 +36,6 @@ class CreateFailureTable extends Migration
      */
     public function down()
     {
-        Schema::drop;
+        Schema::drop('failure');
     }
 }

@@ -14,7 +14,7 @@ class LaratrustSetupTables extends Migration
         // Create table for storing roles
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('rol')->unique();
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
