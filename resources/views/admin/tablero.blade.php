@@ -24,7 +24,7 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
-          
+
             <li class="active">
               <a href="#" id="reloj">Hora</a>
             </li>
@@ -36,14 +36,27 @@
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="{{ asset("/img/myAvatar.png") }}" class="user-image" alt="User Image">
+
+                @if (Auth::user()->avatar)
+                                    <img src="{{ asset('uploads/'. Auth::user()->avatar) }}" class="user-image" alt="User Image"/>
+                @else
+                                   <img src="img/find_user.png" class="user-image img-responsive"/>
+                @endif
+
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs">{{ Auth::user()->name }}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
-                  <img src="{{ asset("/img/myAvatar.png") }}" class="img-circle" alt="User Image">
+
+                  @if (Auth::user()->avatar)
+                      <img src="{{ asset('uploads/'. Auth::user()->avatar) }}" class="img-circle" alt="User Image"/>
+                  @else
+                      <img src="{{ asset("/img/myAvatar.png") }}" class="img-circle" alt="User Image">
+
+                  @endif
+
 
                   <p>
                     {{ Auth::user()->name }} - {{ Auth::user()->role }}
@@ -86,7 +99,13 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="{{ asset("/img/myAvatar.png") }}" class="img-circle" alt="User Image">
+            @if (Auth::user()->avatar)
+                <img src="{{ asset('uploads/'. Auth::user()->avatar) }}" class="img-circle" alt="User Image"/>
+            @else
+                <img src="{{ asset("/img/myAvatar.png") }}" class="img-circle" alt="User Image">
+
+            @endif
+          
           </div>
           <div class="pull-left info">
             <p>{{ Auth::user()->name }}</p>

@@ -135,13 +135,23 @@
 
               </select>
             </div>
-              <div class="form-group inner-addon left-addon">
-              <i class="fa fa-circle" aria-hidden="true"></i>
-              <select v-model="editUser.status" class="form-control">
-                <option value="Activo">Activo</option>
-                <option value="Inactivo">Inactivo</option>
-              </select>
-            </div>
+            <div class="form-group inner-addon left-addon">
+                <i class="fa fa-circle" aria-hidden="true"></i>
+               <select  v-model="editUser.status" class="form-control">
+                 <option value="Activo">&nbsp; Activo</option>
+                 <option value="Inactivo">&nbsp; Inactivo</option>
+               </select>
+               </div>
+
+               <div class="form-group inner-addon left-addon">
+                <div class="col-md-2">
+                    <img :src="avatar"  class="img-responsive">
+                </div>
+
+                  <div class="col-md-8">
+                      <input type="file" v-on:change="onFileChange" class="form-control">
+                  </div>
+               </div>
 
           </form>
 
@@ -177,7 +187,7 @@ export default {
           id:'',
           rol:''
        },
-
+       avatar:'',
         showModal:false,
         showModal1:false,
         editUser:{
@@ -191,7 +201,8 @@ export default {
           name:'',
           pass:'',
           email:'',
-          status:''
+          status:'',
+          avatar:''
         }
 
       }
@@ -214,6 +225,29 @@ export default {
         });
 
       },
+      onFileChange(e){
+              let files = e.target.files || e.dataTransfer.files;
+               if (!files.length)
+                   return;
+               this.createImage(files[0]);
+
+           },
+           createImage(file){
+              //console.log(file.name);
+             // var formData = new FormData();
+              //formData.append('avatar', this.file);
+
+             let reader = new FileReader();
+              let vm = this;
+              reader.onload = (e) => {
+                vm.avatar = e.target.result;
+
+              };
+              reader.readAsDataURL(file);
+
+               // console.log(reader.readAsDataURL(file));
+            },
+
       saveUser(newUser)
       {
         var input = this.newUser;
@@ -267,6 +301,7 @@ export default {
       updateUser(editUser){
         var input = this.editUser;
         var update = '/update_user/' + input.id;
+        this.editUser.avatar = this.avatar;
 
         axios.put(update, input).then(response => {
           swal({
@@ -495,5 +530,8 @@ a.btn-t:hover
     color: inherit;
     text-decoration: inherit;
 }
+.imagen{
+        max-height: 36px;
+    }
 
 </style>

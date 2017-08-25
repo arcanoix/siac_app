@@ -99,18 +99,14 @@ desired effect
         function reloj(){
           time_act = moment().locale('es');
           time = time_act.format('MMMM Do YYYY, h:mm:ss a');
-        //  console.log(time);
          document.getElementById('reloj').innerHTML= time;
           setTimeout('reloj()',1000);
-
         }
-
         window.onload = function(){
           reloj();
-
         }
     </script>
-  
+
 
 </body>
 </html>

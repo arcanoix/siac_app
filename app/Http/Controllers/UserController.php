@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Role;
 use DB;
+use Intervention\Image\ImageManagerStatic as Image;
 
 
 class UserController extends Controller
@@ -83,7 +84,22 @@ class UserController extends Controller
                   $role_id = $request->input('role_id');
                   $find_user->roles()->attach(($role_id));
 
-                              //dd($find_user->status , $role_id);
+                  $imageData = $request->avatar;
+
+                //  dd($imageData);
+                                     if(is_null($request->avatar)){
+                                       $find_user->avatar = $find_user->avatar;
+                                     }
+                                     else
+                                     {
+                                       $avatar_name = strtolower($find_user->name) . '_' . strtolower($find_user->email) . '_' . 'avatar.jpg';
+
+                                       $avatar =  Image::make($request->avatar)->save(public_path('uploads/').$avatar_name);
+                                       $find_user->avatar = $avatar_name;
+                                     }
+
+
+                              //dd($find_user);
                 $find_user->save();
 
             return $find_user;

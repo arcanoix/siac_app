@@ -35884,6 +35884,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getUsers = '/users';
 var postUsers = '/users_save';
@@ -35897,7 +35907,7 @@ var postUsers = '/users_save';
         id: '',
         rol: ''
       },
-
+      avatar: '',
       showModal: false,
       showModal1: false,
       editUser: {
@@ -35911,7 +35921,8 @@ var postUsers = '/users_save';
         name: '',
         pass: '',
         email: '',
-        status: ''
+        status: '',
+        avatar: ''
       }
 
     };
@@ -35930,6 +35941,25 @@ var postUsers = '/users_save';
         _this.role = response.data.role;
         //console.log(response.data.role);
       });
+    },
+    onFileChange: function onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage: function createImage(file) {
+      //console.log(file.name);
+      // var formData = new FormData();
+      //formData.append('avatar', this.file);
+
+      var reader = new FileReader();
+      var vm = this;
+      reader.onload = function (e) {
+        vm.avatar = e.target.result;
+      };
+      reader.readAsDataURL(file);
+
+      // console.log(reader.readAsDataURL(file));
     },
     saveUser: function saveUser(newUser) {
       var _this2 = this;
@@ -35983,6 +36013,7 @@ var postUsers = '/users_save';
 
       var input = this.editUser;
       var update = '/update_user/' + input.id;
+      this.editUser.avatar = this.avatar;
 
       axios.put(update, input).then(function (response) {
         swal({
@@ -39290,7 +39321,7 @@ exports.push([module.i, "\n.simple-root {\r\n  margin-top: 20%;\r\n  margin-left
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)();
-exports.push([module.i, "\n.rojo { background: red;\n}\n.azul { background: blue;\n}\n.simple-root {\r\n  margin-top: 20%;\r\n  margin-left: auto;\r\n  margin-right: auto;\n}\n.help.is-danger {\r\n  color: red;\n}\n.form-control.is-danger {\r\n  border: 1px solid red;\n}\r\n\r\n\r\n\r\n/* enable absolute positioning */\n.inner-addon {\r\n    position: relative;\n}\r\n\r\n/* style icon */\n.inner-addon .fa {\r\n  position: absolute;\r\n  padding: 10px;\r\n  pointer-events: none;\n}\r\n\r\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\r\n\r\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\r\n    background-color: white;\r\n     opacity:0.9; /* Opacidad 90% */\r\n     border-radius: 2px;\r\n     border-bottom: 2px;\n}\r\n/* Table css Start */\na.del\r\n{\r\n    background:#d9534f;\r\n    border-radius: 2px;\r\n    width: 35px;\r\n    height:28px;\r\n    padding-left:12px;\r\n    line-height:10px;\n}\na.edit\r\n{\r\n    padding-left:10px;\r\n    background:#337ab7;\r\n    color:#fff;\r\n    border-radius:2px;\r\n    border:none;\n}\ntr.row-name\r\n{\r\n    font-size: 18px;\r\n    color:#448aff;\n}\ntr.row-content\r\n{\r\n    color:#6c7173;\n}\nth  {\r\n   text-align: center;\r\n  padding-top: 10px;\r\n  padding-right: 10px;\r\n  padding-bottom: 10px;\r\n  padding-left: 30px;\n}\ntd  {\r\n  text-align: center;\r\n padding-top: 10px;\r\n padding-right: 10px;\r\n padding-bottom: 10px;\r\n padding-left: 30px;\n}\ntable\r\n{\r\n    border-bottom: 8px solid #448aff;\n}\ntd.check\r\n{\r\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\r\n{\r\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\r\n{\r\n    background: #de6c69;\n}\na.btn-danger\r\n{\r\n    background:#d9534f;\n}\na.btn-top\r\n{\r\n    /*background:#448aff;*/\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\n}\na.btn-top:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\na.btn-t\r\n{\r\n\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\r\n    width: 20%;\n}\na.btn-t:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\r\n/* Table css End */\r\n\r\n/*modal*/\n.Modal__container {\r\n    max-width: 700px;\r\n    width: 90%;\r\n    background: white;\r\n    border-radius: 2px;\r\n    -webkit-animation-duration: 0.3s;\r\n            animation-duration: 0.3s;\r\n    -webkit-animation-delay: 0s;\r\n            animation-delay: 0s;\n}\n.Modal__header {\r\n    border-bottom: 1px solid white;\r\n    padding: 15px 10px;\r\n    background-color: silver;\r\n    color: white;\r\n    border-radius: 2px;\n}\n.Modal__header > h1 {\r\n    font-size: 27px;\r\n    font-weight: normal;\r\n    margin: 0;\n}\n.Modal__content {\r\n    padding: 10px;\n}\n.Modal__footer {\r\n    padding: 5px;\n}\n.u-overlay {\r\n    position: fixed;\r\n    z-index: 1000;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(0,0,0,0.8);\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n        -ms-flex-align: center;\r\n            align-items: center;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\n}\n.naked-link {\r\n    color: inherit;\r\n    text-decoration: inherit;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.rojo { background: red;\n}\n.azul { background: blue;\n}\n.simple-root {\r\n  margin-top: 20%;\r\n  margin-left: auto;\r\n  margin-right: auto;\n}\n.help.is-danger {\r\n  color: red;\n}\n.form-control.is-danger {\r\n  border: 1px solid red;\n}\r\n\r\n\r\n\r\n/* enable absolute positioning */\n.inner-addon {\r\n    position: relative;\n}\r\n\r\n/* style icon */\n.inner-addon .fa {\r\n  position: absolute;\r\n  padding: 10px;\r\n  pointer-events: none;\n}\r\n\r\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\r\n\r\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\r\n    background-color: white;\r\n     opacity:0.9; /* Opacidad 90% */\r\n     border-radius: 2px;\r\n     border-bottom: 2px;\n}\r\n/* Table css Start */\na.del\r\n{\r\n    background:#d9534f;\r\n    border-radius: 2px;\r\n    width: 35px;\r\n    height:28px;\r\n    padding-left:12px;\r\n    line-height:10px;\n}\na.edit\r\n{\r\n    padding-left:10px;\r\n    background:#337ab7;\r\n    color:#fff;\r\n    border-radius:2px;\r\n    border:none;\n}\ntr.row-name\r\n{\r\n    font-size: 18px;\r\n    color:#448aff;\n}\ntr.row-content\r\n{\r\n    color:#6c7173;\n}\nth  {\r\n   text-align: center;\r\n  padding-top: 10px;\r\n  padding-right: 10px;\r\n  padding-bottom: 10px;\r\n  padding-left: 30px;\n}\ntd  {\r\n  text-align: center;\r\n padding-top: 10px;\r\n padding-right: 10px;\r\n padding-bottom: 10px;\r\n padding-left: 30px;\n}\ntable\r\n{\r\n    border-bottom: 8px solid #448aff;\n}\ntd.check\r\n{\r\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\r\n{\r\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\r\n{\r\n    background: #de6c69;\n}\na.btn-danger\r\n{\r\n    background:#d9534f;\n}\na.btn-top\r\n{\r\n    /*background:#448aff;*/\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\n}\na.btn-top:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\na.btn-t\r\n{\r\n\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\r\n    width: 20%;\n}\na.btn-t:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\r\n/* Table css End */\r\n\r\n/*modal*/\n.Modal__container {\r\n    max-width: 700px;\r\n    width: 90%;\r\n    background: white;\r\n    border-radius: 2px;\r\n    -webkit-animation-duration: 0.3s;\r\n            animation-duration: 0.3s;\r\n    -webkit-animation-delay: 0s;\r\n            animation-delay: 0s;\n}\n.Modal__header {\r\n    border-bottom: 1px solid white;\r\n    padding: 15px 10px;\r\n    background-color: silver;\r\n    color: white;\r\n    border-radius: 2px;\n}\n.Modal__header > h1 {\r\n    font-size: 27px;\r\n    font-weight: normal;\r\n    margin: 0;\n}\n.Modal__content {\r\n    padding: 10px;\n}\n.Modal__footer {\r\n    padding: 5px;\n}\n.u-overlay {\r\n    position: fixed;\r\n    z-index: 1000;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(0,0,0,0.8);\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n        -ms-flex-align: center;\r\n            align-items: center;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\n}\n.naked-link {\r\n    color: inherit;\r\n    text-decoration: inherit;\n}\n.imagen{\r\n        max-height: 36px;\n}\r\n\r\n", ""]);
 
 /***/ }),
 /* 109 */
@@ -59403,11 +59434,30 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "value": "Activo"
     }
-  }, [_vm._v("Activo")]), _vm._v(" "), _c('option', {
+  }, [_vm._v("  Activo")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "Inactivo"
     }
-  }, [_vm._v("Inactivo")])])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("  Inactivo")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('div', {
+    staticClass: "col-md-2"
+  }, [_c('img', {
+    staticClass: "img-responsive",
+    attrs: {
+      "src": _vm.avatar
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-8"
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "file"
+    },
+    on: {
+      "change": _vm.onFileChange
+    }
+  })])])])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -59778,14 +59828,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-dashboard"
   }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
     staticClass: "active"
-  }, [_vm._v("Cliente")])])])
+  }, [_vm._v("Falla")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"
   }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Numero telefonico")]), _vm._v(" "), _c('th', [_vm._v("Tipo De Falla")]), _vm._v(" "), _c('th', [_vm._v("Estatus")]), _vm._v(" "), _c('th', [_vm._v("Cliente")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Tecnico Asignado")]), _vm._v(" "), _c('th', [_vm._v("Editar")]), _vm._v(" "), _c('th', [_vm._v("Eliminar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "btn-top  btn btn-primary pull-right"
+    staticClass: "btn-top  btn btn-primary"
   }, [_c('i', {
     staticClass: "fa fa-pencil-square-o",
     attrs: {
@@ -59794,7 +59844,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   })])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "btn-top btn btn-danger  pull-right"
+    staticClass: "btn-top btn btn-danger"
   }, [_c('i', {
     staticClass: "fa fa-trash",
     attrs: {

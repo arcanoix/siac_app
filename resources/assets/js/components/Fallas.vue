@@ -7,7 +7,7 @@
          </h1>
          <ol class="breadcrumb">
            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-           <li class="active">Cliente</li>
+           <li class="active">Falla</li>
          </ol>
        </section>
 <div class="tabled">
@@ -46,8 +46,8 @@
         <td>{{ b.address }}</td>
         <td>{{ b.users.name }}</td>
 
-        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
       </tr>
 
     </table>
