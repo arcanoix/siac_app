@@ -66,10 +66,8 @@
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
 
-
-              <select class="form-control" v-model="newFalla.number_telephone_id">
-                <option :value="n.id" v-for="n in number">{{ n.number }}</option>
-              </select>
+              <v-select :value="numero.id" v-model="newFalla.number_telephone_id"  :options="Selectnumber" :on-change="onChange"></v-select>
+            
 
              <span v-show="errors.has('number_telephone_id')" class="help is-danger">{{ errors.first('number_telephone_id') }}</span>
 
@@ -135,6 +133,11 @@
 
 
 <script>
+ import Vue from 'vue';
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect)
+
 var getFalla = 'fallas';
 var postFalla = 'falla_save';
 
@@ -152,10 +155,11 @@ export default {
           id:'',
           name:''
         },
-        number:{
-          id:'',
-          number:''
+        numero:{
+          id:''
         },
+        selected:null,
+        number:[],
         newFalla:{
           number_telephone_id:'',
           type_failure:'',
@@ -163,7 +167,7 @@ export default {
           customer_id:'',
           address:'',
           user_id:''
-        }
+        },
 
       }
   },
@@ -175,8 +179,24 @@ export default {
     this.fetchUser();
 
   },
+  computed:{
+      Selectnumber(){
+        return this.number.map(g =>(
+          {
+            label:g.number,
+             value:g.id
+           }
+        ))
+
+      }
+  },
+
   methods:{
-      fetchFallas(){
+      onChange(obj){
+          this.numero.id = obj.value;
+          //this.newFalla.number_telephone_id = obj.value;
+      },
+    fetchFallas(){
          axios.get(getFalla).then(response => {
 
             this.falla = response.data.falla;
@@ -202,12 +222,15 @@ export default {
       },
       saveFalla(newFalla){
         var input = this.newFalla;
+
+
         if(input['name'] == ''){
           this.hasError =false;
           this.hasDeleted = true;
         }
         else
         {
+            this.newFalla.number_telephone_id = this.numero.id;
               this.hasError=true;
                axios.post(postFalla, this.newFalla).then(response => {
                this.fetchFallas();

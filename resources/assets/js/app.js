@@ -23,7 +23,9 @@ window.Vue = require('vue');
  import Dashboard from './components/Dashboard.vue';
  import Modal from './components/Modal.vue';
  import VueRouter from 'vue-router';
- 
+
+ import vSelect from 'vue-select'
+
 
 import es from 'vee-validate/dist/locale/es';
  import VeeValidate, { Validator } from 'vee-validate';
@@ -47,9 +49,11 @@ Vue.use(VeeValidate, {
  Vue.component('users', Users)
  Vue.component('modal', Modal)
 
+ //Vue.component('v-select', vSelect)
+
 //VueGoogleMap.load({key:'AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0'});
 
- 
+
 
  //Vue.component('map', require('./components/Dashboard.vue'));
 

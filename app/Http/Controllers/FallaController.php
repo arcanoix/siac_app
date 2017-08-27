@@ -28,10 +28,10 @@ class FallaController extends Controller
       $falla_save->status = $r->status;
       $falla_save->customer_id = $r->customer_id;
       $falla_save->address = $r->address;
-      
+
       $falla_save->user_id = $r->user_id;
 
-    //  dd($falla_save);
+    // dd($falla_save);
 
       $falla_save->save();
 
