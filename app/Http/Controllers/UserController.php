@@ -71,18 +71,29 @@ class UserController extends Controller
 
 
             //
+
                   $find_user->name = $request->name;
                   $find_user->email = $request->email;
                   $find_user->status = $request->status;
-                  $find_user->roles()->detach();
+                  //$find_user->roles()->detach();
 
                   if(is_null($request->pass)){
                     $find_user->password;
                   }else{
                     $find_user->password = $request->pass;
                   }
-                  $role_id = $request->input('role_id');
-                  $find_user->roles()->attach(($role_id));
+
+                  if($request->input('role_id') == null)
+                  {
+                  //  dd($find_user->role_id);
+                    $find_user->role_id;
+
+                  }else{
+
+                    $role_id = $request->input('role_id');
+                    $find_user->roles()->attach(($role_id));
+
+                  }
 
                   $imageData = $request->avatar;
 

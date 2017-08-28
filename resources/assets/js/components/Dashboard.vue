@@ -76,7 +76,14 @@
 																			  map-type-id="terrain"
 																			  style="width: 900px; height: 300px"
 																			>
-																				
+																			<gmap-marker
+																	      :key="index"
+																	      v-for="(m, index) in markers"
+																	      :position="m.position"
+																	      :clickable="true"
+																	      :draggable="true"
+																	      @click="center=m.position"
+																	    ></gmap-marker>
 
 																			</gmap-map>
 

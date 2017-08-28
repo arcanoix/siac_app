@@ -22,12 +22,13 @@
 
             <form  class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
-                <input type="email" name="email" placeholder="Usuario" value="{{ old('email') }}" required autofocus/>
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
+                
+                    <input type="email" name="email" placeholder="Usuario" value="{{ old('email') }}" required autofocus/>
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
 
                 <input type="password" name="password" placeholder="Contraseña" required/>
                 @if ($errors->has('password'))
@@ -36,16 +37,15 @@
                     </span>
                 @endif
                 <div style="text-align:center; margin: 0 auto;">
-                     
+
                     <button type="submit" class="btnlogin">
                                     Accesar
                                 </button>
                 </div>
 
-                 
-                
-               
+
+
+
             </form>
 
   </div>
-

@@ -34343,6 +34343,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 var getDash = 'dashboard';
 
@@ -56687,7 +56694,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "zoom": 8,
       "map-type-id": "terrain"
     }
-  })], 1)])])])])
+  }, _vm._l((_vm.markers), function(m, index) {
+    return _c('gmap-marker', {
+      key: index,
+      attrs: {
+        "position": m.position,
+        "clickable": true,
+        "draggable": true
+      },
+      on: {
+        "click": function($event) {
+          _vm.center = m.position
+        }
+      }
+    })
+  }))], 1)])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-xs-3"

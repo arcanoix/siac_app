@@ -15,6 +15,9 @@
 Route::get('/', function () {
     return view('admin.login');
 });
+Route::get('/login#/', function () {
+    return view('admin.login');
+})->name('login');
 
 Auth::routes();
 
