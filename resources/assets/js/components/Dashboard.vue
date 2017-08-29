@@ -124,12 +124,12 @@ Vue.use(VueGoogleMaps, {
                     zoom:7,
                     center:{
                         lat:10.0,
-                        lng:10.0
+                        lng:-67.9
                     },
                      markers: [{
-          position: {lat: 10.0, lng: 10.0}
+          position: {lat: 10.0, lng: -67.9}
         }, {
-          position: {lat: 11.0, lng: 11.0}
+          position: {lat: 10.0, lng: -67.7}
         }]
 			}
 		},
