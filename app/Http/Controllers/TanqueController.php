@@ -26,6 +26,8 @@ class TanqueController extends Controller
       $tanque->address = $request->address;
       $tanque->ads_id = $request->ads_id;
 
+      //dd($tanque);
+
       $tanque->save();
 
       return response()->json([

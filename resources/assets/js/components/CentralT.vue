@@ -7,7 +7,7 @@
          </h1>
          <ol class="breadcrumb">
            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-           <li class="active">Tanque</li>
+           <li class="active">Central Telefonica</li>
          </ol>
        </section>
 <div class="tabled">
@@ -16,7 +16,7 @@
     <h3 style="text-align: center;">Central</h3>
 
     <div style="padding: 5px">
-      <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
+
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nueva Central Telefonica</a>
 
@@ -69,24 +69,23 @@
 
             </div>
              <div class="form-group inner-addon left-addon">
-               <i class="fa fa-envelope" aria-hidden="true"></i>
-              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" v-model="newCentral.address" type="text" class="form-control" placeholder="Tipo de falla" name="address">
+
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" v-model="newCentral.address" type="text" class="form-control" placeholder="Direccion" name="address">
              <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
 
             </div>
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newCentral.parish_id" type="text" class="form-control" placeholder="ADS_ID">
-
+            <div  class="form-group inner-addon left-addon">
+              <v-select :value="parroquia.id" v-model="newCentral.parish_id"  :options="SelectP" :on-change="onChangeP"></v-select>
             </div>
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newCentral.sector_id" type="text" class="form-control" placeholder="ADS_ID">
 
-            </div>
             <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newCentral.tanks_id" type="text" class="form-control" placeholder="ADS_ID">
+              <v-select :value="sector.id" v-model="newCentral.sector_id"  :options="SelectS" :on-change="onChangeS"></v-select>
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+
+
+             <v-select :value="tanque.id" v-model="newCentral.tanks_id"  :options="SelectT" :on-change="onChangeT"></v-select>
 
             </div>
           </form>
@@ -107,6 +106,12 @@
 </template>
 
 <script>
+
+import Vue from 'vue';
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect)
+
 var getCental = 'central';
 var post_central = 'central_save';
 
@@ -116,6 +121,18 @@ export default {
       return {
         central: [],
         showModal:false,
+        sector:{
+          id:''
+        },
+        parroquia:{
+          id:''
+        },
+        tanque:{
+          id:''
+        },
+        tan:[],
+        sec:[],
+        parro:[],
         newCentral:{
           name:'',
           address:'',
@@ -128,16 +145,76 @@ export default {
   },
   created(){
     this.fetchCentral();
+    this.fetchSector();
+    this.fetchParroquia();
+    this.fetchTanque();
 
   },
+  computed:{
+    SelectT(){
+      return this.tan.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+    },
+    SelectP(){
+      return this.parro.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+    },
+    SelectS(){
+      return this.sec.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+    }
+  },
   methods:{
+
+    onChangeT(obj){
+        this.tanque.id = obj.value;
+    },
+
+    onChangeP(obj){
+        this.parroquia.id = obj.value;
+    },
+
+    onChangeS(obj){
+        this.sector.id = obj.value;
+    },
+
+    fetchTanque(){
+      axios.get('tanques').then(response => {
+         this.tan = response.data.tanque;
+     });
+    },
+
       fetchCentral(){
          axios.get(getCental).then(response => {
-
             this.central = response.data.central;
         });
 
       },
+
+      fetchSector(){
+        axios.get('sector').then(response => {
+            this.sec = response.data.sector;
+        });
+      },
+
+      fetchParroquia(){
+        axios.get('parroquia').then(response => {
+            this.parro = response.data;
+        });
+      },
+
       saveCentral(newCentral){
         var input = this.newCentral;
         if(input['name'] == ''){
@@ -146,6 +223,9 @@ export default {
         }
         else
         {
+            this.newCentral.parish_id = this.parroquia.id;
+            this.newCentral.sector_id =this.sector.id;
+            this.newCentral.tanks_id = this.tanque.id;
               this.hasError=true;
                axios.post(post_central, this.newCentral).then(response => {
                this.fetchCentral();
@@ -174,6 +254,7 @@ export default {
         })
       }
   }
+
 }
 </script>
 

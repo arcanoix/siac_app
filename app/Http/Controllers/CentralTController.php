@@ -25,6 +25,8 @@ class CentralTController extends Controller
       $central->sector_id = $centralT->sector_id;
       $central->tanks_id = $centralT->tanks_id;
 
+      //dd($central);
+
       $central->save();
 
       return response()->json([

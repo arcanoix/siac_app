@@ -33605,6 +33605,10 @@ module.exports = function spread(callback) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
 //
 //
 //
@@ -33763,6 +33767,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('v-select', __WEBPACK_IMPORTED_MODULE_1_vue_select___default.a);
 
 var getAds = 'ads';
 var postAds = 'ads_save';
@@ -33772,6 +33795,23 @@ var postAds = 'ads_save';
     return {
       ads: [],
       showModal: false,
+      showModal1: false,
+      municipio: {
+        id: ''
+      },
+      manga: {
+        id: ''
+      },
+      sector: {
+        id: ''
+      },
+      parroquia: {
+        id: ''
+      },
+      sec: [],
+      parro: [],
+      man: [],
+      munic: [],
       newAds: {
         name: '',
         type_ads: '',
@@ -33781,44 +33821,137 @@ var postAds = 'ads_save';
         pl: '',
         address: '',
         sleeve_id: '',
-        state_id: '',
+        state_id: 7,
         municipality_id: '',
         parish_id: '',
         sector_id: '',
         coord_x: '',
         coord_y: ''
       }
-
     };
   },
   created: function created() {
     this.fetchAds();
+    this.fetchManga();
+    this.fetchSector();
+    this.fetchParroquia();
+    this.fetchMunicipio();
+  },
+
+
+  computed: {
+    SelectM: function SelectM() {
+      return this.munic.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    SelectMan: function SelectMan() {
+      return this.man.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    SelectP: function SelectP() {
+      return this.parro.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    SelectS: function SelectS() {
+      return this.sec.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    }
   },
 
   methods: {
+    onChange: function onChange(obj) {
+      this.municipio.id = obj.value;
+    },
+    onChangeM: function onChangeM(obj) {
+      this.manga.id = obj.value;
+    },
+    onChangeP: function onChangeP(obj) {
+      this.parroquia.id = obj.value;
+    },
+    onChangeS: function onChangeS(obj) {
+      this.sector.id = obj.value;
+    },
     fetchAds: function fetchAds() {
       var _this = this;
 
       axios.get(getAds).then(function (response) {
-
         _this.ads = response.data.ads;
       });
     },
-    saveUser: function saveUser(newAds) {
+    fetchManga: function fetchManga() {
       var _this2 = this;
+
+      axios.get('manga').then(function (response) {
+        _this2.man = response.data.manga;
+      });
+    },
+    fetchSector: function fetchSector() {
+      var _this3 = this;
+
+      axios.get('sector').then(function (response) {
+        _this3.sec = response.data.sector;
+      });
+    },
+    fetchParroquia: function fetchParroquia() {
+      var _this4 = this;
+
+      axios.get('parroquia').then(function (response) {
+        _this4.parro = response.data;
+      });
+    },
+    fetchMunicipio: function fetchMunicipio() {
+      var _this5 = this;
+
+      axios.get('municipio').then(function (response) {
+        _this5.munic = response.data.municipio;
+      });
+    },
+    saveUser: function saveUser(newAds) {
+      var _this6 = this;
 
       var input = this.newAds;
       if (input['name'] == '') {
         this.hasError = false;
         this.hasDeleted = true;
       } else {
+        this.newAds.sleeve_id = this.manga.id;
+        this.newAds.sector_id = this.sector.id;
+        this.newAds.parish_id = this.parroquia.id;
+        this.newAds.municipality_id = this.municipio.id;
+
         this.hasError = true;
         axios.post(postAds, this.newAds).then(function (response) {
 
-          _this2.fetchAds();
-          _this2.showModal = false;
+          _this6.fetchAds();
+          _this6.showModal = false;
         });
       }
+    },
+    onEdit: function onEdit(b) {
+      var _this7 = this;
+
+      var showUser = '/showAds/';
+      var that = this;
+      that.showModal1 = true;
+      axios.get(showUser + b.id).then(function (response) {
+        _this7.editUser = response.data;
+      });
     },
     onDelete: function onDelete(b) {
       var that = this;
@@ -33848,6 +33981,10 @@ var postAds = 'ads_save';
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
 //
 //
 //
@@ -33955,7 +34092,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('v-select', __WEBPACK_IMPORTED_MODULE_1_vue_select___default.a);
 
 var getCental = 'central';
 var post_central = 'central_save';
@@ -33965,6 +34107,18 @@ var post_central = 'central_save';
     return {
       central: [],
       showModal: false,
+      sector: {
+        id: ''
+      },
+      parroquia: {
+        id: ''
+      },
+      tanque: {
+        id: ''
+      },
+      tan: [],
+      sec: [],
+      parro: [],
       newCentral: {
         name: '',
         address: '',
@@ -33977,29 +34131,90 @@ var post_central = 'central_save';
   },
   created: function created() {
     this.fetchCentral();
+    this.fetchSector();
+    this.fetchParroquia();
+    this.fetchTanque();
   },
 
+  computed: {
+    SelectT: function SelectT() {
+      return this.tan.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    SelectP: function SelectP() {
+      return this.parro.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    SelectS: function SelectS() {
+      return this.sec.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    }
+  },
   methods: {
-    fetchCentral: function fetchCentral() {
+    onChangeT: function onChangeT(obj) {
+      this.tanque.id = obj.value;
+    },
+    onChangeP: function onChangeP(obj) {
+      this.parroquia.id = obj.value;
+    },
+    onChangeS: function onChangeS(obj) {
+      this.sector.id = obj.value;
+    },
+    fetchTanque: function fetchTanque() {
       var _this = this;
 
-      axios.get(getCental).then(function (response) {
+      axios.get('tanques').then(function (response) {
+        _this.tan = response.data.tanque;
+      });
+    },
+    fetchCentral: function fetchCentral() {
+      var _this2 = this;
 
-        _this.central = response.data.central;
+      axios.get(getCental).then(function (response) {
+        _this2.central = response.data.central;
+      });
+    },
+    fetchSector: function fetchSector() {
+      var _this3 = this;
+
+      axios.get('sector').then(function (response) {
+        _this3.sec = response.data.sector;
+      });
+    },
+    fetchParroquia: function fetchParroquia() {
+      var _this4 = this;
+
+      axios.get('parroquia').then(function (response) {
+        _this4.parro = response.data;
       });
     },
     saveCentral: function saveCentral(newCentral) {
-      var _this2 = this;
+      var _this5 = this;
 
       var input = this.newCentral;
       if (input['name'] == '') {
         this.hasError = false;
         this.hasDeleted = true;
       } else {
+        this.newCentral.parish_id = this.parroquia.id;
+        this.newCentral.sector_id = this.sector.id;
+        this.newCentral.tanks_id = this.tanque.id;
         this.hasError = true;
         axios.post(post_central, this.newCentral).then(function (response) {
-          _this2.fetchCentral();
-          _this2.showModal = false;
+          _this5.fetchCentral();
+          _this5.showModal = false;
         });
       }
     },
@@ -34023,6 +34238,7 @@ var post_central = 'central_save';
       });
     }
   }
+
 });
 
 /***/ }),
@@ -35530,7 +35746,6 @@ var postServicio = 'servicios_save';
       var _this = this;
 
       axios.get(getServicio).then(function (response) {
-
         _this.servicio = response.data.servicio;
       });
     },
@@ -35543,8 +35758,7 @@ var postServicio = 'servicios_save';
         this.hasDeleted = true;
       } else {
         this.hasError = true;
-        axios.post(postUsers, this.newServicio).then(function (response) {
-
+        axios.post(postServicio, this.newServicio).then(function (response) {
           _this2.fetchServicio();
           _this2.showModal = false;
         });
@@ -35578,6 +35792,10 @@ var postServicio = 'servicios_save';
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
 //
 //
 //
@@ -35671,8 +35889,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
+
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('v-select', __WEBPACK_IMPORTED_MODULE_1_vue_select___default.a);
 
 var getTanque = 'tanques';
 var post_tanque = 'tanque_save';
@@ -35681,6 +35903,10 @@ var post_tanque = 'tanque_save';
   data: function data() {
     return {
       tanque: [],
+      ads: [],
+      adds: {
+        id: ''
+      },
       showModal: false,
       newTanque: {
         name: '',
@@ -35692,9 +35918,23 @@ var post_tanque = 'tanque_save';
   },
   created: function created() {
     this.fetchTanque();
+    this.fetchAds();
   },
 
+  computed: {
+    SelectS: function SelectS() {
+      return this.ads.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    }
+  },
   methods: {
+    onChangeS: function onChangeS(obj) {
+      this.adds.id = obj.value;
+    },
     fetchTanque: function fetchTanque() {
       var _this = this;
 
@@ -35703,18 +35943,26 @@ var post_tanque = 'tanque_save';
         _this.tanque = response.data.tanque;
       });
     },
-    saveFalla: function saveFalla(newTanque) {
+    fetchAds: function fetchAds() {
       var _this2 = this;
+
+      axios.get('ads').then(function (response) {
+        _this2.ads = response.data.ads;
+      });
+    },
+    saveTanque: function saveTanque(newTanque) {
+      var _this3 = this;
 
       var input = this.newTanque;
       if (input['name'] == '') {
         this.hasError = false;
         this.hasDeleted = true;
       } else {
+        this.newTanque.ads_id = this.adds.id;
         this.hasError = true;
         axios.post(post_tanque, this.newTanque).then(function (response) {
-          _this2.fetchTanque();
-          _this2.showModal = false;
+          _this3.fetchTanque();
+          _this3.showModal = false;
         });
       }
     },
@@ -56759,7 +57007,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(1), _vm._v(" "), _c('a', {
+  }, [_c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -56777,7 +57025,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nuevo Tanque")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.tanque), function(b) {
+  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.tanque), function(b) {
     return _c('tr', {
       staticClass: "row-content"
     }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.ads_id))]), _vm._v(" "), _c('td', {
@@ -56787,14 +57035,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.onEdit(b)
         }
       }
-    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.onDelete(b)
         }
       }
-    }, [_vm._m(4, true)])])
+    }, [_vm._m(3, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -56881,7 +57129,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Tipo de falla",
+      "placeholder": "Direccion del tanque",
       "name": "address"
     },
     domProps: {
@@ -56903,33 +57151,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('address')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+      "value": _vm.adds.id,
+      "options": _vm.SelectS,
+      "on-change": _vm.onChangeS
+    },
+    model: {
       value: (_vm.newTanque.ads_id),
+      callback: function($$v) {
+        _vm.newTanque.ads_id = $$v
+      },
       expression: "newTanque.ads_id"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "ADS_ID"
-    },
-    domProps: {
-      "value": (_vm.newTanque.ads_id)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newTanque.ads_id = $event.target.value
-      }
     }
-  })])])]), _vm._v(" "), _c('div', {
+  })], 1)])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -56968,18 +57203,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
     staticClass: "active"
   }, [_vm._v("Tanque")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "btn-t btn btn-success pull-right",
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-chevron-left",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v("Regresar")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"
@@ -57071,7 +57294,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(1), _vm._v(" "), _c('a', {
+  }, [_c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -57089,7 +57312,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nueva ADS")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.ads), function(b) {
+  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.ads), function(b) {
     return _c('tr', {
       staticClass: "row-content"
     }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.type_ads) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.cc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.cl))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.pc))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.pl))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address))]), _vm._v(" "), _c('td', {
@@ -57099,14 +57322,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.onEdit(b)
         }
       }
-    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.onDelete(b)
         }
       }
-    }, [_vm._m(4, true)])])
+    }, [_vm._m(3, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -57350,33 +57573,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+      "value": _vm.manga.id,
+      "options": _vm.SelectMan,
+      "on-change": _vm.onChangeM
+    },
+    model: {
       value: (_vm.newAds.sleeve_id),
+      callback: function($$v) {
+        _vm.newAds.sleeve_id = $$v
+      },
       expression: "newAds.sleeve_id"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "ID Manga"
-    },
-    domProps: {
-      "value": (_vm.newAds.sleeve_id)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newAds.sleeve_id = $event.target.value
-      }
     }
-  })]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon col-xs-6"
   }, [_c('input', {
     directives: [{
@@ -57387,7 +57597,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "text",
+      "type": "hidden",
       "placeholder": "ID estado"
     },
     domProps: {
@@ -57401,74 +57611,50 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon col-xs-6"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.municipio.id,
+      "options": _vm.SelectM,
+      "on-change": _vm.onChange
+    },
+    model: {
       value: (_vm.newAds.municipality_id),
+      callback: function($$v) {
+        _vm.newAds.municipality_id = $$v
+      },
       expression: "newAds.municipality_id"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "ID Municipio"
-    },
-    domProps: {
-      "value": (_vm.newAds.municipality_id)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newAds.municipality_id = $event.target.value
-      }
     }
-  })]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group col-xs-3"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.parroquia.id,
+      "options": _vm.SelectP,
+      "on-change": _vm.onChangeP
+    },
+    model: {
       value: (_vm.newAds.parish_id),
+      callback: function($$v) {
+        _vm.newAds.parish_id = $$v
+      },
       expression: "newAds.parish_id"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "ID parroquia"
-    },
-    domProps: {
-      "value": (_vm.newAds.parish_id)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newAds.parish_id = $event.target.value
-      }
     }
-  })]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group col-xs-3"
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.newAds.sector_id),
-      expression: "newAds.sector_id"
-    }],
-    staticClass: "form-control",
+  }, [_c('v-select', {
     attrs: {
-      "type": "text",
-      "placeholder": "ID Sector"
+      "value": _vm.sector.id,
+      "options": _vm.SelectS,
+      "on-change": _vm.onChangeS
     },
-    domProps: {
-      "value": (_vm.newAds.sector_id)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newAds.sector_id = $event.target.value
-      }
+    model: {
+      value: (_vm.newAds.sector_id),
+      callback: function($$v) {
+        _vm.newAds.sector_id = $$v
+      },
+      expression: "newAds.sector_id"
     }
-  })]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group col-xs-3"
   }, [_c('input', {
     directives: [{
@@ -57554,18 +57740,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "active"
   }, [_vm._v("ADS")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "btn-t btn btn-success pull-right",
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-chevron-left",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v("Regresar")])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"
   }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Tipo")]), _vm._v(" "), _c('th', [_vm._v("Cable Central")]), _vm._v(" "), _c('th', [_vm._v("Cable Local")]), _vm._v(" "), _c('th', [_vm._v("Par Central")]), _vm._v(" "), _c('th', [_vm._v("Par Local")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Editar")]), _vm._v(" "), _c('th', [_vm._v("Eliminar")])])
@@ -57613,7 +57787,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(1), _vm._v(" "), _c('a', {
+  }, [_c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -57631,7 +57805,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nuevo Servicio")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.servicio), function(b) {
+  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.servicio), function(b) {
     return _c('tr', {
       staticClass: "row-content"
     }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.description) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.created_at))]), _vm._v(" "), _c('td', {
@@ -57641,14 +57815,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.onEdit(b)
         }
       }
-    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.onDelete(b)
         }
       }
-    }, [_vm._m(4, true)])])
+    }, [_vm._m(3, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -57662,7 +57836,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Registro de Usuario\n\n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de Servicio\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -57691,7 +57865,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Nombre de Usuario"
+      "placeholder": "Nombre del Servicio"
     },
     domProps: {
       "value": (_vm.newServicio.name)
@@ -57735,7 +57909,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Correo Electronico",
+      "placeholder": "Descripcion del Servicio",
       "name": "description"
     },
     domProps: {
@@ -57793,19 +57967,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-dashboard"
   }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
     staticClass: "active"
-  }, [_vm._v("Cliente")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "btn-t btn btn-success pull-right",
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-chevron-left",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v("Regresar")])
+  }, [_vm._v("Servicios")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"
@@ -59842,7 +60004,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "padding": "5px"
     }
-  }, [_vm._m(1), _vm._v(" "), _c('a', {
+  }, [_c('a', {
     staticClass: "btn-t btn-primary pull-left",
     attrs: {
       "href": "#"
@@ -59860,7 +60022,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("Nueva Central Telefonica")])]), _vm._v(" "), _c('table', {
     staticClass: "table table-striped"
-  }, [_vm._m(2), _vm._v(" "), _vm._l((_vm.central), function(b) {
+  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.central), function(b) {
     return _c('tr', {
       staticClass: "row-content"
     }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.parish_id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.sector_id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.tanks_id))]), _vm._v(" "), _c('td', {
@@ -59870,14 +60032,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.onEdit(b)
         }
       }
-    }, [_vm._m(3, true)]), _vm._v(" "), _c('td', {
+    }, [_vm._m(2, true)]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
           _vm.onDelete(b)
         }
       }
-    }, [_vm._m(4, true)])])
+    }, [_vm._m(3, true)])])
   })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
@@ -59941,12 +60103,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-envelope",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
+  }, [_c('input', {
     directives: [{
       name: "validate",
       rawName: "v-validate",
@@ -59964,7 +60121,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Tipo de falla",
+      "placeholder": "Direccion",
       "name": "address"
     },
     domProps: {
@@ -59986,89 +60143,50 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('address')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+      "value": _vm.parroquia.id,
+      "options": _vm.SelectP,
+      "on-change": _vm.onChangeP
+    },
+    model: {
       value: (_vm.newCentral.parish_id),
+      callback: function($$v) {
+        _vm.newCentral.parish_id = $$v
+      },
       expression: "newCentral.parish_id"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "ADS_ID"
-    },
-    domProps: {
-      "value": (_vm.newCentral.parish_id)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newCentral.parish_id = $event.target.value
-      }
     }
-  })]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+      "value": _vm.sector.id,
+      "options": _vm.SelectS,
+      "on-change": _vm.onChangeS
+    },
+    model: {
       value: (_vm.newCentral.sector_id),
+      callback: function($$v) {
+        _vm.newCentral.sector_id = $$v
+      },
       expression: "newCentral.sector_id"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "ADS_ID"
-    },
-    domProps: {
-      "value": (_vm.newCentral.sector_id)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newCentral.sector_id = $event.target.value
-      }
     }
-  })]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+      "value": _vm.tanque.id,
+      "options": _vm.SelectT,
+      "on-change": _vm.onChangeT
+    },
+    model: {
       value: (_vm.newCentral.tanks_id),
+      callback: function($$v) {
+        _vm.newCentral.tanks_id = $$v
+      },
       expression: "newCentral.tanks_id"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "placeholder": "ADS_ID"
-    },
-    domProps: {
-      "value": (_vm.newCentral.tanks_id)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.newCentral.tanks_id = $event.target.value
-      }
     }
-  })])])]), _vm._v(" "), _c('div', {
+  })], 1)])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -60106,19 +60224,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-dashboard"
   }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
     staticClass: "active"
-  }, [_vm._v("Tanque")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "btn-t btn btn-success pull-right",
-    attrs: {
-      "href": "#"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-chevron-left",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v("Regresar")])
+  }, [_vm._v("Central Telefonica")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"

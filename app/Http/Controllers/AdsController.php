@@ -35,6 +35,8 @@ class AdsController extends Controller
           $ads_new->coord_x = $request->coord_x;
           $ads_new->coord_y = $request->coord_y;
 
+          //dd($ads_new);
+
           $ads_new->save();
 
           return response()->json([
@@ -51,5 +53,15 @@ class AdsController extends Controller
         return response()->json([
           'success' => 'delete'
         ]);
+    }
+
+    public function show($id)
+    {
+
+      if($find_ads = Ads::find($id)){
+        return $find_ads;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
     }
 }

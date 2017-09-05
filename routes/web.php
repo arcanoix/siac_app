@@ -71,11 +71,12 @@ Route::delete('/cliente_delete/{id}','ClientesController@destroy');
 //rutas para ads
 Route::get('ads', 'AdsController@index');
 Route::post('ads_save','AdsController@store');
+Route::get('/showAds/{id}','AdsController@show');
 Route::delete('/ads_delete/{id}','AdsController@destroy');
 
 //rutas para servicios
 Route::get('servicios','ServicioController@index');
-Route::post('servicio_save','ServicioController@store');
+Route::post('servicios_save','ServicioController@store');
 Route::delete('/servicio_del/{id}','ServicioController@destroy');
 
 //rutas para las fallas
@@ -120,6 +121,7 @@ Route::get('/registro/tecnico',function(){
 
 Route::get('estado', 'EstateController@index');
 Route::get('municipio','EstateController@getM');
+Route::get('sector','EstateController@getS');
 Route::get('M','EstateController@getMID');
 Route::get('/parish/{id}','EstateController@getParish');
 Route::get('parroquia','EstateController@getP');

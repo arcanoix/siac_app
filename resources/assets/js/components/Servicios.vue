@@ -7,7 +7,7 @@
          </h1>
          <ol class="breadcrumb">
            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-           <li class="active">Cliente</li>
+           <li class="active">Servicios</li>
          </ol>
        </section>
 <div class="tabled">
@@ -16,7 +16,7 @@
     <h3 style="text-align: center;">Servicios</h3>
 
     <div style="padding: 5px">
-      <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
+
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Servicio</a>
 
@@ -37,7 +37,7 @@
       <tr v-for="b in servicio"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
-        <td>{{b.description}} </td>
+        <td>{{ b.description }} </td>
         <td>{{ b.created_at }}</td>
 
 
@@ -52,7 +52,7 @@
 
       <modal :display="showModal" @close="showModal = false">
         <div slot="header">
-          <i class="fa fa-user"></i> Registro de Usuario
+          <i class="fa fa-user"></i> Registro de Servicio
 
         </div>
         <div slot="body">
@@ -60,13 +60,13 @@
 
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newServicio.name" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newServicio.name" type="text" class="form-control" placeholder="Nombre del Servicio" :class="{'input': true, 'is-danger': errors.has('name') }">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-envelope" aria-hidden="true"></i>
-              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('description') }" v-model="newServicio.description" type="text" class="form-control" placeholder="Correo Electronico" name="description">
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('description') }" v-model="newServicio.description" type="text" class="form-control" placeholder="Descripcion del Servicio" name="description">
              <span v-show="errors.has('description')" class="help is-danger">{{ errors.first('description') }}</span>
 
             </div>
@@ -113,7 +113,6 @@ export default {
   methods:{
       fetchServicio(){
          axios.get(getServicio).then(response => {
-
             this.servicio = response.data.servicio;
         });
 
@@ -127,8 +126,7 @@ export default {
         else
         {
               this.hasError=true;
-               axios.post(postUsers, this.newServicio).then(response => {
-
+               axios.post(postServicio, this.newServicio).then(response => {
                this.fetchServicio();
                this.showModal=false;
                });

@@ -16,7 +16,7 @@
     <h3 style="text-align: center;">ADS</h3>
 
     <div style="padding: 5px">
-      <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
+
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nueva ADS</a>
 
@@ -108,27 +108,34 @@
 
             </div>
             <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newAds.sleeve_id" type="text" class="form-control" placeholder="ID Manga">
+
+             <v-select :value="manga.id" v-model="newAds.sleeve_id"  :options="SelectMan" :on-change="onChangeM"></v-select>
 
             </div>
             <div class="form-group inner-addon left-addon col-xs-6">
 
-             <input v-model="newAds.state_id" type="text" class="form-control" placeholder="ID estado">
+             <input v-model="newAds.state_id" type="hidden" class="form-control" placeholder="ID estado">
 
             </div>
+
             <div class="form-group inner-addon left-addon col-xs-6">
 
-             <input v-model="newAds.municipality_id" type="text" class="form-control" placeholder="ID Municipio">
+               <v-select :value="municipio.id" v-model="newAds.municipality_id"  :options="SelectM" :on-change="onChange"></v-select>
+
 
             </div>
 
             <div  class="form-group col-xs-3">
-              <input v-model="newAds.parish_id" type="text" class="form-control" placeholder="ID parroquia">
+
+
+              <v-select :value="parroquia.id" v-model="newAds.parish_id"  :options="SelectP" :on-change="onChangeP"></v-select>
+
             </div>
 
             <div class="form-group col-xs-3">
-              <input v-model="newAds.sector_id" type="text" class="form-control" placeholder="ID Sector">
+
+              <v-select :value="sector.id" v-model="newAds.sector_id"  :options="SelectS" :on-change="onChangeS"></v-select>
+
             </div>
 
             <div class="form-group col-xs-3">
@@ -150,6 +157,12 @@
         </div>
       </modal>
 
+
+
+
+
+
+
   </div>
 </div>
 
@@ -157,6 +170,12 @@
 
 
 <script>
+
+import Vue from 'vue';
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect)
+
 var getAds = 'ads';
 var postAds = 'ads_save';
 
@@ -166,6 +185,23 @@ export default {
       return {
         ads: [],
         showModal:false,
+        showModal1:false,
+        municipio:{
+          id:''
+        },
+        manga:{
+          id:''
+        },
+        sector:{
+          id:''
+        },
+        parroquia:{
+          id:''
+        },
+        sec:[],
+        parro:[],
+        man:[],
+        munic:[],
         newAds:{
           name:'',
           type_ads:'',
@@ -175,27 +211,98 @@ export default {
           pl:'',
           address:'',
           sleeve_id:'',
-          state_id:'',
+          state_id:7,
           municipality_id:'',
           parish_id:'',
           sector_id:'',
           coord_x:'',
           coord_y:''
         }
-
       }
   },
   created(){
     this.fetchAds();
+    this.fetchManga();
+    this.fetchSector();
+    this.fetchParroquia();
+    this.fetchMunicipio();
 
   },
+
+  computed:{
+      SelectM(){
+        return this.munic.map(g =>(
+          {
+            label:g.name,
+             value:g.id
+           }
+        ))
+
+      },
+      SelectMan(){
+        return this.man.map(g =>(
+          {
+            label:g.name,
+             value:g.id
+           }
+        ))
+
+      },
+      SelectP(){
+        return this.parro.map(g =>(
+          {
+            label:g.name,
+             value:g.id
+           }
+        ))
+      },
+      SelectS(){
+        return this.sec.map(g =>(
+          {
+            label:g.name,
+             value:g.id
+           }
+        ))
+      }
+    },
+
   methods:{
+    onChange(obj){
+        this.municipio.id = obj.value;
+    },
+    onChangeM(obj){
+        this.manga.id = obj.value;
+    },
+    onChangeP(obj){
+        this.parroquia.id = obj.value;
+    },
+    onChangeS(obj){
+        this.sector.id = obj.value;
+    },
       fetchAds(){
          axios.get(getAds).then(response => {
-
             this.ads = response.data.ads;
         });
-
+      },
+      fetchManga(){
+        axios.get('manga').then(response => {
+              this.man = response.data.manga;
+        });
+      },
+      fetchSector(){
+        axios.get('sector').then(response => {
+            this.sec = response.data.sector;
+        });
+      },
+      fetchParroquia(){
+        axios.get('parroquia').then(response => {
+            this.parro = response.data;
+        });
+      },
+      fetchMunicipio(){
+        axios.get('municipio').then(response => {
+            this.munic = response.data.municipio;
+        });
       },
       saveUser(newAds){
         var input = this.newAds;
@@ -205,6 +312,11 @@ export default {
         }
         else
         {
+              this.newAds.sleeve_id = this.manga.id;
+              this.newAds.sector_id = this.sector.id;
+              this.newAds.parish_id = this.parroquia.id;
+              this.newAds.municipality_id = this.municipio.id;
+
               this.hasError=true;
                axios.post(postAds, this.newAds).then(response => {
 
@@ -212,6 +324,15 @@ export default {
                this.showModal = false;
                });
         }
+      },
+      onEdit(b){
+        var showUser = '/showAds/';
+        var that = this;
+        that.showModal1 = true;
+        axios.get(showUser + b.id).then(response => {
+            this.editUser = response.data;
+        });
+
       },
       onDelete(b){
         var that = this;

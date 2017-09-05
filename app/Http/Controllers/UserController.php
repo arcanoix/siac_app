@@ -91,6 +91,7 @@ class UserController extends Controller
                   }else{
 
                     $role_id = $request->input('role_id');
+                    $find_user->roles()->detach();
                     $find_user->roles()->attach(($role_id));
 
                   }

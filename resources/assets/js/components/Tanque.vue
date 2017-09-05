@@ -16,7 +16,7 @@
     <h3 style="text-align: center;">Tanque</h3>
 
     <div style="padding: 5px">
-      <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
+
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Tanque</a>
 
@@ -66,14 +66,12 @@
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-envelope" aria-hidden="true"></i>
-              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" v-model="newTanque.address" type="text" class="form-control" placeholder="Tipo de falla" name="address">
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" v-model="newTanque.address" type="text" class="form-control" placeholder="Direccion del tanque" name="address">
              <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="newTanque.ads_id" type="text" class="form-control" placeholder="ADS_ID">
-
+               <v-select :value="adds.id" v-model="newTanque.ads_id"  :options="SelectS" :on-change="onChangeS"></v-select>
             </div>
 
           </form>
@@ -94,6 +92,12 @@
 </template>
 
 <script>
+
+import Vue from 'vue';
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect)
+
 var getTanque = 'tanques';
 var post_tanque = 'tanque_save';
 
@@ -102,6 +106,10 @@ export default {
   data(){
       return {
         tanque: [],
+        ads:[],
+        adds:{
+          id:''
+        },
         showModal:false,
         newTanque:{
           name:'',
@@ -113,9 +121,23 @@ export default {
   },
   created(){
     this.fetchTanque();
+    this.fetchAds();
 
   },
+  computed:{
+    SelectS(){
+      return this.ads.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+    }
+  },
   methods:{
+    onChangeS(obj){
+        this.adds.id = obj.value;
+    },
       fetchTanque(){
          axios.get(getTanque).then(response => {
 
@@ -123,7 +145,12 @@ export default {
         });
 
       },
-      saveFalla(newTanque){
+      fetchAds(){
+          axios.get('ads').then(response => {
+            this.ads = response.data.ads;
+          });
+      },
+      saveTanque(newTanque){
         var input = this.newTanque;
         if(input['name'] == ''){
           this.hasError =false;
@@ -131,6 +158,7 @@ export default {
         }
         else
         {
+          this.newTanque.ads_id = this.adds.id;
               this.hasError=true;
                axios.post(post_tanque, this.newTanque).then(response => {
                this.fetchTanque();

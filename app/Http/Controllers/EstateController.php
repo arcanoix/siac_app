@@ -21,6 +21,14 @@ class EstateController extends Controller
     		]);
     }
 
+    public function getS(){
+      $sector = Sector::with('parroquia')->get();
+
+      return response()->json([
+          'sector' => $sector
+      ]);
+    }
+
     public function getM()
     {
     	$municipio = Municipality::with('states')->get();
