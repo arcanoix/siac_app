@@ -183,7 +183,9 @@ return [
 
         Cornford\Googlmapper\MapperServiceProvider::class,
 
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -238,7 +240,8 @@ return [
         'Laratrust'   => Laratrust\LaratrustFacade::class,
 
         'Mapper'      => Cornford\Googlmapper\Facades\MapperFacade::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
