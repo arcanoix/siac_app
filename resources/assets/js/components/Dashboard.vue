@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container-fluid">
 	<div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
@@ -91,6 +91,22 @@
 																		</div>
                                 </div>
                       </div>
+											<br>
+
+											<div class="col-lg-12 col-md-8" style="padding-top:19px;">
+	                        <div class="panel panel-primary">
+	                            <div class="panel-heading">
+																	<h1 class="panel-title">Graficos de Fallas</h1>
+	                                <div class="row">
+	                                    <div class="col-xs-12">
+
+	                                      
+	                                    </div>
+	                                </div>
+	                            </div>
+
+	                        </div>
+	                    </div>
 
                 </div>
 	</div>
@@ -100,9 +116,12 @@
 <script>
 var getDash = 'dashboard';
 import Vue from 'vue';
-//import {load, Map, Marker} from 'vue2-google-maps';
-//
+
 import * as VueGoogleMaps from 'vue2-google-maps';
+
+import {Line} from 'vue-chartjs';
+
+
 
 Vue.use(VueGoogleMaps, {
     load:{
@@ -117,26 +136,27 @@ Vue.use(VueGoogleMaps, {
 		data(){
 			return{
 					cliente:[],
-                    mapName:'',
+          mapName:'',
 					user:[],
 					falla:[],
 					ads:[],
-                    zoom:7,
-                    center:{
-                        lat:10.0,
-                        lng:-67.9
-                    },
-                     markers: [{
+		      zoom:7,
+          center:{
+              lat:10.0,
+              lng:-67.9
+              },
+         markers: [{
           position: {lat: 10.0, lng: -67.9}
         }, {
           position: {lat: 10.0, lng: -67.7}
-        }]
-			}
+        }],
+				}
 		},
 
 		created(){
 			this.fetchDash();
 		},
+
 		methods:{
 
 			fetchDash(){
