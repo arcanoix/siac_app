@@ -12,13 +12,29 @@ class UserController extends Controller
     //
     public function index()
     {
-        $users = User::with('roles')->get();
+        $users = User::with('roles')->paginate(5);
         $role = Role::all();
 
+/*
     return response()->json([
         'users' => $users,
         'role' => $role
-        ]);
+      ]);*/
+
+      $response = [
+       'pagination' => [
+           'total' => $users->total(),
+           'per_page' => $users->perPage(),
+           'current_page' => $users->currentPage(),
+           'last_page' => $users->lastPage(),
+           'from' => $users->firstItem(),
+           'to' => $users->lastItem()
+       ],
+       'data' => $users,
+       'role' => $role
+   ];
+
+   return $response;
 
 
     }

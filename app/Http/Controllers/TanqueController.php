@@ -11,11 +11,21 @@ class TanqueController extends Controller
 
     public function index()
     {
-      $tanque = Tanque::all();
+      $tanque = Tanque::paginate(5);
 
-      return response()->json([
-        'tanque' => $tanque
-      ]);
+      $response = [
+       'pagination' => [
+           'total' => $tanque->total(),
+           'per_page' => $tanque->perPage(),
+           'current_page' => $tanque->currentPage(),
+           'last_page' => $tanque->lastPage(),
+           'from' => $tanque->firstItem(),
+           'to' => $tanque->lastItem()
+       ],
+       'data' => $tanque
+   ];
+
+   return $response;
 
     }
 

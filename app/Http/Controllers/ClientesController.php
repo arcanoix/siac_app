@@ -9,11 +9,21 @@ class ClientesController extends Controller
     //
     public function index()
     {
-      $clientes = Clientes::all();
+      $clientes = Clientes::paginate(5);
 
-      return response()->json([
-        'clientes' => $clientes
-      ]);
+      $response = [
+       'pagination' => [
+           'total' => $clientes->total(),
+           'per_page' => $clientes->perPage(),
+           'current_page' => $clientes->currentPage(),
+           'last_page' => $clientes->lastPage(),
+           'from' => $clientes->firstItem(),
+           'to' => $clientes->lastItem()
+       ],
+       'data' => $clientes
+   ];
+
+   return $response;
     }
 
     public function store(Request $request)

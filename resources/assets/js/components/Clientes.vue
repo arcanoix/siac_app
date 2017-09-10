@@ -1,5 +1,5 @@
 <template>
- <div class="container">
+ <div class="container-fluid">
    <section class="content-header">
         <h1>
 
@@ -17,7 +17,7 @@
     <h3 style="text-align: center;">Clientes</h3>
 
     <div style="padding: 5px">
-      <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
+
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Cliente</a>
 
@@ -33,7 +33,7 @@
         <th>Direccion</th>
         <th>Email</th>
         <th>Editar</th>
-        <th>Eliminar</th>
+
 
       </tr>
       <tr v-for="b in clientes"  class="row-content">
@@ -45,10 +45,31 @@
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
     </table>
+
+
+    <nav>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a  aria-label="Previous"
+                           v-on:click.prevent="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber"
+                        :class="[ page == isActived ? 'active' : '']">
+                        <a  v-on:click.prevent="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a aria-label="Next" v-on:click.prevent="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
     <br>
 
 
@@ -155,21 +176,62 @@ export default {
           parish_id:'',
           sector_id:'',
           number_telephone_id:''
-        }
+        },
+        pagination:{
+          total:0,
+          per_page : 7,
+          from:1,
+          to:0,
+          current_page:1
+        },
+        offset: 4,
 
       }
   },
   created(){
-    this.fetchCliente();
+    this.fetchCliente(this.pagination.current_page);
 
   },
+  computed:{
+    isActived(){
+      return this.pagination.current_page;
+    },
+    pagesNumber(){
+      if (!this.pagination.to) {
+               return [];
+           }
+           var from = this.pagination.current_page - this.offset;
+           if (from < 1) {
+               from = 1;
+           }
+           var to = from + (this.offset * 2);
+           if (to >= this.pagination.last_page) {
+               to = this.pagination.last_page;
+           }
+           var pagesArray = [];
+           while (from <= to) {
+               pagesArray.push(from);
+               from++;
+           }
+           return pagesArray;
+    }
+  },
   methods:{
-      fetchCliente(){
-         axios.get(getCliente).then(response => {
+      fetchCliente(page){
 
-            this.clientes = response.data.clientes;
+
+         axios.get('/clientes?page='+ page).then(response => {
+
+          //  this.clientes = response.data.clientes;
+            this.clientes = response.data.data.data;
+            this.pagination = response.data.pagination;
         });
 
+      },
+      changePage(page){
+          //console.log(page);
+          this.pagination.current_page = page;
+          this.fetchCentral(page);
       },
       saveCliente(newCliente){
         var input = this.newCliente;

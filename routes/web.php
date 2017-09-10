@@ -75,7 +75,7 @@ Route::post('clientes_save','ClientesController@store');
 Route::delete('/cliente_delete/{id}','ClientesController@destroy');
 
 //rutas para ads
-Route::get('ads', 'AdsController@index');
+Route::get('/ads', 'AdsController@index');
 Route::post('ads_save','AdsController@store');
 Route::get('/showAds/{id}','AdsController@show');
 Route::delete('/ads_delete/{id}','AdsController@destroy');
@@ -96,7 +96,7 @@ Route::post('tanque_save','TanqueController@store');
 Route::delete('/tanque_del/{id}','TanqueController@destroy');
 
 //Rutas para Central
-Route::get('central','CentralTController@index');
+Route::get('/central','CentralTController@index');
 Route::post('central_save','CentralTController@store');
 Route::delete('/central_del/{id}','CentralTController@destroy');
 

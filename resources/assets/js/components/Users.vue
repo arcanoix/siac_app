@@ -51,6 +51,26 @@
       </tr>
 
     </table>
+
+    <nav>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a  aria-label="Previous"
+                           v-on:click.prevent="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber"
+                        :class="[ page == isActived ? 'active' : '']">
+                        <a  v-on:click.prevent="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a aria-label="Next" v-on:click.prevent="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
     <br>
 
 <!-- Modal Create User -->
@@ -203,27 +223,71 @@ export default {
           email:'',
           status:'',
           avatar:''
-        }
+        },
+        pagination:{
+          total:0,
+          per_page : 7,
+          from:1,
+          to:0,
+          current_page:1
+        },
+        offset: 4,
 
       }
   },
+  ready(){
+    this.fetchUsers(this.pagination.current_page);
+  },
   created(){
-    this.fetchUsers();
+    this.fetchUsers(this.pagination.current_page);
 
   },
   computed:{
-
+        isActived(){
+          return this.pagination.current_page;
+        },
+        pagesNumber(){
+          if (!this.pagination.to) {
+                   return [];
+               }
+               var from = this.pagination.current_page - this.offset;
+               if (from < 1) {
+                   from = 1;
+               }
+               var to = from + (this.offset * 2);
+               if (to >= this.pagination.last_page) {
+                   to = this.pagination.last_page;
+               }
+               var pagesArray = [];
+               while (from <= to) {
+                   pagesArray.push(from);
+                   from++;
+               }
+               return pagesArray;
+        }
   },
   methods:{
-      fetchUsers()
+      fetchUsers(page)
       {
-         axios.get(getUsers).then(response => {
-            this.users = response.data.users;
+        var data = {page: page};
+         axios.get('/users?page='+ page).then(response => {
+           //console.log(getUsers, data);
+            this.users = response.data.data.data;
+            this.pagination = response.data.pagination;
             this.role = response.data.role;
+
+          //  console.log(response.data.pagination);
+          //  this.$set('users', response.data.data.data);
+            //this.$set('pagination', response.data.pagination);
             //console.log(response.data.role);
 
         });
 
+      },
+      changePage(page){
+          //console.log(page);
+          this.pagination.current_page = page;
+          this.fetchUsers(page);
       },
       onFileChange(e){
               let files = e.target.files || e.dataTransfer.files;

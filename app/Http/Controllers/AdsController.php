@@ -10,11 +10,23 @@ class AdsController extends Controller
 
     public function index()
     {
-      $ads = Ads::all();
+      $ads = Ads::paginate(5);
 
-      return response()->json([
-          'ads' => $ads
-      ]);
+      $response = [
+       'pagination' => [
+           'total' => $ads->total(),
+           'per_page' => $ads->perPage(),
+           'current_page' => $ads->currentPage(),
+           'last_page' => $ads->lastPage(),
+           'from' => $ads->firstItem(),
+           'to' => $ads->lastItem()
+       ],
+       'data' => $ads
+   ];
+
+   return $response;
+
+
     }
 
     public function store(Request $request)

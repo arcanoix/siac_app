@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <section class="content-header">
          <h1>
 
@@ -36,7 +36,7 @@
         <th>Direccion</th>
 
         <th>Editar</th>
-        <th>Eliminar</th>
+      
 
       </tr>
       <tr v-for="b in ads"  class="row-content">
@@ -51,10 +51,30 @@
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
     </table>
+
+    <nav>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a  aria-label="Previous"
+                           v-on:click.prevent="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber"
+                        :class="[ page == isActived ? 'active' : '']">
+                        <a  v-on:click.prevent="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a aria-label="Next" v-on:click.prevent="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
     <br>
 
 
@@ -217,11 +237,19 @@ export default {
           sector_id:'',
           coord_x:'',
           coord_y:''
-        }
+        },
+        pagination:{
+          total:0,
+          per_page : 7,
+          from:1,
+          to:0,
+          current_page:1
+        },
+        offset: 4,
       }
   },
   created(){
-    this.fetchAds();
+    this.fetchAds(this.pagination.current_page);
     this.fetchManga();
     this.fetchSector();
     this.fetchParroquia();
@@ -263,7 +291,30 @@ export default {
              value:g.id
            }
         ))
+      },
+      isActived(){
+        return this.pagination.current_page;
+      },
+      pagesNumber(){
+        if (!this.pagination.to) {
+                 return [];
+             }
+             var from = this.pagination.current_page - this.offset;
+             if (from < 1) {
+                 from = 1;
+             }
+             var to = from + (this.offset * 2);
+             if (to >= this.pagination.last_page) {
+                 to = this.pagination.last_page;
+             }
+             var pagesArray = [];
+             while (from <= to) {
+                 pagesArray.push(from);
+                 from++;
+             }
+             return pagesArray;
       }
+
     },
 
   methods:{
@@ -279,10 +330,20 @@ export default {
     onChangeS(obj){
         this.sector.id = obj.value;
     },
-      fetchAds(){
-         axios.get(getAds).then(response => {
-            this.ads = response.data.ads;
+      fetchAds(page){
+        var data = {page: page};
+
+         axios.get('/ads?page=' + page).then(response => {
+            //this.ads = response.data.ads;
+            this.ads = response.data.data.data;
+            this.pagination = response.data.pagination;
         });
+
+      },
+      changePage(page){
+          //console.log(page);
+          this.pagination.current_page = page;
+          this.fetchAds(page);
       },
       fetchManga(){
         axios.get('manga').then(response => {

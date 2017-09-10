@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <section class="content-header">
          <h1>
 
@@ -33,23 +33,43 @@
         <th>Sector</th>
         <th>Tanquilla</th>
         <th>Editar</th>
-        <th>Eliminar</th>
+
 
       </tr>
       <tr v-for="b in central"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
         <td>{{b.address}} </td>
-        <td>{{ b.parish_id }}</td>
-        <td>{{b.sector_id}}</td>
-        <td>{{b.tanks_id}}</td>
+        <td>{{ b.parroquia.name }}</td>
+        <td>{{b.sector.name}}</td>
+        <td>{{b.tanque.name}}</td>
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
     </table>
+
+    <nav>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a  aria-label="Previous"
+                           v-on:click.prevent="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber"
+                        :class="[ page == isActived ? 'active' : '']">
+                        <a  v-on:click.prevent="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a aria-label="Next" v-on:click.prevent="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
     <br>
 
 
@@ -139,12 +159,20 @@ export default {
           parish_id:'',
           sector_id:'',
           tanks_id:''
-        }
+        },
+        pagination:{
+          total:0,
+          per_page : 7,
+          from:1,
+          to:0,
+          current_page:1
+        },
+        offset: 4,
 
       }
   },
   created(){
-    this.fetchCentral();
+    this.fetchCentral(this.pagination.current_page);
     this.fetchSector();
     this.fetchParroquia();
     this.fetchTanque();
@@ -174,6 +202,28 @@ export default {
            value:g.id
          }
       ))
+    },
+    isActived(){
+      return this.pagination.current_page;
+    },
+    pagesNumber(){
+      if (!this.pagination.to) {
+               return [];
+           }
+           var from = this.pagination.current_page - this.offset;
+           if (from < 1) {
+               from = 1;
+           }
+           var to = from + (this.offset * 2);
+           if (to >= this.pagination.last_page) {
+               to = this.pagination.last_page;
+           }
+           var pagesArray = [];
+           while (from <= to) {
+               pagesArray.push(from);
+               from++;
+           }
+           return pagesArray;
     }
   },
   methods:{
@@ -192,26 +242,36 @@ export default {
 
     fetchTanque(){
       axios.get('tanques').then(response => {
-         this.tan = response.data.tanque;
+         this.tan = response.data.data.data;
+
      });
     },
 
-      fetchCentral(){
-         axios.get(getCental).then(response => {
-            this.central = response.data.central;
+      fetchCentral(page){
+         axios.get('/central?page='+ page).then(response => {
+           this.central = response.data.data.data;
+           this.pagination = response.data.pagination;
         });
 
+      },
+
+      changePage(page){
+          //console.log(page);
+          this.pagination.current_page = page;
+          this.fetchCentral(page);
       },
 
       fetchSector(){
         axios.get('sector').then(response => {
             this.sec = response.data.sector;
+            console.log(response.data.sector);
         });
       },
 
       fetchParroquia(){
         axios.get('parroquia').then(response => {
             this.parro = response.data;
+
         });
       },
 

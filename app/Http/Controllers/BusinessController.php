@@ -13,10 +13,24 @@ class BusinessController extends Controller
 
     public function index()
     {
-     	$business = Business::with('num')->get();
+     	$business = Business::with('num')->paginate(5);
       //$business = DB::table('number_telephone')->join('business','number_telephone.id','=','business.number_telephone_id')->select('business.*','number_telephone.number')->get();
 
-     	return $business;
+     //	return $business;
+     $response = [
+      'pagination' => [
+          'total' => $business->total(),
+          'per_page' => $business->perPage(),
+          'current_page' => $business->currentPage(),
+          'last_page' => $business->lastPage(),
+          'from' => $business->firstItem(),
+          'to' => $business->lastItem()
+      ],
+      'data' => $business
+  ];
+
+  return $response;
+
     }
 
 	public function store(Request $request)

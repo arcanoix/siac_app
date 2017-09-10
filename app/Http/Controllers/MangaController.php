@@ -15,12 +15,21 @@ class MangaController extends Controller
     public function index()
     {
         //
-        $manga = Manga::all();
+        $manga = Manga::paginate(5);
 
-        return response()->json([
+        $response = [
+         'pagination' => [
+             'total' => $manga->total(),
+             'per_page' => $manga->perPage(),
+             'current_page' => $manga->currentPage(),
+             'last_page' => $manga->lastPage(),
+             'from' => $manga->firstItem(),
+             'to' => $manga->lastItem()
+         ],
+         'data' => $manga
+     ];
 
-          'manga' => $manga
-        ]);
+     return $response;
 
     }
 

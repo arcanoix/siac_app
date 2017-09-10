@@ -12,11 +12,21 @@ class FallaController extends Controller
     public function index()
     {
       //$falla = Falla::all();
-      $falla = Falla::with('number','cliente','users')->get();
+      $falla = Falla::with('number','cliente','users')->paginate(5);
 
-      return response()->json([
-          'falla' => $falla
-      ]);
+      $response = [
+       'pagination' => [
+           'total' => $falla->total(),
+           'per_page' => $falla->perPage(),
+           'current_page' => $falla->currentPage(),
+           'last_page' => $falla->lastPage(),
+           'from' => $falla->firstItem(),
+           'to' => $falla->lastItem()
+       ],
+       'data' => $falla
+   ];
+
+   return $response;
     }
 
     public function store(Request $r)
