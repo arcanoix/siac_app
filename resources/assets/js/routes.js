@@ -14,6 +14,7 @@ import Tanque from './components/Tanque.vue'
 import Central from './components/CentralT.vue'
 
 
+
 Vue.use(VueRouter)
 /* Rutas de acceso para el panel del menu */
 const router = new VueRouter({

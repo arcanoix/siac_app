@@ -105,7 +105,7 @@
                 <img src="{{ asset("/img/myAvatar.png") }}" class="img-circle" alt="User Image">
 
             @endif
-          
+
           </div>
           <div class="pull-left info">
             <p>{{ Auth::user()->name }}</p>
@@ -167,6 +167,19 @@
             </router-link>
 
 
+            <li class="treeview">
+              <a href="#"><i class="fa fa-book"></i> <span>Reportes</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                  <li><a href="http://127.0.0.1:8000/falla_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Fallas</span></a></li>
+                  <li>  <a href="http://127.0.0.1:8000/cliente_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Clientes</span></a></li>
+                  <li>  <a href="http://127.0.0.1:8000/usuario_reporte" targe="_blank"> <i class="fa fa-suitcase"></i> <span>Usuarios</span></a></li>
+
+              </ul>
+            </li>
       <!-- -->
           <li class="treeview">
             <a href="#"><i class="fa fa-cogs"></i> <span>Configuracion</span>

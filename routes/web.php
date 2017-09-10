@@ -34,6 +34,12 @@ Route::get('/site',function(){
 });
 
 
+/*ruta de reportes*/
+
+Route::get('falla_reporte', 'PdfController@fallas');
+Route::get('cliente_reporte','PdfController@cliente');
+Route::get('usuario_reporte', 'PdfController@usuario');
+
 
 /* Ruta modulo usuarios */
 Route::get('/users', 'UserController@index');
