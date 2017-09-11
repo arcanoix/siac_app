@@ -172,13 +172,115 @@
         </div>
         <div slot="footer">
 
-        <a href="#" class="btn btn-primary" v-on:click.prevent="saveUser()">Guardar</a>
+        <a href="#" class="btn btn-primary" v-on:click.prevent="saveAds()">Guardar</a>
 
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
 
         </div>
       </modal>
 
+<!-- -->
+
+
+      <modal :display="showModal1" @close="showModal1 = false">
+        <div slot="header">
+          <i class="fa fa-user"></i> Actualizacion de ADS
+
+        </div>
+        <div slot="body">
+          <form class="form">
+
+            <div class="form-group inner-addon left-addon">
+               <i class="fa fa-user" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="editAds.name" type="text" class="form-control" placeholder="Nombre" :class="{'input': true, 'is-danger': errors.has('name') }">
+             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+
+            </div>
+
+
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-envelope" aria-hidden="true"></i>
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_ads') }" v-model="editAds.type_ads" type="text" class="form-control" placeholder="Tipo de Ads" name="type_ads">
+             <span v-show="errors.has('type_ads')" class="help is-danger">{{ errors.first('type_ads') }}</span>
+
+            </div>
+
+
+            <div class="form-group inner-addon left-addon">
+             <input v-model="editAds.cc" type="text" class="form-control" placeholder="Cable central">
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.cl" type="text" class="form-control" placeholder="cable local">
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.pc" type="text" class="form-control" placeholder="Par central">
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.pl" type="text" class="form-control" placeholder="Par local">
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.address" type="text" class="form-control" placeholder="Direccion">
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+
+             <v-select :value="manga.id" v-model="editAds.sleeve_id"  :options="SelectMan" :on-change="onChangeM"></v-select>
+
+            </div>
+
+
+            <div class="form-group inner-addon left-addon">
+
+               <v-select :value="municipio.id" v-model="editAds.municipality_id"  :options="SelectM" :on-change="onChange"></v-select>
+
+
+            </div>
+
+            <div  class="form-group inner-addon left-addon">
+
+
+              <v-select :value="parroquia.id" v-model="editAds.parish_id"  :options="SelectP" :on-change="onChangeP"></v-select>
+
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+
+              <v-select :value="sector.id" v-model="editAds.sector_id"  :options="SelectS" :on-change="onChangeS"></v-select>
+
+            </div>
+
+            <div class="">
+
+             <input v-model="editAds.state_id" type="hidden"  placeholder="ID estado">
+
+            </div>
+
+            <div class="">
+             <input v-model="editAds.coord_x" type="hidden"  placeholder="coordenada x">
+            </div>
+
+            <div class="">
+             <input v-model="editAds.coord_y" type="hidden"  placeholder="coordenada y">
+            </div>
+          </form>
+
+        </div>
+        <div slot="footer">
+
+        <a href="#" class="btn btn-primary" v-on:click.prevent="updateAds()">Guardar</a>
+
+          <a href="#" class="btn btn-default" v-on:click.prevent="showModal1=false">Cerrar</a>
+
+        </div>
+      </modal>
 
 
 
@@ -225,6 +327,22 @@ export default {
         man:[],
         munic:[],
         newAds:{
+          name:'',
+          type_ads:'',
+          cc:'',
+          cl:'',
+          pc:'',
+          pl:'',
+          address:'',
+          sleeve_id:'',
+          state_id:7,
+          municipality_id:'',
+          parish_id:'',
+          sector_id:'',
+          coord_x:10,
+          coord_y:15
+        },
+        editAds:{
           name:'',
           type_ads:'',
           cc:'',
@@ -368,7 +486,7 @@ export default {
             this.munic = response.data.municipio;
         });
       },
-      saveUser(newAds){
+      saveAds(newAds){
         var input = this.newAds;
         if(input['name'] == ''){
           this.hasError =false;
@@ -394,9 +512,24 @@ export default {
         var that = this;
         that.showModal1 = true;
         axios.get(showUser + b.id).then(response => {
-            this.editUser = response.data;
+            this.editAds = response.data;
         });
 
+      },
+      updateAds(editAds){
+        var input = this.editAds;
+        var update = '/update_a/' + input.id;
+        axios.put(update, input).then(response => {
+          swal({
+                title: "Success",
+                text: 'Mailing List updated',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+            this.fetchAds();
+            this.showModal1= false;
+        });
       },
       onDelete(b){
         var that = this;

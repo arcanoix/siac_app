@@ -73,6 +73,40 @@ class BusinessController extends Controller
 
 	}
 
+  public function show($id){
+
+
+      if($business = Business::find($id)){
+
+        return $business;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+
+  }
+
+  public function update(Request $request, $id){
+    if($business = Business::find($id)){
+      $business->name = $request->name;
+      $business->rif = $request->rif;
+      $business->address = $request->address;
+      $business->email = $request->email;
+      $business->number_telephone_id = $request->number_telephone_id;
+      $business->number_contact = $request->number_contact;
+      $business->state_id = $request->state_id;
+      $business->municipality_id = $request->municipality_id;
+      $business->parish_id = $request->parish_id;
+      $business->sector_id = $request->sector_id;
+
+      $business->save();
+      
+      return $business;
+    }else{
+      return response()->json(['error' => 'Error no se encuentra el registro']);
+    }
+
+  }
+
   public function destroy($id)
   {
     $del_business = Business::find($id);
