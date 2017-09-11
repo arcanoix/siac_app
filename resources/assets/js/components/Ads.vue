@@ -36,7 +36,7 @@
         <th>Direccion</th>
 
         <th>Editar</th>
-      
+
 
       </tr>
       <tr v-for="b in ads"  class="row-content">
@@ -132,38 +132,40 @@
              <v-select :value="manga.id" v-model="newAds.sleeve_id"  :options="SelectMan" :on-change="onChangeM"></v-select>
 
             </div>
-            <div class="form-group inner-addon left-addon col-xs-6">
 
-             <input v-model="newAds.state_id" type="hidden" class="form-control" placeholder="ID estado">
 
-            </div>
-
-            <div class="form-group inner-addon left-addon col-xs-6">
+            <div class="form-group inner-addon left-addon">
 
                <v-select :value="municipio.id" v-model="newAds.municipality_id"  :options="SelectM" :on-change="onChange"></v-select>
 
 
             </div>
 
-            <div  class="form-group col-xs-3">
+            <div  class="form-group inner-addon left-addon">
 
 
               <v-select :value="parroquia.id" v-model="newAds.parish_id"  :options="SelectP" :on-change="onChangeP"></v-select>
 
             </div>
 
-            <div class="form-group col-xs-3">
+            <div class="form-group inner-addon left-addon">
 
               <v-select :value="sector.id" v-model="newAds.sector_id"  :options="SelectS" :on-change="onChangeS"></v-select>
 
             </div>
 
-            <div class="form-group col-xs-3">
-             <input v-model="newAds.coord_x" type="text" class="form-control" placeholder="coordenada x">
+            <div class="">
+
+             <input v-model="newAds.state_id" type="hidden"  placeholder="ID estado">
+
             </div>
 
-            <div class="form-group col-xs-3">
-             <input v-model="newAds.coord_y" type="text" class="form-control" placeholder="coordenada y">
+            <div class="">
+             <input v-model="newAds.coord_x" type="hidden"  placeholder="coordenada x">
+            </div>
+
+            <div class="">
+             <input v-model="newAds.coord_y" type="hidden"  placeholder="coordenada y">
             </div>
           </form>
 
@@ -235,8 +237,8 @@ export default {
           municipality_id:'',
           parish_id:'',
           sector_id:'',
-          coord_x:'',
-          coord_y:''
+          coord_x:10,
+          coord_y:15
         },
         pagination:{
           total:0,
@@ -347,7 +349,8 @@ export default {
       },
       fetchManga(){
         axios.get('manga').then(response => {
-              this.man = response.data.manga;
+              this.man = response.data.data.data;
+
         });
       },
       fetchSector(){

@@ -45,7 +45,7 @@ class BusinessController extends Controller
       $empresa->state_id = $request->state_id;
       $empresa->municipality_id = $request->municipality_id;
       $empresa->parish_id = $request->parish_id;
-      $empresa->sector = $request->sector;
+      $empresa->sector_id = $request->sector_id;
 
           //  dd($empresa);
           if($find_number = NumeroT::find($request->number_telephone_id))

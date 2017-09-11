@@ -33,7 +33,7 @@
         <th>Email</th>
         <th>Numero Telefonico</th>
         <th>Editar</th>
-      
+
 
       </tr>
       <tr v-for="b in business"  class="row-content">
@@ -107,6 +107,7 @@
              <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
 
             </div>
+
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
               <select v-model="newBusiness.number_telephone_id" class="form-control">
@@ -152,11 +153,13 @@
 
             </div>
 
-          <div class="form-group inner-addon left-addon">
-             <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
-            <input type="text" v-model="newBusiness.sector" class="form-control" placeholder="Sector donde reside">
-             <span v-show="errors.has('sector')" class="help is-danger">{{ errors.first('sector') }}</span>
-          </div>
+            <div class="form-group inner-addon left-addon">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+             <select v-model="newBusiness.sector_id" class="form-control">
+               <option v-for="num in sector" :value="num.id">&nbsp;  {{ num.name }}</option>
+
+             </select>
+           </div>
 
           </form>
 
@@ -198,6 +201,10 @@ export default {
           id:'',
           name:''
         },
+        sector:{
+          id:'',
+          name:''
+        },
         numberT:{
             id:'',
             code:'',
@@ -214,7 +221,7 @@ export default {
           state_id:'7',
           municipality_id:'',
           parish_id:'',
-          sector:''
+          sector_id:''
         },
         pagination:{
           total:0,
@@ -233,6 +240,7 @@ export default {
     this.fetchMunicipio();
     this.fetchParish();
     this.fetchN();
+    this.fetchSector();
 
   },
   computed:{
@@ -264,6 +272,7 @@ export default {
         //console.log(page);
         this.pagination.current_page = page;
         this.fetchUsers(page);
+        this.fetchSector();
     },
 
 
@@ -277,6 +286,11 @@ export default {
 
         });
 
+      },
+      fetchSector(){
+          axios.get('sector').then(response => {
+              this.sector = response.data.sector;
+          });
       },
       fetchN(){
           axios.get('numero_espera').then(response => {
@@ -311,8 +325,8 @@ export default {
         {
               this.hasError=true;
                axios.post(postBusiness, this.newBusiness).then(response => {
-               this.fetchBusiness();
-               this.showModal= false;
+                   this.fetchBusiness();
+                   this.showModal= false;
 
                });
 

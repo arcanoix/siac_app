@@ -34,6 +34,7 @@ class NumeroTController extends Controller
 
     public function store(Request $request)
     {
+      //dd($request->all());
       $numeroN = new NumeroT();
 
       $numeroN->code = $request->code;

@@ -90,20 +90,20 @@
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Apellido" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+              <input v-validate="'required'" v-model="newCliente.last_name" type="text" class="form-control" placeholder="Apellido" :class="{'input': true, 'is-danger': errors.has('last_name') }">
+             <span v-show="errors.has('last_name')" class="help is-danger">{{ errors.first('last_name') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Cedula" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+              <input v-validate="'required'" v-model="newCliente.identification_card" type="text" class="form-control" placeholder="Cedula" :class="{'input': true, 'is-danger': errors.has('identification_card') }">
+             <span v-show="errors.has('identification_card')" class="help is-danger">{{ errors.first('identification_card') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Direccion" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+              <input v-validate="'required'" v-model="newCliente.address" type="text" class="form-control" placeholder="Direccion" :class="{'input': true, 'is-danger': errors.has('address') }">
+             <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
 
             </div>
              <div class="form-group inner-addon left-addon">
@@ -113,29 +113,49 @@
 
             </div>
             <div class="form-group inner-addon left-addon">
-               <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Estado" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+              <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
 
-            </div>
+             <select v-model="newCliente.state_id" class="form-control" style="display:none;">
+               <option :value="e.id"  v-for="e in estado">&nbsp;{{ e.name }}</option>
+
+             </select>
+            <span v-show="errors.has('state_id')" class="help is-danger">{{ errors.first('state_id') }}</span>
+
+           </div>
+           <div class="form-group inner-addon left-addon">
+              <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
+                 <select v-model="newCliente.municipality_id" class="form-control">
+                   <option :value="m.id"  v-for="m in municipality">&nbsp; {{ m.name }}</option>
+
+                 </select>
+                  <span v-show="errors.has('municipality_id')" class="help is-danger">{{ errors.first('municipality_id') }}</span>
+
+           </div>
+
+           <div class="form-group inner-addon left-addon">
+              <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
+                 <select v-model="newCliente.parish_id" class="form-control">
+                   <option :value="p.id"  v-for="p in parish">&nbsp; {{ p.name }}</option>
+
+                 </select>
+                  <span v-show="errors.has('parish_id')" class="help is-danger">{{ errors.first('parish_id') }}</span>
+
+           </div>
+           <div class="form-group inner-addon left-addon">
+             <i class="fa fa-phone" aria-hidden="true"></i>
+            <select v-model="newCliente.sector_id" class="form-control">
+              <option v-for="num in sector" :value="num.id">&nbsp;  {{ num.name }}</option>
+
+            </select>
+          </div>
+
             <div class="form-group inner-addon left-addon">
-               <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Municipio" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+             <select v-model="newCliente.number_telephone_id" class="form-control">
+               <option v-for="num in numberT" :value="num.id">&nbsp; {{ num.code }} - {{ num.number }}</option>
 
-            </div>
-            <div class="form-group inner-addon left-addon">
-               <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Sector" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
-
-            </div>
-            <div class="form-group inner-addon left-addon">
-               <i class="fa fa-phone" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newCliente.name" type="text" class="form-control" placeholder="Numero Telefono" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
-
-            </div>
+             </select>
+           </div>
 
           </form>
 
@@ -171,11 +191,33 @@ export default {
           identification_card:'',
           address:'',
           email:'',
-          state_id:'',
+          state_id:7,
           municipality_id:'',
           parish_id:'',
           sector_id:'',
           number_telephone_id:''
+        },
+        estado:{
+          id:7,
+          name:'Carabobo'
+        },
+        municipality:{
+            id:'',
+            name:''
+        },
+        parish:{
+          id:'',
+          name:''
+        },
+        sector:{
+          id:'',
+          name:''
+        },
+        numberT:{
+            id:'',
+            code:'',
+            number:'',
+            status:''
         },
         pagination:{
           total:0,
@@ -190,6 +232,11 @@ export default {
   },
   created(){
     this.fetchCliente(this.pagination.current_page);
+      this.fetchN();
+      this.fetchEstado();
+      this.fetchMunicipio();
+      this.fetchParish();
+      this.fetchSector();
 
   },
   computed:{
@@ -233,6 +280,34 @@ export default {
           this.pagination.current_page = page;
           this.fetchCentral(page);
       },
+      fetchN(){
+          axios.get('numero_espera').then(response => {
+            this.numberT = response.data;
+          });
+      },
+      fetchSector(){
+          axios.get('sector').then(response => {
+              this.sector = response.data.sector;
+          });
+      },
+      fetchMunicipio(){
+          axios.get('municipio').then(response => {
+
+          this.municipality = response.data.municipio;
+          //console.log(this.municipality);
+        });
+      },
+      fetchEstado(){
+          axios.get('estado').then(response => {
+            this.estado = response.data.estado;
+
+          });
+      },
+      fetchParish(){
+          axios.get('parroquia').then(response => {
+            this.parish = response.data;
+          });
+      },
       saveCliente(newCliente){
         var input = this.newCliente;
         if(input['name'] == ''){
@@ -245,6 +320,7 @@ export default {
                axios.post(postCliente, this.newCliente).then(response => {
 
                this.fetchCliente();
+               this.showModal = false;
                });
 
         }

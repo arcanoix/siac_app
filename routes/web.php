@@ -100,6 +100,9 @@ Route::get('/central','CentralTController@index');
 Route::post('central_save','CentralTController@store');
 Route::delete('/central_del/{id}','CentralTController@destroy');
 
+//rutas para sector
+Route::post('save_sector','EstateController@sector');
+
 //Rutas Dashboard
 Route::get('dashboard','DashboardController@index');
 

@@ -36,7 +36,7 @@
         <th>Par Local</th>
         <th>IDManga</th>
         <th>Editar</th>
-      
+
 
       </tr>
       <tr v-for="b in numberT"  class="row-content">
@@ -90,23 +90,40 @@
           <form class="form">
 
             <div class="form-group inner-addon left-addon">
-               <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newNumber.code" type="text" class="form-control" placeholder="Codigo" :class="{'input': true, 'is-danger': errors.has('code') }">
-             <span v-show="errors.has('code')" class="help is-danger">{{ errors.first('code') }}</span>
+
+               <select v-model="newNumber.code" class="form-control">
+                 <option>0241</option>
+                 <option>0245</option>
+                 <option>0249</option>
+                 <option>0242</option>
+               </select>
 
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
-              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('number') }" v-model="newNumber.number" type="text" class="form-control" placeholder="Numero Telefonico" name="number">
+              <input maxlength="7" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('number') }" v-model="newNumber.number" type="text" class="form-control" placeholder="Numero Telefonico" name="number">
              <span v-show="errors.has('number')" class="help is-danger">{{ errors.first('number') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
 
-             <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('status') }" v-model="newNumber.status" type="text" class="form-control" placeholder="Status" name="status">
-            <span v-show="errors.has('status')" class="help is-danger">{{ errors.first('status') }}</span>
+              <select v-model="newNumber.status" class="form-control">
+                <option>Activo</option>
+                <option>Inactivo</option>
+              </select>
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+
+
+              <select class="form-control" v-model="newNumber.sleeve_id">
+                <option :value="u.id" v-for="u in sleeve">{{ u.name }}</option>
+              </select>
+
+             <span v-show="errors.has('number_telephone_id')" class="help is-danger">{{ errors.first('number_telephone_id') }}</span>
 
             </div>
+
 
             <div  class="form-group col-xs-3">
               <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cc') }" v-model="newNumber.cc" type="text" class="form-control" placeholder="Cable Central" name="cc">
@@ -123,18 +140,13 @@
              <span v-show="errors.has('pc')" class="help is-danger">{{ errors.first('pc') }}</span>
             </div>
 
+
+
+
             <div class="form-group col-xs-3">
               <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('pl') }" v-model="newNumber.pl" type="text" class="form-control" placeholder="Par Local" name="pl">
              <span v-show="errors.has('pl')" class="help is-danger">{{ errors.first('pl') }}</span>
             </div>
-
-            <div class="form-group col-xs-3">
-              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('sleeve_id') }" v-model="newNumber.sleeve_id" type="text" class="form-control" placeholder="Manga" name="sleeve_id">
-             <span v-show="errors.has('sleeve_id')" class="help is-danger">{{ errors.first('sleeve_id') }}</span>
-            </div>
-
-
-
 
 
           </form>
@@ -175,6 +187,10 @@ export default {
           pl:'',
           sleeve_id:''
         },
+        sleeve:{
+          id:'',
+          name:''
+        },
         pagination:{
           total:0,
           per_page : 7,
@@ -188,6 +204,7 @@ export default {
   },
   created(){
     this.fetchNumber(this.pagination.current_page);
+    this.fetchSleeve();
 
   },
   computed:{
@@ -215,6 +232,11 @@ export default {
     }
   },
   methods:{
+    fetchSleeve(){
+        axios.get('manga').then(response => {
+            this.sleeve = response.data.data.data;
+        });
+    },
       fetchNumber(page){
          axios.get('/numero_telefonico?page=' + page).then(response => {
             //this. = response.data.numberT;
