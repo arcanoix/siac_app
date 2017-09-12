@@ -93,14 +93,29 @@
                       </div>
 											<br>
 
-											<div class="col-lg-12 col-md-8" style="padding-top:19px;">
-	                        <div class="panel panel-primary">
+											<div class="col-xs-12" style="padding-top:19px;">
+													<div class="panel panel-blank">
+															<div class="panel-heading">
+																	<h1 class="panel-title">Graficos de Fallas</h1>
+																	<div class="row">
+																			<div class="col-xs-12">
+																					<gra></gra>
+
+																			</div>
+																	</div>
+															</div>
+
+													</div>
+											</div>
+
+											<div class="col-xs-12" style="padding-top:19px;">
+	                        <div class="panel panel-blank">
 	                            <div class="panel-heading">
 																	<h1 class="panel-title">Graficos de Fallas</h1>
 	                                <div class="row">
 	                                    <div class="col-xs-12">
+																					<grafica></grafica>
 
-	                                      
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -115,12 +130,10 @@
 
 <script>
 var getDash = 'dashboard';
-import Vue from 'vue';
-
-import * as VueGoogleMaps from 'vue2-google-maps';
-
-import {Line} from 'vue-chartjs';
-
+import Vue from 'vue'
+import * as VueGoogleMaps from 'vue2-google-maps'
+import grafica from './graph.js'
+import gra from './grafica.js'
 
 
 Vue.use(VueGoogleMaps, {
@@ -130,9 +143,8 @@ Vue.use(VueGoogleMaps, {
 });
 
 
-
-
 	export default {
+		components:{grafica, gra},
 		data(){
 			return{
 					cliente:[],
