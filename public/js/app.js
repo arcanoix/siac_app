@@ -53836,6 +53836,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getnumber = 'numero_telefonico';
 var postnumber = 'numero_save';
@@ -53845,6 +53912,7 @@ var postnumber = 'numero_save';
     return {
       numberT: [],
       showModal: false,
+      showModal1: false,
       newNumber: {
         code: '',
         number: '',
@@ -53855,10 +53923,21 @@ var postnumber = 'numero_save';
         pl: '',
         sleeve_id: ''
       },
-      sleeve: {
-        id: '',
-        name: ''
+      editNumber: {
+        code: '',
+        number: '',
+        status: '',
+        cc: '',
+        cl: '',
+        pc: '',
+        pl: '',
+        sleeve_id: ''
       },
+      manga: {
+        id: ''
+      },
+      man: [],
+      code: ['0241', '0245', '0249', '0242'],
       pagination: {
         total: 0,
         per_page: 7,
@@ -53876,6 +53955,14 @@ var postnumber = 'numero_save';
   },
 
   computed: {
+    SelectMan: function SelectMan() {
+      return this.man.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
     isActived: function isActived() {
       return this.pagination.current_page;
     },
@@ -53900,11 +53987,14 @@ var postnumber = 'numero_save';
     }
   },
   methods: {
+    onChangeM: function onChangeM(obj) {
+      this.manga.id = obj.value;
+    },
     fetchSleeve: function fetchSleeve() {
       var _this = this;
 
       axios.get('manga').then(function (response) {
-        _this.sleeve = response.data.data.data;
+        _this.man = response.data.data.data;
       });
     },
     fetchNumber: function fetchNumber(page) {
@@ -53929,6 +54019,7 @@ var postnumber = 'numero_save';
         this.hasError = false;
         this.hasDeleted = true;
       } else {
+        this.newNumber.sleeve_id = this.manga.id;
         this.hasError = true;
         axios.post(postnumber, this.newNumber).then(function (response) {
 
@@ -53936,6 +54027,34 @@ var postnumber = 'numero_save';
           _this3.showModal = false;
         });
       }
+    },
+    onEdit: function onEdit(b) {
+      var _this4 = this;
+
+      var showUser = '/showNum/';
+      var that = this;
+      that.showModal1 = true;
+      axios.get(showUser + b.id).then(function (response) {
+        _this4.editNumber = response.data;
+      });
+    },
+    updateNumber: function updateNumber(editNumber) {
+      var _this5 = this;
+
+      var input = this.editNumber;
+      var update = '/update_N/' + input.id;
+
+      axios.put(update, input).then(function (response) {
+        swal({
+          title: "Success",
+          text: 'Registro actualizado',
+          type: 'success',
+          animation: 'slide-from-bottom',
+          timer: 3000
+        });
+        _this5.fetchNumber();
+        _this5.showModal1 = false;
+      });
     },
     ondelete: function ondelete(b) {
       var that = this;
@@ -89658,26 +89777,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form"
   }, [_c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+  }, [_c('v-select', {
+    attrs: {
+      "placeholder": "Selecciona Codigo de area",
+      "options": _vm.code
+    },
+    model: {
       value: (_vm.newNumber.code),
+      callback: function($$v) {
+        _vm.newNumber.code = $$v
+      },
       expression: "newNumber.code"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newNumber.code = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
     }
-  }, [_c('option', [_vm._v("0241")]), _vm._v(" "), _c('option', [_vm._v("0245")]), _vm._v(" "), _c('option', [_vm._v("0249")]), _vm._v(" "), _c('option', [_vm._v("0242")])])]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-phone",
@@ -89746,40 +89858,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('option', [_vm._v("Activo")]), _vm._v(" "), _c('option', [_vm._v("Inactivo")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.manga.id,
+      "placeholder": "Selecciona una manga",
+      "options": _vm.SelectMan,
+      "on-change": _vm.onChangeM
+    },
+    model: {
       value: (_vm.newNumber.sleeve_id),
+      callback: function($$v) {
+        _vm.newNumber.sleeve_id = $$v
+      },
       expression: "newNumber.sleeve_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newNumber.sleeve_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
     }
-  }, _vm._l((_vm.sleeve), function(u) {
-    return _c('option', {
-      domProps: {
-        "value": u.id
-      }
-    }, [_vm._v(_vm._s(u.name))])
-  })), _vm._v(" "), _c('span', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.errors.has('number_telephone_id')),
-      expression: "errors.has('number_telephone_id')"
-    }],
-    staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('number_telephone_id')))])]), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Porfavor Carga una manga en su modulo")])])], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group col-xs-3"
   }, [_c('input', {
     directives: [{
@@ -89963,6 +90058,305 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal = false
       }
     }
+  }, [_vm._v("Cerrar")])])]), _vm._v(" "), _c('modal', {
+    attrs: {
+      "display": _vm.showModal1
+    },
+    on: {
+      "close": function($event) {
+        _vm.showModal1 = false
+      }
+    }
+  }, [_c('div', {
+    slot: "header"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  }), _vm._v(" Actualizacion de Numero Telefonico\n\n                          ")]), _vm._v(" "), _c('div', {
+    slot: "body"
+  }, [_c('form', {
+    staticClass: "form"
+  }, [_c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "placeholder": "Selecciona Codigo de area",
+      "options": _vm.code
+    },
+    model: {
+      value: (_vm.editNumber.code),
+      callback: function($$v) {
+        _vm.editNumber.code = $$v
+      },
+      expression: "editNumber.code"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-phone",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editNumber.number),
+      expression: "editNumber.number"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('number')
+    },
+    attrs: {
+      "maxlength": "7",
+      "type": "text",
+      "placeholder": "Numero Telefonico",
+      "name": "number"
+    },
+    domProps: {
+      "value": (_vm.editNumber.number)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editNumber.number = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('number')),
+      expression: "errors.has('number')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('number')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editNumber.status),
+      expression: "editNumber.status"
+    }],
+    staticClass: "form-control",
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.editNumber.status = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, [_c('option', [_vm._v("Activo")]), _vm._v(" "), _c('option', [_vm._v("Inactivo")])])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.manga.id,
+      "options": _vm.SelectMan,
+      "on-change": _vm.onChangeM
+    },
+    model: {
+      value: (_vm.editNumber.sleeve_id),
+      callback: function($$v) {
+        _vm.editNumber.sleeve_id = $$v
+      },
+      expression: "editNumber.sleeve_id"
+    }
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Porfavor Carga una manga en su modulo")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editNumber.cc),
+      expression: "editNumber.cc"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('cc')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Cable Central",
+      "name": "cc"
+    },
+    domProps: {
+      "value": (_vm.editNumber.cc)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editNumber.cc = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('cc')),
+      expression: "errors.has('cc')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('cc')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editNumber.cl),
+      expression: "editNumber.cl"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('cl')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Cable Local",
+      "name": "cl"
+    },
+    domProps: {
+      "value": (_vm.editNumber.cl)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editNumber.cl = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('cl')),
+      expression: "errors.has('cl')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('cl')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editNumber.pc),
+      expression: "editNumber.pc"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('pc')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Par Central",
+      "name": "pc"
+    },
+    domProps: {
+      "value": (_vm.editNumber.pc)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editNumber.pc = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('pc')),
+      expression: "errors.has('pc')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('pc')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group col-xs-3"
+  }, [_c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editNumber.pl),
+      expression: "editNumber.pl"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('pl')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Par Local",
+      "name": "pl"
+    },
+    domProps: {
+      "value": (_vm.editNumber.pl)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editNumber.pl = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('pl')),
+      expression: "errors.has('pl')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('pl')))])])])]), _vm._v(" "), _c('div', {
+    slot: "footer"
+  }, [_c('a', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.updateNumber()
+      }
+    }
+  }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showModal1 = false
+      }
+    }
   }, [_vm._v("Cerrar")])])])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
@@ -89984,7 +90378,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Codigo")]), _vm._v(" "), _c('th', [_vm._v("Numero")]), _vm._v(" "), _c('th', [_vm._v("Estatus")]), _vm._v(" "), _c('th', [_vm._v("Cable Central")]), _vm._v(" "), _c('th', [_vm._v("Cable Local")]), _vm._v(" "), _c('th', [_vm._v("Par Central")]), _vm._v(" "), _c('th', [_vm._v("Par Local")]), _vm._v(" "), _c('th', [_vm._v("IDManga")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "btn-top  btn btn-primary pull-right"
+    staticClass: "btn-top  btn btn-primary"
   }, [_c('i', {
     staticClass: "fa fa-pencil-square-o",
     attrs: {

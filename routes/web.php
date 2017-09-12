@@ -67,6 +67,8 @@ Route::delete('/manga_del/{id}','MangaController@destroy');
 //rutas para numero telefonico
 Route::get('numero_telefonico', 'NumeroTController@index');
 Route::post('numero_save','NumeroTController@store');
+Route::get('/showNum/{id}','NumeroTController@show');
+Route::put('/update_N/{id}','NumeroTController@update');
 Route::delete('/numero_delete/{id}','NumeroTController@destroy');
 
 Route::get('numero_espera','NumeroTController@numeroE');

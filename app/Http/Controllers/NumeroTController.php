@@ -32,6 +32,37 @@ class NumeroTController extends Controller
       return $numero_e;
     }
 
+    public function show($id)
+    {
+      if($numero_e = NumeroT::find($id)){
+
+        return $numero_e;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+    }
+
+    public function update(Request $request, $id)
+    {
+      if($numeroN = NumeroT::find($id)){
+        $numeroN->code = $request->code;
+        $numeroN->number = $request->number;
+        $numeroN->status = $request->status;
+        $numeroN->cc = $request->cc;
+        $numeroN->cl = $request->cl;
+        $numeroN->pc = $request->pc;
+        $numeroN->pl = $request->pl;
+        $numeroN->sleeve_id = $request->sleeve_id;
+
+      //  dd($numeroN);
+
+        $numeroN->save();
+        return $numeroN;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+    }
+
     public function store(Request $request)
     {
       //dd($request->all());

@@ -51,7 +51,7 @@
         <td>{{ b.sleeve_id }}</td>
 
 
-        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
       <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
@@ -91,14 +91,10 @@
 
             <div class="form-group inner-addon left-addon">
 
-               <select v-model="newNumber.code" class="form-control">
-                 <option>0241</option>
-                 <option>0245</option>
-                 <option>0249</option>
-                 <option>0242</option>
-               </select>
+               <v-select v-model="newNumber.code" placeholder="Selecciona Codigo de area"  :options="code"></v-select>
 
             </div>
+
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
               <input maxlength="7" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('number') }" v-model="newNumber.number" type="text" class="form-control" placeholder="Numero Telefonico" name="number">
@@ -115,12 +111,7 @@
 
             <div class="form-group inner-addon left-addon">
 
-
-              <select class="form-control" v-model="newNumber.sleeve_id">
-                <option :value="u.id" v-for="u in sleeve">{{ u.name }}</option>
-              </select>
-
-             <span v-show="errors.has('number_telephone_id')" class="help is-danger">{{ errors.first('number_telephone_id') }}</span>
+             <v-select :value="manga.id" v-model="newNumber.sleeve_id" placeholder="Selecciona una manga"  :options="SelectMan" :on-change="onChangeM"><span slot="no-options">Porfavor Carga una manga en su modulo</span></v-select>
 
             </div>
 
@@ -160,6 +151,82 @@
 
         </div>
       </modal>
+                        <!-- -->
+
+                        <modal :display="showModal1" @close="showModal1 = false">
+                          <div slot="header">
+                            <i class="fa fa-user"></i> Actualizacion de Numero Telefonico
+
+                          </div>
+                          <div slot="body">
+                            <form class="form">
+
+                              <div class="form-group inner-addon left-addon">
+
+                                 <v-select v-model="editNumber.code" placeholder="Selecciona Codigo de area"  :options="code"></v-select>
+
+                              </div>
+
+                               <div class="form-group inner-addon left-addon">
+                                 <i class="fa fa-phone" aria-hidden="true"></i>
+                                <input maxlength="7" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('number') }" v-model="editNumber.number" type="text" class="form-control" placeholder="Numero Telefonico" name="number">
+                               <span v-show="errors.has('number')" class="help is-danger">{{ errors.first('number') }}</span>
+
+                              </div>
+                              <div class="form-group inner-addon left-addon">
+
+                                <select v-model="editNumber.status" class="form-control">
+                                  <option>Activo</option>
+                                  <option>Inactivo</option>
+                                </select>
+                              </div>
+
+                              <div class="form-group inner-addon left-addon">
+
+                               <v-select :value="manga.id" v-model="editNumber.sleeve_id"  :options="SelectMan" :on-change="onChangeM"><span slot="no-options">Porfavor Carga una manga en su modulo</span></v-select>
+
+                              </div>
+
+
+                              <div  class="form-group col-xs-3">
+                                <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cc') }" v-model="editNumber.cc" type="text" class="form-control" placeholder="Cable Central" name="cc">
+                               <span v-show="errors.has('cc')" class="help is-danger">{{ errors.first('cc') }}</span>
+                              </div>
+
+                              <div class="form-group col-xs-3">
+                                <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cl') }" v-model="editNumber.cl" type="text" class="form-control" placeholder="Cable Local" name="cl">
+                               <span v-show="errors.has('cl')" class="help is-danger">{{ errors.first('cl') }}</span>
+                              </div>
+
+                              <div class="form-group col-xs-3">
+                                <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('pc') }" v-model="editNumber.pc" type="text" class="form-control" placeholder="Par Central" name="pc">
+                               <span v-show="errors.has('pc')" class="help is-danger">{{ errors.first('pc') }}</span>
+                              </div>
+
+
+
+
+                              <div class="form-group col-xs-3">
+                                <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('pl') }" v-model="editNumber.pl" type="text" class="form-control" placeholder="Par Local" name="pl">
+                               <span v-show="errors.has('pl')" class="help is-danger">{{ errors.first('pl') }}</span>
+                              </div>
+
+
+                            </form>
+
+                          </div>
+                          <div slot="footer">
+
+                          <a href="#" class="btn btn-primary" v-on:click.prevent="updateNumber()">Guardar</a>
+
+                            <a href="#" class="btn btn-default" v-on:click.prevent="showModal1=false">Cerrar</a>
+
+                          </div>
+                        </modal>
+
+
+
+
 
   </div>
 </div>
@@ -177,6 +244,7 @@ export default {
       return {
         numberT: [],
         showModal:false,
+        showModal1:false,
         newNumber:{
           code:'',
           number:'',
@@ -187,10 +255,21 @@ export default {
           pl:'',
           sleeve_id:''
         },
-        sleeve:{
-          id:'',
-          name:''
+        editNumber:{
+          code:'',
+          number:'',
+          status:'',
+          cc:'',
+          cl:'',
+          pc:'',
+          pl:'',
+          sleeve_id:''
         },
+        manga:{
+          id:''
+        },
+          man:[],
+        code:['0241','0245','0249','0242'],
         pagination:{
           total:0,
           per_page : 7,
@@ -208,6 +287,15 @@ export default {
 
   },
   computed:{
+    SelectMan(){
+      return this.man.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+
+    },
     isActived(){
       return this.pagination.current_page;
     },
@@ -232,9 +320,12 @@ export default {
     }
   },
   methods:{
+    onChangeM(obj){
+        this.manga.id = obj.value;
+    },
     fetchSleeve(){
         axios.get('manga').then(response => {
-            this.sleeve = response.data.data.data;
+            this.man = response.data.data.data;
         });
     },
       fetchNumber(page){
@@ -258,6 +349,7 @@ export default {
         }
         else
         {
+            this.newNumber.sleeve_id = this.manga.id;
               this.hasError=true;
                axios.post(postnumber, this.newNumber).then(response => {
 
@@ -269,6 +361,32 @@ export default {
 
 
 
+      },
+      onEdit(b){
+        var showUser = '/showNum/';
+        var that = this;
+        that.showModal1 = true;
+        axios.get(showUser + b.id).then(response => {
+            this.editNumber = response.data;
+        });
+      },
+      updateNumber(editNumber){
+        var input = this.editNumber;
+        var update = '/update_N/' + input.id;
+
+
+        axios.put(update, input).then(response => {
+          swal({
+                title: "Success",
+                text: 'Registro actualizado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+            this.fetchNumber();
+            this.showModal1= false;
+
+        });
       },
       ondelete(b)
       {
