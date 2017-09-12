@@ -32,6 +32,29 @@ class ServicioController extends Controller
             ]);
     }
 
+    public function show($id)
+    {
+      if($servicio = Servicio::find($id)){
+
+        return $servicio;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+    }
+
+    public function update(Request $request, $id)
+    {
+      if($servicio_save = Servicio::find($id)){
+        $servicio_save->name = $request->name;
+        $servicio_save->description = $request->description;
+
+        $servicio_save->save();
+        return $servicio_save;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+    }
+
     public function destroy($id)
     {
           $find_servicio = Servicio::find($id);

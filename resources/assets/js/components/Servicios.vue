@@ -31,7 +31,7 @@
         <th>Descripcion</th>
         <th>Fecha</th>
         <th>Editar</th>
-      
+
 
       </tr>
       <tr v-for="b in servicio"  class="row-content">
@@ -83,6 +83,42 @@
         </div>
       </modal>
 
+
+
+      <modal :display="showModal1" @close="showModal1 = false">
+        <div slot="header">
+          <i class="fa fa-user"></i> Actualizacion de Servicios
+
+        </div>
+        <div slot="body">
+          <form class="form">
+
+            <div class="form-group inner-addon left-addon">
+               <i class="fa fa-user" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="editServicio.name" type="text" class="form-control" placeholder="Nombre del Servicio" :class="{'input': true, 'is-danger': errors.has('name') }">
+             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+
+            </div>
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-envelope" aria-hidden="true"></i>
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('description') }" v-model="editServicio.description" type="text" class="form-control" placeholder="Descripcion del Servicio" name="description">
+             <span v-show="errors.has('description')" class="help is-danger">{{ errors.first('description') }}</span>
+
+            </div>
+
+          </form>
+
+        </div>
+        <div slot="footer">
+
+        <a href="#" class="btn btn-primary" v-on:click.prevent="updateServicio()">Guardar</a>
+
+          <a href="#" class="btn btn-default" v-on:click.prevent="showModal1=false">Cerrar</a>
+
+        </div>
+      </modal>
+
+
   </div>
 </div>
 
@@ -99,7 +135,12 @@ export default {
       return {
         servicio: [],
         showModal:false,
+        showModal1:false,
         newServicio:{
+          name:'',
+          description:''
+        },
+        editServicio:{
           name:'',
           description:''
         }
@@ -132,6 +173,29 @@ export default {
                });
 
         }
+      },
+      onEdit(b){
+        var showUser = '/show_s/';
+        var that = this;
+        that.showModal1 = true;
+        axios.get(showUser + b.id).then(response => {
+            this.editServicio = response.data;
+        });
+      },
+      updateServicio(editServicio){
+        var input = this.editServicio;
+        var update = '/update_s/' + input.id;
+        axios.put(update, input).then(response => {
+          swal({
+                title: "Success",
+                text: 'Registro actualizado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+            this.fetchServicio();
+            this.showModal1= false;
+        });
       },
       onDelete(b){
         var that = this;

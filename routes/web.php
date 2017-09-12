@@ -92,6 +92,8 @@ Route::delete('/ads_delete/{id}','AdsController@destroy');
 //rutas para servicios
 Route::get('servicios','ServicioController@index');
 Route::post('servicios_save','ServicioController@store');
+Route::get('/show_s/{id}','ServicioController@show');
+Route::put('/update_s/{id}','ServicioController@update');
 Route::delete('/servicio_del/{id}','ServicioController@destroy');
 
 //rutas para las fallas
