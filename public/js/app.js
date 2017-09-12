@@ -51657,6 +51657,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -51672,6 +51720,7 @@ var post_central = 'central_save';
     return {
       central: [],
       showModal: false,
+      showModal1: false,
       sector: {
         id: ''
       },
@@ -51685,6 +51734,13 @@ var post_central = 'central_save';
       sec: [],
       parro: [],
       newCentral: {
+        name: '',
+        address: '',
+        parish_id: '',
+        sector_id: '',
+        tanks_id: ''
+      },
+      editCentral: {
         name: '',
         address: '',
         parish_id: '',
@@ -51819,6 +51875,33 @@ var post_central = 'central_save';
           _this5.showModal = false;
         });
       }
+    },
+    onEdit: function onEdit(b) {
+      var _this6 = this;
+
+      var showUser = '/show_c/';
+      var that = this;
+      that.showModal1 = true;
+      axios.get(showUser + b.id).then(function (response) {
+        _this6.editCentral = response.data;
+      });
+    },
+    updateCentral: function updateCentral(editCentral) {
+      var _this7 = this;
+
+      var input = this.editCentral;
+      var update = '/update_c/' + input.id;
+      axios.put(update, input).then(function (response) {
+        swal({
+          title: "Success",
+          text: 'Registro actualizado',
+          type: 'success',
+          animation: 'slide-from-bottom',
+          timer: 3000
+        });
+        _this7.fetchCentral();
+        _this7.showModal1 = false;
+      });
     },
     onDelete: function onDelete(b) {
       var that = this;
@@ -95873,7 +95956,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('input', {
+  }, [_c('i', {
+    staticClass: "fa fa-globe",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
     directives: [{
       name: "validate",
       rawName: "v-validate",
@@ -95916,6 +96004,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('v-select', {
     attrs: {
       "value": _vm.parroquia.id,
+      "placeholder": "Seleccione Parroquia",
       "options": _vm.SelectP,
       "on-change": _vm.onChangeP
     },
@@ -95926,11 +96015,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "newCentral.parish_id"
     }
-  })], 1), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor registre una parroquia en su modulo")])])], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('v-select', {
     attrs: {
       "value": _vm.sector.id,
+      "placeholder": "Seleccione el Sector",
       "options": _vm.SelectS,
       "on-change": _vm.onChangeS
     },
@@ -95941,11 +96033,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "newCentral.sector_id"
     }
-  })], 1), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor registre un sector en su modulo")])])], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('v-select', {
     attrs: {
       "value": _vm.tanque.id,
+      "placeholder": "Seleccione el tanque",
       "options": _vm.SelectT,
       "on-change": _vm.onChangeT
     },
@@ -95956,7 +96051,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "newCentral.tanks_id"
     }
-  })], 1)])]), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor registre un tanque o tanquilla en su modulo")])])], 1)])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -95980,6 +96077,190 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal = false
       }
     }
+  }, [_vm._v("Cerrar")])])]), _vm._v(" "), _c('modal', {
+    attrs: {
+      "display": _vm.showModal1
+    },
+    on: {
+      "close": function($event) {
+        _vm.showModal1 = false
+      }
+    }
+  }, [_c('div', {
+    slot: "header"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  }), _vm._v(" Registro de Central\n\n        ")]), _vm._v(" "), _c('div', {
+    slot: "body"
+  }, [_c('form', {
+    staticClass: "form"
+  }, [_c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-user",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editCentral.name),
+      expression: "editCentral.name"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('name')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Nombre"
+    },
+    domProps: {
+      "value": (_vm.editCentral.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editCentral.name = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('name')),
+      expression: "errors.has('name')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-globe",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editCentral.address),
+      expression: "editCentral.address"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('address')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Direccion",
+      "name": "address"
+    },
+    domProps: {
+      "value": (_vm.editCentral.address)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editCentral.address = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('address')),
+      expression: "errors.has('address')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('address')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.parroquia.id,
+      "placeholder": "Seleccione Parroquia",
+      "options": _vm.SelectP,
+      "on-change": _vm.onChangeP
+    },
+    model: {
+      value: (_vm.editCentral.parish_id),
+      callback: function($$v) {
+        _vm.editCentral.parish_id = $$v
+      },
+      expression: "editCentral.parish_id"
+    }
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor registre una parroquia en su modulo")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.sector.id,
+      "placeholder": "Seleccione el Sector",
+      "options": _vm.SelectS,
+      "on-change": _vm.onChangeS
+    },
+    model: {
+      value: (_vm.editCentral.sector_id),
+      callback: function($$v) {
+        _vm.editCentral.sector_id = $$v
+      },
+      expression: "editCentral.sector_id"
+    }
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor registre un sector en su modulo")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.tanque.id,
+      "placeholder": "Seleccione el tanque",
+      "options": _vm.SelectT,
+      "on-change": _vm.onChangeT
+    },
+    model: {
+      value: (_vm.editCentral.tanks_id),
+      callback: function($$v) {
+        _vm.editCentral.tanks_id = $$v
+      },
+      expression: "editCentral.tanks_id"
+    }
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor registre un tanque o tanquilla en su modulo")])])], 1)])]), _vm._v(" "), _c('div', {
+    slot: "footer"
+  }, [_c('a', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.updateCentral()
+      }
+    }
+  }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showModal1 = false
+      }
+    }
   }, [_vm._v("Cerrar")])])])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
@@ -96001,7 +96282,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Parroquia")]), _vm._v(" "), _c('th', [_vm._v("Sector")]), _vm._v(" "), _c('th', [_vm._v("Tanquilla")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "btn-top  btn btn-primary pull-right"
+    staticClass: "btn-top  btn btn-primary"
   }, [_c('i', {
     staticClass: "fa fa-pencil-square-o",
     attrs: {

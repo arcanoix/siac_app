@@ -45,6 +45,34 @@ class CentralTController extends Controller
 
     }
 
+    public function show($id)
+    {
+      if($central = CentralT::find($id)){
+
+        return $central;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+    }
+
+    public function update(Request $centralT, $id)
+    {
+      if($central = CentralT::find($id)){
+        $central->name = $centralT->name;
+        $central->address = $centralT->address;
+        $central->parish_id = $centralT->parish_id;
+        $central->sector_id = $centralT->sector_id;
+        $central->tanks_id = $centralT->tanks_id;
+
+        //dd($central);
+
+        $central->save();
+        return $central;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+    }
+
     public function destroy($id)
     {
       $find_central = CentralT::find($id);

@@ -45,7 +45,7 @@
         <td>{{b.tanque.name}}</td>
 
 
-        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
       <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
@@ -89,23 +89,23 @@
 
             </div>
              <div class="form-group inner-addon left-addon">
-
+                   <i class="fa fa-globe" aria-hidden="true"></i>
               <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" v-model="newCentral.address" type="text" class="form-control" placeholder="Direccion" name="address">
              <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
 
             </div>
             <div  class="form-group inner-addon left-addon">
-              <v-select :value="parroquia.id" v-model="newCentral.parish_id"  :options="SelectP" :on-change="onChangeP"></v-select>
+              <v-select :value="parroquia.id" v-model="newCentral.parish_id" placeholder="Seleccione Parroquia"  :options="SelectP" :on-change="onChangeP"><span slot="no-options">Por favor registre una parroquia en su modulo</span></v-select>
             </div>
 
             <div class="form-group inner-addon left-addon">
-              <v-select :value="sector.id" v-model="newCentral.sector_id"  :options="SelectS" :on-change="onChangeS"></v-select>
+              <v-select :value="sector.id" v-model="newCentral.sector_id" placeholder="Seleccione el Sector"  :options="SelectS" :on-change="onChangeS"><span slot="no-options">Por favor registre un sector en su modulo</span></v-select>
             </div>
 
             <div class="form-group inner-addon left-addon">
 
 
-             <v-select :value="tanque.id" v-model="newCentral.tanks_id"  :options="SelectT" :on-change="onChangeT"></v-select>
+             <v-select :value="tanque.id" v-model="newCentral.tanks_id" placeholder="Seleccione el tanque"  :options="SelectT" :on-change="onChangeT"><span slot="no-options">Por favor registre un tanque o tanquilla en su modulo</span></v-select>
 
             </div>
           </form>
@@ -116,6 +116,54 @@
         <a href="#" class="btn btn-primary" v-on:click.prevent="saveCentral()">Guardar</a>
 
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
+
+        </div>
+      </modal>
+
+
+
+      <modal :display="showModal1" @close="showModal1 = false">
+        <div slot="header">
+          <i class="fa fa-user"></i> Registro de Central
+
+        </div>
+        <div slot="body">
+          <form class="form">
+
+            <div class="form-group inner-addon left-addon">
+               <i class="fa fa-user" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="editCentral.name" type="text" class="form-control" placeholder="Nombre" :class="{'input': true, 'is-danger': errors.has('name') }">
+             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+
+            </div>
+             <div class="form-group inner-addon left-addon">
+                   <i class="fa fa-globe" aria-hidden="true"></i>
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" v-model="editCentral.address" type="text" class="form-control" placeholder="Direccion" name="address">
+             <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
+
+            </div>
+            <div  class="form-group inner-addon left-addon">
+              <v-select :value="parroquia.id" v-model="editCentral.parish_id" placeholder="Seleccione Parroquia"  :options="SelectP" :on-change="onChangeP"><span slot="no-options">Por favor registre una parroquia en su modulo</span></v-select>
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+              <v-select :value="sector.id" v-model="editCentral.sector_id" placeholder="Seleccione el Sector"  :options="SelectS" :on-change="onChangeS"><span slot="no-options">Por favor registre un sector en su modulo</span></v-select>
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+
+
+             <v-select :value="tanque.id" v-model="editCentral.tanks_id" placeholder="Seleccione el tanque"  :options="SelectT" :on-change="onChangeT"><span slot="no-options">Por favor registre un tanque o tanquilla en su modulo</span></v-select>
+
+            </div>
+          </form>
+
+        </div>
+        <div slot="footer">
+
+        <a href="#" class="btn btn-primary" v-on:click.prevent="updateCentral()">Guardar</a>
+
+          <a href="#" class="btn btn-default" v-on:click.prevent="showModal1=false">Cerrar</a>
 
         </div>
       </modal>
@@ -141,6 +189,7 @@ export default {
       return {
         central: [],
         showModal:false,
+        showModal1:false,
         sector:{
           id:''
         },
@@ -154,6 +203,13 @@ export default {
         sec:[],
         parro:[],
         newCentral:{
+          name:'',
+          address:'',
+          parish_id:'',
+          sector_id:'',
+          tanks_id:''
+        },
+        editCentral:{
           name:'',
           address:'',
           parish_id:'',
@@ -293,6 +349,30 @@ export default {
                });
         }
 
+      },
+      onEdit(b)
+      {
+        var showUser = '/show_c/';
+        var that = this;
+        that.showModal1 = true;
+        axios.get(showUser + b.id).then(response => {
+            this.editCentral = response.data;
+        });
+      },
+      updateCentral(editCentral){
+        var input = this.editCentral;
+        var update = '/update_c/' + input.id;
+        axios.put(update, input).then(response => {
+          swal({
+                title: "Success",
+                text: 'Registro actualizado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+            this.fetchCentral();
+            this.showModal1= false;
+        });
       },
       onDelete(b){
         var that = this;

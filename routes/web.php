@@ -113,6 +113,8 @@ Route::delete('/tanque_del/{id}','TanqueController@destroy');
 //Rutas para Central
 Route::get('/central','CentralTController@index');
 Route::post('central_save','CentralTController@store');
+Route::get('/show_c/{id}','CentralTController@show');
+Route::put('/update_c/{id}','CentralTController@update');
 Route::delete('/central_del/{id}','CentralTController@destroy');
 
 //rutas para sector
