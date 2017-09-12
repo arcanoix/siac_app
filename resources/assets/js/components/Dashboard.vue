@@ -96,11 +96,11 @@
 											<div class="col-xs-12" style="padding-top:19px;">
 													<div class="panel panel-blank">
 															<div class="panel-heading">
-																	<h1 class="panel-title">Graficos de Fallas</h1>
+																	<h1 class="panel-title">Grafico</h1>
 																	<div class="row">
 																			<div class="col-xs-12">
-																					<gra></gra>
 
+																				<gra></gra>
 																			</div>
 																	</div>
 															</div>
@@ -136,6 +136,7 @@ import grafica from './graph.js'
 import gra from './grafica.js'
 
 
+
 Vue.use(VueGoogleMaps, {
     load:{
         key: 'AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0'
@@ -147,6 +148,7 @@ Vue.use(VueGoogleMaps, {
 		components:{grafica, gra},
 		data(){
 			return{
+
 					cliente:[],
           mapName:'',
 					user:[],
@@ -157,20 +159,32 @@ Vue.use(VueGoogleMaps, {
               lat:10.0,
               lng:-67.9
               },
-         markers: [{
-          position: {lat: 10.0, lng: -67.9}
-        }, {
-          position: {lat: 10.0, lng: -67.7}
-        }],
+         markers: [
+					 	{
+          		position: {
+								lat: 10.0, lng: -67.9
+							}
+        		},
+				 		{
+          		position: {
+								lat: 10.0, lng: -67.7
+							}
+        		}
+					]
 				}
 		},
 
 		created(){
 			this.fetchDash();
+
 		},
 
 		methods:{
-
+				getDevices(){
+					axios.get('grafica').then(response => {
+						console.log(reponse.data);
+					})
+			},
 			fetchDash(){
 				axios.get(getDash).then(response => {
 						this.user = response.data.user;

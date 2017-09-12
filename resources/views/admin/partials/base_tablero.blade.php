@@ -80,16 +80,16 @@ desired effect
 
 
 <!-- REQUIRED JS SCRIPTS -->
-
-<!-- jQuery 3.2.1 -->
-<script src="{{ asset('/admin-lte/plugins/jQuery/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<!-- jQuery 3.2.1-->
+<script src="{{ asset('admin-lte/plugins/jQuery/jquery-3.2.1.min.js') }}"></script>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('/admin-lte/dist/js/app.min.js') }}"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="{{ asset('/admin-lte/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('admin-lte/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/sweetalert2.min.js')}}"></script>
 <script src="{{asset('js/moment.js')}}"></script>
 <script src="{{asset('js/moment-with-locales.js')}}"></script>

@@ -123,6 +123,8 @@ Route::get('/show_s/{id}','EstateController@show');
 Route::put('update_s/{id}','EstateController@update');
 
 
+Route::get('grafica','FallaController@grafica');
+
 //Rutas Dashboard
 Route::get('dashboard','DashboardController@index');
 

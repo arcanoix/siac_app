@@ -1,55 +1,12 @@
-import { Line } from 'vue-chartjs'
- export default Line.extend({
-   props: {
-     chartData: {
-       type: Array | Object,
-       required: false
-     },
-     chartLabels: {
-       type: Array,
-       required: true
-     }
-   },
-   data () {
-     return {
-       options: {
-         scales: {
-           yAxes: [{
-             ticks: {
-               beginAtZero: true
-             },
-             gridLines: {
-               display: true
-             }
-           }],
-           xAxes: [ {
-             gridLines: {
-               display: false
-             }
-           }]
-         },
-         legend: {
-           display: false
-         },
-         responsive: true,
-         maintainAspectRatio: false
-       }
-     }
-   },
-   mounted () {
-     this.renderChart({
-       labels: this.chartLabels,
-       datasets: [
-         {
-           label: 'downloads',
-           borderColor: '#249EBF',
-           pointBackgroundColor: 'white',
-           borderWidth: 1,
-           pointBorderColor: '#249EBF',
-           backgroundColor: 'transparent',
-           data: this.chartData
-         }
-       ]
-     }, this.options)
-   }
- })
+import { Line, mixins } from 'vue-chartjs'
+const { reactiveProp } = mixins
+
+export default Line.extend({
+  mixins: [reactiveProp],
+  props: ['options'],
+  mounted () {
+    // this.chartData is created in the mixin.
+    // If you want to pass options please create a local options object
+    this.renderChart(this.chartData, this.options)
+  }
+})

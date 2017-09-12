@@ -9,6 +9,16 @@ class FallaController extends Controller
 {
     //
 
+    public function grafica()
+    {
+      $grafica = Falla::where('status','=','En Proceso')->count();
+      $listo = Falla::where('status','=','Listo')->count();
+      return response()->json([
+        'En Proceso' => $grafica,
+        'Listo' => $listo
+      ]);
+    }
+
     public function index()
     {
       //$falla = Falla::all();

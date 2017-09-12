@@ -1,23 +1,26 @@
-import {Line} from 'vue-chartjs'
+import {Bar} from 'vue-chartjs'
 
-export default Line.extend({
+export default Bar.extend({
   mounted () {
 
     this.renderChart({
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
       datasets: [
         {
-          label: 'Data One',
+          label: 'En Proceso',
           backgroundColor: '#FC2525',
-          data: [40, 39, 10, 40, 39, 80, 40]
+          data: [0, 6, 0, 0, 0]
         },
         {
-          label: 'Data Two',
+          label: 'Listo',
           backgroundColor: '#05CBE1',
-          data: [60, 55, 32, 10, 2, 12, 53]
+          data: [0, 2, 0, 0, 0]
         }
+
       ]
     }, {responsive: true, maintainAspectRatio: false})
 
   }
+
+
 })

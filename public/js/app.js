@@ -52669,49 +52669,59 @@ var getDash = 'dashboard';
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue2_google_maps__, {
-		load: {
-				key: 'AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0'
-		}
+	load: {
+		key: 'AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0'
+	}
 });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-		components: { grafica: __WEBPACK_IMPORTED_MODULE_2__graph_js__["a" /* default */], gra: __WEBPACK_IMPORTED_MODULE_3__grafica_js__["a" /* default */] },
-		data: function data() {
-				return {
-						cliente: [],
-						mapName: '',
-						user: [],
-						falla: [],
-						ads: [],
-						zoom: 7,
-						center: {
-								lat: 10.0,
-								lng: -67.9
-						},
-						markers: [{
-								position: { lat: 10.0, lng: -67.9 }
-						}, {
-								position: { lat: 10.0, lng: -67.7 }
-						}]
-				};
-		},
-		created: function created() {
-				this.fetchDash();
-		},
+	components: { grafica: __WEBPACK_IMPORTED_MODULE_2__graph_js__["a" /* default */], gra: __WEBPACK_IMPORTED_MODULE_3__grafica_js__["a" /* default */] },
+	data: function data() {
+		return {
 
-
-		methods: {
-				fetchDash: function fetchDash() {
-						var _this = this;
-
-						axios.get(getDash).then(function (response) {
-								_this.user = response.data.user;
-								_this.cliente = response.data.cliente;
-								_this.falla = response.data.falla;
-								_this.ads = response.data.ads;
-						});
+			cliente: [],
+			mapName: '',
+			user: [],
+			falla: [],
+			ads: [],
+			zoom: 7,
+			center: {
+				lat: 10.0,
+				lng: -67.9
+			},
+			markers: [{
+				position: {
+					lat: 10.0, lng: -67.9
 				}
+			}, {
+				position: {
+					lat: 10.0, lng: -67.7
+				}
+			}]
+		};
+	},
+	created: function created() {
+		this.fetchDash();
+	},
+
+
+	methods: {
+		getDevices: function getDevices() {
+			axios.get('grafica').then(function (response) {
+				console.log(reponse.data);
+			});
+		},
+		fetchDash: function fetchDash() {
+			var _this = this;
+
+			axios.get(getDash).then(function (response) {
+				_this.user = response.data.user;
+				_this.cliente = response.data.cliente;
+				_this.falla = response.data.falla;
+				_this.ads = response.data.ads;
+			});
 		}
+	}
 });
 
 /***/ }),
@@ -56446,19 +56456,19 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_chartjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__);
 
 
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__["Line"].extend({
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__["Bar"].extend({
   mounted: function mounted() {
 
     this.renderChart({
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
       datasets: [{
-        label: 'Data One',
+        label: 'En Proceso',
         backgroundColor: '#FC2525',
-        data: [40, 39, 10, 40, 39, 80, 40]
+        data: [0, 6, 0, 0, 0]
       }, {
-        label: 'Data Two',
+        label: 'Listo',
         backgroundColor: '#05CBE1',
-        data: [60, 55, 32, 10, 2, 12, 53]
+        data: [0, 2, 0, 0, 0]
       }]
     }, { responsive: true, maintainAspectRatio: false });
   }
@@ -56479,12 +56489,16 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     this.renderChart({
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [{
-        label: 'Data One',
+        label: 'En Proceso',
         backgroundColor: '#FC2525',
         data: [40, 39, 10, 40, 39, 80, 40]
       }, {
-        label: 'Data Two',
+        label: 'Listo',
         backgroundColor: '#05CBE1',
+        data: [60, 55, 32, 10, 2, 12, 53]
+      }, {
+        label: 'z',
+        backgroundColor: '#05CBE2',
         data: [60, 55, 32, 10, 2, 12, 53]
       }]
     }, { responsive: true, maintainAspectRatio: false });
@@ -91147,7 +91161,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-heading"
   }, [_c('h1', {
     staticClass: "panel-title"
-  }, [_vm._v("Graficos de Fallas")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Grafico")]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12"
@@ -99514,57 +99528,13 @@ module.exports = __webpack_require__(200);
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_chartjs__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_chartjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__);
+// MonthlyIncome.js
+
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__["Line"].extend({
-  props: {
-    chartData: {
-      type: Array | Object,
-      required: false
-    },
-    chartLabels: {
-      type: Array,
-      required: true
-    }
-  },
-  data: function data() {
-    return {
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            },
-            gridLines: {
-              display: true
-            }
-          }],
-          xAxes: [{
-            gridLines: {
-              display: false
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    };
-  },
+  props: ['data', 'options'],
   mounted: function mounted() {
-    this.renderChart({
-      labels: this.chartLabels,
-      datasets: [{
-        label: 'downloads',
-        borderColor: '#249EBF',
-        pointBackgroundColor: 'white',
-        borderWidth: 1,
-        pointBorderColor: '#249EBF',
-        backgroundColor: 'transparent',
-        data: this.chartData
-      }]
-    }, this.options);
+    this.renderChart(this.data, this.options);
   }
 }));
 
