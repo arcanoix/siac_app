@@ -83,13 +83,8 @@
           <form class="form">
 
             <div class="form-group inner-addon left-addon">
-               <i class="fa fa-user" aria-hidden="true"></i>
 
               <v-select :value="numero.id" v-model="newFalla.number_telephone_id"  :options="Selectnumber" :on-change="onChange"></v-select>
-
-
-             <span v-show="errors.has('number_telephone_id')" class="help is-danger">{{ errors.first('number_telephone_id') }}</span>
-
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -98,22 +93,10 @@
 
             </div>
             <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-
-              <select v-model="newFalla.status" class="form-control">
-                  <option>Listo</option>
-                  <option>En Proceso</option>
-
-              </select>
-
+                <v-select v-model="newFalla.status" placeholder="Selecciona un Estatus" :options="Estatus" ></v-select>
             </div>
             <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-
-             <select class="form-control" v-model="newFalla.customer_id">
-               <option :value="cliente.id" v-for="cliente in customer">{{ cliente.name }}</option>
-             </select>
-
+                <v-select :value="cliente.id" v-model="newFalla.customer_id" placeholder="Selecciona un Cliente" :options="SelectCliente" :on-change="onChangeCliente"><span slot="no-options">Porfavor Carga un cliente en su modulo</span></v-select>
             </div>
             <div class="form-group inner-addon left-addon">
              <i class="fa fa-key" aria-hidden="true"></i>
@@ -122,13 +105,7 @@
             </div>
 
             <div class="form-group inner-addon left-addon">
-               <i class="fa fa-user" aria-hidden="true"></i>
-
-              <select class="form-control" v-model="newFalla.user_id">
-                <option :value="u.id" v-for="u in users">{{ u.name }}</option>
-              </select>
-
-             <span v-show="errors.has('number_telephone_id')" class="help is-danger">{{ errors.first('number_telephone_id') }}</span>
+              <v-select :value="user.id" v-model="newFalla.user_id" placeholder="Selecciona un Usuario" :options="SelectUser" :on-change="onChangeUser"><span slot="no-options">Porfavor Carga un Tecnico en su modulo</span></v-select>
 
             </div>
 
@@ -141,6 +118,60 @@
         <a href="#" class="btn btn-primary" v-on:click.prevent="saveFalla()">Guardar</a>
 
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
+
+        </div>
+      </modal>
+
+
+
+      <modal :display="showModal1" @close="showModal1 = false">
+        <div slot="header">
+          <i class="fa fa-user"></i> Actualizacion de Registro de Fallas
+
+        </div>
+        <div slot="body">
+          <form class="form">
+
+            <div class="form-group inner-addon left-addon">
+               <i class="fa fa-user" aria-hidden="true"></i>
+
+              <v-select :value="numero.id" v-model="editFalla.number_telephone_id"  :options="Selectnumber" :on-change="onChange"></v-select>
+
+
+             <span v-show="errors.has('number_telephone_id')" class="help is-danger">{{ errors.first('number_telephone_id') }}</span>
+
+            </div>
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-envelope" aria-hidden="true"></i>
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_failure') }" v-model="editFalla.type_failure" type="text" class="form-control" placeholder="Tipo de falla" name="type_failure">
+             <span v-show="errors.has('type_failure')" class="help is-danger">{{ errors.first('type_failure') }}</span>
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+              <v-select v-model="editFalla.status"  :options="Estatus" ></v-select>
+            </div>
+            <div class="form-group inner-addon left-addon">
+                <v-select :value="cliente.id" v-model="editFalla.customer_id"  :options="SelectCliente" :on-change="onChangeCliente"></v-select>
+            </div>
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-globe" aria-hidden="true"></i>
+             <input v-model="editFalla.address" type="text" class="form-control" placeholder="Direccion">
+
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+              <v-select :value="user.id" v-model="editFalla.user_id"  :options="SelectUser" :on-change="onChangeUser"></v-select>
+
+            </div>
+
+          </form>
+
+        </div>
+        <div slot="footer">
+
+        <a href="#" class="btn btn-primary" v-on:click.prevent="updateFalla()">Guardar</a>
+
+          <a href="#" class="btn btn-default" v-on:click.prevent="showModal1=false">Cerrar</a>
 
         </div>
       </modal>
@@ -166,6 +197,8 @@ export default {
       return {
         falla: [],
         showModal:false,
+        showModal1:false,
+        Estatus:['En proceso', 'Listo'],
         customer:{
           id:'',
           name:''
@@ -177,9 +210,25 @@ export default {
         numero:{
           id:''
         },
+        cl:{
+          id:''
+        },
+        user:{
+          id:''
+        },
         selected:null,
         number:[],
+        cliente:[],
+        u:[],
         newFalla:{
+          number_telephone_id:'',
+          type_failure:'',
+          status:'',
+          customer_id:'',
+          address:'',
+          user_id:''
+        },
+        editFalla:{
           number_telephone_id:'',
           type_failure:'',
           status:'',
@@ -208,6 +257,22 @@ export default {
 
   },
   computed:{
+    SelectUser(){
+      return this.u.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ));
+    },
+    SelectCliente(){
+      return this.cliente.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ));
+    },
       Selectnumber(){
         return this.number.map(g =>(
           {
@@ -242,10 +307,16 @@ export default {
   },
 
   methods:{
+    onChangeUser(obj){
+      this.user.id = obj.value;
+    },
       onChange(obj){
           this.numero.id = obj.value;
           //this.newFalla.number_telephone_id = obj.value;
       },
+      onChangeCliente(obj){
+          this.cl.id = obj.value;
+              },
     fetchFallas(page){
 
          axios.get('/fallas?page=' + page).then(response => {
@@ -262,7 +333,7 @@ export default {
       },
       fetchCustomer(){
           axios.get('clientes').then(response => {
-            this.customer = response.data.data.data;
+            this.cliente = response.data.data.data;
           })
       },
       fetchNumber(){
@@ -275,10 +346,8 @@ export default {
       fetchUser(){
         axios.get('tecnicos').then(response => {
 
-            this.users = response.data;
-            console.log(response.data);
-          //  console.log(response.data);
-        })
+            this.u = response.data;
+      })
       },
       saveFalla(newFalla){
         var input = this.newFalla;
@@ -290,6 +359,8 @@ export default {
         }
         else
         {
+            this.newFalla.user_id = this.user.id;
+            this.newFalla.customer_id = this.cl.id;
             this.newFalla.number_telephone_id = this.numero.id;
               this.hasError=true;
                axios.post(postFalla, this.newFalla).then(response => {
@@ -298,6 +369,29 @@ export default {
                });
         }
 
+      },
+      updateFalla(editFalla){
+        var input = this.editFalla;
+        var update = '/update_f/' + input.id;
+        axios.put(update, input).then(response => {
+          swal({
+                title: "Success",
+                text: 'Registro actualizado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+            this.fetchFallas();
+            this.showModal1= false;
+        });
+      },
+      onEdit(b){
+        var showUser = '/show_f/';
+        var that = this;
+        that.showModal1 = true;
+        axios.get(showUser + b.id).then(response => {
+            this.editFalla = response.data;
+        });
       },
       onDelete(b){
         var that = this;

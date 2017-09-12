@@ -95,6 +95,8 @@ Route::delete('/servicio_del/{id}','ServicioController@destroy');
 //rutas para las fallas
 Route::get('fallas','FallaController@index');
 Route::post('falla_save','FallaController@store');
+Route::get('/show_f/{id}','FallaController@show');
+Route::put('/update_f/{id}','FallaController@update');
 Route::delete('/falla_del/{id}','FallaController@destroy');
 
 //rutas para tanques

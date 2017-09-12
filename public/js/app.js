@@ -53203,6 +53203,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -53217,6 +53248,8 @@ var postFalla = 'falla_save';
     return {
       falla: [],
       showModal: false,
+      showModal1: false,
+      Estatus: ['En proceso', 'Listo'],
       customer: {
         id: '',
         name: ''
@@ -53228,9 +53261,25 @@ var postFalla = 'falla_save';
       numero: {
         id: ''
       },
+      cl: {
+        id: ''
+      },
+      user: {
+        id: ''
+      },
       selected: null,
       number: [],
+      cliente: [],
+      u: [],
       newFalla: {
+        number_telephone_id: '',
+        type_failure: '',
+        status: '',
+        customer_id: '',
+        address: '',
+        user_id: ''
+      },
+      editFalla: {
         number_telephone_id: '',
         type_failure: '',
         status: '',
@@ -53259,6 +53308,22 @@ var postFalla = 'falla_save';
   },
 
   computed: {
+    SelectUser: function SelectUser() {
+      return this.u.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    SelectCliente: function SelectCliente() {
+      return this.cliente.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
     Selectnumber: function Selectnumber() {
       return this.number.map(function (g) {
         return {
@@ -53292,9 +53357,15 @@ var postFalla = 'falla_save';
   },
 
   methods: {
+    onChangeUser: function onChangeUser(obj) {
+      this.user.id = obj.value;
+    },
     onChange: function onChange(obj) {
       this.numero.id = obj.value;
       //this.newFalla.number_telephone_id = obj.value;
+    },
+    onChangeCliente: function onChangeCliente(obj) {
+      this.cl.id = obj.value;
     },
     fetchFallas: function fetchFallas(page) {
       var _this = this;
@@ -53314,7 +53385,7 @@ var postFalla = 'falla_save';
       var _this2 = this;
 
       axios.get('clientes').then(function (response) {
-        _this2.customer = response.data.data.data;
+        _this2.cliente = response.data.data.data;
       });
     },
     fetchNumber: function fetchNumber() {
@@ -53331,9 +53402,7 @@ var postFalla = 'falla_save';
 
       axios.get('tecnicos').then(function (response) {
 
-        _this4.users = response.data;
-        console.log(response.data);
-        //  console.log(response.data);
+        _this4.u = response.data;
       });
     },
     saveFalla: function saveFalla(newFalla) {
@@ -53345,6 +53414,8 @@ var postFalla = 'falla_save';
         this.hasError = false;
         this.hasDeleted = true;
       } else {
+        this.newFalla.user_id = this.user.id;
+        this.newFalla.customer_id = this.cl.id;
         this.newFalla.number_telephone_id = this.numero.id;
         this.hasError = true;
         axios.post(postFalla, this.newFalla).then(function (response) {
@@ -53352,6 +53423,33 @@ var postFalla = 'falla_save';
           _this5.showModal = false;
         });
       }
+    },
+    updateFalla: function updateFalla(editFalla) {
+      var _this6 = this;
+
+      var input = this.editFalla;
+      var update = '/update_f/' + input.id;
+      axios.put(update, input).then(function (response) {
+        swal({
+          title: "Success",
+          text: 'Registro actualizado',
+          type: 'success',
+          animation: 'slide-from-bottom',
+          timer: 3000
+        });
+        _this6.fetchFallas();
+        _this6.showModal1 = false;
+      });
+    },
+    onEdit: function onEdit(b) {
+      var _this7 = this;
+
+      var showUser = '/show_f/';
+      var that = this;
+      that.showModal1 = true;
+      axios.get(showUser + b.id).then(function (response) {
+        _this7.editFalla = response.data;
+      });
     },
     onDelete: function onDelete(b) {
       var that = this;
@@ -94733,12 +94831,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form"
   }, [_c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-user",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('v-select', {
+  }, [_c('v-select', {
     attrs: {
       "value": _vm.numero.id,
       "options": _vm.Selectnumber,
@@ -94751,15 +94844,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "newFalla.number_telephone_id"
     }
-  }), _vm._v(" "), _c('span', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.errors.has('number_telephone_id')),
-      expression: "errors.has('number_telephone_id')"
-    }],
-    staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('number_telephone_id')))])], 1), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-envelope",
@@ -94806,63 +94891,37 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('type_failure')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+      "placeholder": "Selecciona un Estatus",
+      "options": _vm.Estatus
+    },
+    model: {
       value: (_vm.newFalla.status),
+      callback: function($$v) {
+        _vm.newFalla.status = $$v
+      },
       expression: "newFalla.status"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newFalla.status = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
     }
-  }, [_c('option', [_vm._v("Listo")]), _vm._v(" "), _c('option', [_vm._v("En Proceso")])])]), _vm._v(" "), _c('div', {
+  })], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+      "value": _vm.cliente.id,
+      "placeholder": "Selecciona un Cliente",
+      "options": _vm.SelectCliente,
+      "on-change": _vm.onChangeCliente
+    },
+    model: {
       value: (_vm.newFalla.customer_id),
+      callback: function($$v) {
+        _vm.newFalla.customer_id = $$v
+      },
       expression: "newFalla.customer_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newFalla.customer_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
     }
-  }, _vm._l((_vm.customer), function(cliente) {
-    return _c('option', {
-      domProps: {
-        "value": cliente.id
-      }
-    }, [_vm._v(_vm._s(cliente.name))])
-  }))]), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Porfavor Carga un cliente en su modulo")])])], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-key",
@@ -94892,45 +94951,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-user",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+      "value": _vm.user.id,
+      "placeholder": "Selecciona un Usuario",
+      "options": _vm.SelectUser,
+      "on-change": _vm.onChangeUser
+    },
+    model: {
       value: (_vm.newFalla.user_id),
+      callback: function($$v) {
+        _vm.newFalla.user_id = $$v
+      },
       expression: "newFalla.user_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newFalla.user_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
     }
-  }, _vm._l((_vm.users), function(u) {
-    return _c('option', {
-      domProps: {
-        "value": u.id
-      }
-    }, [_vm._v(_vm._s(u.name))])
-  })), _vm._v(" "), _c('span', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.errors.has('number_telephone_id')),
-      expression: "errors.has('number_telephone_id')"
-    }],
-    staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('number_telephone_id')))])])])]), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Porfavor Carga un Tecnico en su modulo")])])], 1)])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -94952,6 +94989,191 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": function($event) {
         $event.preventDefault();
         _vm.showModal = false
+      }
+    }
+  }, [_vm._v("Cerrar")])])]), _vm._v(" "), _c('modal', {
+    attrs: {
+      "display": _vm.showModal1
+    },
+    on: {
+      "close": function($event) {
+        _vm.showModal1 = false
+      }
+    }
+  }, [_c('div', {
+    slot: "header"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  }), _vm._v(" Actualizacion de Registro de Fallas\n\n        ")]), _vm._v(" "), _c('div', {
+    slot: "body"
+  }, [_c('form', {
+    staticClass: "form"
+  }, [_c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-user",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('v-select', {
+    attrs: {
+      "value": _vm.numero.id,
+      "options": _vm.Selectnumber,
+      "on-change": _vm.onChange
+    },
+    model: {
+      value: (_vm.editFalla.number_telephone_id),
+      callback: function($$v) {
+        _vm.editFalla.number_telephone_id = $$v
+      },
+      expression: "editFalla.number_telephone_id"
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('number_telephone_id')),
+      expression: "errors.has('number_telephone_id')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('number_telephone_id')))])], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-envelope",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editFalla.type_failure),
+      expression: "editFalla.type_failure"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('type_failure')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Tipo de falla",
+      "name": "type_failure"
+    },
+    domProps: {
+      "value": (_vm.editFalla.type_failure)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editFalla.type_failure = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('type_failure')),
+      expression: "errors.has('type_failure')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('type_failure')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "options": _vm.Estatus
+    },
+    model: {
+      value: (_vm.editFalla.status),
+      callback: function($$v) {
+        _vm.editFalla.status = $$v
+      },
+      expression: "editFalla.status"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.cliente.id,
+      "options": _vm.SelectCliente,
+      "on-change": _vm.onChangeCliente
+    },
+    model: {
+      value: (_vm.editFalla.customer_id),
+      callback: function($$v) {
+        _vm.editFalla.customer_id = $$v
+      },
+      expression: "editFalla.customer_id"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-globe",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editFalla.address),
+      expression: "editFalla.address"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Direccion"
+    },
+    domProps: {
+      "value": (_vm.editFalla.address)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editFalla.address = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.user.id,
+      "options": _vm.SelectUser,
+      "on-change": _vm.onChangeUser
+    },
+    model: {
+      value: (_vm.editFalla.user_id),
+      callback: function($$v) {
+        _vm.editFalla.user_id = $$v
+      },
+      expression: "editFalla.user_id"
+    }
+  })], 1)])]), _vm._v(" "), _c('div', {
+    slot: "footer"
+  }, [_c('a', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.updateFalla()
+      }
+    }
+  }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showModal1 = false
       }
     }
   }, [_vm._v("Cerrar")])])])], 1)])
