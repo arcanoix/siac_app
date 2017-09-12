@@ -10,11 +10,23 @@ class AdsController extends Controller
 
     public function index()
     {
-      $ads = Ads::all();
+      $ads = Ads::paginate(5);
 
-      return response()->json([
-          'ads' => $ads
-      ]);
+      $response = [
+       'pagination' => [
+           'total' => $ads->total(),
+           'per_page' => $ads->perPage(),
+           'current_page' => $ads->currentPage(),
+           'last_page' => $ads->lastPage(),
+           'from' => $ads->firstItem(),
+           'to' => $ads->lastItem()
+       ],
+       'data' => $ads
+   ];
+
+   return $response;
+
+
     }
 
     public function store(Request $request)
@@ -60,6 +72,33 @@ class AdsController extends Controller
 
       if($find_ads = Ads::find($id)){
         return $find_ads;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+    }
+
+    public function update(Request $request, $id)
+    {
+      if($ads_new = Ads::find($id)){
+        $ads_new->name= $request->name;
+        $ads_new->type_ads = $request->type_ads;
+        $ads_new->cc = $request->cc;
+        $ads_new->cl = $request->cl;
+        $ads_new->pc = $request->pc;
+        $ads_new->pl = $request->pl;
+        $ads_new->address = $request->address;
+        $ads_new->sleeve_id = $request->sleeve_id;
+        $ads_new->state_id = $request->state_id;
+        $ads_new->municipality_id = $request->municipality_id;
+        $ads_new->parish_id = $request->parish_id;
+        $ads_new->sector_id = $request->sector_id;
+        $ads_new->coord_x = $request->coord_x;
+        $ads_new->coord_y = $request->coord_y;
+
+        //dd($ads_new);
+
+        $ads_new->save();
+        return $ads_new;
       }else{
         return response()->json(['error' => 'Error no se encuentra el registro']);
       }

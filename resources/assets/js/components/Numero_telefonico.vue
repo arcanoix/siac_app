@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <section class="content-header">
          <h1>
 
@@ -7,7 +7,7 @@
          </h1>
          <ol class="breadcrumb">
            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-           <li class="active">Cliente</li>
+           <li class="active">Numero Telefonico</li>
          </ol>
        </section>
 <div class="tabled">
@@ -16,7 +16,7 @@
     <h3 style="text-align: center;">Numeros Telefonicos</h3>
 
     <div style="padding: 5px">
-      <a href="#" class="btn-t btn btn-success pull-right"> <i class="fa fa-chevron-left" aria-hidden="true"></i>Regresar</a>
+
       <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
       ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nuevo Numero Telefonico</a>
 
@@ -36,7 +36,7 @@
         <th>Par Local</th>
         <th>IDManga</th>
         <th>Editar</th>
-        <th>Eliminar</th>
+
 
       </tr>
       <tr v-for="b in numberT"  class="row-content">
@@ -52,10 +52,31 @@
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
     </table>
+
+            <nav>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a  aria-label="Previous"
+                           v-on:click.prevent="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber"
+                        :class="[ page == isActived ? 'active' : '']">
+                        <a  v-on:click.prevent="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a aria-label="Next" v-on:click.prevent="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
     <br>
 
 
@@ -69,23 +90,40 @@
           <form class="form">
 
             <div class="form-group inner-addon left-addon">
-               <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newNumber.code" type="text" class="form-control" placeholder="Codigo" :class="{'input': true, 'is-danger': errors.has('code') }">
-             <span v-show="errors.has('code')" class="help is-danger">{{ errors.first('code') }}</span>
+
+               <select v-model="newNumber.code" class="form-control">
+                 <option>0241</option>
+                 <option>0245</option>
+                 <option>0249</option>
+                 <option>0242</option>
+               </select>
 
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
-              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('number') }" v-model="newNumber.number" type="text" class="form-control" placeholder="Numero Telefonico" name="number">
+              <input maxlength="7" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('number') }" v-model="newNumber.number" type="text" class="form-control" placeholder="Numero Telefonico" name="number">
              <span v-show="errors.has('number')" class="help is-danger">{{ errors.first('number') }}</span>
 
             </div>
             <div class="form-group inner-addon left-addon">
 
-             <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('status') }" v-model="newNumber.status" type="text" class="form-control" placeholder="Status" name="status">
-            <span v-show="errors.has('status')" class="help is-danger">{{ errors.first('status') }}</span>
+              <select v-model="newNumber.status" class="form-control">
+                <option>Activo</option>
+                <option>Inactivo</option>
+              </select>
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+
+
+              <select class="form-control" v-model="newNumber.sleeve_id">
+                <option :value="u.id" v-for="u in sleeve">{{ u.name }}</option>
+              </select>
+
+             <span v-show="errors.has('number_telephone_id')" class="help is-danger">{{ errors.first('number_telephone_id') }}</span>
 
             </div>
+
 
             <div  class="form-group col-xs-3">
               <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('cc') }" v-model="newNumber.cc" type="text" class="form-control" placeholder="Cable Central" name="cc">
@@ -102,18 +140,13 @@
              <span v-show="errors.has('pc')" class="help is-danger">{{ errors.first('pc') }}</span>
             </div>
 
+
+
+
             <div class="form-group col-xs-3">
               <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('pl') }" v-model="newNumber.pl" type="text" class="form-control" placeholder="Par Local" name="pl">
              <span v-show="errors.has('pl')" class="help is-danger">{{ errors.first('pl') }}</span>
             </div>
-
-            <div class="form-group col-xs-3">
-              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('sleeve_id') }" v-model="newNumber.sleeve_id" type="text" class="form-control" placeholder="Manga" name="sleeve_id">
-             <span v-show="errors.has('sleeve_id')" class="help is-danger">{{ errors.first('sleeve_id') }}</span>
-            </div>
-
-
-
 
 
           </form>
@@ -153,21 +186,69 @@ export default {
           pc:'',
           pl:'',
           sleeve_id:''
-        }
+        },
+        sleeve:{
+          id:'',
+          name:''
+        },
+        pagination:{
+          total:0,
+          per_page : 7,
+          from:1,
+          to:0,
+          current_page:1
+        },
+        offset: 4,
 
       }
   },
   created(){
-    this.fetchNumber();
+    this.fetchNumber(this.pagination.current_page);
+    this.fetchSleeve();
 
   },
+  computed:{
+    isActived(){
+      return this.pagination.current_page;
+    },
+    pagesNumber(){
+      if (!this.pagination.to) {
+               return [];
+           }
+           var from = this.pagination.current_page - this.offset;
+           if (from < 1) {
+               from = 1;
+           }
+           var to = from + (this.offset * 2);
+           if (to >= this.pagination.last_page) {
+               to = this.pagination.last_page;
+           }
+           var pagesArray = [];
+           while (from <= to) {
+               pagesArray.push(from);
+               from++;
+           }
+           return pagesArray;
+    }
+  },
   methods:{
-      fetchNumber(){
-         axios.get(getnumber).then(response => {
-
-            this.numberT = response.data.numberT;
+    fetchSleeve(){
+        axios.get('manga').then(response => {
+            this.sleeve = response.data.data.data;
+        });
+    },
+      fetchNumber(page){
+         axios.get('/numero_telefonico?page=' + page).then(response => {
+            //this. = response.data.numberT;
+            this.numberT = response.data.data.data;
+            this.pagination = response.data.pagination;
         });
 
+      },
+      changePage(page){
+          //console.log(page);
+          this.pagination.current_page = page;
+          this.fetchCentral(page);
       },
       saveNumber(newNumber){
         var input = this.newNumber;

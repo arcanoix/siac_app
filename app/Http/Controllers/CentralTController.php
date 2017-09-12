@@ -9,11 +9,21 @@ class CentralTController extends Controller
     //
 
     public function index(){
-      $central = CentralT::all();
+      $central = CentralT::with('parroquia','sector','tanque')->paginate(5);
 
-      return response()->json([
-          'central' => $central
-      ]);
+      $response = [
+       'pagination' => [
+           'total' => $central->total(),
+           'per_page' => $central->perPage(),
+           'current_page' => $central->currentPage(),
+           'last_page' => $central->lastPage(),
+           'from' => $central->firstItem(),
+           'to' => $central->lastItem()
+       ],
+       'data' => $central
+   ];
+
+   return $response;
     }
 
     public function store(Request $centralT)

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <section class="content-header">
          <h1>
 
@@ -31,7 +31,7 @@
         <th>Descripcion</th>
         <th>Fecha</th>
         <th>Editar</th>
-        <th>Eliminar</th>
+      
 
       </tr>
       <tr v-for="b in servicio"  class="row-content">
@@ -42,7 +42,7 @@
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
     </table>

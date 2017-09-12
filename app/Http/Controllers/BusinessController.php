@@ -13,10 +13,24 @@ class BusinessController extends Controller
 
     public function index()
     {
-     	$business = Business::with('num')->get();
+     	$business = Business::with('num')->paginate(5);
       //$business = DB::table('number_telephone')->join('business','number_telephone.id','=','business.number_telephone_id')->select('business.*','number_telephone.number')->get();
 
-     	return $business;
+     //	return $business;
+     $response = [
+      'pagination' => [
+          'total' => $business->total(),
+          'per_page' => $business->perPage(),
+          'current_page' => $business->currentPage(),
+          'last_page' => $business->lastPage(),
+          'from' => $business->firstItem(),
+          'to' => $business->lastItem()
+      ],
+      'data' => $business
+  ];
+
+  return $response;
+
     }
 
 	public function store(Request $request)
@@ -31,7 +45,7 @@ class BusinessController extends Controller
       $empresa->state_id = $request->state_id;
       $empresa->municipality_id = $request->municipality_id;
       $empresa->parish_id = $request->parish_id;
-      $empresa->sector = $request->sector;
+      $empresa->sector_id = $request->sector_id;
 
           //  dd($empresa);
           if($find_number = NumeroT::find($request->number_telephone_id))
@@ -58,6 +72,40 @@ class BusinessController extends Controller
 
 
 	}
+
+  public function show($id){
+
+
+      if($business = Business::find($id)){
+
+        return $business;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+
+  }
+
+  public function update(Request $request, $id){
+    if($business = Business::find($id)){
+      $business->name = $request->name;
+      $business->rif = $request->rif;
+      $business->address = $request->address;
+      $business->email = $request->email;
+      $business->number_telephone_id = $request->number_telephone_id;
+      $business->number_contact = $request->number_contact;
+      $business->state_id = $request->state_id;
+      $business->municipality_id = $request->municipality_id;
+      $business->parish_id = $request->parish_id;
+      $business->sector_id = $request->sector_id;
+
+      $business->save();
+      
+      return $business;
+    }else{
+      return response()->json(['error' => 'Error no se encuentra el registro']);
+    }
+
+  }
 
   public function destroy($id)
   {

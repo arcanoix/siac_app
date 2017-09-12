@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <section class="content-header">
          <h1>
 
@@ -36,7 +36,7 @@
         <th>Direccion</th>
 
         <th>Editar</th>
-        <th>Eliminar</th>
+
 
       </tr>
       <tr v-for="b in ads"  class="row-content">
@@ -51,10 +51,30 @@
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
     </table>
+
+    <nav>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a  aria-label="Previous"
+                           v-on:click.prevent="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber"
+                        :class="[ page == isActived ? 'active' : '']">
+                        <a  v-on:click.prevent="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a aria-label="Next" v-on:click.prevent="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
     <br>
 
 
@@ -112,51 +132,155 @@
              <v-select :value="manga.id" v-model="newAds.sleeve_id"  :options="SelectMan" :on-change="onChangeM"></v-select>
 
             </div>
-            <div class="form-group inner-addon left-addon col-xs-6">
 
-             <input v-model="newAds.state_id" type="hidden" class="form-control" placeholder="ID estado">
 
-            </div>
-
-            <div class="form-group inner-addon left-addon col-xs-6">
+            <div class="form-group inner-addon left-addon">
 
                <v-select :value="municipio.id" v-model="newAds.municipality_id"  :options="SelectM" :on-change="onChange"></v-select>
 
 
             </div>
 
-            <div  class="form-group col-xs-3">
+            <div  class="form-group inner-addon left-addon">
 
 
               <v-select :value="parroquia.id" v-model="newAds.parish_id"  :options="SelectP" :on-change="onChangeP"></v-select>
 
             </div>
 
-            <div class="form-group col-xs-3">
+            <div class="form-group inner-addon left-addon">
 
               <v-select :value="sector.id" v-model="newAds.sector_id"  :options="SelectS" :on-change="onChangeS"></v-select>
 
             </div>
 
-            <div class="form-group col-xs-3">
-             <input v-model="newAds.coord_x" type="text" class="form-control" placeholder="coordenada x">
+            <div class="">
+
+             <input v-model="newAds.state_id" type="hidden"  placeholder="ID estado">
+
             </div>
 
-            <div class="form-group col-xs-3">
-             <input v-model="newAds.coord_y" type="text" class="form-control" placeholder="coordenada y">
+            <div class="">
+             <input v-model="newAds.coord_x" type="hidden"  placeholder="coordenada x">
+            </div>
+
+            <div class="">
+             <input v-model="newAds.coord_y" type="hidden"  placeholder="coordenada y">
             </div>
           </form>
 
         </div>
         <div slot="footer">
 
-        <a href="#" class="btn btn-primary" v-on:click.prevent="saveUser()">Guardar</a>
+        <a href="#" class="btn btn-primary" v-on:click.prevent="saveAds()">Guardar</a>
 
           <a href="#" class="btn btn-default" v-on:click.prevent="showModal=false">Cerrar</a>
 
         </div>
       </modal>
 
+<!-- -->
+
+
+      <modal :display="showModal1" @close="showModal1 = false">
+        <div slot="header">
+          <i class="fa fa-user"></i> Actualizacion de ADS
+
+        </div>
+        <div slot="body">
+          <form class="form">
+
+            <div class="form-group inner-addon left-addon">
+               <i class="fa fa-user" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="editAds.name" type="text" class="form-control" placeholder="Nombre" :class="{'input': true, 'is-danger': errors.has('name') }">
+             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+
+            </div>
+
+
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-envelope" aria-hidden="true"></i>
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_ads') }" v-model="editAds.type_ads" type="text" class="form-control" placeholder="Tipo de Ads" name="type_ads">
+             <span v-show="errors.has('type_ads')" class="help is-danger">{{ errors.first('type_ads') }}</span>
+
+            </div>
+
+
+            <div class="form-group inner-addon left-addon">
+             <input v-model="editAds.cc" type="text" class="form-control" placeholder="Cable central">
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.cl" type="text" class="form-control" placeholder="cable local">
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.pc" type="text" class="form-control" placeholder="Par central">
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.pl" type="text" class="form-control" placeholder="Par local">
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.address" type="text" class="form-control" placeholder="Direccion">
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+
+             <v-select :value="manga.id" v-model="editAds.sleeve_id"  :options="SelectMan" :on-change="onChangeM"></v-select>
+
+            </div>
+
+
+            <div class="form-group inner-addon left-addon">
+
+               <v-select :value="municipio.id" v-model="editAds.municipality_id"  :options="SelectM" :on-change="onChange"></v-select>
+
+
+            </div>
+
+            <div  class="form-group inner-addon left-addon">
+
+
+              <v-select :value="parroquia.id" v-model="editAds.parish_id"  :options="SelectP" :on-change="onChangeP"></v-select>
+
+            </div>
+
+            <div class="form-group inner-addon left-addon">
+
+              <v-select :value="sector.id" v-model="editAds.sector_id"  :options="SelectS" :on-change="onChangeS"></v-select>
+
+            </div>
+
+            <div class="">
+
+             <input v-model="editAds.state_id" type="hidden"  placeholder="ID estado">
+
+            </div>
+
+            <div class="">
+             <input v-model="editAds.coord_x" type="hidden"  placeholder="coordenada x">
+            </div>
+
+            <div class="">
+             <input v-model="editAds.coord_y" type="hidden"  placeholder="coordenada y">
+            </div>
+          </form>
+
+        </div>
+        <div slot="footer">
+
+        <a href="#" class="btn btn-primary" v-on:click.prevent="updateAds()">Guardar</a>
+
+          <a href="#" class="btn btn-default" v-on:click.prevent="showModal1=false">Cerrar</a>
+
+        </div>
+      </modal>
 
 
 
@@ -215,13 +339,37 @@ export default {
           municipality_id:'',
           parish_id:'',
           sector_id:'',
-          coord_x:'',
-          coord_y:''
-        }
+          coord_x:10,
+          coord_y:15
+        },
+        editAds:{
+          name:'',
+          type_ads:'',
+          cc:'',
+          cl:'',
+          pc:'',
+          pl:'',
+          address:'',
+          sleeve_id:'',
+          state_id:7,
+          municipality_id:'',
+          parish_id:'',
+          sector_id:'',
+          coord_x:10,
+          coord_y:15
+        },
+        pagination:{
+          total:0,
+          per_page : 7,
+          from:1,
+          to:0,
+          current_page:1
+        },
+        offset: 4,
       }
   },
   created(){
-    this.fetchAds();
+    this.fetchAds(this.pagination.current_page);
     this.fetchManga();
     this.fetchSector();
     this.fetchParroquia();
@@ -263,7 +411,30 @@ export default {
              value:g.id
            }
         ))
+      },
+      isActived(){
+        return this.pagination.current_page;
+      },
+      pagesNumber(){
+        if (!this.pagination.to) {
+                 return [];
+             }
+             var from = this.pagination.current_page - this.offset;
+             if (from < 1) {
+                 from = 1;
+             }
+             var to = from + (this.offset * 2);
+             if (to >= this.pagination.last_page) {
+                 to = this.pagination.last_page;
+             }
+             var pagesArray = [];
+             while (from <= to) {
+                 pagesArray.push(from);
+                 from++;
+             }
+             return pagesArray;
       }
+
     },
 
   methods:{
@@ -279,14 +450,25 @@ export default {
     onChangeS(obj){
         this.sector.id = obj.value;
     },
-      fetchAds(){
-         axios.get(getAds).then(response => {
-            this.ads = response.data.ads;
+      fetchAds(page){
+        var data = {page: page};
+
+         axios.get('/ads?page=' + page).then(response => {
+            //this.ads = response.data.ads;
+            this.ads = response.data.data.data;
+            this.pagination = response.data.pagination;
         });
+
+      },
+      changePage(page){
+          //console.log(page);
+          this.pagination.current_page = page;
+          this.fetchAds(page);
       },
       fetchManga(){
         axios.get('manga').then(response => {
-              this.man = response.data.manga;
+              this.man = response.data.data.data;
+
         });
       },
       fetchSector(){
@@ -304,7 +486,7 @@ export default {
             this.munic = response.data.municipio;
         });
       },
-      saveUser(newAds){
+      saveAds(newAds){
         var input = this.newAds;
         if(input['name'] == ''){
           this.hasError =false;
@@ -330,9 +512,24 @@ export default {
         var that = this;
         that.showModal1 = true;
         axios.get(showUser + b.id).then(response => {
-            this.editUser = response.data;
+            this.editAds = response.data;
         });
 
+      },
+      updateAds(editAds){
+        var input = this.editAds;
+        var update = '/update_a/' + input.id;
+        axios.put(update, input).then(response => {
+          swal({
+                title: "Success",
+                text: 'Mailing List updated',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+            this.fetchAds();
+            this.showModal1= false;
+        });
       },
       onDelete(b){
         var that = this;

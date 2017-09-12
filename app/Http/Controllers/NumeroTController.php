@@ -10,11 +10,20 @@ class NumeroTController extends Controller
 
     public function index()
     {
-        $numberT = NumeroT::all();
+        $numberT = NumeroT::paginate(5);
+        $response = [
+         'pagination' => [
+             'total' => $numberT->total(),
+             'per_page' => $numberT->perPage(),
+             'current_page' => $numberT->currentPage(),
+             'last_page' => $numberT->lastPage(),
+             'from' => $numberT->firstItem(),
+             'to' => $numberT->lastItem()
+         ],
+         'data' => $numberT
+       ];
 
-        return response()->json([
-          'numberT' => $numberT
-        ]);
+       return $response;
     }
 
     public function numeroE(){
@@ -25,6 +34,7 @@ class NumeroTController extends Controller
 
     public function store(Request $request)
     {
+      //dd($request->all());
       $numeroN = new NumeroT();
 
       $numeroN->code = $request->code;

@@ -21,6 +21,18 @@ class EstateController extends Controller
     		]);
     }
 
+    public function sector(Request $request){
+      $sector = new Sector;
+
+      $sector->name = $request->name;
+      $sector->parish_id = $request->parish_id;
+      $sector->codigo_postal = $request->codigo_postal;
+
+      $sector->save();
+
+      return response()->json($sector);
+    }
+
     public function getS(){
       $sector = Sector::with('parroquia')->get();
 

@@ -12,13 +12,29 @@ class UserController extends Controller
     //
     public function index()
     {
-        $users = User::with('roles')->get();
+        $users = User::with('roles')->paginate(5);
         $role = Role::all();
 
+/*
     return response()->json([
         'users' => $users,
         'role' => $role
-        ]);
+      ]);*/
+
+      $response = [
+       'pagination' => [
+           'total' => $users->total(),
+           'per_page' => $users->perPage(),
+           'current_page' => $users->currentPage(),
+           'last_page' => $users->lastPage(),
+           'from' => $users->firstItem(),
+           'to' => $users->lastItem()
+       ],
+       'data' => $users,
+       'role' => $role
+   ];
+
+   return $response;
 
 
     }
@@ -66,16 +82,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
        //dd($request->pass);
-
        if($find_user = User::find($id)){
-
-
-            //
-
                   $find_user->name = $request->name;
                   $find_user->email = $request->email;
                   $find_user->status = $request->status;
-                  //$find_user->roles()->detach();
 
                   if(is_null($request->pass)){
                     $find_user->password;
@@ -89,13 +99,10 @@ class UserController extends Controller
                     $find_user->role_id;
 
                   }else{
-
                     $role_id = $request->input('role_id');
                     $find_user->roles()->detach();
                     $find_user->roles()->attach(($role_id));
-
                   }
-
                   $imageData = $request->avatar;
 
                 //  dd($imageData);

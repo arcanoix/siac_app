@@ -34,6 +34,12 @@ Route::get('/site',function(){
 });
 
 
+/*ruta de reportes*/
+
+Route::get('falla_reporte', 'PdfController@fallas');
+Route::get('cliente_reporte','PdfController@cliente');
+Route::get('usuario_reporte', 'PdfController@usuario');
+
 
 /* Ruta modulo usuarios */
 Route::get('/users', 'UserController@index');
@@ -49,6 +55,8 @@ Route::get('tecnicos','UserController@getTecnicos');
 /* Ruta modulo empresas */
 Route::get('/business', 'BusinessController@index');
 Route::post('/business_save', 'BusinessController@store');
+Route::get('/showBusiness/{id}', 'BusinessController@show');
+Route::put('/update_b/{id}', 'BusinessController@update');
 Route::delete('/business_delete/{id}','BusinessController@destroy');
 
 //rutas para mangas
@@ -66,12 +74,15 @@ Route::get('numero_espera','NumeroTController@numeroE');
 //rutas para clientes
 Route::get('clientes', 'ClientesController@index');
 Route::post('clientes_save','ClientesController@store');
+Route::get('/showCliente/{id}', 'ClientesController@show');
+Route::put('/update_c/{id}', 'ClientesController@update');
 Route::delete('/cliente_delete/{id}','ClientesController@destroy');
 
 //rutas para ads
-Route::get('ads', 'AdsController@index');
+Route::get('/ads', 'AdsController@index');
 Route::post('ads_save','AdsController@store');
 Route::get('/showAds/{id}','AdsController@show');
+Route::put('/update_a/{id}', 'AdsController@update');
 Route::delete('/ads_delete/{id}','AdsController@destroy');
 
 //rutas para servicios
@@ -90,9 +101,12 @@ Route::post('tanque_save','TanqueController@store');
 Route::delete('/tanque_del/{id}','TanqueController@destroy');
 
 //Rutas para Central
-Route::get('central','CentralTController@index');
+Route::get('/central','CentralTController@index');
 Route::post('central_save','CentralTController@store');
 Route::delete('/central_del/{id}','CentralTController@destroy');
+
+//rutas para sector
+Route::post('save_sector','EstateController@sector');
 
 //Rutas Dashboard
 Route::get('dashboard','DashboardController@index');

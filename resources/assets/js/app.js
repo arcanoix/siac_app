@@ -48,6 +48,7 @@ Vue.use(VeeValidate, {
  Vue.component('dashboard', Dashboard)
  Vue.component('users', Users)
  Vue.component('modal', Modal)
+ //Vue.component('vue-pagination', require('./components/Pagination.vue'))
 
  //Vue.component('v-select', vSelect)
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <section class="content-header">
          <h1>
 
@@ -31,7 +31,6 @@
         <th>Direccion</th>
         <th>Ads</th>
         <th>Editar</th>
-        <th>Eliminar</th>
 
       </tr>
       <tr v-for="b in tanque"  class="row-content">
@@ -42,10 +41,30 @@
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
     </table>
+
+    <nav>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a  aria-label="Previous"
+                           v-on:click.prevent="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber"
+                        :class="[ page == isActived ? 'active' : '']">
+                        <a  v-on:click.prevent="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a aria-label="Next" v-on:click.prevent="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
     <br>
 
 
@@ -115,12 +134,21 @@ export default {
           name:'',
           address:'',
           ads_id:''
-        }
+        },
+        pagination:{
+          total:0,
+          per_page : 7,
+          from:1,
+          to:0,
+          current_page:1
+        },
+        offset: 4,
+
 
       }
   },
   created(){
-    this.fetchTanque();
+    this.fetchTanque(this.pagination.current_page);
     this.fetchAds();
 
   },
@@ -132,22 +160,53 @@ export default {
            value:g.id
          }
       ))
+    },
+    isActived(){
+      return this.pagination.current_page;
+    },
+    pagesNumber(){
+      if (!this.pagination.to) {
+               return [];
+           }
+           var from = this.pagination.current_page - this.offset;
+           if (from < 1) {
+               from = 1;
+           }
+           var to = from + (this.offset * 2);
+           if (to >= this.pagination.last_page) {
+               to = this.pagination.last_page;
+           }
+           var pagesArray = [];
+           while (from <= to) {
+               pagesArray.push(from);
+               from++;
+           }
+           return pagesArray;
     }
   },
   methods:{
     onChangeS(obj){
         this.adds.id = obj.value;
     },
-      fetchTanque(){
-         axios.get(getTanque).then(response => {
+      fetchTanque(page){
 
-            this.tanque = response.data.tanque;
+         axios.get('/tanques?page=' + page).then(response => {
+
+            //this.tanque = response.data.tanque;
+            this.tanque = response.data.data.data;
+            this.pagination = response.data.pagination;
         });
 
       },
+      changePage(page){
+          //console.log(page);
+          this.pagination.current_page = page;
+          this.fetchTanque(page);
+      },
       fetchAds(){
           axios.get('ads').then(response => {
-            this.ads = response.data.ads;
+            this.ads = response.data.data.data;
+            console.log(response.data);
           });
       },
       saveTanque(newTanque){

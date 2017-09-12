@@ -9,11 +9,21 @@ class ClientesController extends Controller
     //
     public function index()
     {
-      $clientes = Clientes::all();
+      $clientes = Clientes::paginate(5);
 
-      return response()->json([
-        'clientes' => $clientes
-      ]);
+      $response = [
+       'pagination' => [
+           'total' => $clientes->total(),
+           'per_page' => $clientes->perPage(),
+           'current_page' => $clientes->currentPage(),
+           'last_page' => $clientes->lastPage(),
+           'from' => $clientes->firstItem(),
+           'to' => $clientes->lastItem()
+       ],
+       'data' => $clientes
+   ];
+
+   return $response;
     }
 
     public function store(Request $request)
@@ -36,6 +46,38 @@ class ClientesController extends Controller
       return response()->json([
         'cliente_new' => $cliente_new
       ]);
+    }
+
+    public function show($id)
+    {
+      if($cliente = Clientes::find($id)){
+
+        return $cliente;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+    }
+
+    public function update(Request $request, $id)
+    {
+      if($cliente_new = Clientes::find($id)){
+        $cliente_new->name = $request->name;
+        $cliente_new->last_name = $request->last_name;
+        $cliente_new->identification_card = $request->identification_card;
+        $cliente_new->address = $request->address;
+        $cliente_new->email = $request->email;
+        $cliente_new->state_id = $request->state_id;
+        $cliente_new->municipality_id = $request->municipality_id;
+        $cliente_new->parish_id = $request->parish_id;
+        $cliente_new->sector_id = $request->sector_id;
+        $cliente_new->number_telephone_id = $request->number_telephone_id;
+
+        $cliente_new->save();
+        
+        return $cliente_new;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
     }
 
      public function destroy($id)

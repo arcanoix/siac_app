@@ -34,7 +34,6 @@
         <th>Direccion</th>
         <th>Tecnico Asignado</th>
         <th>Editar</th>
-        <th>Eliminar</th>
 
       </tr>
       <tr v-for="b in falla"  class="row-content">
@@ -47,10 +46,30 @@
         <td>{{ b.users.name }}</td>
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-        <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
     </table>
+
+    <nav>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a  aria-label="Previous"
+                           v-on:click.prevent="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber"
+                        :class="[ page == isActived ? 'active' : '']">
+                        <a  v-on:click.prevent="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a aria-label="Next" v-on:click.prevent="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
     <br>
 
 
@@ -67,7 +86,7 @@
                <i class="fa fa-user" aria-hidden="true"></i>
 
               <v-select :value="numero.id" v-model="newFalla.number_telephone_id"  :options="Selectnumber" :on-change="onChange"></v-select>
-            
+
 
              <span v-show="errors.has('number_telephone_id')" class="help is-danger">{{ errors.first('number_telephone_id') }}</span>
 
@@ -169,10 +188,19 @@ export default {
           user_id:''
         },
 
+        pagination:{
+          total:0,
+          per_page : 7,
+          from:1,
+          to:0,
+          current_page:1
+        },
+        offset: 4,
+
       }
   },
   created(){
-    this.fetchFallas();
+    this.fetchFallas(this.pagination.current_page);
     this.fetchCustomer();
     this.fetchNumber();
 
@@ -186,8 +214,30 @@ export default {
             label:g.number,
              value:g.id
            }
-        ))
+        ));
 
+      },
+      isActived(){
+        return this.pagination.current_page;
+      },
+      pagesNumber(){
+        if (!this.pagination.to) {
+                 return [];
+             }
+             var from = this.pagination.current_page - this.offset;
+             if (from < 1) {
+                 from = 1;
+             }
+             var to = from + (this.offset * 2);
+             if (to >= this.pagination.last_page) {
+                 to = this.pagination.last_page;
+             }
+             var pagesArray = [];
+             while (from <= to) {
+                 pagesArray.push(from);
+                 from++;
+             }
+             return pagesArray;
       }
   },
 
@@ -196,21 +246,30 @@ export default {
           this.numero.id = obj.value;
           //this.newFalla.number_telephone_id = obj.value;
       },
-    fetchFallas(){
-         axios.get(getFalla).then(response => {
+    fetchFallas(page){
 
-            this.falla = response.data.falla;
+         axios.get('/fallas?page=' + page).then(response => {
+
+           this.falla = response.data.data.data;
+           this.pagination = response.data.pagination;
         });
 
       },
+      changePage(page){
+          //console.log(page);
+          this.pagination.current_page = page;
+          this.fetchFallas(page);
+      },
       fetchCustomer(){
           axios.get('clientes').then(response => {
-            this.customer = response.data.clientes;
+            this.customer = response.data.data.data;
           })
       },
       fetchNumber(){
           axios.get('numero_telefonico').then(response => {
-            this.number = response.data.numberT;
+
+            this.number = response.data.data.data;
+            //console.log(response.data.data.data);
           })
       },
       fetchUser(){
@@ -218,6 +277,7 @@ export default {
 
             this.users = response.data;
             console.log(response.data);
+          //  console.log(response.data);
         })
       },
       saveFalla(newFalla){
