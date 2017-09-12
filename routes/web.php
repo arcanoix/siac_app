@@ -119,6 +119,9 @@ Route::delete('/central_del/{id}','CentralTController@destroy');
 
 //rutas para sector
 Route::post('save_sector','EstateController@sector');
+Route::get('/show_s/{id}','EstateController@show');
+Route::put('update_s/{id}','EstateController@update');
+
 
 //Rutas Dashboard
 Route::get('dashboard','DashboardController@index');

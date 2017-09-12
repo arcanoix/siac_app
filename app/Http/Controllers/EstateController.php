@@ -34,11 +34,21 @@ class EstateController extends Controller
     }
 
     public function getS(){
-      $sector = Sector::with('parroquia')->get();
+      $sector = Sector::with('parroquia')->paginate(5);
 
-      return response()->json([
-          'sector' => $sector
-      ]);
+      $response = [
+       'pagination' => [
+           'total' => $sector->total(),
+           'per_page' => $sector->perPage(),
+           'current_page' => $sector->currentPage(),
+           'last_page' => $sector->lastPage(),
+           'from' => $sector->firstItem(),
+           'to' => $sector->lastItem()
+       ],
+       'data' => $sector
+   ];
+
+   return $response;
     }
 
     public function getM()
@@ -89,6 +99,29 @@ class EstateController extends Controller
         $parish = Parish::all();
 
         return response()->json($parish);
+    }
+
+    public function show($id){
+
+      if($sector = Sector::find($id)){
+
+        return $sector;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+    }
+
+    public function update(Request $request, $id){
+      if($sector = Sector::find($id)){
+        $sector->name = $request->name;
+        $sector->parish_id = $request->parish_id;
+        $sector->codigo_postal = $request->codigo_postal;
+
+        $sector->save();
+        return $sector;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
     }
 
 }

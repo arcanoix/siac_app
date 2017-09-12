@@ -54491,6 +54491,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -54498,10 +54512,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       sector: [],
       showModal1: false,
       showModal: false,
-      parish: {
-        id: '',
-        name: ''
+      parroquia: {
+        id: ''
       },
+      parro: [],
       newSector: {
         name: '',
         parish_id: '',
@@ -54511,31 +54525,108 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         name: '',
         parish_id: '',
         codigo_postal: 2222
-      }
+      },
+      pagination: {
+        total: 0,
+        per_page: 7,
+        from: 1,
+        to: 0,
+        current_page: 1
+      },
+      offset: 4
     };
   },
   created: function created() {
     this.fetchParroquia();
-    this.fetchSector();
+    this.fetchSector(this.pagination.current_page);
   },
 
+  computed: {
+    SelectP: function SelectP() {
+      return this.parro.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
   methods: {
+    changePage: function changePage(page) {
+      //console.log(page);
+      this.pagination.current_page = page;
+      this.fetchSector(page);
+    },
+    onChangeP: function onChangeP(obj) {
+      this.parroquia.id = obj.value;
+    },
     fetchParroquia: function fetchParroquia() {
       var _this = this;
 
       axios.get('parroquia').then(function (response) {
-        _this.parish = response.data;
+        _this.parro = response.data;
       });
     },
-    fetchSector: function fetchSector() {
+    fetchSector: function fetchSector(page) {
       var _this2 = this;
 
-      axios.get('sector').then(function (response) {
-        _this2.sector = response.data.sector;
+      axios.get('/sector?page=' + page).then(function (response) {
+        //  this.sector = response.data.sector;
+        _this2.sector = response.data.data.data;
+        _this2.pagination = response.data.pagination;
+      });
+    },
+    onEdit: function onEdit(b) {
+      var _this3 = this;
+
+      var showUser = '/show_s/';
+      var that = this;
+      that.showModal1 = true;
+      axios.get(showUser + b.id).then(function (response) {
+        _this3.editSector = response.data;
+      });
+    },
+    updateSector: function updateSector(editSector) {
+      var _this4 = this;
+
+      var input = this.editSector;
+      var update = '/update_s/' + input.id;
+      axios.put(update, input).then(function (response) {
+        swal({
+          title: "Success",
+          text: 'Registro actualizado',
+          type: 'success',
+          animation: 'slide-from-bottom',
+          timer: 3000
+        });
+        _this4.fetchSector();
+        _this4.showModal1 = false;
       });
     },
     saveUser: function saveUser(newSector) {
-      var _this3 = this;
+      var _this5 = this;
 
       var input = this.newSector;
 
@@ -54543,11 +54634,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.hasError = false;
         this.hasDeleted = true;
       } else {
+        this.newSector.parish_id = this.parroquia.id;
         this.hasError = true;
         axios.post('save_sector', this.newSector).then(function (response) {
 
-          _this3.fetchSector();
-          _this3.showModal = false;
+          _this5.fetchSector();
+          _this5.showModal = false;
         });
       }
     }
@@ -71799,7 +71891,7 @@ exports.push([module.i, "\n.simple-root {\r\n  margin-top: 20%;\r\n  margin-left
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 320 */
@@ -93631,7 +93723,48 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "aria-hidden": "true"
       }
     })])])])
-  })], 2), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
+  })], 2), _vm._v(" "), _c('nav', [_c('ul', {
+    staticClass: "pagination"
+  }, [(_vm.pagination.current_page > 1) ? _c('li', [_c('a', {
+    attrs: {
+      "aria-label": "Previous"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.changePage(_vm.pagination.current_page - 1)
+      }
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("«")])])]) : _vm._e(), _vm._v(" "), _vm._l((_vm.pagesNumber), function(page) {
+    return _c('li', {
+      class: [page == _vm.isActived ? 'active' : '']
+    }, [_c('a', {
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.changePage(page)
+        }
+      }
+    }, [_vm._v(_vm._s(page))])])
+  }), _vm._v(" "), (_vm.pagination.current_page < _vm.pagination.last_page) ? _c('li', [_c('a', {
+    attrs: {
+      "aria-label": "Next"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.changePage(_vm.pagination.current_page + 1)
+      }
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("»")])])]) : _vm._e()], 2)]), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
     attrs: {
       "display": _vm.showModal
     },
@@ -93650,45 +93783,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form"
   }, [_c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-globe",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+      "value": _vm.parroquia.id,
+      "placeholder": "Seleccione Parroquia",
+      "options": _vm.SelectP,
+      "on-change": _vm.onChangeP
+    },
+    model: {
       value: (_vm.newSector.parish_id),
+      callback: function($$v) {
+        _vm.newSector.parish_id = $$v
+      },
       expression: "newSector.parish_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newSector.parish_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
     }
-  }, _vm._l((_vm.parish), function(p) {
-    return _c('option', {
-      domProps: {
-        "value": p.id
-      }
-    }, [_vm._v("  " + _vm._s(p.name))])
-  })), _vm._v(" "), _c('span', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.errors.has('parish_id')),
-      expression: "errors.has('parish_id')"
-    }],
-    staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('parish_id')))])]), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor registre una parroquia en su modulo")])])], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('input', {
     directives: [{
@@ -93882,7 +93993,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": function($event) {
         $event.preventDefault();
-        _vm.updateUser()
+        _vm.updateSector()
       }
     }
   }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {
