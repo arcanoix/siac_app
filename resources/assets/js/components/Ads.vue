@@ -96,47 +96,29 @@
 
 
              <div class="form-group inner-addon left-addon">
-               
+
               <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_ads') }" v-model="newAds.type_ads" type="text" class="form-control" placeholder="Tipo de Ads" name="type_ads">
              <span v-show="errors.has('type_ads')" class="help is-danger">{{ errors.first('type_ads') }}</span>
 
             </div>
 
 
-            <div class="form-group col-md-3">
-             <input v-model="newAds.cc" type="text" class="form-control" placeholder="Cable central">
-            </div>
 
-            <div class="form-group  col-md-3">
-          
-             <input v-model="newAds.cl" type="text" class="form-control" placeholder="cable local">
-
-            </div>
-            <div class="form-group col-md-3">
-             
-             <input v-model="newAds.pc" type="text" class="form-control" placeholder="Par central">
-
-            </div>
-            <div class="form-group col-md-3">
-             
-             <input v-model="newAds.pl" type="text" class="form-control" placeholder="Par local">
-
-            </div>
             <div class="form-group inner-addon left-addon">
-             
+
              <input v-model="newAds.address" type="text" class="form-control" placeholder="Direccion">
 
             </div>
             <div class="form-group inner-addon left-addon">
 
-             <v-select :value="manga.id" v-model="newAds.sleeve_id"  :options="SelectMan" :on-change="onChangeM"></v-select>
+             <v-select :value="manga.id" v-model="newAds.sleeve_id" placeholder="Selecciona una manga"  :options="SelectMan" :on-change="onChangeM"></v-select>
 
             </div>
 
 
             <div class="form-group inner-addon left-addon">
 
-               <v-select :value="municipio.id" v-model="newAds.municipality_id"  :options="SelectM" :on-change="onChange"></v-select>
+               <v-select :value="municipio.id" v-model="newAds.municipality_id" placeholder="Selecciona Municipio"  :options="SelectM" :on-change="onChange"></v-select>
 
 
             </div>
@@ -144,29 +126,44 @@
             <div  class="form-group inner-addon left-addon">
 
 
-              <v-select :value="parroquia.id" v-model="newAds.parish_id"  :options="SelectP" :on-change="onChangeP"></v-select>
+              <v-select :value="parroquia.id" v-model="newAds.parish_id"  :options="SelectP" placeholder="Selecciona Parroquia" :on-change="onChangeP"></v-select>
 
             </div>
 
             <div class="form-group inner-addon left-addon">
 
-              <v-select :value="sector.id" v-model="newAds.sector_id"  :options="SelectS" :on-change="onChangeS"></v-select>
+              <v-select :value="sector.id" v-model="newAds.sector_id"  :options="SelectS" placeholder="Selecciona el Sector" :on-change="onChangeS"></v-select>
 
             </div>
 
-            <div class="">
+            <div class="form-group col-md-3">
+             <input v-model="newAds.cc" maxlength="3" type="text" class="form-control" placeholder="Cable central">
+            </div>
+
+            <div class="form-group  col-md-3">
+
+             <input v-model="newAds.cl" maxlength="3" type="text" class="form-control" placeholder="cable local">
+
+            </div>
+            <div class="form-group col-md-3">
+
+             <input v-model="newAds.pc" maxlength="3" type="text" class="form-control" placeholder="Par central">
+
+            </div>
+            <div class="form-group col-md-3">
+
+             <input v-model="newAds.pl" maxlength="3" type="text" class="form-control" placeholder="Par local">
+
+            </div>
+
+            <div>
 
              <input v-model="newAds.state_id" type="hidden"  placeholder="ID estado">
-
+              <input v-model="newAds.coord_x" type="hidden"  placeholder="coordenada x">
+              <input v-model="newAds.coord_y" type="hidden"  placeholder="coordenada y">
             </div>
 
-            <div class="">
-             <input v-model="newAds.coord_x" type="hidden"  placeholder="coordenada x">
-            </div>
 
-            <div class="">
-             <input v-model="newAds.coord_y" type="hidden"  placeholder="coordenada y">
-            </div>
           </form>
 
         </div>
@@ -206,70 +203,56 @@
             </div>
 
 
-            <div class="form-group inner-addon left-addon">
-             <input v-model="editAds.cc" type="text" class="form-control" placeholder="Cable central">
-            </div>
 
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="editAds.cl" type="text" class="form-control" placeholder="cable local">
-
-            </div>
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="editAds.pc" type="text" class="form-control" placeholder="Par central">
-
-            </div>
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
-             <input v-model="editAds.pl" type="text" class="form-control" placeholder="Par local">
-
-            </div>
             <div class="form-group inner-addon left-addon">
              <i class="fa fa-key" aria-hidden="true"></i>
              <input v-model="editAds.address" type="text" class="form-control" placeholder="Direccion">
-
             </div>
-            <div class="form-group inner-addon left-addon">
 
+            <div class="form-group inner-addon left-addon">
              <v-select :value="manga.id" v-model="editAds.sleeve_id"  :options="SelectMan" :on-change="onChangeM"></v-select>
-
             </div>
 
 
             <div class="form-group inner-addon left-addon">
-
                <v-select :value="municipio.id" v-model="editAds.municipality_id"  :options="SelectM" :on-change="onChange"></v-select>
-
-
             </div>
 
             <div  class="form-group inner-addon left-addon">
-
-
               <v-select :value="parroquia.id" v-model="editAds.parish_id"  :options="SelectP" :on-change="onChangeP"></v-select>
-
             </div>
 
             <div class="form-group inner-addon left-addon">
-
               <v-select :value="sector.id" v-model="editAds.sector_id"  :options="SelectS" :on-change="onChangeS"></v-select>
-
             </div>
 
-            <div class="">
+            <div class="form-group col-md-3">
+             <input v-model="editAds.cc" type="text" class="form-control" placeholder="Cable central">
+            </div>
+
+            <div class="form-group col-md-3">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.cl" type="text" class="form-control" placeholder="cable local">
+            </div>
+
+            <div class="form-group col-md-3">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.pc" type="text" class="form-control" placeholder="Par central">
+            </div>
+
+            <div class="form-group col-md-3">
+             <i class="fa fa-key" aria-hidden="true"></i>
+             <input v-model="editAds.pl" type="text" class="form-control" placeholder="Par local">
+            </div>
+
+            <div>
 
              <input v-model="editAds.state_id" type="hidden"  placeholder="ID estado">
-
-            </div>
-
-            <div class="">
              <input v-model="editAds.coord_x" type="hidden"  placeholder="coordenada x">
+             <input v-model="editAds.coord_y" type="hidden"  placeholder="coordenada y">
+
             </div>
 
-            <div class="">
-             <input v-model="editAds.coord_y" type="hidden"  placeholder="coordenada y">
-            </div>
           </form>
 
         </div>

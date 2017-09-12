@@ -2,7 +2,6 @@
   <div class="container-fluid">
     <section class="content-header">
          <h1>
-
            <small></small>
          </h1>
          <ol class="breadcrumb">
@@ -110,9 +109,9 @@
 
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
+
               <select v-model="newBusiness.number_telephone_id" class="form-control">
                 <option v-for="num in numberT" :value="num.id">&nbsp; {{ num.code }} - {{ num.number }}</option>
-
               </select>
 
 
@@ -123,43 +122,24 @@
              <span v-show="errors.has('number_contact')" class="help is-danger">{{ errors.first('number_contact') }}</span>
 
             </div>
-             <div class="form-group inner-addon left-addon">
-               <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
 
+             <div form-group inner-addon left-addon>
               <select v-model="newBusiness.state_id" class="form-control" style="display:none;">
                 <option :value="e.id"  v-for="e in estado">&nbsp;{{ e.name }}</option>
-
               </select>
-             <span v-show="errors.has('state_id')" class="help is-danger">{{ errors.first('state_id') }}</span>
-
-            </div>
-            <div class="form-group inner-addon left-addon">
-               <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
-                  <select v-model="newBusiness.municipality_id" class="form-control">
-                    <option :value="m.id"  v-for="m in municipality">&nbsp; {{ m.name }}</option>
-
-                  </select>
-                   <span v-show="errors.has('municipality_id')" class="help is-danger">{{ errors.first('municipality_id') }}</span>
-
             </div>
 
             <div class="form-group inner-addon left-addon">
-               <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
-                  <select v-model="newBusiness.parish_id" class="form-control">
-                    <option :value="p.id"  v-for="p in parish">&nbsp; {{ p.name }}</option>
+               <v-select :value="municipio.id" v-model="newBusiness.municipality_id" placeholder="Selecciona Municipio"  :options="SelectM" :on-change="onChange"></v-select>
+            </div>
 
-                  </select>
-                   <span v-show="errors.has('parish_id')" class="help is-danger">{{ errors.first('parish_id') }}</span>
-
+            <div  class="form-group inner-addon left-addon">
+              <v-select :value="parroquia.id" v-model="newBusiness.parish_id"  :options="SelectP" placeholder="Selecciona Parroquia" :on-change="onChangeP"></v-select>
             </div>
 
             <div class="form-group inner-addon left-addon">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-             <select v-model="newBusiness.sector_id" class="form-control">
-               <option v-for="num in sector" :value="num.id">&nbsp;  {{ num.name }}</option>
-
-             </select>
-           </div>
+              <v-select :value="sector.id" v-model="newBusiness.sector_id"  :options="SelectS" placeholder="Selecciona el Sector" :on-change="onChangeS"></v-select>
+            </div>
 
           </form>
 
@@ -222,43 +202,25 @@
              <span v-show="errors.has('number_contact')" class="help is-danger">{{ errors.first('number_contact') }}</span>
 
             </div>
-             <div class="form-group inner-addon left-addon">
-               <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
 
+             <div>
               <select v-model="editBusiness.state_id" class="form-control" style="display:none;">
                 <option :value="e.id"  v-for="e in estado">&nbsp;{{ e.name }}</option>
-
               </select>
-             <span v-show="errors.has('state_id')" class="help is-danger">{{ errors.first('state_id') }}</span>
+
 
             </div>
             <div class="form-group inner-addon left-addon">
-               <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
-                  <select v-model="editBusiness.municipality_id" class="form-control">
-                    <option :value="m.id"  v-for="m in municipality">&nbsp; {{ m.name }}</option>
+               <v-select :value="municipio.id" v-model="editBusiness.municipality_id" placeholder="Selecciona Municipio"  :options="SelectM" :on-change="onChange"></v-select>
+            </div>
 
-                  </select>
-                   <span v-show="errors.has('municipality_id')" class="help is-danger">{{ errors.first('municipality_id') }}</span>
-
+            <div  class="form-group inner-addon left-addon">
+              <v-select :value="parroquia.id" v-model="editBusiness.parish_id"  :options="SelectP" placeholder="Selecciona Parroquia" :on-change="onChangeP"></v-select>
             </div>
 
             <div class="form-group inner-addon left-addon">
-               <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
-                  <select v-model="editBusiness.parish_id" class="form-control">
-                    <option :value="p.id"  v-for="p in parish">&nbsp; {{ p.name }}</option>
-
-                  </select>
-                   <span v-show="errors.has('parish_id')" class="help is-danger">{{ errors.first('parish_id') }}</span>
-
+              <v-select :value="sector.id" v-model="editBusiness.sector_id"  :options="SelectS" placeholder="Selecciona el Sector" :on-change="onChangeS"></v-select>
             </div>
-
-            <div class="form-group inner-addon left-addon">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-             <select v-model="editBusiness.sector_id" class="form-control">
-               <option v-for="num in sector" :value="num.id">&nbsp;  {{ num.name }}</option>
-
-             </select>
-           </div>
 
           </form>
 
@@ -292,18 +254,19 @@ export default {
           id:7,
           name:'Carabobo'
         },
-        municipality:{
-            id:'',
-            name:''
-        },
-        parish:{
-          id:'',
-          name:''
+        municipio:{
+          id:''
         },
         sector:{
-          id:'',
-          name:''
+          id:''
         },
+        parroquia:{
+          id:''
+        },
+        sec:[],
+        parro:[],
+        man:[],
+        munic:[],
         numberT:{
             id:'',
             code:'',
@@ -355,6 +318,31 @@ export default {
 
   },
   computed:{
+    SelectM(){
+      return this.munic.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+
+    },
+    SelectP(){
+      return this.parro.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+    },
+    SelectS(){
+      return this.sec.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+    },
         isActived(){
           return this.pagination.current_page;
         },
@@ -379,6 +367,16 @@ export default {
         }
   },
   methods:{
+    onChange(obj){
+        this.municipio.id = obj.value;
+    },
+    onChangeP(obj){
+        this.parroquia.id = obj.value;
+
+    },
+    onChangeS(obj){
+        this.sector.id = obj.value;
+    },
     changePage(page){
         //console.log(page);
         this.pagination.current_page = page;
@@ -400,19 +398,18 @@ export default {
       },
       fetchSector(){
           axios.get('sector').then(response => {
-              this.sector = response.data.sector;
+              this.sec = response.data.sector;
           });
       },
       fetchN(){
           axios.get('numero_espera').then(response => {
             this.numberT = response.data;
+
           });
       },
       fetchMunicipio(){
-          axios.get('municipio').then(response => {
-
-          this.municipality = response.data.municipio;
-          //console.log(this.municipality);
+        axios.get('municipio').then(response => {
+            this.munic = response.data.municipio;
         });
       },
       fetchEstado(){
@@ -423,7 +420,8 @@ export default {
       },
       fetchParish(){
           axios.get('parroquia').then(response => {
-            this.parish = response.data;
+            this.parro = response.data;
+
           });
       },
       saveBusiness(newBusiness){
@@ -434,6 +432,11 @@ export default {
         }
         else
         {
+          //this.newAds.sleeve_id = this.manga.id;
+          this.newBusiness.sector_id = this.sector.id;
+          this.newBusiness.parish_id = this.parroquia.id;
+          this.newBusiness.municipality_id = this.municipio.id;
+
               this.hasError=true;
                axios.post(postBusiness, this.newBusiness).then(response => {
                    this.fetchBusiness();
