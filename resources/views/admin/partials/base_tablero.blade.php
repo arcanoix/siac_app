@@ -25,17 +25,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="{{ asset("/admin-lte/bootstrap/css/bootstrap.min.css") }}">
+  <link rel="stylesheet" href="{{ asset('/admin-lte/bootstrap/css/bootstrap.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css')}}">
 
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/AdminLTE.min.css") }}">
+  <link rel="stylesheet" href="{{ asset('/admin-lte/dist/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
   -->
-  <link rel="stylesheet" href="{{ asset("/admin-lte/dist/css/skins/skin-blue.min.css") }}">
+  <link rel="stylesheet" href="{{ asset('/admin-lte/dist/css/skins/skin-blue.min.css') }}">
 
   <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css')}}">
 
@@ -82,15 +82,14 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3.2.1 -->
-<script src="{{ asset("/admin-lte/plugins/jQuery/jquery-3.2.1.min.js") }}"></script>
+<script src="{{ asset('/admin-lte/plugins/jQuery/jquery-3.2.1.min.js') }}"></script>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset("/admin-lte/dist/js/app.min.js") }}"></script>
+<script src="{{ asset('/admin-lte/dist/js/app.min.js') }}"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="{{ asset("/admin-lte/bootstrap/js/bootstrap.min.js") }}"></script>
-<script src="{{ asset('js/bootstrap.min.js')}}" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="{{ asset('/admin-lte/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/sweetalert2.min.js')}}"></script>
 <script src="{{asset('js/moment.js')}}"></script>
 <script src="{{asset('js/moment-with-locales.js')}}"></script>

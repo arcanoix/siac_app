@@ -31,7 +31,7 @@ class CreateBusinessTable extends Migration
             $table->foreign('parish_id')->references('id')->on('parish');
            /* $table->integer('sector_id')->unsigned();
             $table->foreign('sector_id')->references('id')->on('sector');*/
-            $table->string('sector')->nullable();
+            $table->integer('sector_id')->nullable();
             $table->timestamps();
 
         });

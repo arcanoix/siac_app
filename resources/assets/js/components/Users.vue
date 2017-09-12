@@ -275,7 +275,7 @@ export default {
             this.users = response.data.data.data;
             this.pagination = response.data.pagination;
             this.role = response.data.role;
-
+            console.log(response.data);
           //  console.log(response.data.pagination);
           //  this.$set('users', response.data.data.data);
             //this.$set('pagination', response.data.pagination);
