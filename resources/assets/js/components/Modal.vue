@@ -83,7 +83,7 @@
   }
 
   .modal-container {
-    min-width: 548px;
+    min-width: 348px;
     max-width: 600px;
     margin: 0px auto;
     padding: 0px;

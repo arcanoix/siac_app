@@ -96,34 +96,34 @@
 
 
              <div class="form-group inner-addon left-addon">
-               <i class="fa fa-envelope" aria-hidden="true"></i>
+               
               <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_ads') }" v-model="newAds.type_ads" type="text" class="form-control" placeholder="Tipo de Ads" name="type_ads">
              <span v-show="errors.has('type_ads')" class="help is-danger">{{ errors.first('type_ads') }}</span>
 
             </div>
 
 
-            <div class="form-group inner-addon left-addon">
+            <div class="form-group col-md-3">
              <input v-model="newAds.cc" type="text" class="form-control" placeholder="Cable central">
             </div>
 
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
+            <div class="form-group  col-md-3">
+          
              <input v-model="newAds.cl" type="text" class="form-control" placeholder="cable local">
 
             </div>
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
+            <div class="form-group col-md-3">
+             
              <input v-model="newAds.pc" type="text" class="form-control" placeholder="Par central">
 
             </div>
-            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
+            <div class="form-group col-md-3">
+             
              <input v-model="newAds.pl" type="text" class="form-control" placeholder="Par local">
 
             </div>
             <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
+             
              <input v-model="newAds.address" type="text" class="form-control" placeholder="Direccion">
 
             </div>
