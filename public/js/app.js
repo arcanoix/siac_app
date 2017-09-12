@@ -51489,7 +51489,7 @@ var postAds = 'ads_save';
       axios.put(update, input).then(function (response) {
         swal({
           title: "Success",
-          text: 'Mailing List updated',
+          text: 'Registro actualizado',
           type: 'success',
           animation: 'slide-from-bottom',
           timer: 3000
@@ -90714,17 +90714,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('type_ads')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('input', {
+  }, [_c('i', {
+    staticClass: "fa fa-globe",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
     directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
       name: "model",
       rawName: "v-model",
       value: (_vm.newAds.address),
       expression: "newAds.address"
     }],
     staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('address')
+    },
     attrs: {
       "type": "text",
-      "placeholder": "Direccion"
+      "placeholder": "Direccion",
+      "name": "address"
     },
     domProps: {
       "value": (_vm.newAds.address)
@@ -90735,7 +90749,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.newAds.address = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('address')),
+      expression: "errors.has('address')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('address')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('v-select', {
     attrs: {
@@ -90751,7 +90773,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "newAds.sleeve_id"
     }
-  })], 1), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Porfavor Carga una manga en su modulo")])])], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('v-select', {
     attrs: {
@@ -90799,7 +90823,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "newAds.sector_id"
     }
-  })], 1), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Porfavor Carga un Sector en su modulo")])])], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group col-md-3"
   }, [_c('input', {
     directives: [{
@@ -91088,7 +91114,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v(_vm._s(_vm.errors.first('type_ads')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
-    staticClass: "fa fa-key",
+    staticClass: "fa fa-globe",
     attrs: {
       "aria-hidden": "true"
     }
@@ -91198,12 +91224,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "form-group col-md-3"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -91226,12 +91247,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "form-group col-md-3"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -91254,12 +91270,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "form-group col-md-3"
-  }, [_c('i', {
-    staticClass: "fa fa-key",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('input', {
+  }, [_c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -91385,7 +91396,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Tipo")]), _vm._v(" "), _c('th', [_vm._v("Cable Central")]), _vm._v(" "), _c('th', [_vm._v("Cable Local")]), _vm._v(" "), _c('th', [_vm._v("Par Central")]), _vm._v(" "), _c('th', [_vm._v("Par Local")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "btn-top  btn btn-primary pull-right"
+    staticClass: "btn-top  btn btn-primary"
   }, [_c('i', {
     staticClass: "fa fa-pencil-square-o",
     attrs: {
@@ -92045,7 +92056,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "newBusiness.sector_id"
     }
-  })], 1)])]), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor inserta un nuevo sector en su modulo")])])], 1)])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -93221,7 +93234,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       },
       expression: "newCliente.sector_id"
     }
-  })], 1), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor inserta un nuevo sector en su modulo")])])], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('v-select', {
     attrs: {

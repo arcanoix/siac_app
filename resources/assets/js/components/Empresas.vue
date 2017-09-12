@@ -136,7 +136,7 @@
             </div>
 
             <div class="form-group inner-addon left-addon">
-              <v-select :value="sector.id" v-model="newBusiness.sector_id"  :options="SelectS" placeholder="Selecciona el Sector" :on-change="onChangeS"></v-select>
+              <v-select :value="sector.id" v-model="newBusiness.sector_id"  :options="SelectS" placeholder="Selecciona el Sector" :on-change="onChangeS"><span slot="no-options">Por favor inserta un nuevo sector en su modulo</span></v-select>
             </div>
 
           </form>

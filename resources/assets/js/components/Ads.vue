@@ -50,7 +50,7 @@
         <td>{{b.address}}</td>
 
 
-        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
       <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
@@ -105,13 +105,13 @@
 
 
             <div class="form-group inner-addon left-addon">
-
-             <input v-model="newAds.address" type="text" class="form-control" placeholder="Direccion">
-
+                  <i class="fa fa-globe" aria-hidden="true"></i>
+             <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" v-model="newAds.address" type="text" class="form-control" placeholder="Direccion" name="address">
+                <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
             </div>
             <div class="form-group inner-addon left-addon">
 
-             <v-select :value="manga.id" v-model="newAds.sleeve_id" placeholder="Selecciona una manga"  :options="SelectMan" :on-change="onChangeM"></v-select>
+             <v-select :value="manga.id" v-model="newAds.sleeve_id" placeholder="Selecciona una manga"  :options="SelectMan" :on-change="onChangeM"><span slot="no-options">Porfavor Carga una manga en su modulo</span></v-select>
 
             </div>
 
@@ -132,7 +132,7 @@
 
             <div class="form-group inner-addon left-addon">
 
-              <v-select :value="sector.id" v-model="newAds.sector_id"  :options="SelectS" placeholder="Selecciona el Sector" :on-change="onChangeS"></v-select>
+              <v-select :value="sector.id" v-model="newAds.sector_id"  :options="SelectS" placeholder="Selecciona el Sector" :on-change="onChangeS"><span slot="no-options">Porfavor Carga un Sector en su modulo</span></v-select>
 
             </div>
 
@@ -205,7 +205,7 @@
 
 
             <div class="form-group inner-addon left-addon">
-             <i class="fa fa-key" aria-hidden="true"></i>
+             <i class="fa fa-globe" aria-hidden="true"></i>
              <input v-model="editAds.address" type="text" class="form-control" placeholder="Direccion">
             </div>
 
@@ -231,17 +231,17 @@
             </div>
 
             <div class="form-group col-md-3">
-             <i class="fa fa-key" aria-hidden="true"></i>
+
              <input v-model="editAds.cl" type="text" class="form-control" placeholder="cable local">
             </div>
 
             <div class="form-group col-md-3">
-             <i class="fa fa-key" aria-hidden="true"></i>
+
              <input v-model="editAds.pc" type="text" class="form-control" placeholder="Par central">
             </div>
 
             <div class="form-group col-md-3">
-             <i class="fa fa-key" aria-hidden="true"></i>
+
              <input v-model="editAds.pl" type="text" class="form-control" placeholder="Par local">
             </div>
 
@@ -505,7 +505,7 @@ export default {
         axios.put(update, input).then(response => {
           swal({
                 title: "Success",
-                text: 'Mailing List updated',
+                text: 'Registro actualizado',
                 type: 'success',
                 animation: 'slide-from-bottom',
                 timer: 3000
