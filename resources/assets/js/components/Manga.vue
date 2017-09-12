@@ -16,7 +16,7 @@
       <h3 style="text-align: center;">Manga</h3>
 
       <div style="padding: 5px">
-      
+
         <a class="btn-t btn-primary pull-left" href="#" v-on:click.prevent
         ="showModal=true"> <i class="fa fa-user-plus" aria-hidden="true"></i>Nueva manga</a>
 
@@ -45,7 +45,7 @@
           <td>{{b.created_at}}</td>
 
 
-          <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+          <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
         <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
         </tr>
 
@@ -115,6 +115,49 @@
 
           </div>
         </modal>
+        <!-- -->
+
+        <modal :display="showModal1" @close="showModal1 = false">
+          <div slot="header">
+            <i class="fa fa-user"></i> Actualizacion de Manga
+
+          </div>
+          <div slot="body">
+            <form class="form">
+
+              <div class="form-group inner-addon left-addon">
+                 <i class="fa fa-user" aria-hidden="true"></i>
+                <input v-validate="'required'" v-model="editManga.name" type="text" class="form-control" placeholder="Nombre de manga" :class="{'input': true, 'is-danger': errors.has('name') }">
+               <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+
+              </div>
+               <div class="form-group inner-addon left-addon">
+                 <i class="fa fa-phone" aria-hidden="true"></i>
+                <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('description') }" v-model="editManga.description" type="text" class="form-control" placeholder="Descripcion" name="description">
+               <span v-show="errors.has('description')" class="help is-danger">{{ errors.first('description') }}</span>
+
+              </div>
+              <div class="form-group inner-addon left-addon">
+               <i class="fa fa-key" aria-hidden="true"></i>
+               <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" v-model="editManga.address" type="text" class="form-control" placeholder="Direccion" name="address">
+              <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
+
+              </div>
+
+
+
+
+            </form>
+
+          </div>
+          <div slot="footer">
+
+          <a href="#" class="btn btn-primary" v-on:click.prevent="updateManga()">Guardar</a>
+
+            <a href="#" class="btn btn-default" v-on:click.prevent="showModal1=false">Cerrar</a>
+
+          </div>
+        </modal>
 
     </div>
   </div>
@@ -130,7 +173,13 @@ export default {
       return {
         manga: [],
         showModal:false,
+        showModal1:false,
         newManga:{
+          name:'',
+          description:'',
+          address:''
+        },
+        editManga:{
           name:'',
           description:'',
           address:''
@@ -191,6 +240,48 @@ export default {
           //console.log(page);
           this.pagination.current_page = page;
           this.fetchManga(page);
+      },
+      onEdit(b){
+        var showUser = '/show_m/';
+        var that = this;
+        that.showModal1 = true;
+        axios.get(showUser + b.id).then(response => {
+            this.editManga = response.data;
+        });
+      },
+      onDelete(b){
+        var that = this;
+        var delAds = '/manga_del/';
+        //console.log(delUsers + "/"+ b.id);
+
+        swal({
+          title: '¿Estas seguro de eliminar el registro?',
+          text: 'Luego de eliminar no podras recuperar el registro',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No'
+        }).then(function(){
+          axios.delete(delAds +  b.id).then(response => {
+            //console.log("eliminado");
+            that.fetchManga();
+          });
+        })
+      },
+      updateManga(editManga){
+        var input = this.editManga;
+        var update = '/update_m/' + input.id;
+        axios.put(update, input).then(response => {
+          swal({
+                title: "Success",
+                text: 'Registro actualizado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+            this.fetchManga();
+            this.showModal1= false;
+        });
       },
       saveManga(newManga){
         var input = this.newManga;

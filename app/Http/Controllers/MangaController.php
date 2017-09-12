@@ -33,22 +33,7 @@ class MangaController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $manga= new Manga();
@@ -66,46 +51,35 @@ class MangaController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
+      if($manga = Manga::find($id)){
+
+        return $manga;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+      if($manga = Manga::find($id)){
+        $manga->name = $request->name;
+        $manga->address = $request->address;
+        $manga->description = $request->description;
+
+        //dd($manga);
+
+          $manga->save();
+        return $manga;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $manga=Manga::find($id);

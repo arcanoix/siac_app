@@ -53601,6 +53601,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var getManga = '/manga';
 var postManga = '/manga_save';
@@ -53610,7 +53653,13 @@ var postManga = '/manga_save';
     return {
       manga: [],
       showModal: false,
+      showModal1: false,
       newManga: {
+        name: '',
+        description: '',
+        address: ''
+      },
+      editManga: {
         name: '',
         description: '',
         address: ''
@@ -53671,8 +53720,54 @@ var postManga = '/manga_save';
       this.pagination.current_page = page;
       this.fetchManga(page);
     },
-    saveManga: function saveManga(newManga) {
+    onEdit: function onEdit(b) {
       var _this2 = this;
+
+      var showUser = '/show_m/';
+      var that = this;
+      that.showModal1 = true;
+      axios.get(showUser + b.id).then(function (response) {
+        _this2.editManga = response.data;
+      });
+    },
+    onDelete: function onDelete(b) {
+      var that = this;
+      var delAds = '/manga_del/';
+      //console.log(delUsers + "/"+ b.id);
+
+      swal({
+        title: '¿Estas seguro de eliminar el registro?',
+        text: 'Luego de eliminar no podras recuperar el registro',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+      }).then(function () {
+        axios.delete(delAds + b.id).then(function (response) {
+          //console.log("eliminado");
+          that.fetchManga();
+        });
+      });
+    },
+    updateManga: function updateManga(editManga) {
+      var _this3 = this;
+
+      var input = this.editManga;
+      var update = '/update_m/' + input.id;
+      axios.put(update, input).then(function (response) {
+        swal({
+          title: "Success",
+          text: 'Registro actualizado',
+          type: 'success',
+          animation: 'slide-from-bottom',
+          timer: 3000
+        });
+        _this3.fetchManga();
+        _this3.showModal1 = false;
+      });
+    },
+    saveManga: function saveManga(newManga) {
+      var _this4 = this;
 
       var input = this.newManga;
       if (input['name'] == '') {
@@ -53681,8 +53776,8 @@ var postManga = '/manga_save';
       } else {
         this.hasError = true;
         axios.post(postManga, this.newManga).then(function (response) {
-          _this2.fetchManga();
-          _this2.showModal = false;
+          _this4.fetchManga();
+          _this4.showModal = false;
         });
       }
     }
@@ -95769,6 +95864,181 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showModal = false
       }
     }
+  }, [_vm._v("Cerrar")])])]), _vm._v(" "), _c('modal', {
+    attrs: {
+      "display": _vm.showModal1
+    },
+    on: {
+      "close": function($event) {
+        _vm.showModal1 = false
+      }
+    }
+  }, [_c('div', {
+    slot: "header"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  }), _vm._v(" Actualizacion de Manga\n\n        ")]), _vm._v(" "), _c('div', {
+    slot: "body"
+  }, [_c('form', {
+    staticClass: "form"
+  }, [_c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-user",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editManga.name),
+      expression: "editManga.name"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('name')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Nombre de manga"
+    },
+    domProps: {
+      "value": (_vm.editManga.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editManga.name = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('name')),
+      expression: "errors.has('name')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-phone",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editManga.description),
+      expression: "editManga.description"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('description')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Descripcion",
+      "name": "description"
+    },
+    domProps: {
+      "value": (_vm.editManga.description)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editManga.description = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('description')),
+      expression: "errors.has('description')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('description')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editManga.address),
+      expression: "editManga.address"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('address')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Direccion",
+      "name": "address"
+    },
+    domProps: {
+      "value": (_vm.editManga.address)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editManga.address = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('address')),
+      expression: "errors.has('address')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('address')))])])])]), _vm._v(" "), _c('div', {
+    slot: "footer"
+  }, [_c('a', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.updateManga()
+      }
+    }
+  }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showModal1 = false
+      }
+    }
   }, [_vm._v("Cerrar")])])])], 1)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('section', {
@@ -95790,7 +96060,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Descripcion")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Fecha")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "btn-top  btn btn-primary pull-right"
+    staticClass: "btn-top  btn btn-primary"
   }, [_c('i', {
     staticClass: "fa fa-pencil-square-o",
     attrs: {
