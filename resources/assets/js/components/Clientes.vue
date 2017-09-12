@@ -44,7 +44,7 @@
         <td>{{ b.email }}</td>
 
 
-        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
       <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
@@ -112,51 +112,34 @@
              <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
 
             </div>
-            <div class="form-group inner-addon left-addon">
-              <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
 
-             <select v-model="newCliente.state_id" class="form-control" style="display:none;">
-               <option :value="e.id"  v-for="e in estado">&nbsp;{{ e.name }}</option>
 
-             </select>
-            <span v-show="errors.has('state_id')" class="help is-danger">{{ errors.first('state_id') }}</span>
-
-           </div>
            <div class="form-group inner-addon left-addon">
-              <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
-                 <select v-model="newCliente.municipality_id" class="form-control">
-                   <option :value="m.id"  v-for="m in municipality">&nbsp; {{ m.name }}</option>
+              <v-select :value="municipio.id" v-model="newCliente.municipality_id" placeholder="Selecciona Municipio"  :options="SelectM" :on-change="onChange"></v-select>
+           </div>
 
-                 </select>
-                  <span v-show="errors.has('municipality_id')" class="help is-danger">{{ errors.first('municipality_id') }}</span>
-
+           <div  class="form-group inner-addon left-addon">
+             <v-select :value="parroquia.id" v-model="newCliente.parish_id"  :options="SelectP" placeholder="Selecciona Parroquia" :on-change="onChangeP"></v-select>
            </div>
 
            <div class="form-group inner-addon left-addon">
-              <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
-                 <select v-model="newCliente.parish_id" class="form-control">
-                   <option :value="p.id"  v-for="p in parish">&nbsp; {{ p.name }}</option>
-
-                 </select>
-                  <span v-show="errors.has('parish_id')" class="help is-danger">{{ errors.first('parish_id') }}</span>
-
+             <v-select :value="sector.id" v-model="newCliente.sector_id"  :options="SelectS" placeholder="Selecciona el Sector" :on-change="onChangeS"></v-select>
            </div>
+
            <div class="form-group inner-addon left-addon">
-             <i class="fa fa-phone" aria-hidden="true"></i>
-            <select v-model="newCliente.sector_id" class="form-control">
-              <option v-for="num in sector" :value="num.id">&nbsp;  {{ num.name }}</option>
+             <v-select :value="numero.id" v-model="newCliente.number_telephone_id" :options="SelectNUM" placeholder="Selecciona Numero a asignar" :on-change="onChangeNUM"><span slot="no-options">Por favor inserta un nuevo numero telefonico en su modulo</span></v-select>
+           </div>
+
+           <div >
+
+
+            <select v-model="newCliente.state_id" class="form-control" style="display:none;">
+              <option :value="e.id"  v-for="e in estado">&nbsp;{{ e.name }}</option>
 
             </select>
+           <span v-show="errors.has('state_id')" class="help is-danger">{{ errors.first('state_id') }}</span>
+
           </div>
-
-            <div class="form-group inner-addon left-addon">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-             <select v-model="newCliente.number_telephone_id" class="form-control">
-               <option v-for="num in numberT" :value="num.id">&nbsp; {{ num.code }} - {{ num.number }}</option>
-
-             </select>
-           </div>
-
           </form>
 
         </div>
@@ -210,51 +193,20 @@
              <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
 
             </div>
+
+
+
             <div class="form-group inner-addon left-addon">
-              <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
-
-             <select v-model="editCliente.state_id" class="form-control" style="display:none;">
-               <option :value="e.id"  v-for="e in estado">&nbsp;{{ e.name }}</option>
-
-             </select>
-            <span v-show="errors.has('state_id')" class="help is-danger">{{ errors.first('state_id') }}</span>
-
-           </div>
-           <div class="form-group inner-addon left-addon">
-              <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
-                 <select v-model="editCliente.municipality_id" class="form-control">
-                   <option :value="m.id"  v-for="m in municipality">&nbsp; {{ m.name }}</option>
-
-                 </select>
-                  <span v-show="errors.has('municipality_id')" class="help is-danger">{{ errors.first('municipality_id') }}</span>
-
+            <v-select :value="numero.id" v-model="editCliente.number_telephone_id" :options="SelectNUM" placeholder="Selecciona Numero a asignar" :on-change="onChangeNUM"><span slot="no-options">Por favor inserta un nuevo numero telefonico en su modulo</span></v-select>
            </div>
 
-           <div class="form-group inner-addon left-addon">
-              <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
-                 <select v-model="editCliente.parish_id" class="form-control">
-                   <option :value="p.id"  v-for="p in parish">&nbsp; {{ p.name }}</option>
-
-                 </select>
-                  <span v-show="errors.has('parish_id')" class="help is-danger">{{ errors.first('parish_id') }}</span>
-
-           </div>
-           <div class="form-group inner-addon left-addon">
-             <i class="fa fa-phone" aria-hidden="true"></i>
-            <select v-model="editCliente.sector_id" class="form-control">
-              <option v-for="num in sector" :value="num.id">&nbsp;  {{ num.name }}</option>
-
+           <div>
+            <select v-model="editCliente.state_id" class="form-control" style="display:none;">
+              <option :value="e.id"  v-for="e in estado">&nbsp;{{ e.name }}</option>
             </select>
+           <span v-show="errors.has('state_id')" class="help is-danger">{{ errors.first('state_id') }}</span>
+
           </div>
-
-            <div class="form-group inner-addon left-addon">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-             <select v-model="editCliente.number_telephone_id" class="form-control">
-               <option v-for="num in numberT" :value="num.id">&nbsp; {{ num.code }} - {{ num.number }}</option>
-
-             </select>
-           </div>
-
           </form>
 
         </div>
@@ -311,18 +263,22 @@ export default {
           id:7,
           name:'Carabobo'
         },
-        municipality:{
-            id:'',
-            name:''
-        },
-        parish:{
-          id:'',
-          name:''
+        municipio:{
+          id:''
         },
         sector:{
-          id:'',
-          name:''
+          id:''
         },
+        parroquia:{
+          id:''
+        },
+        numero:{
+          id:''
+        },
+        num:[],
+        sec:[],
+        parro:[],
+        munic:[],
         numberT:{
             id:'',
             code:'',
@@ -350,6 +306,39 @@ export default {
 
   },
   computed:{
+    SelectM(){
+      return this.munic.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+
+    },
+    SelectP(){
+      return this.parro.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+    },
+    SelectS(){
+      return this.sec.map(g =>(
+        {
+          label:g.name,
+           value:g.id
+         }
+      ))
+    },
+    SelectNUM(){
+      return this.num.map(g =>(
+        {
+          label:g.number,
+          value:g.id
+        }
+      ))
+    },
     isActived(){
       return this.pagination.current_page;
     },
@@ -374,6 +363,19 @@ export default {
     }
   },
   methods:{
+    onChange(obj){
+        this.municipio.id = obj.value;
+    },
+    onChangeP(obj){
+        this.parroquia.id = obj.value;
+
+    },
+    onChangeS(obj){
+        this.sector.id = obj.value;
+    },
+    onChangeNUM(obj){
+        this.numero.id = obj.value;
+    },
       fetchCliente(page){
 
 
@@ -392,18 +394,18 @@ export default {
       },
       fetchN(){
           axios.get('numero_espera').then(response => {
-            this.numberT = response.data;
+            this.numero = response.data;
           });
       },
       fetchSector(){
           axios.get('sector').then(response => {
-              this.sector = response.data.sector;
+              this.sec = response.data.sector;
           });
       },
       fetchMunicipio(){
           axios.get('municipio').then(response => {
 
-          this.municipality = response.data.municipio;
+        this.munic = response.data.municipio;
           //console.log(this.municipality);
         });
       },
@@ -415,7 +417,7 @@ export default {
       },
       fetchParish(){
           axios.get('parroquia').then(response => {
-            this.parish = response.data;
+            this.parro = response.data;
           });
       },
       saveCliente(newCliente){
@@ -426,6 +428,10 @@ export default {
         }
         else
         {
+          this.newCliente.sector_id = this.sector.id;
+          this.newCliente.parish_id = this.parroquia.id;
+          this.newCliente.municipality_id = this.municipio.id;
+          this.newCliente.number_telephone_id = this.numero.id;
               this.hasError=true;
                axios.post(postCliente, this.newCliente).then(response => {
 
@@ -451,7 +457,7 @@ export default {
         axios.put(update, input).then(response => {
           swal({
                 title: "Success",
-                text: 'Mailing List updated',
+                text: 'Registro actualizado',
                 type: 'success',
                 animation: 'slide-from-bottom',
                 timer: 3000

@@ -52075,54 +52075,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 var getCliente = 'clientes';
 var postCliente = 'clientes_save';
@@ -52161,18 +52113,22 @@ var postCliente = 'clientes_save';
         id: 7,
         name: 'Carabobo'
       },
-      municipality: {
-        id: '',
-        name: ''
-      },
-      parish: {
-        id: '',
-        name: ''
+      municipio: {
+        id: ''
       },
       sector: {
-        id: '',
-        name: ''
+        id: ''
       },
+      parroquia: {
+        id: ''
+      },
+      numero: {
+        id: ''
+      },
+      num: [],
+      sec: [],
+      parro: [],
+      munic: [],
       numberT: {
         id: '',
         code: '',
@@ -52200,6 +52156,38 @@ var postCliente = 'clientes_save';
   },
 
   computed: {
+    SelectM: function SelectM() {
+      return this.munic.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    SelectP: function SelectP() {
+      return this.parro.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    SelectS: function SelectS() {
+      return this.sec.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    SelectNUM: function SelectNUM() {
+      return this.num.map(function (g) {
+        return {
+          label: g.number,
+          value: g.id
+        };
+      });
+    },
     isActived: function isActived() {
       return this.pagination.current_page;
     },
@@ -52224,6 +52212,18 @@ var postCliente = 'clientes_save';
     }
   },
   methods: {
+    onChange: function onChange(obj) {
+      this.municipio.id = obj.value;
+    },
+    onChangeP: function onChangeP(obj) {
+      this.parroquia.id = obj.value;
+    },
+    onChangeS: function onChangeS(obj) {
+      this.sector.id = obj.value;
+    },
+    onChangeNUM: function onChangeNUM(obj) {
+      this.numero.id = obj.value;
+    },
     fetchCliente: function fetchCliente(page) {
       var _this = this;
 
@@ -52243,14 +52243,14 @@ var postCliente = 'clientes_save';
       var _this2 = this;
 
       axios.get('numero_espera').then(function (response) {
-        _this2.numberT = response.data;
+        _this2.numero = response.data;
       });
     },
     fetchSector: function fetchSector() {
       var _this3 = this;
 
       axios.get('sector').then(function (response) {
-        _this3.sector = response.data.sector;
+        _this3.sec = response.data.sector;
       });
     },
     fetchMunicipio: function fetchMunicipio() {
@@ -52258,7 +52258,7 @@ var postCliente = 'clientes_save';
 
       axios.get('municipio').then(function (response) {
 
-        _this4.municipality = response.data.municipio;
+        _this4.munic = response.data.municipio;
         //console.log(this.municipality);
       });
     },
@@ -52273,7 +52273,7 @@ var postCliente = 'clientes_save';
       var _this6 = this;
 
       axios.get('parroquia').then(function (response) {
-        _this6.parish = response.data;
+        _this6.parro = response.data;
       });
     },
     saveCliente: function saveCliente(newCliente) {
@@ -52284,6 +52284,10 @@ var postCliente = 'clientes_save';
         this.hasError = false;
         this.hasDeleted = true;
       } else {
+        this.newCliente.sector_id = this.sector.id;
+        this.newCliente.parish_id = this.parroquia.id;
+        this.newCliente.municipality_id = this.municipio.id;
+        this.newCliente.number_telephone_id = this.numero.id;
         this.hasError = true;
         axios.post(postCliente, this.newCliente).then(function (response) {
 
@@ -52312,7 +52316,7 @@ var postCliente = 'clientes_save';
       axios.put(update, input).then(function (response) {
         swal({
           title: "Success",
-          text: 'Mailing List updated',
+          text: 'Registro actualizado',
           type: 'success',
           animation: 'slide-from-bottom',
           timer: 3000
@@ -52764,12 +52768,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 var getBusiness = 'business';
 var postBusiness = 'business_save';
@@ -52797,6 +52795,10 @@ var postBusiness = 'business_save';
       parro: [],
       man: [],
       munic: [],
+      numero: {
+        id: ''
+      },
+      num: [],
       numberT: {
         id: '',
         code: '',
@@ -52872,6 +52874,14 @@ var postBusiness = 'business_save';
         };
       });
     },
+    SelectNUM: function SelectNUM() {
+      return this.num.map(function (g) {
+        return {
+          label: g.number,
+          value: g.id
+        };
+      });
+    },
     isActived: function isActived() {
       return this.pagination.current_page;
     },
@@ -52911,6 +52921,9 @@ var postBusiness = 'business_save';
       this.fetchUsers(page);
       this.fetchSector();
     },
+    onChangeNUM: function onChangeNUM(obj) {
+      this.numero.id = obj.value;
+    },
     fetchBusiness: function fetchBusiness(page) {
       var _this = this;
 
@@ -52932,7 +52945,7 @@ var postBusiness = 'business_save';
       var _this3 = this;
 
       axios.get('numero_espera').then(function (response) {
-        _this3.numberT = response.data;
+        _this3.numero = response.data;
       });
     },
     fetchMunicipio: function fetchMunicipio() {
@@ -52968,7 +52981,7 @@ var postBusiness = 'business_save';
         this.newBusiness.sector_id = this.sector.id;
         this.newBusiness.parish_id = this.parroquia.id;
         this.newBusiness.municipality_id = this.municipio.id;
-
+        this.newBusiness.number_telephone_id = this.numero.id;
         this.hasError = true;
         axios.post(postBusiness, this.newBusiness).then(function (response) {
           _this7.fetchBusiness();
@@ -52996,7 +53009,7 @@ var postBusiness = 'business_save';
       axios.put(update, input).then(function (response) {
         swal({
           title: "Success",
-          text: 'Mailing List updated',
+          text: 'Registro actualizado',
           type: 'success',
           animation: 'slide-from-bottom',
           timer: 3000
@@ -91890,32 +91903,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+  }), _vm._v(" "), _c('v-select', {
+    attrs: {
+      "value": _vm.numero.id,
+      "options": _vm.SelectNUM,
+      "placeholder": "Selecciona Numero a asignar",
+      "on-change": _vm.onChangeNUM
+    },
+    model: {
       value: (_vm.newBusiness.number_telephone_id),
+      callback: function($$v) {
+        _vm.newBusiness.number_telephone_id = $$v
+      },
       expression: "newBusiness.number_telephone_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newBusiness.number_telephone_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
     }
-  }, _vm._l((_vm.numberT), function(num) {
-    return _c('option', {
-      domProps: {
-        "value": num.id
-      }
-    }, [_vm._v("  " + _vm._s(num.code) + " - " + _vm._s(num.number))])
-  }))]), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor inserta un nuevo numero telefonico en su modulo")])])], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-phone",
@@ -92280,37 +92284,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('email')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-phone",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
+      "value": _vm.numero.id,
+      "options": _vm.SelectNUM,
+      "placeholder": "Selecciona Numero a asignar",
+      "on-change": _vm.onChangeNUM
+    },
+    model: {
       value: (_vm.editBusiness.number_telephone_id),
+      callback: function($$v) {
+        _vm.editBusiness.number_telephone_id = $$v
+      },
       expression: "editBusiness.number_telephone_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.editBusiness.number_telephone_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
     }
-  }, _vm._l((_vm.numberT), function(num) {
-    return _c('option', {
-      domProps: {
-        "value": num.id
-      }
-    }, [_vm._v("  " + _vm._s(num.code) + " - " + _vm._s(num.number))])
-  }))]), _vm._v(" "), _c('div', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor inserta un nuevo numero telefonico en su modulo")])])], 1), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-phone",
@@ -93185,12 +93175,71 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('email')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-globe",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
+      "value": _vm.municipio.id,
+      "placeholder": "Selecciona Municipio",
+      "options": _vm.SelectM,
+      "on-change": _vm.onChange
+    },
+    model: {
+      value: (_vm.newCliente.municipality_id),
+      callback: function($$v) {
+        _vm.newCliente.municipality_id = $$v
+      },
+      expression: "newCliente.municipality_id"
     }
-  }), _vm._v(" "), _c('select', {
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.parroquia.id,
+      "options": _vm.SelectP,
+      "placeholder": "Selecciona Parroquia",
+      "on-change": _vm.onChangeP
+    },
+    model: {
+      value: (_vm.newCliente.parish_id),
+      callback: function($$v) {
+        _vm.newCliente.parish_id = $$v
+      },
+      expression: "newCliente.parish_id"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.sector.id,
+      "options": _vm.SelectS,
+      "placeholder": "Selecciona el Sector",
+      "on-change": _vm.onChangeS
+    },
+    model: {
+      value: (_vm.newCliente.sector_id),
+      callback: function($$v) {
+        _vm.newCliente.sector_id = $$v
+      },
+      expression: "newCliente.sector_id"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.numero.id,
+      "options": _vm.SelectNUM,
+      "placeholder": "Selecciona Numero a asignar",
+      "on-change": _vm.onChangeNUM
+    },
+    model: {
+      value: (_vm.newCliente.number_telephone_id),
+      callback: function($$v) {
+        _vm.newCliente.number_telephone_id = $$v
+      },
+      expression: "newCliente.number_telephone_id"
+    }
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor inserta un nuevo numero telefonico en su modulo")])])], 1), _vm._v(" "), _c('div', [_c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -93226,151 +93275,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "errors.has('state_id')"
     }],
     staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('state_id')))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-globe",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.newCliente.municipality_id),
-      expression: "newCliente.municipality_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newCliente.municipality_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.municipality), function(m) {
-    return _c('option', {
-      domProps: {
-        "value": m.id
-      }
-    }, [_vm._v("  " + _vm._s(m.name))])
-  })), _vm._v(" "), _c('span', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.errors.has('municipality_id')),
-      expression: "errors.has('municipality_id')"
-    }],
-    staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('municipality_id')))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-globe",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.newCliente.parish_id),
-      expression: "newCliente.parish_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newCliente.parish_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.parish), function(p) {
-    return _c('option', {
-      domProps: {
-        "value": p.id
-      }
-    }, [_vm._v("  " + _vm._s(p.name))])
-  })), _vm._v(" "), _c('span', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.errors.has('parish_id')),
-      expression: "errors.has('parish_id')"
-    }],
-    staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('parish_id')))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-phone",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.newCliente.sector_id),
-      expression: "newCliente.sector_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newCliente.sector_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.sector), function(num) {
-    return _c('option', {
-      domProps: {
-        "value": num.id
-      }
-    }, [_vm._v("   " + _vm._s(num.name))])
-  }))]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-phone",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.newCliente.number_telephone_id),
-      expression: "newCliente.number_telephone_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.newCliente.number_telephone_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.numberT), function(num) {
-    return _c('option', {
-      domProps: {
-        "value": num.id
-      }
-    }, [_vm._v("  " + _vm._s(num.code) + " - " + _vm._s(num.number))])
-  }))])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('state_id')))])])])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -93634,12 +93539,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "help is-danger"
   }, [_vm._v(_vm._s(_vm.errors.first('email')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-globe",
+  }, [_c('v-select', {
     attrs: {
-      "aria-hidden": "true"
+      "value": _vm.numero.id,
+      "options": _vm.SelectNUM,
+      "placeholder": "Selecciona Numero a asignar",
+      "on-change": _vm.onChangeNUM
+    },
+    model: {
+      value: (_vm.editCliente.number_telephone_id),
+      callback: function($$v) {
+        _vm.editCliente.number_telephone_id = $$v
+      },
+      expression: "editCliente.number_telephone_id"
     }
-  }), _vm._v(" "), _c('select', {
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Por favor inserta un nuevo numero telefonico en su modulo")])])], 1), _vm._v(" "), _c('div', [_c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -93675,151 +93591,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       expression: "errors.has('state_id')"
     }],
     staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('state_id')))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-globe",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.editCliente.municipality_id),
-      expression: "editCliente.municipality_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.editCliente.municipality_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.municipality), function(m) {
-    return _c('option', {
-      domProps: {
-        "value": m.id
-      }
-    }, [_vm._v("  " + _vm._s(m.name))])
-  })), _vm._v(" "), _c('span', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.errors.has('municipality_id')),
-      expression: "errors.has('municipality_id')"
-    }],
-    staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('municipality_id')))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "glyphicon glyphicon-globe",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.editCliente.parish_id),
-      expression: "editCliente.parish_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.editCliente.parish_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.parish), function(p) {
-    return _c('option', {
-      domProps: {
-        "value": p.id
-      }
-    }, [_vm._v("  " + _vm._s(p.name))])
-  })), _vm._v(" "), _c('span', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (_vm.errors.has('parish_id')),
-      expression: "errors.has('parish_id')"
-    }],
-    staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('parish_id')))])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-phone",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.editCliente.sector_id),
-      expression: "editCliente.sector_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.editCliente.sector_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.sector), function(num) {
-    return _c('option', {
-      domProps: {
-        "value": num.id
-      }
-    }, [_vm._v("   " + _vm._s(num.name))])
-  }))]), _vm._v(" "), _c('div', {
-    staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-phone",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.editCliente.number_telephone_id),
-      expression: "editCliente.number_telephone_id"
-    }],
-    staticClass: "form-control",
-    on: {
-      "change": function($event) {
-        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
-          return o.selected
-        }).map(function(o) {
-          var val = "_value" in o ? o._value : o.value;
-          return val
-        });
-        _vm.editCliente.number_telephone_id = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-      }
-    }
-  }, _vm._l((_vm.numberT), function(num) {
-    return _c('option', {
-      domProps: {
-        "value": num.id
-      }
-    }, [_vm._v("  " + _vm._s(num.code) + " - " + _vm._s(num.number))])
-  }))])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('state_id')))])])])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",
@@ -93864,7 +93636,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Apellido")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "btn-top  btn btn-primary pull-right"
+    staticClass: "btn-top  btn btn-primary"
   }, [_c('i', {
     staticClass: "fa fa-pencil-square-o",
     attrs: {

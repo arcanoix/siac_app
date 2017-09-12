@@ -110,9 +110,7 @@
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-phone" aria-hidden="true"></i>
 
-              <select v-model="newBusiness.number_telephone_id" class="form-control">
-                <option v-for="num in numberT" :value="num.id">&nbsp; {{ num.code }} - {{ num.number }}</option>
-              </select>
+            <v-select :value="numero.id" v-model="newBusiness.number_telephone_id" :options="SelectNUM" placeholder="Selecciona Numero a asignar" :on-change="onChangeNUM"><span slot="no-options">Por favor inserta un nuevo numero telefonico en su modulo</span></v-select>
 
 
             </div>
@@ -188,12 +186,8 @@
             </div>
 
              <div class="form-group inner-addon left-addon">
-               <i class="fa fa-phone" aria-hidden="true"></i>
-              <select v-model="editBusiness.number_telephone_id" class="form-control">
-                <option v-for="num in numberT" :value="num.id">&nbsp; {{ num.code }} - {{ num.number }}</option>
 
-              </select>
-
+                              <v-select :value="numero.id" v-model="editBusiness.number_telephone_id" :options="SelectNUM" placeholder="Selecciona Numero a asignar" :on-change="onChangeNUM"><span slot="no-options">Por favor inserta un nuevo numero telefonico en su modulo</span></v-select>
 
             </div>
              <div class="form-group inner-addon left-addon">
@@ -267,6 +261,10 @@ export default {
         parro:[],
         man:[],
         munic:[],
+        numero:{
+          id:''
+        },
+        num:[],
         numberT:{
             id:'',
             code:'',
@@ -343,6 +341,14 @@ export default {
          }
       ))
     },
+    SelectNUM(){
+      return this.num.map(g =>(
+        {
+          label:g.number,
+          value:g.id
+        }
+      ))
+    },
         isActived(){
           return this.pagination.current_page;
         },
@@ -383,8 +389,9 @@ export default {
         this.fetchUsers(page);
         this.fetchSector();
     },
-
-
+    onChangeNUM(obj){
+        this.numero.id = obj.value;
+    },
       fetchBusiness(page){
           var data = {page: page};
          axios.get('/business?page='+ page).then(response => {
@@ -403,8 +410,7 @@ export default {
       },
       fetchN(){
           axios.get('numero_espera').then(response => {
-            this.numberT = response.data;
-
+            this.numero = response.data;
           });
       },
       fetchMunicipio(){
@@ -436,7 +442,7 @@ export default {
           this.newBusiness.sector_id = this.sector.id;
           this.newBusiness.parish_id = this.parroquia.id;
           this.newBusiness.municipality_id = this.municipio.id;
-
+            this.newBusiness.number_telephone_id = this.numero.id;
               this.hasError=true;
                axios.post(postBusiness, this.newBusiness).then(response => {
                    this.fetchBusiness();
@@ -466,7 +472,7 @@ export default {
         axios.put(update, input).then(response => {
           swal({
                 title: "Success",
-                text: 'Mailing List updated',
+                text: 'Registro actualizado',
                 type: 'success',
                 animation: 'slide-from-bottom',
                 timer: 3000
