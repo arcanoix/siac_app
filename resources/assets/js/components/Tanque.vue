@@ -37,10 +37,10 @@
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
         <td>{{b.address}} </td>
-        <td>{{ b.ads_id }}</td>
+        <td>{{ b.ads.name }}</td>
 
 
-        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary pull-right"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
       <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger  pull-right"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
       </tr>
 
@@ -71,7 +71,7 @@
 
       <modal :display="showModal" @close="showModal = false">
         <div slot="header">
-          <i class="fa fa-user"></i> Registro de Fallas
+          <i class="fa fa-user"></i> Registro de Tanque
 
         </div>
         <div slot="body">
@@ -105,6 +105,45 @@
         </div>
       </modal>
 
+
+      <modal :display="showModal1" @close="showModal1 = false">
+        <div slot="header">
+          <i class="fa fa-user"></i> Actualizacion de Tanque
+
+        </div>
+        <div slot="body">
+          <form class="form">
+
+            <div class="form-group inner-addon left-addon">
+               <i class="fa fa-user" aria-hidden="true"></i>
+              <input v-validate="'required'" v-model="editTanque.name" type="text" class="form-control" placeholder="Nombre" :class="{'input': true, 'is-danger': errors.has('name') }">
+             <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+
+            </div>
+             <div class="form-group inner-addon left-addon">
+               <i class="fa fa-envelope" aria-hidden="true"></i>
+              <input v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('address') }" v-model="editTanque.address" type="text" class="form-control" placeholder="Direccion del tanque" name="address">
+             <span v-show="errors.has('address')" class="help is-danger">{{ errors.first('address') }}</span>
+
+            </div>
+            <div class="form-group inner-addon left-addon">
+               <v-select :value="adds.id" v-model="editTanque.ads_id"  :options="SelectS" :on-change="onChangeS"></v-select>
+            </div>
+
+          </form>
+
+        </div>
+        <div slot="footer">
+
+        <a href="#" class="btn btn-primary" v-on:click.prevent="updateTanque()">Guardar</a>
+
+          <a href="#" class="btn btn-default" v-on:click.prevent="showModal1=false">Cerrar</a>
+
+        </div>
+      </modal>
+
+
+
   </div>
 </div>
 
@@ -130,7 +169,13 @@ export default {
           id:''
         },
         showModal:false,
+        showModal1:false,
         newTanque:{
+          name:'',
+          address:'',
+          ads_id:''
+        },
+        editTanque:{
           name:'',
           address:'',
           ads_id:''
@@ -225,6 +270,29 @@ export default {
                });
         }
 
+      },
+      onEdit(b){
+        var showUser = '/show_t/';
+        var that = this;
+        that.showModal1 = true;
+        axios.get(showUser + b.id).then(response => {
+            this.editTanque = response.data;
+        });
+      },
+      updateTanque(editTanque){
+        var input = this.editTanque;
+        var update = '/update_t/' + input.id;
+        axios.put(update, input).then(response => {
+          swal({
+                title: "Success",
+                text: 'Registro actualizado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+            this.fetchTanque();
+            this.showModal1= false;
+        });
       },
       onDelete(b){
         var that = this;

@@ -106,6 +106,8 @@ Route::delete('/falla_del/{id}','FallaController@destroy');
 //rutas para tanques
 Route::get('tanques','TanqueController@index');
 Route::post('tanque_save','TanqueController@store');
+Route::get('/show_t/{id}','TanqueController@show');
+Route::put('/update_t/{id}','TanqueController@update');
 Route::delete('/tanque_del/{id}','TanqueController@destroy');
 
 //Rutas para Central

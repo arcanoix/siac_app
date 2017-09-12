@@ -11,7 +11,7 @@ class TanqueController extends Controller
 
     public function index()
     {
-      $tanque = Tanque::paginate(5);
+      $tanque = Tanque::with('ads')->paginate(5);
 
       $response = [
        'pagination' => [
@@ -44,6 +44,32 @@ class TanqueController extends Controller
           'tanque' => $tanque
       ]);
 
+    }
+
+    public function show($id)
+    {
+      if($tanque = Tanque::find($id)){
+
+        return $tanque;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
+    }
+
+    public function update(Request $request, $id)
+    {
+      if($tanque = Tanque::find($id)){
+        $tanque->name = $request->name;
+        $tanque->address = $request->address;
+        $tanque->ads_id = $request->ads_id;
+
+        //dd($tanque);
+
+        $tanque->save();
+        return $tanque;
+      }else{
+        return response()->json(['error' => 'Error no se encuentra el registro']);
+      }
     }
 
     public function destroy($id)
