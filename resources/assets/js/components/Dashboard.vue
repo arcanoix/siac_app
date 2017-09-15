@@ -96,7 +96,7 @@
 											<div class="col-xs-12" style="padding-top:19px;">
 													<div class="panel panel-blank">
 															<div class="panel-heading">
-																	<h1 class="panel-title">Grafico</h1>
+																	<h1 class="panel-title">Grafico De Fallas</h1>
 																	<div class="row">
 																			<div class="col-xs-12">
 
@@ -133,7 +133,7 @@ var getDash = 'dashboard';
 import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import grafica from './graph.js'
-import gra from './grafica.js'
+import Gra from './grafica.js'
 
 
 
@@ -145,7 +145,7 @@ Vue.use(VueGoogleMaps, {
 
 
 	export default {
-		components:{grafica, gra},
+		components:{grafica, Gra},
 		data(){
 			return{
 
@@ -162,12 +162,14 @@ Vue.use(VueGoogleMaps, {
          markers: [
 					 	{
           		position: {
-								lat: 10.0, lng: -67.9
+								lat: 10.0,
+								 lng: -67.9
 							}
         		},
 				 		{
           		position: {
-								lat: 10.0, lng: -67.7
+								lat: 10.0,
+								 lng: -67.7
 							}
         		}
 					]

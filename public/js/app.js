@@ -50137,7 +50137,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vee_validate__ = __webpack_require__(337);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vee_validate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_vee_validate__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__routes_js__ = __webpack_require__(239);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__graph_js__ = __webpack_require__(238);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * include Vue and Vue Resource. This gives a great starting point for
@@ -50178,11 +50177,10 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_6_vee_validate___default.a, {
 
 
 
-
 Vue.component('dashboard', __WEBPACK_IMPORTED_MODULE_1__components_Dashboard_vue___default.a);
 Vue.component('users', __WEBPACK_IMPORTED_MODULE_0__components_Users_vue___default.a);
 Vue.component('modal', __WEBPACK_IMPORTED_MODULE_2__components_Modal_vue___default.a);
-Vue.component('CommitChart', __WEBPACK_IMPORTED_MODULE_8__graph_js__["a" /* default */]);
+
 //Vue.component('vue-pagination', require('./components/Pagination.vue'))
 
 //Vue.component('v-select', vSelect)
@@ -50200,8 +50198,7 @@ var app = new Vue({
   router: __WEBPACK_IMPORTED_MODULE_7__routes_js__["a" /* default */],
   components: {
     Users: __WEBPACK_IMPORTED_MODULE_0__components_Users_vue___default.a,
-    Modal: __WEBPACK_IMPORTED_MODULE_2__components_Modal_vue___default.a,
-    CommitChart: __WEBPACK_IMPORTED_MODULE_8__graph_js__["a" /* default */]
+    Modal: __WEBPACK_IMPORTED_MODULE_2__components_Modal_vue___default.a
   },
   data: {
     showModal: false,
@@ -52529,8 +52526,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_google_maps__ = __webpack_require__(407);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_google_maps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue2_google_maps__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__graph_js__ = __webpack_require__(237);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__grafica_js__ = __webpack_require__(459);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__graph_js__ = __webpack_require__(238);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__grafica_js__ = __webpack_require__(237);
 //
 //
 //
@@ -52675,7 +52672,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue2
 });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	components: { grafica: __WEBPACK_IMPORTED_MODULE_2__graph_js__["a" /* default */], gra: __WEBPACK_IMPORTED_MODULE_3__grafica_js__["a" /* default */] },
+	components: { grafica: __WEBPACK_IMPORTED_MODULE_2__graph_js__["a" /* default */], Gra: __WEBPACK_IMPORTED_MODULE_3__grafica_js__["a" /* default */] },
 	data: function data() {
 		return {
 
@@ -52691,11 +52688,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue2
 			},
 			markers: [{
 				position: {
-					lat: 10.0, lng: -67.9
+					lat: 10.0,
+					lng: -67.9
 				}
 			}, {
 				position: {
-					lat: 10.0, lng: -67.7
+					lat: 10.0,
+					lng: -67.7
 				}
 			}]
 		};
@@ -56457,21 +56456,44 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__["Bar"].extend({
+  data: function data() {
+    return {
+      data: [],
+      listo: []
+    };
+  },
   mounted: function mounted() {
+    var _this = this;
 
-    this.renderChart({
-      labels: ['agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-      datasets: [{
-        label: 'En Proceso',
-        backgroundColor: '#FC2525',
-        data: [0, 6, 0, 0, 0]
-      }, {
-        label: 'Listo',
-        backgroundColor: '#05CBE1',
-        data: [0, 2, 0, 0, 0]
-      }]
-    }, { responsive: true, maintainAspectRatio: false });
+    axios.get('grafica').then(function (response) {
+      console.log(response);
+      _this.data = response.data.EnProceso.map(function (data) {
+        return data.estatus;
+      });
+      _this.listo = response.data.Listo.map(function (labels) {
+        return labels.estatus;
+      });
+      _this.fillData();
+    });
+  },
+
+  methods: {
+    fillData: function fillData() {
+      this.renderChart({
+        labels: ['agosto', 'Septiembre'],
+        datasets: [{
+          label: 'En Proceso',
+          backgroundColor: '#FC2525',
+          data: this.data
+        }, {
+          label: 'Listo',
+          backgroundColor: '#05CBE1',
+          data: this.listo
+        }]
+      }, { responsive: true, maintainAspectRatio: false });
+    }
   }
+
 }));
 
 /***/ }),
@@ -56487,19 +56509,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   mounted: function mounted() {
 
     this.renderChart({
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
       datasets: [{
         label: 'En Proceso',
         backgroundColor: '#FC2525',
-        data: [40, 39, 10, 40, 39, 80, 40]
+        data: [0, 6, 0, 0, 0]
       }, {
         label: 'Listo',
         backgroundColor: '#05CBE1',
-        data: [60, 55, 32, 10, 2, 12, 53]
-      }, {
-        label: 'z',
-        backgroundColor: '#05CBE2',
-        data: [60, 55, 32, 10, 2, 12, 53]
+        data: [0, 2, 0, 0, 0]
       }]
     }, { responsive: true, maintainAspectRatio: false });
   }
@@ -91161,7 +91179,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel-heading"
   }, [_c('h1', {
     staticClass: "panel-title"
-  }, [_vm._v("Grafico")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Grafico De Fallas")]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-xs-12"
@@ -99513,30 +99531,6 @@ setToStringTag(global.JSON, 'JSON', true);
 __webpack_require__(199);
 module.exports = __webpack_require__(200);
 
-
-/***/ }),
-/* 452 */,
-/* 453 */,
-/* 454 */,
-/* 455 */,
-/* 456 */,
-/* 457 */,
-/* 458 */,
-/* 459 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_chartjs__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_chartjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__);
-// MonthlyIncome.js
-
-
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__["Line"].extend({
-  props: ['data', 'options'],
-  mounted: function mounted() {
-    this.renderChart(this.data, this.options);
-  }
-}));
 
 /***/ })
 /******/ ]);

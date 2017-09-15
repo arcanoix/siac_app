@@ -43,13 +43,15 @@ Vue.use(VeeValidate, {
 });
 
  import Router from './routes.js'
- import CommitChart from './graph.js'
+
+
+
 
 
  Vue.component('dashboard', Dashboard)
  Vue.component('users', Users)
  Vue.component('modal', Modal)
- Vue.component('CommitChart', CommitChart)
+
  //Vue.component('vue-pagination', require('./components/Pagination.vue'))
 
  //Vue.component('v-select', vSelect)
@@ -71,7 +73,6 @@ const app = new Vue({
     components: {
         Users,
         Modal,
-        CommitChart
      },
      data:{
      	showModal:false,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Falla;
+use DB;
 
 class FallaController extends Controller
 {
@@ -11,12 +12,35 @@ class FallaController extends Controller
 
     public function grafica()
     {
-      $grafica = Falla::where('status','=','En Proceso')->count();
-      $listo = Falla::where('status','=','Listo')->count();
+//SELECT count(status) as estatus, MONTH(created_at) as mes FROM `failure` WHERE status = 'En Proceso' GROUP BY MONTH(created_at)
+
+      $EnProceso = Falla::select(\DB::raw('MONTH(created_at) as Mes, count(status) as estatus'))
+      ->groupBy(\DB::raw('MONTH(created_at)'))
+      ->orderBy('Mes')
+      ->where('status','En Proceso')
+      ->get()
+      ->toArray();
+
+
+
+      $listo = Falla::select(\DB::raw('MONTH(created_at) as Mes, count(status) as estatus'))
+      ->groupBy(\DB::raw('MONTH(created_at)'))
+      ->orderBy('Mes')
+      ->where('status','Listo')
+      ->get()
+      ->toArray();
+
+
       return response()->json([
-        'En Proceso' => $grafica,
+
+        'EnProceso' => $EnProceso,
         'Listo' => $listo
+
       ]);
+
+
+        //   return $EnProceso;
+
     }
 
     public function index()

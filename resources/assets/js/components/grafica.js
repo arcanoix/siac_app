@@ -1,9 +1,39 @@
-// MonthlyIncome.js
-import { Line } from 'vue-chartjs'
+import {Bar} from 'vue-chartjs'
 
-export default Line.extend({
-  props: ['data', 'options'],
+export default Bar.extend({
+  data(){
+    return{
+        data:[],
+        listo:[]
+    }
+  },
   mounted () {
-    this.renderChart(this.data, this.options)
-  }
+    axios.get('grafica').then(response => {
+      console.log(response)
+        this.data = response.data.EnProceso.map(data => data.estatus);
+        this.listo = response.data.Listo.map(labels => labels.estatus);
+          this.fillData();
+    })
+
+},
+  methods:{
+    fillData(){
+      this.renderChart({
+        labels: ['agosto', 'Septiembre'],
+        datasets: [
+          {
+            label: 'En Proceso',
+            backgroundColor: '#FC2525',
+            data: this.data
+          },
+          {
+            label: 'Listo',
+            backgroundColor: '#05CBE1',
+            data: this.listo
+          }
+        ]
+      }, {responsive: true, maintainAspectRatio: false})
+    },
+    }
+
 })
