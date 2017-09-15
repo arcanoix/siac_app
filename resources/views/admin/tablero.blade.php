@@ -24,10 +24,10 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
-
-            <li class="active">
+                 <li class="active">
               <a href="#" id="reloj">Hora</a>
             </li>
+       
 
             <!-- Tasks Menu -->
 

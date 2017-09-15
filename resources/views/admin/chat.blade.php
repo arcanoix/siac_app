@@ -15,6 +15,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="{{ asset("/admin-lte/bootstrap/css/bootstrap.min.css") }}">
+ 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -56,6 +57,7 @@
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
+
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -69,10 +71,49 @@
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <!-- The user image in the navbar-->
-                  <img src="{{ asset("/img/myAvatar.png") }}" class="user-image" alt="User Image">
-                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                
+                     <img src="{{ asset("/img/myAvatar.png") }}" class="user-image" alt="User Image">
+                      <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                      <span class="hidden-xs">{{ Auth::user()->name }}</span>
+               
+                 
                 </a>
+
+                     <ul class="dropdown-menu">
+                <!-- The user image in the menu -->
+                <li class="user-header">
+
+                  @if (Auth::user()->avatar)
+                      <img src="{{ asset('uploads/'. Auth::user()->avatar) }}" class="img-circle" alt="User Image"/>
+                  @else
+                      <img src="{{ asset('/img/myAvatar.png') }}" class="img-circle" alt="User Image">
+
+                  @endif
+
+
+                  <p>
+                    {{ Auth::user()->name }} - {{ Auth::user()->role }}
+                    <small>Miembro desde: {{ Auth::user()->created_at }}</small>
+                  </p>
+                </li>
+
+                <li class="user-footer">
+
+                  <div class="col-xs-8">
+
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();" class="btn btn-primary btn-flat">
+                              Cerrar Sesion
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+
+                  </div>
+                </li>
+              </ul>
 
               </li>
               <!-- Control Sidebar Toggle Button -->
@@ -119,7 +160,7 @@
             <!-- Menus enlazados con las rutas del front vuejs  -->
 
 
-              
+
 
           </ul>
           <!-- /.sidebar-menu -->
@@ -145,7 +186,19 @@
 
                 <div class="col-md-8" id="chat">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Chat </div>
+
+                      <div class="panel-heading" id="accordion">
+                             <span class="glyphicon glyphicon-comment"></span> Chat
+                             <div class="btn-group pull-right">
+                                 <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                     <span class="glyphicon glyphicon-chevron-down"></span>
+                                 </a>
+                             </div>
+                      </div>
+
+
+
+                       <div class="panel-collapse collapse" id="collapseOne">
                         <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12" >
@@ -192,11 +245,14 @@
     <footer class="main-footer">
       <!-- To the right -->
       <div class="pull-right hidden-xs">
-        Anything you want
+      SIAC
       </div>
       <!-- Default to the left -->
       <strong>Copyright &copy; 2017 <a href="#">Siac</a>.</strong> All rights reserved.
     </footer>
+    
+     <script src="{{ asset('admin-lte/plugins/jQuery/jquery-3.2.1.min.js') }}"></script>
+     <script src="{{ asset('admin-lte/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
@@ -219,19 +275,19 @@
         },
         methods: {
           post: function() {
-            console.log('mensaje ' + this.input);
+          //  console.log('mensaje ' + this.input);
             var payload = [this.channel, this.userName, this.input];
-            console.log(payload);
+          //  console.log(payload);
             socket.emit('chat',payload);
             this.input = ''
           }
         }
       });
 
-      console.log(vm.userName);
+    //  console.log(vm.userName);
       socket.on('chat.' + vm.channel, function(payload){
         vm.messages.push(['chat', payload[1], payload[2]]);
-        console.log('mensaje recibido -- ' + payload);
+        //console.log('mensaje recibido -- ' + payload);
       });
 
 

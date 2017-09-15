@@ -56480,7 +56480,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   methods: {
     fillData: function fillData() {
       this.renderChart({
-        labels: ['agosto', 'Septiembre'],
+        labels: ['Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre'],
         datasets: [{
           label: 'En Proceso',
           backgroundColor: '#FC2525',

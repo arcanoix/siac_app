@@ -31,10 +31,11 @@ class FallaController extends Controller
       ->toArray();
 
 
+
       return response()->json([
 
         'EnProceso' => $EnProceso,
-        'Listo' => $listo
+        'Listo' => $listo,
 
       ]);
 
