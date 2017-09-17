@@ -52412,7 +52412,7 @@ var postCliente = 'clientes_save';
       var _this2 = this;
 
       axios.get('numero_espera').then(function (response) {
-        _this2.numero = response.data;
+        _this2.num = response.data;
       });
     },
     fetchSector: function fetchSector() {
@@ -53141,7 +53141,8 @@ var postBusiness = 'business_save';
       var _this3 = this;
 
       axios.get('numero_espera').then(function (response) {
-        _this3.numero = response.data;
+        console.log(response.data);
+        _this3.num = response.data;
       });
     },
     fetchMunicipio: function fetchMunicipio() {
@@ -54305,7 +54306,7 @@ var postnumber = 'numero_save';
       newNumber: {
         code: '',
         number: '',
-        status: '',
+        status: 'En Espera',
         cc: '',
         cl: '',
         pc: '',
@@ -54315,7 +54316,7 @@ var postnumber = 'numero_save';
       editNumber: {
         code: '',
         number: '',
-        status: '',
+        status: 'En Espera',
         cc: '',
         cl: '',
         pc: '',
@@ -90469,7 +90470,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.newNumber.status = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, [_c('option', [_vm._v("Activo")]), _vm._v(" "), _c('option', [_vm._v("Inactivo")])])]), _vm._v(" "), _c('div', {
+  }, [_c('option', [_vm._v("En Espera")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('v-select', {
     attrs: {
@@ -90769,7 +90770,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.editNumber.status = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, [_c('option', [_vm._v("Activo")]), _vm._v(" "), _c('option', [_vm._v("Inactivo")])])]), _vm._v(" "), _c('div', {
+  }, [_c('option', [_vm._v("En Espera")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('v-select', {
     attrs: {

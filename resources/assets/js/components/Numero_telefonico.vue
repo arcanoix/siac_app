@@ -104,8 +104,8 @@
             <div class="form-group inner-addon left-addon">
 
               <select v-model="newNumber.status" class="form-control">
-                <option>Activo</option>
-                <option>Inactivo</option>
+                
+                <option>En Espera</option>
               </select>
             </div>
 
@@ -176,8 +176,8 @@
                               <div class="form-group inner-addon left-addon">
 
                                 <select v-model="editNumber.status" class="form-control">
-                                  <option>Activo</option>
-                                  <option>Inactivo</option>
+                                  
+                                  <option>En Espera</option>
                                 </select>
                               </div>
 
@@ -248,7 +248,7 @@ export default {
         newNumber:{
           code:'',
           number:'',
-          status:'',
+          status:'En Espera',
           cc:'',
           cl:'',
           pc:'',
@@ -258,7 +258,7 @@ export default {
         editNumber:{
           code:'',
           number:'',
-          status:'',
+          status:'En Espera',
           cc:'',
           cl:'',
           pc:'',

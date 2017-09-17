@@ -410,7 +410,8 @@ export default {
       },
       fetchN(){
           axios.get('numero_espera').then(response => {
-            this.numero = response.data;
+            console.log(response.data);
+            this.num = response.data;
           });
       },
       fetchMunicipio(){
