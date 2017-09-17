@@ -75,7 +75,7 @@
 																			  :zoom="8"
 																			  map-type-id="terrain"
 																			  style="width: 900px; height: 300px"
-                                                                               
+
 																			>
 																			<gmap-marker
 																	      :key="index"
@@ -185,7 +185,7 @@ Vue.use(VueGoogleMaps, {
 		methods:{
 				getDevices(){
 					axios.get('grafica').then(response => {
-						console.log(reponse.data);
+						//console.log(reponse.data);
 					})
 			},
 			fetchDash(){

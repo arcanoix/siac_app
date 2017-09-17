@@ -30,8 +30,9 @@
         <th>#</th>
         <th>Nombre</th>
         <th>Apellido</th>
-        <th>Direccion</th>
+        <th>Cedula</th>
         <th>Email</th>
+        <th>Direccion</th>
         <th>Editar</th>
 
 
@@ -39,8 +40,9 @@
       <tr v-for="b in clientes"  class="row-content">
         <td>{{ b.id }}</td>
         <td>{{ b.name }}</td>
-        <td>{{b.last_name}}</td>
-        <td>{{b.identification_card}}</td>
+        <td>{{ b.last_name }}</td>
+        <td>{{ b.identification_card }}</td>
+        <td>{{ b.address }}</td>
         <td>{{ b.email }}</td>
 
 

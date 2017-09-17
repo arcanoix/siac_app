@@ -76,7 +76,10 @@ class FallaController extends Controller
 
       $falla_save->user_id = $r->user_id;
 
-    // dd($falla_save);
+      $falla_save->lat = $r->latitude;
+      $falla_save->longitud = $r->longitude;
+
+     //dd($falla_save);
 
       $falla_save->save();
 
