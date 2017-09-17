@@ -40,7 +40,7 @@
                 @if (Auth::user()->avatar)
                                     <img src="{{ asset('uploads/'. Auth::user()->avatar) }}" class="user-image" alt="User Image"/>
                 @else
-                                   <img src="img/find_user.png" class="user-image img-responsive"/>
+                                   <img src="{{ asset('/img/myAvatar.png') }}" class="user-image img-responsive"/>
                 @endif
 
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->

@@ -36858,7 +36858,7 @@ var postCliente = 'clientes_save';
     changePage: function changePage(page) {
       //console.log(page);
       this.pagination.current_page = page;
-      this.fetchCentral(page);
+      this.fetchCliente(page);
     },
     fetchN: function fetchN() {
       var _this2 = this;
@@ -36871,7 +36871,7 @@ var postCliente = 'clientes_save';
       var _this3 = this;
 
       axios.get('sector').then(function (response) {
-        _this3.sec = response.data.sector;
+        _this3.sec = response.data.data.data;
       });
     },
     fetchMunicipio: function fetchMunicipio() {
@@ -37565,8 +37565,8 @@ var postBusiness = 'business_save';
     changePage: function changePage(page) {
       //console.log(page);
       this.pagination.current_page = page;
-      this.fetchUsers(page);
-      this.fetchSector();
+      this.fetchBusiness(page);
+      //this.fetchSector();
     },
     onChangeNUM: function onChangeNUM(obj) {
       this.numero.id = obj.value;
@@ -37585,7 +37585,7 @@ var postBusiness = 'business_save';
       var _this2 = this;
 
       axios.get('sector').then(function (response) {
-        _this2.sec = response.data.sector;
+        _this2.sec = response.data.data.data;
       });
     },
     fetchN: function fetchN() {
@@ -38849,7 +38849,7 @@ var postnumber = 'numero_save';
     changePage: function changePage(page) {
       //console.log(page);
       this.pagination.current_page = page;
-      this.fetchCentral(page);
+      this.fetchNumber(page);
     },
     saveNumber: function saveNumber(newNumber) {
       var _this3 = this;
@@ -40142,7 +40142,7 @@ var postUsers = '/users_save';
       axios.put(update, input).then(function (response) {
         swal({
           title: "Success",
-          text: 'Mailing List updated',
+          text: 'Registro actualizado',
           type: 'success',
           animation: 'slide-from-bottom',
           timer: 3000
@@ -96119,7 +96119,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('gra')], 1)])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12",
     staticStyle: {
-      "padding-top": "19px"
+      "padding-top": "19px",
+      "display": "none"
     }
   }, [_c('div', {
     staticClass: "panel panel-blank"
@@ -98706,7 +98707,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Rif")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Numero Telefonico")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "btn-top  btn btn-primary pull-right"
+    staticClass: "btn-top  btn btn-primary"
   }, [_c('i', {
     staticClass: "fa fa-pencil-square-o",
     attrs: {

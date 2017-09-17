@@ -370,7 +370,7 @@ export default {
         axios.put(update, input).then(response => {
           swal({
                 title: "Success",
-                text: 'Mailing List updated',
+                text: 'Registro actualizado',
                 type: 'success',
                 animation: 'slide-from-bottom',
                 timer: 3000

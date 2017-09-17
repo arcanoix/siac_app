@@ -339,7 +339,7 @@ export default {
       changePage(page){
           //console.log(page);
           this.pagination.current_page = page;
-          this.fetchCentral(page);
+          this.fetchNumber(page);
       },
       saveNumber(newNumber){
         var input = this.newNumber;

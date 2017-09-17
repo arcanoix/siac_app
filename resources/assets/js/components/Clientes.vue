@@ -390,7 +390,7 @@ export default {
       changePage(page){
           //console.log(page);
           this.pagination.current_page = page;
-          this.fetchCentral(page);
+          this.fetchCliente(page);
       },
       fetchN(){
           axios.get('numero_espera').then(response => {
@@ -399,7 +399,7 @@ export default {
       },
       fetchSector(){
           axios.get('sector').then(response => {
-              this.sec = response.data.sector;
+              this.sec = response.data.data.data;
           });
       },
       fetchMunicipio(){
