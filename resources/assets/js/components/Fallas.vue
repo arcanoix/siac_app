@@ -349,8 +349,8 @@ export default {
 
      lookupCoordinates() {
       var app = this;
-      app.longitude = "Searching.....";
-      app.latitude = "Searching.....";     
+      app.longitude = "Ubicando.....";
+      app.latitude = "Ubicando.....";     
 
      
 
@@ -361,8 +361,8 @@ export default {
               app.latitude = response.data.results[0].geometry.location.lat;              
             })
             .catch( error => {
-              app.longitude = "Invalid place";
-              app.latitude = "Invalid place";              
+              app.longitude = "Ubicacion no Valida";
+              app.latitude = "Ubicacion no Valida";              
             })
     }, 
 

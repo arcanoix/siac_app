@@ -53727,16 +53727,16 @@ var postFalla = 'falla_save';
   methods: {
     lookupCoordinates: function lookupCoordinates() {
       var app = this;
-      app.longitude = "Searching.....";
-      app.latitude = "Searching.....";
+      app.longitude = "Ubicando.....";
+      app.latitude = "Ubicando.....";
 
       axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + app.place).then(function (response) {
         console.log(response);
         app.longitude = response.data.results[0].geometry.location.lng;
         app.latitude = response.data.results[0].geometry.location.lat;
       }).catch(function (error) {
-        app.longitude = "Invalid place";
-        app.latitude = "Invalid place";
+        app.longitude = "Ubicacion no Valida";
+        app.latitude = "Ubicacion no Valida";
       });
     },
     onChangeUser: function onChangeUser(obj) {
