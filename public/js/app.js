@@ -52419,7 +52419,7 @@ var postCliente = 'clientes_save';
       var _this3 = this;
 
       axios.get('sector').then(function (response) {
-        _this3.sec = response.data.sector;
+        _this3.sec = response.data.data.data;
       });
     },
     fetchMunicipio: function fetchMunicipio() {
@@ -55691,7 +55691,7 @@ var postUsers = '/users_save';
       axios.put(update, input).then(function (response) {
         swal({
           title: "Success",
-          text: 'Mailing List updated',
+          text: 'Registro actualizado',
           type: 'success',
           animation: 'slide-from-bottom',
           timer: 3000

@@ -399,7 +399,7 @@ export default {
       },
       fetchSector(){
           axios.get('sector').then(response => {
-              this.sec = response.data.sector;
+              this.sec = response.data.data.data;
           });
       },
       fetchMunicipio(){
