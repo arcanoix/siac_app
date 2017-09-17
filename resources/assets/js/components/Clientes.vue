@@ -394,7 +394,7 @@ export default {
       },
       fetchN(){
           axios.get('numero_espera').then(response => {
-            this.numero = response.data;
+            this.num = response.data;
           });
       },
       fetchSector(){

@@ -150,36 +150,62 @@
             <router-link tag="li" to="/tablero">
                 <a><i class="fa fa-tachometer"></i> <span>Tablero</span></a>
             </router-link>
+          
+          @role('')
+                <router-link tag="li" to="/users">
+                    <a><i class="fa fa-user"></i> <span>Usuarios</span></a>
+                </router-link>
 
-            <router-link tag="li" to="/users">
-                <a><i class="fa fa-user"></i> <span>Usuarios</span></a>
-            </router-link>
+                <router-link tag="li" to="/empresas">
+                   <a> <i class="fa fa-building"></i> <span>Empresas</span></a>
+                </router-link>
 
-            <router-link tag="li" to="/empresas">
-               <a> <i class="fa fa-building"></i> <span>Empresas</span></a>
-            </router-link>
+                <router-link tag="li" to="/clientes">
+                  <a> <i class="fa fa-users"></i> <span>Clientes</span></a>
+                </router-link>
 
-            <router-link tag="li" to="/clientes">
-              <a> <i class="fa fa-users"></i> <span>Clientes</span></a>
-            </router-link>
+                 <router-link tag="li" to="/ads">
+                  <a> <i class="fa fa-font"></i> <span>Ads</span></a>
+                </router-link>
+  
 
-          <router-link tag="li" to="/ads">
-              <a> <i class="fa fa-font"></i> <span>Ads</span></a>
-            </router-link>
+                  <router-link tag="li" to="/mangas">
+                    <a><i class="fa fa-link"></i><span>Mangas</span></a>
+                  </router-link>
 
 
+                  <router-link tag="li" to="/numero_telefonico">
+                  <a> <i class="fa fa-tty"></i> <span>Numero Telefonico</span></a>
+                </router-link>
 
-         <router-link tag="li" to="/numero_telefonico">
-              <a> <i class="fa fa-tty"></i> <span>Numero Telefonico</span></a>
-            </router-link>
+                <li class="treeview">
+                      <a href="#"><i class="fa fa-cogs"></i> <span>Configuracion</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                          <router-link tag="li" to="/servicios">
+                              <a> <i class="fa fa-suitcase"></i> <span>Servicios</span></a>
+                          </router-link>
+                          <router-link tag="li" to="/tanque">
+                              <a> <i class="fa fa-suitcase"></i> <span>Tanque</span></a>
+                          </router-link>
+                          <router-link tag="li" to="/central">
+                                <a> <i class="fa fa-suitcase"></i> <span>Central</span></a>
+                          </router-link>
+                          <router-link tag="li" to="/sector">
+                                <a> <i class="fa fa-suitcase"></i> <span>Sector</span></a>
+                          </router-link>
+                      </ul>
+                 </li>
+
+            @endrole
 
             <router-link tag="li" to="/fallas">
               <a> <i class="fa fa-link"></i> <span>Fallas</span></a>
             </router-link>
 
-            <router-link tag="li" to="/mangas">
-              <a><i class="fa fa-link"></i><span>Mangas</span></a>
-            </router-link>
 
 
             <li class="treeview">
@@ -196,27 +222,7 @@
               </ul>
             </li>
       <!-- -->
-          <li class="treeview">
-            <a href="#"><i class="fa fa-cogs"></i> <span>Configuracion</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <router-link tag="li" to="/servicios">
-                  <a> <i class="fa fa-suitcase"></i> <span>Servicios</span></a>
-                </router-link>
-                <router-link tag="li" to="/tanque">
-                    <a> <i class="fa fa-suitcase"></i> <span>Tanque</span></a>
-                  </router-link>
-                  <router-link tag="li" to="/central">
-                      <a> <i class="fa fa-suitcase"></i> <span>Central</span></a>
-                    </router-link>
-                    <router-link tag="li" to="/sector">
-                        <a> <i class="fa fa-suitcase"></i> <span>Sector</span></a>
-                      </router-link>
-            </ul>
-          </li>
+          
 
         </ul>
         <!-- /.sidebar-menu -->

@@ -46536,6 +46536,7 @@ module.exports = function(Chart) {
 				meta.dataset.draw();
 			}
 
+<<<<<<< HEAD
 			for (; i < ilen; ++i) {
 				elements[i].draw();
 			}
@@ -46560,6 +46561,14 @@ module.exports = function(Chart) {
 			var valueOrDefault = helpers.valueAtIndexOrDefault;
 			var getHoverColor = helpers.getHoverColor;
 			var model = element._model;
+=======
+      axios.get('numero_espera').then(function (response) {
+        _this2.num = response.data;
+      });
+    },
+    fetchSector: function fetchSector() {
+      var _this3 = this;
+>>>>>>> 8f04482109624590cd800fb7df94b67a238c4295
 
 			model.backgroundColor = custom.hoverBackgroundColor ? custom.hoverBackgroundColor : valueOrDefault(dataset.hoverBackgroundColor, index, getHoverColor(model.backgroundColor));
 			model.borderColor = custom.hoverBorderColor ? custom.hoverBorderColor : valueOrDefault(dataset.hoverBorderColor, index, getHoverColor(model.borderColor));
@@ -46882,8 +46891,18 @@ module.exports = function(Chart) {
 		s01 = isNaN(s01) ? 0 : s01;
 		s12 = isNaN(s12) ? 0 : s12;
 
+<<<<<<< HEAD
 		var fa = t * s01; // scaling factor for triangle Ta
 		var fb = t * s12;
+=======
+      axios.get('numero_espera').then(function (response) {
+        console.log(response.data);
+        _this3.num = response.data;
+      });
+    },
+    fetchMunicipio: function fetchMunicipio() {
+      var _this4 = this;
+>>>>>>> 8f04482109624590cd800fb7df94b67a238c4295
 
 		return {
 			previous: {
@@ -47431,6 +47450,7 @@ module.exports = function(Chart) {
 			var i = 0;
 			var prop;
 
+<<<<<<< HEAD
 			for (; i < ilen; ++i) {
 				prop = props[i];
 				if (options.hasOwnProperty(prop)) {
@@ -47438,6 +47458,47 @@ module.exports = function(Chart) {
 				}
 			}
 		},
+=======
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      numberT: [],
+      showModal: false,
+      showModal1: false,
+      newNumber: {
+        code: '',
+        number: '',
+        status: 'En Espera',
+        cc: '',
+        cl: '',
+        pc: '',
+        pl: '',
+        sleeve_id: ''
+      },
+      editNumber: {
+        code: '',
+        number: '',
+        status: 'En Espera',
+        cc: '',
+        cl: '',
+        pc: '',
+        pl: '',
+        sleeve_id: ''
+      },
+      manga: {
+        id: ''
+      },
+      man: [],
+      code: ['0241', '0245', '0249', '0242'],
+      pagination: {
+        total: 0,
+        per_page: 7,
+        from: 1,
+        to: 0,
+        current_page: 1
+      },
+      offset: 4
+>>>>>>> 8f04482109624590cd800fb7df94b67a238c4295
 
 		/**
 		 * Fits boxes of the given chart into the given size by having each box measure itself
@@ -95402,7 +95463,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.newNumber.status = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, [_c('option', [_vm._v("Activo")]), _vm._v(" "), _c('option', [_vm._v("Inactivo")])])]), _vm._v(" "), _c('div', {
+  }, [_c('option', [_vm._v("En Espera")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('v-select', {
     attrs: {
@@ -95702,7 +95763,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.editNumber.status = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
       }
     }
-  }, [_c('option', [_vm._v("Activo")]), _vm._v(" "), _c('option', [_vm._v("Inactivo")])])]), _vm._v(" "), _c('div', {
+  }, [_c('option', [_vm._v("En Espera")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('v-select', {
     attrs: {
