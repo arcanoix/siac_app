@@ -390,7 +390,7 @@ export default {
       changePage(page){
           //console.log(page);
           this.pagination.current_page = page;
-          this.fetchCentral(page);
+          this.fetchCliente(page);
       },
       fetchN(){
           axios.get('numero_espera').then(response => {
