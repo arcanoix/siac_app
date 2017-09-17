@@ -108,20 +108,20 @@
 													</div>
 											</div>
 
-											<div class="col-xs-12" style="padding-top:19px;">
-	                        <div class="panel panel-blank">
-	                            <div class="panel-heading">
-																	<h1 class="panel-title">Graficos de Fallas</h1>
-	                                <div class="row">
-	                                    <div class="col-xs-12">
-																					<grafica></grafica>
+											<div class="col-xs-12" style="padding-top:19px; display:none">
+                    	                        <div class="panel panel-blank">
+                    	                            <div class="panel-heading">
+                    										<h1 class="panel-title">Graficos de Fallas</h1>
+                    	                                <div class="row">
+                    	                                    <div class="col-xs-12">
+                    											<grafica></grafica>
 
-	                                    </div>
-	                                </div>
-	                            </div>
+                    	                                    </div>
+                    	                                </div>
+                    	                            </div>
 
-	                        </div>
-	                    </div>
+                    	                        </div>
+                    	                    </div>
 
                 </div>
 	</div>

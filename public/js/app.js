@@ -91186,7 +91186,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('gra')], 1)])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12",
     staticStyle: {
-      "padding-top": "19px"
+      "padding-top": "19px",
+      "display": "none"
     }
   }, [_c('div', {
     staticClass: "panel panel-blank"
