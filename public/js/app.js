@@ -36864,7 +36864,7 @@ var postCliente = 'clientes_save';
       var _this2 = this;
 
       axios.get('numero_espera').then(function (response) {
-        _this2.numero = response.data;
+        _this2.num = response.data;
       });
     },
     fetchSector: function fetchSector() {
@@ -37592,7 +37592,8 @@ var postBusiness = 'business_save';
       var _this3 = this;
 
       axios.get('numero_espera').then(function (response) {
-        _this3.numero = response.data;
+        console.log(response.data);
+        _this3.num = response.data;
       });
     },
     fetchMunicipio: function fetchMunicipio() {
@@ -38756,7 +38757,7 @@ var postnumber = 'numero_save';
       newNumber: {
         code: '',
         number: '',
-        status: '',
+        status: 'En Espera',
         cc: '',
         cl: '',
         pc: '',
@@ -38766,7 +38767,7 @@ var postnumber = 'numero_save';
       editNumber: {
         code: '',
         number: '',
-        status: '',
+        status: 'En Espera',
         cc: '',
         cl: '',
         pc: '',
@@ -46536,7 +46537,6 @@ module.exports = function(Chart) {
 				meta.dataset.draw();
 			}
 
-<<<<<<< HEAD
 			for (; i < ilen; ++i) {
 				elements[i].draw();
 			}
@@ -46561,14 +46561,6 @@ module.exports = function(Chart) {
 			var valueOrDefault = helpers.valueAtIndexOrDefault;
 			var getHoverColor = helpers.getHoverColor;
 			var model = element._model;
-=======
-      axios.get('numero_espera').then(function (response) {
-        _this2.num = response.data;
-      });
-    },
-    fetchSector: function fetchSector() {
-      var _this3 = this;
->>>>>>> 8f04482109624590cd800fb7df94b67a238c4295
 
 			model.backgroundColor = custom.hoverBackgroundColor ? custom.hoverBackgroundColor : valueOrDefault(dataset.hoverBackgroundColor, index, getHoverColor(model.backgroundColor));
 			model.borderColor = custom.hoverBorderColor ? custom.hoverBorderColor : valueOrDefault(dataset.hoverBorderColor, index, getHoverColor(model.borderColor));
@@ -46891,18 +46883,8 @@ module.exports = function(Chart) {
 		s01 = isNaN(s01) ? 0 : s01;
 		s12 = isNaN(s12) ? 0 : s12;
 
-<<<<<<< HEAD
 		var fa = t * s01; // scaling factor for triangle Ta
 		var fb = t * s12;
-=======
-      axios.get('numero_espera').then(function (response) {
-        console.log(response.data);
-        _this3.num = response.data;
-      });
-    },
-    fetchMunicipio: function fetchMunicipio() {
-      var _this4 = this;
->>>>>>> 8f04482109624590cd800fb7df94b67a238c4295
 
 		return {
 			previous: {
@@ -47450,7 +47432,6 @@ module.exports = function(Chart) {
 			var i = 0;
 			var prop;
 
-<<<<<<< HEAD
 			for (; i < ilen; ++i) {
 				prop = props[i];
 				if (options.hasOwnProperty(prop)) {
@@ -47458,47 +47439,6 @@ module.exports = function(Chart) {
 				}
 			}
 		},
-=======
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      numberT: [],
-      showModal: false,
-      showModal1: false,
-      newNumber: {
-        code: '',
-        number: '',
-        status: 'En Espera',
-        cc: '',
-        cl: '',
-        pc: '',
-        pl: '',
-        sleeve_id: ''
-      },
-      editNumber: {
-        code: '',
-        number: '',
-        status: 'En Espera',
-        cc: '',
-        cl: '',
-        pc: '',
-        pl: '',
-        sleeve_id: ''
-      },
-      manga: {
-        id: ''
-      },
-      man: [],
-      code: ['0241', '0245', '0249', '0242'],
-      pagination: {
-        total: 0,
-        per_page: 7,
-        from: 1,
-        to: 0,
-        current_page: 1
-      },
-      offset: 4
->>>>>>> 8f04482109624590cd800fb7df94b67a238c4295
 
 		/**
 		 * Fits boxes of the given chart into the given size by having each box measure itself
@@ -97553,7 +97493,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"
-  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Tipo")]), _vm._v(" "), _c('th', [_vm._v("Cable Central")]), _vm._v(" "), _c('th', [_vm._v("Cable Local")]), _vm._v(" "), _c('th', [_vm._v("Par Central")]), _vm._v(" "), _c('th', [_vm._v("Par Local")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
+  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Tipo")]), _vm._v(" "), _c('th', [_vm._v("Cable Central")]), _vm._v(" "), _c('th', [_vm._v("Cable Local")]), _vm._v(" "), _c('th', [_vm._v("Par Central")]), _vm._v(" "), _c('th', [_vm._v("Par Local")]), _vm._v(" "), _c('th', [_vm._v("Direcciòn")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-top  btn btn-primary"
@@ -97899,7 +97839,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Descripcion")]), _vm._v(" "), _c('th', [_vm._v("Fecha")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
-    staticClass: "btn-top  btn btn-primary pull-right"
+    staticClass: "btn-top  btn btn-primary"
   }, [_c('i', {
     staticClass: "fa fa-pencil-square-o",
     attrs: {
