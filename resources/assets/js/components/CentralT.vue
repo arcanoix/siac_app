@@ -318,7 +318,7 @@ export default {
       },
 
       fetchSector(){
-        axios.get('sector').then(response => {
+        axios.get('sectorT').then(response => {
             this.sec = response.data.sector;
             console.log(response.data.sector);
         });

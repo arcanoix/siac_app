@@ -51518,7 +51518,7 @@ var postAds = 'ads_save';
     fetchSector: function fetchSector() {
       var _this3 = this;
 
-      axios.get('sector').then(function (response) {
+      axios.get('sectorT').then(function (response) {
         _this3.sec = response.data.sector;
       });
     },
@@ -51932,7 +51932,7 @@ var post_central = 'central_save';
     fetchSector: function fetchSector() {
       var _this3 = this;
 
-      axios.get('sector').then(function (response) {
+      axios.get('sectorT').then(function (response) {
         _this3.sec = response.data.sector;
         console.log(response.data.sector);
       });
@@ -52418,8 +52418,8 @@ var postCliente = 'clientes_save';
     fetchSector: function fetchSector() {
       var _this3 = this;
 
-      axios.get('sector').then(function (response) {
-        _this3.sec = response.data.data.data;
+      axios.get('sectorT').then(function (response) {
+        _this3.sec = response.data.sector;
       });
     },
     fetchMunicipio: function fetchMunicipio() {
@@ -52528,6 +52528,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_google_maps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue2_google_maps__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__graph_js__ = __webpack_require__(238);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__grafica_js__ = __webpack_require__(237);
+//
 //
 //
 //
@@ -53009,7 +53010,7 @@ var postBusiness = 'business_save';
         number_telephone_id: '',
         number_contact: '',
         state_id: '7',
-        municipality_id: '',
+        municipality_id: '14',
         parish_id: '',
         sector_id: ''
       },
@@ -53021,7 +53022,7 @@ var postBusiness = 'business_save';
         number_telephone_id: '',
         number_contact: '',
         state_id: '7',
-        municipality_id: '',
+        municipality_id: '14',
         parish_id: '',
         sector_id: ''
       },
@@ -53133,8 +53134,8 @@ var postBusiness = 'business_save';
     fetchSector: function fetchSector() {
       var _this2 = this;
 
-      axios.get('sector').then(function (response) {
-        _this2.sec = response.data.data.data;
+      axios.get('sectorT').then(function (response) {
+        _this2.sec = response.data.sector;
       });
     },
     fetchN: function fetchN() {
@@ -53247,6 +53248,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_google_maps__ = __webpack_require__(407);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_google_maps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue2_google_maps__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -53434,6 +53444,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2_google_maps__, {
+  load: {
+    key: 'AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0'
+  }
+});
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('v-select', __WEBPACK_IMPORTED_MODULE_1_vue_select___default.a);
 
@@ -53443,6 +53460,10 @@ var postFalla = 'falla_save';
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      latitude: '',
+      place: '',
+      active: true,
+      longitude: '',
       falla: [],
       showModal: false,
       showModal1: false,
@@ -53495,6 +53516,18 @@ var postFalla = 'falla_save';
       offset: 4
 
     };
+  },
+
+  watch: {
+    place: function place() {
+      this.longitude = '';
+      this.latitude = '';
+      this.active = true;
+      if (this.place.length >= 4) {
+        this.lookupCoordinates();
+        this.active = false;
+      }
+    }
   },
   created: function created() {
     this.fetchFallas(this.pagination.current_page);
@@ -53554,6 +53587,22 @@ var postFalla = 'falla_save';
   },
 
   methods: {
+
+    lookupCoordinates: _.debounce(function () {
+      var app = this;
+      app.longitude = "Searching.....";
+      app.latitude = "Searching.....";
+
+      axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + app.place).then(function (response) {
+        console.log(response.data);
+        app.longitude = response.data.results[0].geometry.location.lng;
+        app.latitude = response.data.results[0].geometry.location.lat;
+      }).catch(function (error) {
+        app.longitude = "Invalid place";
+        app.latitude = "Invalid place";
+      });
+    }),
+
     onChangeUser: function onChangeUser(obj) {
       this.user.id = obj.value;
     },
@@ -93304,7 +93353,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "value": e.id
       }
-    }, [_vm._v(" " + _vm._s(e.name))])
+    }, [_vm._v(_vm._s(e.name))])
   }))]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('v-select', {
@@ -95756,8 +95805,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: (_vm.newFalla.address),
-      expression: "newFalla.address"
+      value: (_vm.place),
+      expression: "place"
     }],
     staticClass: "form-control",
     attrs: {
@@ -95765,12 +95814,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "placeholder": "Direccion"
     },
     domProps: {
-      "value": (_vm.newFalla.address)
+      "value": (_vm.place)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newFalla.address = $event.target.value
+        _vm.place = $event.target.value
       }
     }
   })]), _vm._v(" "), _c('div', {
@@ -95791,7 +95840,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('span', {
     slot: "no-options"
-  }, [_vm._v("Porfavor Carga un Tecnico en su modulo")])])], 1)])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Porfavor Carga un Tecnico en su modulo")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 Map"
+  }, [_c('h3', [_vm._v(" Latitude : " + _vm._s(_vm.latitude))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 Map"
+  }, [_c('h3', [_vm._v(" Longitude : " + _vm._s(_vm.longitude))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-12 Map",
+    class: {
+      'not-visible': _vm.active
+    }
+  }, [_c('iframe', {
+    staticStyle: {
+      "width": "100%",
+      "height": "350px",
+      "border": "0"
+    },
+    attrs: {
+      "frameborder": "0",
+      "src": 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0&q=' + _vm.place,
+      "allowfullscreen": ""
+    }
+  })])])]), _vm._v(" "), _c('div', {
     slot: "footer"
   }, [_c('a', {
     staticClass: "btn btn-primary",

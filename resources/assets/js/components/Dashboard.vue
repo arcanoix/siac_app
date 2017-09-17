@@ -75,6 +75,7 @@
 																			  :zoom="8"
 																			  map-type-id="terrain"
 																			  style="width: 900px; height: 300px"
+                                                                               
 																			>
 																			<gmap-marker
 																	      :key="index"

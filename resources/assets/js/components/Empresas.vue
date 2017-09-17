@@ -123,7 +123,7 @@
 
              <div form-group inner-addon left-addon>
               <select v-model="newBusiness.state_id" class="form-control" style="display:none;">
-                <option :value="e.id"  v-for="e in estado">&nbsp;{{ e.name }}</option>
+                <option :value="e.id"  v-for="e in estado">{{ e.name }}</option>
               </select>
             </div>
 
@@ -279,7 +279,7 @@ export default {
           number_telephone_id:'',
           number_contact:'',
           state_id:'7',
-          municipality_id:'',
+          municipality_id:'14',
           parish_id:'',
           sector_id:''
         },
@@ -291,7 +291,7 @@ export default {
           number_telephone_id:'',
           number_contact:'',
           state_id:'7',
-          municipality_id:'',
+          municipality_id:'14',
           parish_id:'',
           sector_id:''
         },
@@ -404,8 +404,8 @@ export default {
 
       },
       fetchSector(){
-          axios.get('sector').then(response => {
-              this.sec = response.data.data.data;
+          axios.get('sectorT').then(response => {
+              this.sec = response.data.sector;
           });
       },
       fetchN(){
