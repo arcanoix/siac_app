@@ -213,7 +213,7 @@
                             </div>
                             <div class="col-lg-12" >
                                 <div class="chat-composer">
-                                    <input v-model="input" autocomplete="off" placeholder="Escribe un mensaje..." @keyup.enter="post" />
+                                    <input  v-model="input" autocomplete="off" placeholder="Escribe un mensaje..." @keyup.enter="post" />
 
                                     <input type="hidden" v-model="channel" value="">
                                     <input type="hidden" v-model="userName" value="{{ Auth::user()->name }}">

@@ -38,6 +38,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('/admin-lte/dist/css/skins/skin-blue.min.css') }}">
 
   <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('css/chating.css')}}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -74,10 +75,45 @@ desired effect
 <div id="app">
 
               @yield('content')
-
+ 
 </div>
+ 
+<div class="container">
+            <div id="chat" style="position: fixed;">Open Chat</div>
+              
+              <div id="chata">
+                <div id="chat-box" style="position: fixed;">
+                
+                <div id="chat-bar">
+                  <p>Chat SIAC</p>
+                  <span class="fa fa-close"></span>
+                </div>
+                
+                <div id="chat-messages">
+                   <div v-if="nickname">
+                       <b>@{{ nickname }}</b><span> se a unido </span> 
+                   </div>
+                   <div class="chat-message" v-for="message in messages">
+                                            <p><small>@{{ message[1] }} : </small>@{{ message[2] }} </p>
 
+                    </div>
+                </div>
+                
+                <div id="chat-input">
+                 
+                                    <input class="send" v-model="input" autocomplete="off" placeholder="Escribe un mensaje..." @keyup.enter="post" />
 
+                                    <input type="hidden" v-model="channel" value="">
+                                    <input type="hidden" v-model="userName" value="{{ Auth::user()->name }}">
+
+                                    <button @click="post" class="btn btn-primary">Enviar</button>
+                              
+                </div>
+
+              </div> 
+              </div>  
+  </div>       
+            
 
 <!-- REQUIRED JS SCRIPTS -->
 
@@ -97,6 +133,56 @@ desired effect
 <script src="{{ asset('js/sweetalert2.min.js')}}"></script>
 <script src="{{asset('js/moment.js')}}"></script>
 <script src="{{asset('js/moment-with-locales.js')}}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
+    <script>
+
+    //  var socket = io("http://socket-seac.herokuapp.com:80");
+    var socket=io('http://localhost:8080');
+
+      console.log(socket);
+
+      var vm = new Vue({
+        el: "#chata",
+
+        data: {
+          messages: [],
+          input: "",
+          channel: "",
+          userName: ""
+        },
+        methods: {
+          post: function() {
+          //  console.log('mensaje ' + this.input);
+            var payload = [this.channel, this.userName, this.input];
+          //  console.log(payload);
+            socket.emit('chat',payload);
+            this.input = ''
+          }
+        }
+      });
+
+     // console.log(vm.userName);
+      this.userName = vm.userName;
+
+      
+        //vm.messages.push('chat', vm.userName);
+
+      socket.on('chat.' + vm.channel, function(payload){
+        vm.messages.push(['chat', payload[1], payload[2]]);
+        //console.log('mensaje recibido -- ' + payload);
+        //
+        
+      });
+
+
+
+
+    </script>
+
+
     <script>
         function reloj(){
           time_act = moment().locale('es');
@@ -107,6 +193,31 @@ desired effect
         window.onload = function(){
           reloj();
         }
+    </script>
+
+    <script type="text/javascript">
+      
+          $('#chat-box').hide()
+            $('#chat').click(function() {
+              $(this).fadeOut(500)
+              $('#chat-box').fadeIn(500)
+            })
+            $('.fa.fa-close').click(function() {
+              $('#chat-box').fadeOut(500)
+              $('#chat').fadeIn(500)
+            })
+            $('form').submit(function(event) {
+              event.preventDefault()
+              var msg = $('#message').val()
+              $('#message').val('')
+              $('#messages').append($('<li>').html(msg))
+              $('#chat-messages').animate({
+                scrollTop: $('#chat-messages').get(0).scrollHeight
+              }, 1000)
+            })
+
+
+
     </script>
 
 
