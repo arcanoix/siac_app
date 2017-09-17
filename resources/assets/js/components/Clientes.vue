@@ -398,8 +398,8 @@ export default {
           });
       },
       fetchSector(){
-          axios.get('sector').then(response => {
-              this.sec = response.data.data.data;
+          axios.get('sectorT').then(response => {
+              this.sec = response.data.sector;
           });
       },
       fetchMunicipio(){
