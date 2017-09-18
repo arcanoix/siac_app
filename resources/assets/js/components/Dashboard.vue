@@ -87,9 +87,7 @@
 																	    ></gmap-marker>
 
 																			</gmap-map>
-                                                                            <pre v-for="m in markers">
-                                                                                {{ (m) }}
-                                                                            </pre>
+                                                                          
 
 																		</div>
                                 </div>

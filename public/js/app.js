@@ -52788,8 +52788,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 var getDash = 'dashboard';
 
@@ -91373,9 +91371,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     })
-  })), _vm._v(" "), _vm._l((_vm.markers), function(m) {
-    return _c('pre', [_vm._v("                                                                                " + _vm._s((m)) + "\n                                                                            ")])
-  })], 2)])]), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
+  }))], 1)])]), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12",
     staticStyle: {
       "padding-top": "19px"
