@@ -64,6 +64,18 @@ class FallaController extends Controller
    return $response;
     }
 
+     public function mapa()
+    {
+    $falla = Falla::select('lat','longitud','type_failure')->get()->toArray();
+     //$falla = Falla::all();
+      
+       
+
+
+         return response($falla);
+  
+    }
+
     public function store(Request $r)
     {
       $falla_save = new Falla();

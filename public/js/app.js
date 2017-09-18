@@ -52788,6 +52788,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 var getDash = 'dashboard';
 
@@ -52816,38 +52818,49 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue2
 				lat: 10.0,
 				lng: -67.9
 			},
-			markers: [{
-				position: {
-					lat: 10.0,
-					lng: -67.9
-				}
-			}, {
-				position: {
-					lat: 10.0,
-					lng: -67.7
-				}
-			}]
+			markers: [],
+			lat: 0,
+			lng: 0
 		};
 	},
 	created: function created() {
 		this.fetchDash();
+		this.getDevices();
 	},
 
 
 	methods: {
 		getDevices: function getDevices() {
-			axios.get('grafica').then(function (response) {
-				//console.log(reponse.data);
+			var _this = this;
+
+			axios.get('mapa').then(function (response) {
+				_this.lat = parseFloat(response.data.map(function (l) {
+					return l.lat;
+				}));
+				_this.lng = parseFloat(response.data.map(function (ln) {
+					return ln.longitud;
+				}));
+
+				console.log(_this.lat, _this.lng);
+				//console.log(response.data.position.length);
+				_this.markers = response.data;
+				// console.log(response.data);
+
+
+				/*for (var i=0; i < response.data.length; i++){
+           this.markers[i] = response.data[i];
+          console.log(this.markers[i]);
+    }*/
 			});
 		},
 		fetchDash: function fetchDash() {
-			var _this = this;
+			var _this2 = this;
 
 			axios.get(getDash).then(function (response) {
-				_this.user = response.data.user;
-				_this.cliente = response.data.cliente;
-				_this.falla = response.data.falla;
-				_this.ads = response.data.ads;
+				_this2.user = response.data.user;
+				_this2.cliente = response.data.cliente;
+				_this2.falla = response.data.falla;
+				_this2.ads = response.data.ads;
 			});
 		}
 	}
@@ -91347,7 +91360,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('gmap-marker', {
       key: index,
       attrs: {
-        "position": m.position,
+        "position": {
+          lat: parseFloat(m.lat),
+          lng: parseFloat(m.longitud)
+        },
         "clickable": true,
         "draggable": true
       },
@@ -91357,7 +91373,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     })
-  }))], 1)])]), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
+  })), _vm._v(" "), _vm._l((_vm.markers), function(m) {
+    return _c('pre', [_vm._v("                                                                                " + _vm._s((m)) + "\n                                                                            ")])
+  })], 2)])]), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12",
     staticStyle: {
       "padding-top": "19px"
