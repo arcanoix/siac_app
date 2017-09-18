@@ -285,14 +285,36 @@ export default {
       },
       saveManga(newManga){
         var input = this.newManga;
-        if(input['name'] == ''){
-          this.hasError =false;
+        
+        var name = input['name']
+        var description = input['description']
+        var address = input['address']
+
+
+         if((name && description && address) == ""){
+         
+          this.hasError = false;
           this.hasDeleted = true;
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
               this.hasError=true;
                axios.post(postManga, this.newManga).then(response => {
+
+                swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+
                this.fetchManga();
                this.showModal=false;
                });

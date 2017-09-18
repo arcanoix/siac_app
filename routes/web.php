@@ -156,5 +156,5 @@ Route::get('municipio','EstateController@getM');
 Route::get('sector','EstateController@getS');
 Route::get('sectorT','EstateController@sectorT');
 Route::get('M','EstateController@getMID');
-Route::get('/parish/{id}','EstateController@getParish');
+Route::get('/parroquia/{id}','EstateController@getParish');
 Route::get('parroquia','EstateController@getP');

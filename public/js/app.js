@@ -43169,10 +43169,37 @@ if (typeof jQuery === 'undefined') {
       return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
     }
 
+<<<<<<< HEAD
     if (activeTarget && scrollTop < offsets[0]) {
       this.activeTarget = null
       return this.clear()
     }
+=======
+      var input = this.newAds;
+      var name = input['name'];
+      var type_ads = input['type_ads'];
+      var cc = input['cc'];
+      var cl = input['cl'];
+      var pc = input['pc'];
+      var pl = input['pl'];
+      var address = input['address'];
+
+      if ((name && type_ads && cc && cl && pc && pl && address) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.newAds.sleeve_id = this.manga.id;
+        this.newAds.sector_id = this.sector.id;
+        this.newAds.parish_id = this.parroquia.id;
+        this.newAds.municipality_id = this.municipio.id;
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
     for (i = offsets.length; i--;) {
       activeTarget != targets[i]
@@ -43182,8 +43209,26 @@ if (typeof jQuery === 'undefined') {
     }
   }
 
+<<<<<<< HEAD
   ScrollSpy.prototype.activate = function (target) {
     this.activeTarget = target
+=======
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
+          _this6.fetchAds();
+          _this6.showModal = false;
+        });
+      }
+    },
+    onEdit: function onEdit(b) {
+      var _this7 = this;
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
     this.clear()
 
@@ -43297,11 +43342,22 @@ if (typeof jQuery === 'undefined') {
       relatedTarget: $previous[0]
     })
 
+<<<<<<< HEAD
     $previous.trigger(hideEvent)
     $this.trigger(showEvent)
+=======
+      axios.get('sectorT').then(function (response) {
+        _this3.sec = response.data.sector;
+        //console.log(response.data.sector);
+      });
+    },
+    fetchParroquia: function fetchParroquia() {
+      var _this4 = this;
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
     if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
 
+<<<<<<< HEAD
     var $target = $(selector)
 
     this.activate($this.closest('li'), $ul)
@@ -43342,6 +43398,39 @@ if (typeof jQuery === 'undefined') {
         element.addClass('in')
       } else {
         element.removeClass('fade')
+=======
+      var input = this.newCentral;
+      var name = input['name'];
+      var address = input['address'];
+
+      if ((name && address) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.newCentral.parish_id = this.parroquia.id;
+        this.newCentral.sector_id = this.sector.id;
+        this.newCentral.tanks_id = this.tanque.id;
+        this.hasError = true;
+        axios.post(post_central, this.newCentral).then(function (response) {
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
+          _this5.fetchCentral();
+          _this5.showModal = false;
+        });
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
       }
 
       if (element.parent('.dropdown-menu').length) {
@@ -43606,10 +43695,53 @@ module.exports = function(Chart) {
 
 };
 
+<<<<<<< HEAD
 
 /***/ }),
 /* 310 */
 /***/ (function(module, exports, __webpack_require__) {
+=======
+      var input = this.newCliente;
+      var name = input['name'];
+      var last_name = input['last_name'];
+      var identification_card = input['identification_card'];
+      var address = input['address'];
+      var email = input['email'];
+
+      if ((name && last_name && identification_card && address && email) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.newCliente.sector_id = this.sector.id;
+        this.newCliente.parish_id = this.parroquia.id;
+        this.newCliente.municipality_id = this.municipio.id;
+        this.newCliente.number_telephone_id = this.numero.id;
+        this.hasError = true;
+        axios.post(postCliente, this.newCliente).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
+          _this7.fetchCliente();
+          _this7.showModal = false;
+        });
+      }
+    },
+    onEdit: function onEdit(b) {
+      var _this8 = this;
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 "use strict";
 
@@ -43630,6 +43762,149 @@ module.exports = function(Chart) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+<<<<<<< HEAD
+=======
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_google_maps__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue2_google_maps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue2_google_maps__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__graph_js__ = __webpack_require__(239);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__grafica_js__ = __webpack_require__(238);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var getDash = 'dashboard';
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 
 module.exports = function(Chart) {
@@ -47230,6 +47505,7 @@ module.exports = function(Chart) {
 			mouseX = touches[0].clientX;
 			mouseY = touches[0].clientY;
 
+<<<<<<< HEAD
 		} else {
 			mouseX = e.clientX;
 			mouseY = e.clientY;
@@ -47244,6 +47520,57 @@ module.exports = function(Chart) {
 		var paddingBottom = parseFloat(helpers.getStyle(canvas, 'padding-bottom'));
 		var width = boundingRect.right - boundingRect.left - paddingLeft - paddingRight;
 		var height = boundingRect.bottom - boundingRect.top - paddingTop - paddingBottom;
+=======
+      axios.get('/parroquia/' + this.newBusiness.municipality_id).then(function (response) {
+        _this6.parro = response.data;
+      });
+    },
+    saveBusiness: function saveBusiness(newBusiness) {
+      var _this7 = this;
+
+      var input = this.newBusiness;
+
+      var name = input['name'];
+      var last_name = input['last_name'];
+      var rif = input['rif'];
+      var address = input['address'];
+      var email = input['email'];
+      var number_contact = input['number_contact'];
+
+      if ((name && last_name && rif && address && email && number_contact) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        //this.newAds.sleeve_id = this.manga.id;
+        this.newBusiness.sector_id = this.sector.id;
+        this.newBusiness.parish_id = this.parroquia.id;
+        this.newBusiness.municipality_id = this.municipio.id;
+        this.newBusiness.number_telephone_id = this.numero.id;
+        this.hasError = true;
+        axios.post(postBusiness, this.newBusiness).then(function (response) {
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
+          _this7.fetchBusiness();
+          _this7.showModal = false;
+        });
+      }
+    },
+    onEdit: function onEdit(b) {
+      var _this8 = this;
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 		// We divide by the current device pixel ratio, because the canvas is scaled up by that amount in each direction. However
 		// the backend model is in unscaled coordinates. Since we are going to deal with our model coordinates, we go back here
@@ -47448,6 +47775,30 @@ module.exports = function(Chart) {
 	};
 };
 
+<<<<<<< HEAD
+=======
+      axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + app.place).then(function (response) {
+        //console.log(response);
+        app.longitude = response.data.results[0].geometry.location.lng;
+        app.latitude = response.data.results[0].geometry.location.lat;
+      }).catch(function (error) {
+        app.longitude = "Ubicacion no Valida";
+        app.latitude = "Ubicacion no Valida";
+      });
+    },
+    onChangeUser: function onChangeUser(obj) {
+      this.user.id = obj.value;
+    },
+    onChange: function onChange(obj) {
+      this.numero.id = obj.value;
+      //this.newFalla.number_telephone_id = obj.value;
+    },
+    onChangeCliente: function onChangeCliente(obj) {
+      this.cl.id = obj.value;
+    },
+    fetchFallas: function fetchFallas(page) {
+      var _this = this;
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 /***/ }),
 /* 326 */
@@ -47491,6 +47842,7 @@ defaults._set('global', {
 	}
 });
 
+<<<<<<< HEAD
 module.exports = function() {
 
 	// Occupy the global variable of Chart, and create a simple base class
@@ -47498,6 +47850,50 @@ module.exports = function() {
 		this.construct(item, config);
 		return this;
 	};
+=======
+      var input = this.newFalla;
+      var type_failure = input['type_failure'];
+      var status = input['status'];
+      var address = input['address'];
+      var lat = input['lat'];
+      var longitud = input['longitud'];
+
+      if ((status && type_failure && address && lat && longitud) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.newFalla.user_id = this.user.id;
+        this.newFalla.customer_id = this.cl.id;
+        this.newFalla.number_telephone_id = this.numero.id;
+        this.newFalla.address = this.place;
+        this.newFalla.latitude = this.latitude;
+        this.newFalla.longitude = this.longitude;
+        this.hasError = true;
+        axios.post(postFalla, this.newFalla).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
+          _this5.fetchFallas();
+          _this5.showModal = false;
+        });
+      }
+    },
+    updateFalla: function updateFalla(editFalla) {
+      var _this6 = this;
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 	Chart.Chart = Chart;
 
@@ -47578,8 +47974,46 @@ module.exports = function(Chart) {
 			item.position = item.position || 'top';
 			item.weight = item.weight || 0;
 
+<<<<<<< HEAD
 			chart.boxes.push(item);
 		},
+=======
+      var input = this.newManga;
+
+      var name = input['name'];
+      var description = input['description'];
+      var address = input['address'];
+
+      if ((name && description && address) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.hasError = true;
+        axios.post(postManga, this.newManga).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
+          _this4.fetchManga();
+          _this4.showModal = false;
+        });
+      }
+    }
+  }
+});
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 		/**
 		 * Remove a layoutItem from a chart
@@ -47698,6 +48132,7 @@ module.exports = function(Chart) {
 			var maxChartAreaHeight = chartHeight;
 			var minBoxSizes = [];
 
+<<<<<<< HEAD
 			function getMinimumBoxSize(box) {
 				var minSize;
 				var isHorizontal = box.isHorizontal();
@@ -47709,6 +48144,45 @@ module.exports = function(Chart) {
 					minSize = box.update(verticalBoxWidth, chartAreaHeight);
 					maxChartAreaWidth -= minSize.width;
 				}
+=======
+      var input = this.newNumber;
+      var code = input['code'];
+      var number = input['number'];
+      var status = input['status'];
+      var cc = input['cc'];
+      var cl = input['cl'];
+      var pc = input['pc'];
+      var pl = input['pl'];
+
+      if ((code && number && status && cc && cl && pc && pl) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.newNumber.sleeve_id = this.manga.id;
+        this.hasError = true;
+        axios.post(postnumber, this.newNumber).then(function (response) {
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+          _this3.fetchNumber();
+          _this3.showModal = false;
+        });
+      }
+    },
+    onEdit: function onEdit(b) {
+      var _this4 = this;
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 				minBoxSizes.push({
 					horizontal: isHorizontal,
@@ -47787,6 +48261,7 @@ module.exports = function(Chart) {
 			// Set the Left and Right margins for the horizontal boxes
 			helpers.each(topBoxes.concat(bottomBoxes), fitBox);
 
+<<<<<<< HEAD
 			// Figure out how much margin is on the top and bottom of the vertical boxes
 			helpers.each(topBoxes, function(box) {
 				totalTopBoxesHeight += box.height;
@@ -47800,6 +48275,38 @@ module.exports = function(Chart) {
 				var minBoxSize = helpers.findNextWhere(minBoxSizes, function(minSize) {
 					return minSize.box === box;
 				});
+=======
+      var input = this.newSector;
+      var name = input['name'];
+      if (name == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.newSector.parish_id = this.parroquia.id;
+        this.hasError = true;
+        axios.post('save_sector', this.newSector).then(function (response) {
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+          _this5.fetchSector();
+          _this5.showModal = false;
+        });
+      }
+    }
+  }
+});
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 				var scaleMargin = {
 					left: 0,
@@ -47816,11 +48323,29 @@ module.exports = function(Chart) {
 			// Let the left layout know the final margin
 			helpers.each(leftBoxes.concat(rightBoxes), finalFitVerticalBox);
 
+<<<<<<< HEAD
 			// Recalculate because the size of each layout might have changed slightly due to the margins (label rotation for instance)
 			totalLeftBoxesWidth = leftPadding;
 			totalRightBoxesWidth = rightPadding;
 			totalTopBoxesHeight = topPadding;
 			totalBottomBoxesHeight = bottomPadding;
+=======
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      servicio: [],
+      showModal: false,
+      showModal1: false,
+      hasError: false,
+      newServicio: {
+        name: '',
+        description: ''
+      },
+      editServicio: {
+        name: '',
+        description: ''
+      }
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 			helpers.each(leftBoxes, function(box) {
 				totalLeftBoxesWidth += box.width;
@@ -47837,10 +48362,46 @@ module.exports = function(Chart) {
 				totalBottomBoxesHeight += box.height;
 			});
 
+<<<<<<< HEAD
 			// We may be adding some padding to account for rotated x axis labels
 			var leftPaddingAddition = Math.max(maxHorizontalLeftPadding - totalLeftBoxesWidth, 0);
 			totalLeftBoxesWidth += leftPaddingAddition;
 			totalRightBoxesWidth += Math.max(maxHorizontalRightPadding - totalRightBoxesWidth, 0);
+=======
+      var input = this.newServicio;
+      var name = input['name'];
+      var description = input['description'];
+
+      if ((name && description) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.hasError = true;
+        axios.post(postServicio, this.newServicio).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
+          _this2.fetchServicio();
+          _this2.showModal = false;
+        });
+      }
+    },
+    onEdit: function onEdit(b) {
+      var _this3 = this;
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 			var topPaddingAddition = Math.max(maxVerticalTopPadding - totalTopBoxesHeight, 0);
 			totalTopBoxesHeight += topPaddingAddition;
@@ -47920,6 +48481,7 @@ module.exports = function(Chart) {
 				bottom: totalTopBoxesHeight + maxChartAreaHeight
 			};
 
+<<<<<<< HEAD
 			// Step 9
 			helpers.each(chartAreaBoxes, function(box) {
 				box.left = chart.chartArea.left;
@@ -47932,6 +48494,48 @@ module.exports = function(Chart) {
 		}
 	};
 };
+=======
+      axios.get('ads').then(function (response) {
+        _this2.ads = response.data.data.data;
+        // console.log(response.data);
+      });
+    },
+    saveTanque: function saveTanque(newTanque) {
+      var _this3 = this;
+
+      var input = this.newTanque;
+      var name = input['name'];
+      var address = input['address'];
+
+      if ((name && address) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.newTanque.ads_id = this.adds.id;
+        this.hasError = true;
+        axios.post(post_tanque, this.newTanque).then(function (response) {
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+          _this3.fetchTanque();
+          _this3.showModal = false;
+        });
+      }
+    },
+    onEdit: function onEdit(b) {
+      var _this4 = this;
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 
 /***/ }),
@@ -48081,11 +48685,41 @@ module.exports = function(Chart) {
 					return;
 				}
 
+<<<<<<< HEAD
 				var id = plugin.id;
 				var opts = options[id];
 				if (opts === false) {
 					return;
 				}
+=======
+      var data = { page: page };
+      axios.get('/users?page=' + page).then(function (response) {
+        //console.log(getUsers, data);
+        _this.users = response.data.data.data;
+        _this.pagination = response.data.pagination;
+        _this.role = response.data.role;
+        //console.log(response.data);
+        //  console.log(response.data.pagination);
+        //  this.$set('users', response.data.data.data);
+        //this.$set('pagination', response.data.pagination);
+        //console.log(response.data.role);
+      });
+    },
+    changePage: function changePage(page) {
+      //console.log(page);
+      this.pagination.current_page = page;
+      this.fetchUsers(page);
+    },
+    onFileChange: function onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage: function createImage(file) {
+      //console.log(file.name);
+      // var formData = new FormData();
+      //formData.append('avatar', this.file);
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 				if (opts === true) {
 					opts = helpers.clone(defaults.global.plugins[id]);
@@ -48098,11 +48732,52 @@ module.exports = function(Chart) {
 				});
 			});
 
+<<<<<<< HEAD
 			cache.descriptors = descriptors;
 			cache.id = this._cacheId;
 			return descriptors;
 		}
 	};
+=======
+      var input = this.newUser;
+      var name = input['name'];
+      var email = input['email'];
+      var password = input['password'];
+      var status = input['status'];
+
+      if ((name && email && password && status) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.hasError = true;
+        this.showModal = true;
+        axios.post(postUsers, this.newUser).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
+          _this2.fetchUsers();
+          _this2.showModal = false;
+        });
+      }
+    },
+    onDelete: function onDelete(b) {
+      var that = this;
+      var delUsers = '/users_del/';
+      //console.log(delUsers + "/"+ b.id);
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 	/**
 	 * Plugin extension hooks.
@@ -49497,6 +50172,7 @@ module.exports = function(Chart) {
 		}, 0);
 		combinedBodyLength += model.beforeBody.length + model.afterBody.length;
 
+<<<<<<< HEAD
 		var titleLineCount = model.title.length;
 		var footerLineCount = model.footer.length;
 		var titleFontSize = model.titleFontSize;
@@ -49511,6 +50187,31 @@ module.exports = function(Chart) {
 		height += footerLineCount ? model.footerMarginTop : 0; // Footer Margin
 		height += footerLineCount * (footerFontSize); // Footer Lines
 		height += footerLineCount ? (footerLineCount - 1) * model.footerSpacing : 0; // Footer Line Spacing
+=======
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_vue_chartjs__["Bar"].extend({
+  data: function data() {
+    return {
+      data: [],
+      listo: [],
+      labels: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('grafica').then(function (response) {
+      console.log(response);
+      _this.data = response.data.EnProceso.map(function (data) {
+        return data.estatus;
+      });
+      _this.listo = response.data.Listo.map(function (labels) {
+        return labels.estatus;
+      });
+
+      _this.fillData();
+    });
+  },
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 		// Title width
 		var widthPadding = 0;
@@ -65440,9 +66141,14 @@ function ajaxExtend( target, src ) {
  */
 function ajaxHandleResponses( s, jqXHR, responses ) {
 
+<<<<<<< HEAD
 	var ct, type, finalDataType, firstDataType,
 		contents = s.contents,
 		dataTypes = s.dataTypes;
+=======
+exports = module.exports = __webpack_require__(6)();
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+>>>>>>> 64e5ea3dc7e25c2d075774cfb7e9e2e652161789
 
 	// Remove auto dataType and get content-type in the process
 	while ( dataTypes[ 0 ] === "*" ) {
@@ -96278,9 +96984,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     })
-  })), _vm._v(" "), _vm._l((_vm.markers), function(m) {
-    return _c('pre', [_vm._v("                                                                                " + _vm._s((m)) + "\n                                                                            ")])
-  })], 2)])]), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
+  }))], 1)])]), _vm._v(" "), _c('br'), _vm._v(" "), _c('div', {
     staticClass: "col-xs-12",
     staticStyle: {
       "padding-top": "19px"
@@ -97778,7 +98482,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Nombre del Servicio"
+      "placeholder": "Nombre del Servicio",
+      "name": "name"
     },
     domProps: {
       "value": (_vm.newServicio.name)
@@ -98206,6 +98911,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'input': true, 'is-danger': _vm.errors.has('rif')
     },
     attrs: {
+      "maxlength": "10",
       "type": "text",
       "placeholder": "Rif"
     },
@@ -98594,6 +99300,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'input': true, 'is-danger': _vm.errors.has('rif')
     },
     attrs: {
+      "maxlength": "10",
       "type": "text",
       "placeholder": "Rif"
     },
@@ -99504,6 +100211,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'input': true, 'is-danger': _vm.errors.has('identification_card')
     },
     attrs: {
+      "maxlength": "10",
       "type": "text",
       "placeholder": "Cedula"
     },
@@ -99870,6 +100578,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'input': true, 'is-danger': _vm.errors.has('identification_card')
     },
     attrs: {
+      "maxlength": "10",
       "type": "text",
       "placeholder": "Cedula"
     },

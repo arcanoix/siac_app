@@ -357,7 +357,7 @@ export default {
 
       axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + app.place)
             .then(response => {
-              console.log(response);
+              //console.log(response);
               app.longitude = response.data.results[0].geometry.location.lng;
               app.latitude = response.data.results[0].geometry.location.lat;              
             })
@@ -412,11 +412,23 @@ export default {
       },
       saveFalla(newFalla){
         var input = this.newFalla;
+        var type_failure = input['type_failure']
+        var status = input['status']
+        var address = input['address']
+        var lat = input['lat']
+        var longitud = input['longitud']
 
 
-        if(input['name'] == ''){
-          this.hasError =false;
+         if((status && type_failure && address && lat && longitud) == ""){
+         
+          this.hasError = false;
           this.hasDeleted = true;
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
@@ -428,6 +440,15 @@ export default {
             this.newFalla.longitude = this.longitude;
               this.hasError=true;
                axios.post(postFalla, this.newFalla).then(response => {
+
+                  swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+
                this.fetchFallas();
                this.showModal= false;
                });

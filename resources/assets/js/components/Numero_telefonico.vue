@@ -342,17 +342,38 @@ export default {
           this.fetchNumber(page);
       },
       saveNumber(newNumber){
-        var input = this.newNumber;
-        if(input['code'] == ''){
-          this.hasError =false;
+        var input = this.newNumber
+        var code = input['code']
+        var number = input['number']
+        var status = input['status']
+        var cc = input['cc']
+        var cl = input['cl']
+        var pc = input['pc']
+        var pl = input['pl']
+
+        if((code && number && status && cc && cl && pc && pl) == ""){
+         
+          this.hasError = false;
           this.hasDeleted = true;
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
             this.newNumber.sleeve_id = this.manga.id;
               this.hasError=true;
                axios.post(postnumber, this.newNumber).then(response => {
-
+                   swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
                this.fetchNumber();
                this.showModal=false;
                });
