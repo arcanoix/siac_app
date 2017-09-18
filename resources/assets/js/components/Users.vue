@@ -275,7 +275,7 @@ export default {
             this.users = response.data.data.data;
             this.pagination = response.data.pagination;
             this.role = response.data.role;
-            console.log(response.data);
+            //console.log(response.data);
           //  console.log(response.data.pagination);
           //  this.$set('users', response.data.data.data);
             //this.$set('pagination', response.data.pagination);
@@ -315,17 +315,38 @@ export default {
       saveUser(newUser)
       {
         var input = this.newUser;
-        console.log(input.email);
-        if(input.name === ""){
+        var name = input['name']
+        var email = input['email']
+        var password = input['password']
+        var status = input['status']
+
+        
+
+        if((name && email && password && status) == ""){
+         
           this.hasError = false;
           this.hasDeleted = true;
-          alert("Error no debe dejar casillero en blanco");
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
                this.hasError=true;
                this.showModal=true;
                axios.post(postUsers, this.newUser).then(response => {
+
+                   swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+                   
                  this.fetchUsers();
                  this.showModal=false;
                });
