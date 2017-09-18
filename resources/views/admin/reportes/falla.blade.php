@@ -135,7 +135,7 @@ table {
 
                             @endif
                               <br>
-                            SIAC | 2017
+                            SIAC | 2017 <img src="img/Cantv_logo.PNG" style="width: 90px; height: 30px">
 
                         </div>
                     </div>

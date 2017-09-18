@@ -13,7 +13,7 @@ import Mangas from './components/Manga.vue'
 import Tanque from './components/Tanque.vue'
 import Central from './components/CentralT.vue'
 import Sector from './components/Sector.vue'
-
+import Log from './components/Logs.vue'
 
 
 Vue.use(VueRouter)
@@ -71,6 +71,10 @@ const router = new VueRouter({
 		{
 			path:"/sector",
 			component:Sector
+		},
+		{
+			path:"/log",
+			component:Log
 		}
 	],
 	linkActiveClass: 'active' /* <---- proceso para que el menu quede selected activo */

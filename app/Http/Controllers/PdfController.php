@@ -18,7 +18,7 @@ class PdfController extends Controller
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view)->setPaper('a4', 'landscape');
 
-          return $pdf->download('reporte-incidencias-'.date('Y-m-d').'.pdf');
+           return $pdf->stream();
 
     }
 
@@ -29,7 +29,7 @@ class PdfController extends Controller
           $pdf = \App::make('dompdf.wrapper');
           $pdf->loadHTML($view)->setPaper('a4', 'landscape');
 
-          return $pdf->download('reporte-incidencias-'.date('Y-m-d').'.pdf');
+           return $pdf->stream();
 
     }
 
@@ -41,7 +41,11 @@ class PdfController extends Controller
               $pdf = \App::make('dompdf.wrapper');
               $pdf->loadHTML($view)->setPaper('a4', 'landscape');
 
-              return $pdf->download('reporte-incidencias-'.date('Y-m-d').'.pdf');
+
+               return $pdf->stream();
+
+
+              //return $pdf->download('reporte-incidencias-'.date('Y-m-d').'.pdf');
 
         }
 }
