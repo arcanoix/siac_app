@@ -128,7 +128,7 @@
             </div>
 
             <div class="form-group inner-addon left-addon">
-               <v-select :value="municipio.id" v-model="newBusiness.municipality_id" placeholder="Selecciona Municipio"  :options="SelectM" :on-change="onChange"></v-select>
+               <v-select :value="municipio.id" v-model="newBusiness.municipality_id"  placeholder="Selecciona Municipio"  :options="SelectM" :on-change="onChange"></v-select>
             </div>
 
             <div  class="form-group inner-addon left-addon">
@@ -426,7 +426,9 @@ export default {
           });
       },
       fetchParish(){
-          axios.get('parroquia').then(response => {
+          
+
+          axios.get('/parroquia/'+this.newBusiness.municipality_id).then(response => {
             this.parro = response.data;
 
           });

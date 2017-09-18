@@ -53365,7 +53365,7 @@ var postBusiness = 'business_save';
     fetchParish: function fetchParish() {
       var _this6 = this;
 
-      axios.get('parroquia').then(function (response) {
+      axios.get('/parroquia/' + this.newBusiness.municipality_id).then(function (response) {
         _this6.parro = response.data;
       });
     },
