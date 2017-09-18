@@ -1,0 +1,19 @@
+{
+  "name": "socket-Siac",
+  "version": "1.0.0",
+  "description": "Servidor de prueba para el chat con socket.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Gustavo Herrera",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  },
+  "engines":{
+    "node": "6.0.0"
+  }
+}
