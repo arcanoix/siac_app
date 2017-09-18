@@ -75,19 +75,21 @@
 																			  :zoom="8"
 																			  map-type-id="terrain"
 																			  style="width: 900px; height: 300px"
-                                                                               
+
 																			>
 																			<gmap-marker
 																	      :key="index"
 																	      v-for="(m, index) in markers"
-																	      :position="m.position"
+																	      :position="{lat:parseFloat(m.lat), lng:parseFloat(m.longitud)}"
 																	      :clickable="true"
 																	      :draggable="true"
 																	      @click="center=m.position"
 																	    ></gmap-marker>
 
 																			</gmap-map>
-
+                                                                            <pre v-for="m in markers">
+                                                                                {{ (m) }}
+                                                                            </pre>
 
 																		</div>
                                 </div>
@@ -160,32 +162,36 @@ Vue.use(VueGoogleMaps, {
               lat:10.0,
               lng:-67.9
               },
-         markers: [
-					 	{
-          		position: {
-								lat: 10.0,
-								 lng: -67.9
-							}
-        		},
-				 		{
-          		position: {
-								lat: 10.0,
-								 lng: -67.7
-							}
-        		}
-					]
-				}
+         markers: [],
+         lat:0,
+         lng:0,
+			}
 		},
-
+      
+       
 		created(){
 			this.fetchDash();
+            this.getDevices();
 
 		},
 
 		methods:{
 				getDevices(){
-					axios.get('grafica').then(response => {
-						console.log(reponse.data);
+					axios.get('mapa').then(response => {
+                        this.lat = parseFloat(response.data.map(l => l.lat))
+                        this.lng = parseFloat(response.data.map(ln => ln.longitud))
+
+                        console.log(this.lat, this.lng)
+						//console.log(response.data.position.length);
+                        this.markers = response.data;
+                       // console.log(response.data);
+
+                     
+                         /*for (var i=0; i < response.data.length; i++){
+                                this.markers[i] = response.data[i];
+                               console.log(this.markers[i]);
+                        }*/
+                        
 					})
 			},
 			fetchDash(){

@@ -84,7 +84,7 @@
 
             <div class="form-group inner-addon left-addon">
 
-              <v-select :value="numero.id" v-model="newFalla.number_telephone_id"  :options="Selectnumber" :on-change="onChange"></v-select>
+              <v-select :value="numero.id" placeholder="Selecciona un numero" v-model="newFalla.number_telephone_id"  :options="Selectnumber" :on-change="onChange"><span slot="no-options">Carga datos en el modulo numero telefonico</span></v-select>
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -109,11 +109,11 @@
 
             </div>
 
-            <div class="col-md-6 Map"><h3> Latitude : {{ latitude }}</h3></div>
-                <div class="col-md-6 Map"><h3> Longitude : {{ longitude }}</h3></div>
-                <div class="col-md-12 Map"  v-bind:class="{ 'not-visible' : active }" >
-                    <!-- ADD_YOUR_API_KEY hear -->
-                    <iframe frameborder="0" style="width: 100%; height: 350px; border:0" :src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0&q='+ place" allowfullscreen></iframe>
+            <div class="col-md-6 Map" style=""><h3> Latitude : {{ latitude }}</h3></div>
+                <div class="col-md-6 Map" style=""><h3> Longitude : {{ longitude }}</h3></div>
+                <div class="col-md-12 Map" style="display:none" v-bind:class="{ 'not-visible' : active }" >
+                    <!-- ADD_YOUR_API_KEY hear 
+                    <iframe frameborder="0" style="width: 100%; height: 350px; border:0" :src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0&q='+ place" allowfullscreen></iframe>-->
                 </div>
 
 
@@ -194,6 +194,13 @@
 import vSelect from 'vue-select'
 import * as VueGoogleMaps from 'vue2-google-maps'
 
+window.axios = require('axios');
+
+window.axios.defaults.headers.common = {
+    'X-Requested-With': 'XMLHttpRequest'
+};
+
+
 Vue.use(VueGoogleMaps, {
     load:{
         key: 'AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0'
@@ -244,7 +251,9 @@ export default {
           status:'',
           customer_id:'',
           address:'',
-          user_id:''
+          user_id:'',
+          latitude:'',
+          longitude:''
         },
         editFalla:{
           number_telephone_id:'',
@@ -252,7 +261,9 @@ export default {
           status:'',
           customer_id:'',
           address:'',
-          user_id:''
+          user_id:'',
+          latitude:'',
+          longitude:''
         },
 
         pagination:{
@@ -267,7 +278,7 @@ export default {
       }
   },
    watch: {
-    place: function() {
+    place(){
       this.longitude = '';
       this.latitude = '';      
       this.active = true;
@@ -281,7 +292,6 @@ export default {
     this.fetchFallas(this.pagination.current_page);
     this.fetchCustomer();
     this.fetchNumber();
-
     this.fetchUser();
 
   },
@@ -337,7 +347,26 @@ export default {
 
   methods:{
 
-    
+
+     lookupCoordinates() {
+      var app = this;
+      app.longitude = "Ubicando.....";
+      app.latitude = "Ubicando.....";     
+
+     
+
+      axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + app.place)
+            .then(response => {
+              console.log(response);
+              app.longitude = response.data.results[0].geometry.location.lng;
+              app.latitude = response.data.results[0].geometry.location.lat;              
+            })
+            .catch( error => {
+              app.longitude = "Ubicacion no Valida";
+              app.latitude = "Ubicacion no Valida";              
+            })
+    }, 
+
 
     onChangeUser(obj){
       this.user.id = obj.value;
@@ -394,6 +423,9 @@ export default {
             this.newFalla.user_id = this.user.id;
             this.newFalla.customer_id = this.cl.id;
             this.newFalla.number_telephone_id = this.numero.id;
+            this.newFalla.address = this.place;
+            this.newFalla.latitude = this.latitude;
+            this.newFalla.longitude = this.longitude;
               this.hasError=true;
                axios.post(postFalla, this.newFalla).then(response => {
                this.fetchFallas();

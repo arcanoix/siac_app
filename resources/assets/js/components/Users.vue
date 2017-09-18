@@ -102,10 +102,10 @@
             </div>
 
             <div class="form-group inner-addon left-addon">
-              <i class="fa fa-circle" aria-hidden="true"></i>
+              
               <select v-model="newUser.status" class="form-control">
-                <option>&nbsp; Activo</option>
-                <option>&nbsp; Inactivo</option>
+                <option>Activo</option>
+                <option>Inactivo</option>
               </select>
             </div>
 
