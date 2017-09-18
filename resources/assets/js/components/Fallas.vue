@@ -412,12 +412,11 @@ export default {
         var input = this.newFalla;
         var type_failure = input['type_failure']
         var status = input['status']
-        var address = input['address']
-        var lat = input['lat']
-        var longitud = input['longitud']
+        var address = input['place']
+       
+          //this.newFalla.address = this.place;
 
-
-         if((status && type_failure && address && lat && longitud) == ""){
+         if((status && type_failure && address) == ""){
          
           this.hasError = false;
           this.hasDeleted = true;
