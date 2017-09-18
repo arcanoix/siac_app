@@ -56876,7 +56876,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   data: function data() {
     return {
       data: [],
-      listo: []
+      listo: [],
+      labels: []
     };
   },
   mounted: function mounted() {
@@ -56890,6 +56891,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
       _this.listo = response.data.Listo.map(function (labels) {
         return labels.estatus;
       });
+
       _this.fillData();
     });
   },

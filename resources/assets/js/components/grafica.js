@@ -4,7 +4,8 @@ export default Bar.extend({
   data(){
     return{
         data:[],
-        listo:[]
+        listo:[],
+        labels:[]
     }
   },
   mounted () {
@@ -12,6 +13,7 @@ export default Bar.extend({
       console.log(response)
         this.data = response.data.EnProceso.map(data => data.estatus);
         this.listo = response.data.Listo.map(labels => labels.estatus);
+       
           this.fillData();
     })
 
