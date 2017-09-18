@@ -30,7 +30,7 @@
         <th>#</th>
         <th>Nombre</th>
         <th>Apellido</th>
-        <th>Direccion</th>
+        <th>Cedula</th>
         <th>Email</th>
         <th>Editar</th>
 

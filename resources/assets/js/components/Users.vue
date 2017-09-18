@@ -44,7 +44,7 @@
         <td>{{ b.email }}</td>
 
 
-        <td><a class="btn-top  btn btn-primary pull-right"  v-on:click.prevent="onEdit(b)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+        <td><a class="btn-top  btn btn-primary"  v-on:click.prevent="onEdit(b)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
        <!-- <td>
           <a class="btn-top btn btn-danger  pull-right"  v-on:click.prevent="onDelete(b)"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </td>-->

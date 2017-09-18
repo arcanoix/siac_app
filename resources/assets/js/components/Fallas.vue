@@ -337,24 +337,7 @@ export default {
 
   methods:{
 
-     lookupCoordinates: _.debounce(function() {
-      var app = this;
-      app.longitude = "Searching.....";
-      app.latitude = "Searching.....";     
-
-     
-
-      axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + app.place)
-            .then(response => {
-              console.log(response.data);
-              app.longitude = response.data.results[0].geometry.location.lng;
-              app.latitude = response.data.results[0].geometry.location.lat;              
-            })
-            .catch(function (error) {
-              app.longitude = "Invalid place";
-              app.latitude = "Invalid place";              
-            })
-    }), 
+    
 
     onChangeUser(obj){
       this.user.id = obj.value;

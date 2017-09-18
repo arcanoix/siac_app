@@ -38137,22 +38137,6 @@ var postFalla = 'falla_save';
   },
 
   methods: {
-
-    lookupCoordinates: _.debounce(function () {
-      var app = this;
-      app.longitude = "Searching.....";
-      app.latitude = "Searching.....";
-
-      axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + app.place).then(function (response) {
-        console.log(response.data);
-        app.longitude = response.data.results[0].geometry.location.lng;
-        app.latitude = response.data.results[0].geometry.location.lat;
-      }).catch(function (error) {
-        app.longitude = "Invalid place";
-        app.latitude = "Invalid place";
-      });
-    }),
-
     onChangeUser: function onChangeUser(obj) {
       this.user.id = obj.value;
     },
@@ -100045,7 +100029,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"
-  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Apellido")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
+  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Nombre")]), _vm._v(" "), _c('th', [_vm._v("Apellido")]), _vm._v(" "), _c('th', [_vm._v("Cedula")]), _vm._v(" "), _c('th', [_vm._v("Email")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-top  btn btn-primary"
@@ -100103,7 +100087,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('tr', {
       staticClass: "row-content"
     }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), (b.roles[0]) ? _c('td', [_vm._v(_vm._s(b.roles[0].rol))]) : _c('td', [_vm._v("Sin rol Asignado")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.status))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', [_c('a', {
-      staticClass: "btn-top  btn btn-primary pull-right",
+      staticClass: "btn-top  btn btn-primary",
       on: {
         "click": function($event) {
           $event.preventDefault();
