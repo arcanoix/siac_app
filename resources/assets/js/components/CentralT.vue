@@ -320,7 +320,7 @@ export default {
       fetchSector(){
         axios.get('sectorT').then(response => {
             this.sec = response.data.sector;
-            console.log(response.data.sector);
+           //console.log(response.data.sector);
         });
       },
 
@@ -332,10 +332,21 @@ export default {
       },
 
       saveCentral(newCentral){
+
         var input = this.newCentral;
-        if(input['name'] == ''){
-          this.hasError =false;
+        var name = input['name'];
+        var address = input['address']
+
+         if((name && address) == ""){
+         
+          this.hasError = false;
           this.hasDeleted = true;
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
@@ -344,6 +355,14 @@ export default {
             this.newCentral.tanks_id = this.tanque.id;
               this.hasError=true;
                axios.post(post_central, this.newCentral).then(response => {
+                 swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+                 
                this.fetchCentral();
                this.showModal= false;
                });

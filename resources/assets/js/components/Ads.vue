@@ -471,9 +471,26 @@ export default {
       },
       saveAds(newAds){
         var input = this.newAds;
-        if(input['name'] == ''){
-          this.hasError =false;
+        var name =input['name'];
+        var type_ads = input['type_ads'];
+        var cc = input['cc'];
+        var cl = input['cl'];
+        var pc = input['pc'];
+        var pl = input['pl'];
+        var address = input['address'];
+      
+        
+
+         if((name && type_ads && cc && cl && pc && pl && address) == ""){
+         
+          this.hasError = false;
           this.hasDeleted = true;
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
@@ -485,6 +502,14 @@ export default {
               this.hasError=true;
                axios.post(postAds, this.newAds).then(response => {
 
+                   swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+                   
                this.fetchAds();
                this.showModal = false;
                });

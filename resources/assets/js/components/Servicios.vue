@@ -60,7 +60,7 @@
 
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newServicio.name" type="text" class="form-control" placeholder="Nombre del Servicio" :class="{'input': true, 'is-danger': errors.has('name') }">
+              <input v-validate="'required'" v-model="newServicio.name" type="text" class="form-control" placeholder="Nombre del Servicio" :class="{'input': true, 'is-danger': errors.has('name') }" name="name">
              <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
 
             </div>
@@ -136,6 +136,7 @@ export default {
         servicio: [],
         showModal:false,
         showModal1:false,
+        hasError:false,
         newServicio:{
           name:'',
           description:''
@@ -160,14 +161,34 @@ export default {
       },
       saveServicio(newServicio){
         var input = this.newServicio;
-        if(input['name'] == ''){
-          this.hasError =false;
+        var name = input['name'];
+        var description = input['description'];
+
+        
+        if((name && description) == ""){
+         
+          this.hasError = false;
           this.hasDeleted = true;
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
               this.hasError=true;
                axios.post(postServicio, this.newServicio).then(response => {
+               
+                swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+
                this.fetchServicio();
                this.showModal=false;
                });

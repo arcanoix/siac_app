@@ -257,17 +257,30 @@ export default {
       },
       saveUser(newSector){
         var input = this.newSector;
-
-        if(input['name'] == ''){
-          this.hasError =false;
+        var name = input['name']
+        if(name == ""){
+         
+          this.hasError = false;
           this.hasDeleted = true;
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
               this.newSector.parish_id = this.parroquia.id;
               this.hasError=true;
                axios.post('save_sector', this.newSector).then(response => {
-
+                  swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
                this.fetchSector();
                this.showModal = false;
                });

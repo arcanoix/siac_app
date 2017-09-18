@@ -90,7 +90,7 @@
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-asterisk" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newBusiness.rif" type="text" class="form-control" placeholder="Rif" :class="{'input': true, 'is-danger': errors.has('rif') }">
+              <input v-validate="'required'" maxlength="10" v-model="newBusiness.rif" type="text" class="form-control" placeholder="Rif" :class="{'input': true, 'is-danger': errors.has('rif') }">
              <span v-show="errors.has('rif')" class="help is-danger">{{ errors.first('rif') }}</span>
 
             </div>
@@ -168,7 +168,7 @@
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-asterisk" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="editBusiness.rif" type="text" class="form-control" placeholder="Rif" :class="{'input': true, 'is-danger': errors.has('rif') }">
+              <input v-validate="'required'" maxlength="10" v-model="editBusiness.rif" type="text" class="form-control" placeholder="Rif" :class="{'input': true, 'is-danger': errors.has('rif') }">
              <span v-show="errors.has('rif')" class="help is-danger">{{ errors.first('rif') }}</span>
 
             </div>
@@ -433,9 +433,26 @@ export default {
       },
       saveBusiness(newBusiness){
         var input = this.newBusiness;
-        if(input['name'] == ''){
-          this.hasError =false;
+
+        var name = input['name']
+        var last_name = input['last_name']
+        var rif = input['rif']
+        var address = input['address']
+        var email = input['email']
+        var number_contact = input['number_contact']
+
+
+        
+        if((name && last_name && rif && address && email && number_contact) == ""){
+         
+          this.hasError = false;
           this.hasDeleted = true;
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
@@ -446,6 +463,14 @@ export default {
             this.newBusiness.number_telephone_id = this.numero.id;
               this.hasError=true;
                axios.post(postBusiness, this.newBusiness).then(response => {
+                  swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
+                  
                    this.fetchBusiness();
                    this.showModal= false;
 

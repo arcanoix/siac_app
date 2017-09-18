@@ -4,6 +4,16 @@
 
       <div>
           <h1 style="text-align: center;">Sistema de Identificación de Averias para CANTV</h1>
+
+          @if (count($errors) > 0)
+              <div class="alert alert-danger">
+                  @foreach ($errors->all() as $error)
+                      <ul class="list--unstyled">
+                          <li style="font-size: 14;">{{ $error }}</li>
+                      </ul>
+                  @endforeach
+              </div>
+          @endif
       </div>
 
       <div class="cssToolTip">

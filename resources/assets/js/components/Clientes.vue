@@ -98,7 +98,7 @@
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="newCliente.identification_card" type="text" class="form-control" placeholder="Cedula" :class="{'input': true, 'is-danger': errors.has('identification_card') }">
+              <input v-validate="'required'" maxlength="10" v-model="newCliente.identification_card" type="text" class="form-control" placeholder="Cedula" :class="{'input': true, 'is-danger': errors.has('identification_card') }">
              <span v-show="errors.has('identification_card')" class="help is-danger">{{ errors.first('identification_card') }}</span>
 
             </div>
@@ -179,7 +179,7 @@
             </div>
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" v-model="editCliente.identification_card" type="text" class="form-control" placeholder="Cedula" :class="{'input': true, 'is-danger': errors.has('identification_card') }">
+              <input v-validate="'required'" maxlength="10" v-model="editCliente.identification_card" type="text" class="form-control" placeholder="Cedula" :class="{'input': true, 'is-danger': errors.has('identification_card') }">
              <span v-show="errors.has('identification_card')" class="help is-danger">{{ errors.first('identification_card') }}</span>
 
             </div>
@@ -424,9 +424,23 @@ export default {
       },
       saveCliente(newCliente){
         var input = this.newCliente;
-        if(input['name'] == ''){
-          this.hasError =false;
+        var name = input['name']
+        var last_name = input['last_name']
+        var identification_card = input['identification_card']
+        var address = input['address']
+        var email = input['email']
+
+        
+        if((name && last_name && identification_card && address && email) == ""){
+         
+          this.hasError = false;
           this.hasDeleted = true;
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
@@ -436,6 +450,14 @@ export default {
           this.newCliente.number_telephone_id = this.numero.id;
               this.hasError=true;
                axios.post(postCliente, this.newCliente).then(response => {
+
+                   swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
 
                this.fetchCliente();
                this.showModal = false;

@@ -251,20 +251,37 @@ export default {
       fetchAds(){
           axios.get('ads').then(response => {
             this.ads = response.data.data.data;
-            console.log(response.data);
+           // console.log(response.data);
           });
       },
       saveTanque(newTanque){
         var input = this.newTanque;
-        if(input['name'] == ''){
-          this.hasError =false;
+        var name = input['name'];
+        var address = input['address']
+        
+        if((name && address) == ""){
+         
+          this.hasError = false;
           this.hasDeleted = true;
+          
+          swal({
+            title: "Oops...",
+              text:  'Tiene campos en blanco!',
+               type: 'error' 
+              })
         }
         else
         {
           this.newTanque.ads_id = this.adds.id;
               this.hasError=true;
                axios.post(post_tanque, this.newTanque).then(response => {
+                 swal({
+                title: "Success",
+                text: 'Registro Guardado',
+                type: 'success',
+                animation: 'slide-from-bottom',
+                timer: 3000
+            });
                this.fetchTanque();
                this.showModal= false;
                });

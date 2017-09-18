@@ -51667,9 +51667,24 @@ var postAds = 'ads_save';
       var _this6 = this;
 
       var input = this.newAds;
-      if (input['name'] == '') {
+      var name = input['name'];
+      var type_ads = input['type_ads'];
+      var cc = input['cc'];
+      var cl = input['cl'];
+      var pc = input['pc'];
+      var pl = input['pl'];
+      var address = input['address'];
+
+      if ((name && type_ads && cc && cl && pc && pl && address) == "") {
+
         this.hasError = false;
         this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
       } else {
         this.newAds.sleeve_id = this.manga.id;
         this.newAds.sector_id = this.sector.id;
@@ -51678,6 +51693,14 @@ var postAds = 'ads_save';
 
         this.hasError = true;
         axios.post(postAds, this.newAds).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
 
           _this6.fetchAds();
           _this6.showModal = false;
@@ -52061,7 +52084,7 @@ var post_central = 'central_save';
 
       axios.get('sectorT').then(function (response) {
         _this3.sec = response.data.sector;
-        console.log(response.data.sector);
+        //console.log(response.data.sector);
       });
     },
     fetchParroquia: function fetchParroquia() {
@@ -52075,15 +52098,33 @@ var post_central = 'central_save';
       var _this5 = this;
 
       var input = this.newCentral;
-      if (input['name'] == '') {
+      var name = input['name'];
+      var address = input['address'];
+
+      if ((name && address) == "") {
+
         this.hasError = false;
         this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
       } else {
         this.newCentral.parish_id = this.parroquia.id;
         this.newCentral.sector_id = this.sector.id;
         this.newCentral.tanks_id = this.tanque.id;
         this.hasError = true;
         axios.post(post_central, this.newCentral).then(function (response) {
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
           _this5.fetchCentral();
           _this5.showModal = false;
         });
@@ -52578,9 +52619,22 @@ var postCliente = 'clientes_save';
       var _this7 = this;
 
       var input = this.newCliente;
-      if (input['name'] == '') {
+      var name = input['name'];
+      var last_name = input['last_name'];
+      var identification_card = input['identification_card'];
+      var address = input['address'];
+      var email = input['email'];
+
+      if ((name && last_name && identification_card && address && email) == "") {
+
         this.hasError = false;
         this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
       } else {
         this.newCliente.sector_id = this.sector.id;
         this.newCliente.parish_id = this.parroquia.id;
@@ -52588,6 +52642,14 @@ var postCliente = 'clientes_save';
         this.newCliente.number_telephone_id = this.numero.id;
         this.hasError = true;
         axios.post(postCliente, this.newCliente).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
 
           _this7.fetchCliente();
           _this7.showModal = false;
@@ -53311,9 +53373,24 @@ var postBusiness = 'business_save';
       var _this7 = this;
 
       var input = this.newBusiness;
-      if (input['name'] == '') {
+
+      var name = input['name'];
+      var last_name = input['last_name'];
+      var rif = input['rif'];
+      var address = input['address'];
+      var email = input['email'];
+      var number_contact = input['number_contact'];
+
+      if ((name && last_name && rif && address && email && number_contact) == "") {
+
         this.hasError = false;
         this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
       } else {
         //this.newAds.sleeve_id = this.manga.id;
         this.newBusiness.sector_id = this.sector.id;
@@ -53322,6 +53399,14 @@ var postBusiness = 'business_save';
         this.newBusiness.number_telephone_id = this.numero.id;
         this.hasError = true;
         axios.post(postBusiness, this.newBusiness).then(function (response) {
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
           _this7.fetchBusiness();
           _this7.showModal = false;
         });
@@ -53742,7 +53827,7 @@ var postFalla = 'falla_save';
       app.latitude = "Ubicando.....";
 
       axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + app.place).then(function (response) {
-        console.log(response);
+        //console.log(response);
         app.longitude = response.data.results[0].geometry.location.lng;
         app.latitude = response.data.results[0].geometry.location.lat;
       }).catch(function (error) {
@@ -53802,10 +53887,22 @@ var postFalla = 'falla_save';
       var _this5 = this;
 
       var input = this.newFalla;
+      var type_failure = input['type_failure'];
+      var status = input['status'];
+      var address = input['address'];
+      var lat = input['lat'];
+      var longitud = input['longitud'];
 
-      if (input['name'] == '') {
+      if ((status && type_failure && address && lat && longitud) == "") {
+
         this.hasError = false;
         this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
       } else {
         this.newFalla.user_id = this.user.id;
         this.newFalla.customer_id = this.cl.id;
@@ -53815,6 +53912,15 @@ var postFalla = 'falla_save';
         this.newFalla.longitude = this.longitude;
         this.hasError = true;
         axios.post(postFalla, this.newFalla).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
           _this5.fetchFallas();
           _this5.showModal = false;
         });
@@ -54166,12 +54272,33 @@ var postManga = '/manga_save';
       var _this4 = this;
 
       var input = this.newManga;
-      if (input['name'] == '') {
+
+      var name = input['name'];
+      var description = input['description'];
+      var address = input['address'];
+
+      if ((name && description && address) == "") {
+
         this.hasError = false;
         this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
       } else {
         this.hasError = true;
         axios.post(postManga, this.newManga).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
           _this4.fetchManga();
           _this4.showModal = false;
         });
@@ -54604,14 +54731,35 @@ var postnumber = 'numero_save';
       var _this3 = this;
 
       var input = this.newNumber;
-      if (input['code'] == '') {
+      var code = input['code'];
+      var number = input['number'];
+      var status = input['status'];
+      var cc = input['cc'];
+      var cl = input['cl'];
+      var pc = input['pc'];
+      var pl = input['pl'];
+
+      if ((code && number && status && cc && cl && pc && pl) == "") {
+
         this.hasError = false;
         this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
       } else {
         this.newNumber.sleeve_id = this.manga.id;
         this.hasError = true;
         axios.post(postnumber, this.newNumber).then(function (response) {
-
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
           _this3.fetchNumber();
           _this3.showModal = false;
         });
@@ -54942,15 +55090,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this5 = this;
 
       var input = this.newSector;
+      var name = input['name'];
+      if (name == "") {
 
-      if (input['name'] == '') {
         this.hasError = false;
         this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
       } else {
         this.newSector.parish_id = this.parroquia.id;
         this.hasError = true;
         axios.post('save_sector', this.newSector).then(function (response) {
-
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
           _this5.fetchSector();
           _this5.showModal = false;
         });
@@ -55102,6 +55263,7 @@ var postServicio = 'servicios_save';
       servicio: [],
       showModal: false,
       showModal1: false,
+      hasError: false,
       newServicio: {
         name: '',
         description: ''
@@ -55129,12 +55291,31 @@ var postServicio = 'servicios_save';
       var _this2 = this;
 
       var input = this.newServicio;
-      if (input['name'] == '') {
+      var name = input['name'];
+      var description = input['description'];
+
+      if ((name && description) == "") {
+
         this.hasError = false;
         this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
       } else {
         this.hasError = true;
         axios.post(postServicio, this.newServicio).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
           _this2.fetchServicio();
           _this2.showModal = false;
         });
@@ -55452,20 +55633,37 @@ var post_tanque = 'tanque_save';
 
       axios.get('ads').then(function (response) {
         _this2.ads = response.data.data.data;
-        console.log(response.data);
+        // console.log(response.data);
       });
     },
     saveTanque: function saveTanque(newTanque) {
       var _this3 = this;
 
       var input = this.newTanque;
-      if (input['name'] == '') {
+      var name = input['name'];
+      var address = input['address'];
+
+      if ((name && address) == "") {
+
         this.hasError = false;
         this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
       } else {
         this.newTanque.ads_id = this.adds.id;
         this.hasError = true;
         axios.post(post_tanque, this.newTanque).then(function (response) {
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
           _this3.fetchTanque();
           _this3.showModal = false;
         });
@@ -72281,7 +72479,7 @@ exports.push([module.i, "\n.simple-root {\r\n  margin-top: 20%;\r\n  margin-left
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 324 */
@@ -92869,7 +93067,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "type": "text",
-      "placeholder": "Nombre del Servicio"
+      "placeholder": "Nombre del Servicio",
+      "name": "name"
     },
     domProps: {
       "value": (_vm.newServicio.name)
@@ -93297,6 +93496,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'input': true, 'is-danger': _vm.errors.has('rif')
     },
     attrs: {
+      "maxlength": "10",
       "type": "text",
       "placeholder": "Rif"
     },
@@ -93685,6 +93885,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'input': true, 'is-danger': _vm.errors.has('rif')
     },
     attrs: {
+      "maxlength": "10",
       "type": "text",
       "placeholder": "Rif"
     },
@@ -94595,6 +94796,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'input': true, 'is-danger': _vm.errors.has('identification_card')
     },
     attrs: {
+      "maxlength": "10",
       "type": "text",
       "placeholder": "Cedula"
     },
@@ -94961,6 +95163,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'input': true, 'is-danger': _vm.errors.has('identification_card')
     },
     attrs: {
+      "maxlength": "10",
       "type": "text",
       "placeholder": "Cedula"
     },
