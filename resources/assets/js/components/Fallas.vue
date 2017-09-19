@@ -43,7 +43,7 @@
         <td>{{ b.status }}</td>
         <td>{{ b.cliente.name }}</td>
         <td>{{ b.address }}</td>
-        <td>{{ b.users.name }}</td>
+        <td>{{ b.users.nombre }}</td>
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
       <!--  <td v-on:click.prevent="onDelete(b)"><a class="btn-top btn btn-danger"> <i class="fa fa-trash" aria-hidden="true"></i></a></td>-->
@@ -230,7 +230,7 @@ export default {
         },
         users:{
           id:'',
-          name:''
+          nombre:''
         },
         numero:{
           id:''
@@ -299,8 +299,8 @@ export default {
     SelectUser(){
       return this.u.map(g =>(
         {
-          label:g.name,
-           value:g.id
+          label:g.nombre,
+           value:g.user_id
          }
       ));
     },
@@ -369,7 +369,8 @@ export default {
 
 
     onChangeUser(obj){
-      this.user.id = obj.value;
+      this.user.user_id = obj.value;
+      //console.log(obj)
     },
       onChange(obj){
           this.numero.id = obj.value;
@@ -408,6 +409,7 @@ export default {
         axios.get('tecnicos').then(response => {
 
             this.u = response.data;
+            console.log(response.data)
       })
       },
       saveFalla(newFalla){
@@ -432,7 +434,7 @@ export default {
         }
         else
         {
-            this.newFalla.user_id = this.user.id;
+            this.newFalla.user_id = this.user.user_id;
             this.newFalla.customer_id = this.cl.id;
             this.newFalla.number_telephone_id = this.numero.id;
             this.newFalla.address = this.place;
@@ -458,6 +460,8 @@ export default {
       updateFalla(editFalla){
         var input = this.editFalla;
         var update = '/update_f/' + input.id;
+         this.editFalla.user_id = this.user.user_id;
+
         axios.put(update, input).then(response => {
           swal({
                 title: "Success",

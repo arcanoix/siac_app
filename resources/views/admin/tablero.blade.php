@@ -44,7 +44,7 @@
                 @endif
 
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                <span class="hidden-xs">{{ Auth::user()->nombre }}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
@@ -59,7 +59,7 @@
 
 
                   <p>
-                    {{ Auth::user()->name }} - {{ Auth::user()->role }}
+                    {{ Auth::user()->nombre }} - {{  }}
                     <small>Miembro desde: {{ Auth::user()->created_at }}</small>
                   </p>
                 </li>
@@ -110,7 +110,7 @@
 
           </div>
           <div class="pull-left info">
-            <p>{{ Auth::user()->name }}</p>
+            <p>{{ Auth::user()->nombre }}</p>
             <!-- Status -->
             <a href="#"><i class="fa fa-circle text-success"></i> En linea</a>
 

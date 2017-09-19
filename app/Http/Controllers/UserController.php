@@ -45,6 +45,7 @@ class UserController extends Controller
      ->join('users','role_user.user_id','=','users.id')
      ->join('roles','role_user.role_id','=','roles.id')
      ->where('roles.name','Tecnico')
+
      ->get();
 
       return $users;
@@ -53,7 +54,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
     		$user = new User();
-    		$user->name = $request->name;
+    		$user->nombre = $request->nombre;
     		$user->email = $request->email;
     		$user->password = bcrypt($request->pass);
         $user->status = $request->status;
@@ -83,7 +84,7 @@ class UserController extends Controller
     {
        //dd($request->pass);
        if($find_user = User::find($id)){
-                  $find_user->name = $request->name;
+                  $find_user->nombre = $request->nombre;
                   $find_user->email = $request->email;
                   $find_user->status = $request->status;
 
@@ -111,7 +112,7 @@ class UserController extends Controller
                                      }
                                      else
                                      {
-                                       $avatar_name = strtolower($find_user->name) . '_' . strtolower($find_user->email) . '_' . 'avatar.jpg';
+                                       $avatar_name = strtolower($find_user->nombre) . '_' . strtolower($find_user->email) . '_' . 'avatar.jpg';
 
                                        $avatar =  Image::make($request->avatar)->save(public_path('uploads/').$avatar_name);
                                        $find_user->avatar = $avatar_name;

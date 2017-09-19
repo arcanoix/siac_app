@@ -37,8 +37,8 @@
       </tr>
       <tr v-for="b in users"  class="row-content">
         <td>{{ b.id }}</td>
-        <td>{{ b.name }}</td>
-        <td v-if="b.roles[0]">{{ b.roles[0].rol }}</td>
+        <td>{{ b.nombre }}</td>
+        <td v-if="b.roles[0]">{{ b.roles[0].name }}</td>
         <td v-else>Sin rol Asignado</td>
         <td>{{ b.status }}</td>
         <td>{{ b.email }}</td>
@@ -85,8 +85,8 @@
 
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-              <input v-validate="'required'" data-vv-name="name" v-model="newUser.name" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')"  class="help is-danger">{{ errors.first('name') }}</span>
+              <input v-validate="'required'" data-vv-name="nombre" v-model="newUser.nombre" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('nombre') }">
+             <span v-show="errors.has('nombre')"  class="help is-danger">{{ errors.first('nombre') }}</span>
 
             </div>
              <div class="form-group inner-addon left-addon">
@@ -136,8 +136,8 @@
 
             <div class="form-group inner-addon left-addon">
                <i class="fa fa-user" aria-hidden="true"></i>
-               <input v-validate="'required'" data-vv-name="name" v-model="editUser.name" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('name') }">
-             <span v-show="errors.has('name')"  class="help is-danger">{{ errors.first('name') }}</span>
+               <input v-validate="'required'" data-vv-name="nombre" v-model="editUser.nombre" type="text" class="form-control" placeholder="Nombre de Usuario" :class="{'input': true, 'is-danger': errors.has('nombre') }">
+             <span v-show="errors.has('nombre')"  class="help is-danger">{{ errors.first('nombre') }}</span>
             </div>
              <div class="form-group inner-addon left-addon">
                <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -211,14 +211,14 @@ export default {
         showModal:false,
         showModal1:false,
         editUser:{
-            name:'',
+            nombre:'',
             pass:'',
             email:'',
             status:'',
             role_id:''
         },
         newUser:{
-          name:'',
+          nombre:'',
           pass:'',
           email:'',
           status:'',
@@ -275,7 +275,7 @@ export default {
             this.users = response.data.data.data;
             this.pagination = response.data.pagination;
             this.role = response.data.role;
-            //console.log(response.data);
+            console.log(response.data);
           //  console.log(response.data.pagination);
           //  this.$set('users', response.data.data.data);
             //this.$set('pagination', response.data.pagination);
@@ -315,14 +315,14 @@ export default {
       saveUser(newUser)
       {
         var input = this.newUser;
-        var name = input['name']
+        var nombre = input['nombre']
         var email = input['email']
         var password = input['password']
         var status = input['status']
 
         
 
-        if((name && email && password && status) == ""){
+        if((nombre && email && password && status) == ""){
          
           this.hasError = false;
           this.hasDeleted = true;
@@ -380,6 +380,7 @@ export default {
         that.showModal1 = true;
         axios.get(showUser + b.id).then(response => {
             this.editUser = response.data;
+            console.log(response.data)
         });
 
       },
