@@ -46916,64 +46916,9 @@ module.exports = function(Chart) {
 			var metaData = meta.data;
 			var i, ilen;
 
-<<<<<<< HEAD
 			for (i = 0, ilen = data.length; i < ilen; ++i) {
 				metaData[i] = metaData[i] || me.createMetaData(i);
 			}
-=======
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      latitude: '',
-      place: '',
-      active: true,
-      longitude: '',
-      falla: [],
-      showModal: false,
-      showModal1: false,
-      Estatus: ['En proceso', 'Listo'],
-      customer: {
-        id: '',
-        name: ''
-      },
-      users: {
-        id: '',
-        nombre: ''
-      },
-      numero: {
-        id: ''
-      },
-      cl: {
-        id: ''
-      },
-      user: {
-        id: ''
-      },
-      selected: null,
-      number: [],
-      cliente: [],
-      u: [],
-      newFalla: {
-        number_telephone_id: '',
-        type_failure: '',
-        status: '',
-        customer_id: '',
-        address: '',
-        user_id: '',
-        latitude: '',
-        longitude: ''
-      },
-      editFalla: {
-        number_telephone_id: '',
-        type_failure: '',
-        status: '',
-        customer_id: '',
-        address: '',
-        user_id: '',
-        latitude: '',
-        longitude: ''
-      },
->>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
 
 			meta.dataset = meta.dataset || me.createMetaDataset();
 		},
@@ -46989,7 +46934,6 @@ module.exports = function(Chart) {
 			var dataset = me.getDataset();
 			var data = dataset.data || (dataset.data = []);
 
-<<<<<<< HEAD
 			// In order to correctly handle data addition/deletion animation (an thus simulate
 			// real-time charts), we need to monitor these data modifications and synchronize
 			// the internal meta data accordingly.
@@ -46998,90 +46942,15 @@ module.exports = function(Chart) {
 					// This case happens when the user replaced the data array instance.
 					unlistenArrayEvents(me._data, me);
 				}
-=======
-  computed: {
-    SelectUser: function SelectUser() {
-      return this.u.map(function (g) {
-        return {
-          label: g.nombre,
-          value: g.user_id
-        };
-      });
-    },
-    SelectCliente: function SelectCliente() {
-      return this.cliente.map(function (g) {
-        return {
-          label: g.name,
-          value: g.id
-        };
-      });
-    },
-    Selectnumber: function Selectnumber() {
-      return this.number.map(function (g) {
-        return {
-          label: g.number,
-          value: g.id
-        };
-      });
-    },
-    isActived: function isActived() {
-      return this.pagination.current_page;
-    },
-    pagesNumber: function pagesNumber() {
-      if (!this.pagination.to) {
-        return [];
-      }
-      var from = this.pagination.current_page - this.offset;
-      if (from < 1) {
-        from = 1;
-      }
-      var to = from + this.offset * 2;
-      if (to >= this.pagination.last_page) {
-        to = this.pagination.last_page;
-      }
-      var pagesArray = [];
-      while (from <= to) {
-        pagesArray.push(from);
-        from++;
-      }
-      return pagesArray;
-    }
-  },
->>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
 
 				listenArrayEvents(data, me);
 				me._data = data;
 			}
 
-<<<<<<< HEAD
 			// Re-sync meta data in case the user replaced the data array or if we missed
 			// any updates and so make sure that we handle number of datapoints changing.
 			me.resyncElements();
 		},
-=======
-      axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + app.place).then(function (response) {
-        //console.log(response);
-        app.longitude = response.data.results[0].geometry.location.lng;
-        app.latitude = response.data.results[0].geometry.location.lat;
-      }).catch(function (error) {
-        app.longitude = "Ubicacion no Valida";
-        app.latitude = "Ubicacion no Valida";
-      });
-    },
-    onChangeUser: function onChangeUser(obj) {
-      this.user.user_id = obj.value;
-      //console.log(obj)
-    },
-    onChange: function onChange(obj) {
-      this.numero.id = obj.value;
-      //this.newFalla.number_telephone_id = obj.value;
-    },
-    onChangeCliente: function onChangeCliente(obj) {
-      this.cl.id = obj.value;
-    },
-    fetchFallas: function fetchFallas(page) {
-      var _this = this;
->>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
 
 		update: helpers.noop,
 
@@ -47110,19 +46979,10 @@ module.exports = function(Chart) {
 				meta.dataset.draw();
 			}
 
-<<<<<<< HEAD
 			for (; i < ilen; ++i) {
 				elements[i].draw();
 			}
 		},
-=======
-        _this4.u = response.data;
-        console.log(response.data);
-      });
-    },
-    saveFalla: function saveFalla(newFalla) {
-      var _this5 = this;
->>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
 
 		removeHoverStyle: function(element, elementOpts) {
 			var dataset = this.chart.data.datasets[element._datasetIndex];
@@ -47144,27 +47004,10 @@ module.exports = function(Chart) {
 			var getHoverColor = helpers.getHoverColor;
 			var model = element._model;
 
-<<<<<<< HEAD
 			model.backgroundColor = custom.hoverBackgroundColor ? custom.hoverBackgroundColor : valueOrDefault(dataset.hoverBackgroundColor, index, getHoverColor(model.backgroundColor));
 			model.borderColor = custom.hoverBorderColor ? custom.hoverBorderColor : valueOrDefault(dataset.hoverBorderColor, index, getHoverColor(model.borderColor));
 			model.borderWidth = custom.hoverBorderWidth ? custom.hoverBorderWidth : valueOrDefault(dataset.hoverBorderWidth, index, model.borderWidth);
 		},
-=======
-        swal({
-          title: "Oops...",
-          text: 'Tiene campos en blanco!',
-          type: 'error'
-        });
-      } else {
-        this.newFalla.user_id = this.user.user_id;
-        this.newFalla.customer_id = this.cl.id;
-        this.newFalla.number_telephone_id = this.numero.id;
-        this.newFalla.address = this.place;
-        this.newFalla.latitude = this.latitude;
-        this.newFalla.longitude = this.longitude;
-        this.hasError = true;
-        axios.post(postFalla, this.newFalla).then(function (response) {
->>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
 
 		/**
 		 * @private
@@ -47183,7 +47026,6 @@ module.exports = function(Chart) {
 			}
 		},
 
-<<<<<<< HEAD
 		/**
 		 * @private
 		 */
@@ -47192,26 +47034,6 @@ module.exports = function(Chart) {
 				this.addElementAndReset(start + i);
 			}
 		},
-=======
-      var input = this.editFalla;
-      var update = '/update_f/' + input.id;
-      this.editFalla.user_id = this.user.user_id;
-
-      axios.put(update, input).then(function (response) {
-        swal({
-          title: "Success",
-          text: 'Registro actualizado',
-          type: 'success',
-          animation: 'slide-from-bottom',
-          timer: 3000
-        });
-        _this6.fetchFallas();
-        _this6.showModal1 = false;
-      });
-    },
-    onEdit: function onEdit(b) {
-      var _this7 = this;
->>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
 
 		/**
 		 * @private
@@ -48320,46 +48142,9 @@ module.exports = function(Chart) {
 					}
 				});
 
-<<<<<<< HEAD
 				maxChartAreaHeight = newMaxChartAreaHeight;
 				maxChartAreaWidth = newMaxChartAreaWidth;
 			}
-=======
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      users: [],
-      roles: [],
-      role: {
-        id: '',
-        rol: ''
-      },
-      avatar: '',
-      showModal: false,
-      showModal1: false,
-      editUser: {
-        nombre: '',
-        pass: '',
-        email: '',
-        status: '',
-        role_id: ''
-      },
-      newUser: {
-        nombre: '',
-        pass: '',
-        email: '',
-        status: '',
-        avatar: ''
-      },
-      pagination: {
-        total: 0,
-        per_page: 7,
-        from: 1,
-        to: 0,
-        current_page: 1
-      },
-      offset: 4
->>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
 
 			// Step 7 - Position the boxes
 			var left = leftPadding + leftPaddingAddition;
@@ -48372,38 +48157,8 @@ module.exports = function(Chart) {
 					box.top = top;
 					box.bottom = top + box.height;
 
-<<<<<<< HEAD
 					// Move to next point
 					top = box.bottom;
-=======
-      var data = { page: page };
-      axios.get('/users?page=' + page).then(function (response) {
-        //console.log(getUsers, data);
-        _this.users = response.data.data.data;
-        _this.pagination = response.data.pagination;
-        _this.role = response.data.role;
-        console.log(response.data);
-        //  console.log(response.data.pagination);
-        //  this.$set('users', response.data.data.data);
-        //this.$set('pagination', response.data.pagination);
-        //console.log(response.data.role);
-      });
-    },
-    changePage: function changePage(page) {
-      //console.log(page);
-      this.pagination.current_page = page;
-      this.fetchUsers(page);
-    },
-    onFileChange: function onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
-    },
-    createImage: function createImage(file) {
-      //console.log(file.name);
-      // var formData = new FormData();
-      //formData.append('avatar', this.file);
->>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
 
 				} else {
 
@@ -48412,22 +48167,12 @@ module.exports = function(Chart) {
 					box.top = totalTopBoxesHeight;
 					box.bottom = totalTopBoxesHeight + maxChartAreaHeight;
 
-<<<<<<< HEAD
 					// Move to next point
 					left = box.right;
 				}
 			}
 
 			helpers.each(leftBoxes.concat(topBoxes), placeBox);
-=======
-      var input = this.newUser;
-      var nombre = input['nombre'];
-      var email = input['email'];
-      var password = input['password'];
-      var status = input['status'];
-
-      if ((nombre && email && password && status) == "") {
->>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
 
 			// Account for chart width and height
 			left += maxChartAreaWidth;
@@ -48818,7 +48563,6 @@ module.exports = function(Chart) {
 	 * @param {Object} options - The plugin options.
 	 */
 
-<<<<<<< HEAD
 	/**
 	 * Provided for backward compatibility, use Chart.plugins instead
 	 * @namespace Chart.pluginService
@@ -48827,18 +48571,6 @@ module.exports = function(Chart) {
 	 * @private
 	 */
 	Chart.pluginService = Chart.plugins;
-=======
-      var showUser = '/showUser/';
-      var that = this;
-      that.showModal1 = true;
-      axios.get(showUser + b.id).then(function (response) {
-        _this3.editUser = response.data;
-        console.log(response.data);
-      });
-    },
-    updateUser: function updateUser(editUser) {
-      var _this4 = this;
->>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
 
 	/**
 	 * Provided for backward compatibility, inheriting from Chart.PlugingBase has no
