@@ -21,7 +21,7 @@ export default Bar.extend({
   methods:{
     fillData(){
       this.renderChart({
-        labels: ['Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre'],
+        labels: ['Septiembre', 'Octubre', 'Noviembre'],
         datasets: [
           {
             label: 'En Proceso',

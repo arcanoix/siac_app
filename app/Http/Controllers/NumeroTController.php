@@ -26,6 +26,14 @@ class NumeroTController extends Controller
        return $response;
     }
 
+    public function indexn()
+    {
+        $numberT = NumeroT::where('status','Activo')->get();
+        
+
+       return $numberT;
+    }
+
     public function numeroE(){
       $numero_e = NumeroT::where('status','En Espera')->get();
 

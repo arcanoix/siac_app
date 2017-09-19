@@ -53875,9 +53875,9 @@ var postFalla = 'falla_save';
     fetchNumber: function fetchNumber() {
       var _this3 = this;
 
-      axios.get('numero_telefonico').then(function (response) {
+      axios.get('numero_telefonico1').then(function (response) {
 
-        _this3.number = response.data.data.data;
+        _this3.number = response.data;
         //console.log(response.data.data.data);
       });
     },
@@ -53896,8 +53896,6 @@ var postFalla = 'falla_save';
       var type_failure = input['type_failure'];
       var status = input['status'];
       var address = input['place'];
-
-      //this.newFalla.address = this.place;
 
       if ((status && type_failure && address) == "") {
 
@@ -56905,7 +56903,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   methods: {
     fillData: function fillData() {
       this.renderChart({
-        labels: ['Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre'],
+        labels: ['Septiembre', 'Octubre', 'Noviembre'],
         datasets: [{
           label: 'En Proceso',
           backgroundColor: '#FC2525',
