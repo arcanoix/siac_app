@@ -53437,6 +53437,8 @@ var postBusiness = 'business_save';
       var input = this.editBusiness;
       var update = '/update_b/' + input.id;
 
+      this.editBusiness.number_telephone_id = this.numero.id;
+
       axios.put(update, input).then(function (response) {
         swal({
           title: "Success",
