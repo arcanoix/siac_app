@@ -98,6 +98,22 @@ class BusinessController extends Controller
       $business->parish_id = $request->parish_id;
       $business->sector_id = $request->sector_id;
 
+      if($find_number = NumeroT::find($request->number_telephone_id))
+          {
+              $valor = $find_number->status;
+
+                if($valor != "Activo")
+                {
+                  $find_number->status = "Activo";
+                }else{
+                  $find_number->status = $valor;
+                return  response()->json([
+                    "error" => "Error al asignar numero telefonico"
+                  ]);
+                }
+                $find_number->save();
+           }
+
       $business->save();
       
       return $business;
