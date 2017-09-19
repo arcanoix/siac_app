@@ -101125,7 +101125,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"
-  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Numero telefonico")]), _vm._v(" "), _c('th', [_vm._v("Tipo De Falla")]), _vm._v(" "), _c('th', [_vm._v("Estatus")]), _vm._v(" "), _c('th', [_vm._v("Cliente")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Tecnico Asignado")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
+  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Numero telefonico")]), _vm._v(" "), _c('th', [_vm._v("Tipo De Falla")]), _vm._v(" "), _c('th', [_vm._v("Estatus")]), _vm._v(" "), _c('th', [_vm._v("Empresa")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Tecnico Asignado")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
     staticClass: "btn-top  btn btn-primary"

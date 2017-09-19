@@ -30,7 +30,7 @@
         <th>Numero telefonico</th>
         <th>Tipo De Falla</th>
         <th>Estatus</th>
-        <th>Cliente</th>
+        <th>Empresa</th>
         <th>Direccion</th>
         <th>Tecnico Asignado</th>
         <th>Editar</th>

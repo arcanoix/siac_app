@@ -42,7 +42,7 @@ class FallasEController extends Controller
       $falla_save->number_telephone_id = $r->number_telephone_id;
       $falla_save->type_failure = $r->type_failure;
       $falla_save->status = $r->status;
-      $falla_save->business_id = $r->customer_id;
+      $falla_save->business_id = $r->business_id;
       $falla_save->address = $r->address;
 
       $falla_save->user_id = $r->user_id;
@@ -75,7 +75,7 @@ class FallasEController extends Controller
         $falla_save->number_telephone_id = $r->number_telephone_id;
         $falla_save->type_failure = $r->type_failure;
         $falla_save->status = $r->status;
-        $falla_save->business_id = $r->customer_id;
+        $falla_save->business_id = $r->business_id;
         $falla_save->address = $r->address;
 
         $falla_save->user_id = $r->user_id;
