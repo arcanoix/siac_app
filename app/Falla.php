@@ -7,6 +7,7 @@ use App\NumeroT;
 use App\Clientes;
 use App\User;
 
+
 class Falla extends Model
 {
     //
@@ -23,6 +24,8 @@ class Falla extends Model
     {
       return $this->belongsTo(Clientes::class, 'customer_id', 'id');
     }
+
+     
 
     public function users(){
       return $this->belongsTo(User::class,'user_id','id');
