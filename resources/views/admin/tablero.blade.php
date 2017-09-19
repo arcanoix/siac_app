@@ -150,26 +150,8 @@
             <router-link tag="li" to="/tablero">
                 <a><i class="fa fa-tachometer"></i> <span>Tablero</span></a>
             </router-link>
-           <router-link tag="li" to="/fallas">
-              <a> <i class="fa fa-link"></i> <span>Fallas</span></a>
-            </router-link>
-
-            
-
-            <li class="treeview">
-              <a href="#"><i class="fa fa-book"></i> <span>Reportes</span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                  <li><a href="http://127.0.0.1:8000/falla_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Fallas</span></a></li>
-                  <li>  <a href="http://127.0.0.1:8000/cliente_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Clientes</span></a></li>
-                  <li>  <a href="http://127.0.0.1:8000/usuario_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Usuarios</span></a></li>
-
-              </ul>
-            </li>
-          @role('')
+           
+          @role('Administrador')
                 <router-link tag="li" to="/users">
                     <a><i class="fa fa-user"></i> <span>Usuarios</span></a>
                 </router-link>
@@ -226,7 +208,25 @@
 
             @endrole
 
-           
+           <router-link tag="li" to="/fallas">
+              <a> <i class="fa fa-link"></i> <span>Fallas</span></a>
+            </router-link>
+
+            
+
+            <li class="treeview">
+              <a href="#"><i class="fa fa-book"></i> <span>Reportes</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                  <li><a href="http://127.0.0.1:8000/falla_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Fallas</span></a></li>
+                  <li>  <a href="http://127.0.0.1:8000/cliente_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Clientes</span></a></li>
+                  <li>  <a href="http://127.0.0.1:8000/usuario_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Usuarios</span></a></li>
+
+              </ul>
+            </li>
       <!-- -->
           
 
