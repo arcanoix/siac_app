@@ -104,7 +104,7 @@ desired effect
                                     <input class="send" v-model="input" autocomplete="off" placeholder="Escribe un mensaje..." @keyup.enter="post" />
 
                                     <input type="hidden" v-model="channel" value="">
-                                    <input type="hidden" v-model="userName" value="{{ Auth::user()->nombre }}">
+                                    <input style="display: none;" type="text" v-model="userName" value="{{ Auth::user()->nombre }}">
 
                                     <button @click="post" class="btn btn-primary">Enviar</button>
                               

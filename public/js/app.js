@@ -40102,7 +40102,8 @@ var post_tanque = 'tanque_save';
     SelectS: function SelectS() {
       return this.ads.map(function (g) {
         return {
-          label: g.name,
+          label: g.address,
+
           value: g.id
         };
       });
@@ -96908,7 +96909,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('v-select', {
     attrs: {
       "value": _vm.adds.id,
-      "placeholder": "Selecciona un ADS",
+      "placeholder": "Selecciona la direccion de un ADS",
       "options": _vm.SelectS,
       "on-change": _vm.onChangeS
     },
@@ -100973,15 +100974,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       domProps: {
         "value": rol.id
       }
-    }, [_vm._v(_vm._s(rol.rol))])
+    }, [_vm._v(_vm._s(rol.name))])
   }))]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
-  }, [_c('i', {
-    staticClass: "fa fa-circle",
-    attrs: {
-      "aria-hidden": "true"
-    }
-  }), _vm._v(" "), _c('select', {
+  }, [_c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -101004,11 +101000,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "value": "Activo"
     }
-  }, [_vm._v("  Activo")]), _vm._v(" "), _c('option', {
+  }, [_vm._v("Activo")]), _vm._v(" "), _c('option', {
     attrs: {
       "value": "Inactivo"
     }
-  }, [_vm._v("  Inactivo")])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Inactivo")])])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('div', {
     staticClass: "col-md-2"
