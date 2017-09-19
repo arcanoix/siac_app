@@ -99,7 +99,9 @@ table {
                 <div class="col-md-12">
                     <div class="box-header with-border">
                         <h1 class="box-title">Usuarios del Sistema</h1>
-                        <div class="col-md-12">
+                        <div style="position:absolute;
+ top:0;
+ right:0;">
                             <img src="img/Cantv_logo.PNG" style="width: 90px; height: 30px; ">  
                         </div>
                         

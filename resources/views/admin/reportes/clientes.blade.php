@@ -99,6 +99,11 @@ table {
                 <div class="col-md-12">
                     <div class="box-header with-border">
                         <h1 class="box-title">Clientes CANTV</h1>
+                         <div style="position:absolute;
+ top:0;
+ right:0;">
+                            <img src="img/Cantv_logo.PNG" style="width: 90px; height: 30px; ">  
+                        </div>
                         <div class="box-body">
                             @if (!$clientes->isEmpty())
                                 <table class="table table-bordered">
@@ -133,7 +138,7 @@ table {
 
                             @endif
                               <br>
-                            SIAC | 2017  <img src="img/Cantv_logo.PNG" style="width: 90px; height: 30px">
+                            SIAC | 2017  
 
                         </div>
                     </div>

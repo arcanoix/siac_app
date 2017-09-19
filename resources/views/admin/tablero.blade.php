@@ -59,7 +59,11 @@
 
 
                   <p>
+<<<<<<< HEAD
                     {{ Auth::user()->nombre }} - {{  }}
+=======
+                    {{ Auth::user()->nombre }} - 
+>>>>>>> d227ce25c0460a26a50a99c90429f3ff2f9c83cf
                     <small>Miembro desde: {{ Auth::user()->created_at }}</small>
                   </p>
                 </li>
