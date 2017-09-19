@@ -53715,7 +53715,7 @@ var postFalla = 'falla_save';
       },
       users: {
         id: '',
-        name: ''
+        nombre: ''
       },
       numero: {
         id: ''
@@ -53785,8 +53785,8 @@ var postFalla = 'falla_save';
     SelectUser: function SelectUser() {
       return this.u.map(function (g) {
         return {
-          label: g.name,
-          value: g.id
+          label: g.nombre,
+          value: g.user_id
         };
       });
     },
@@ -53846,7 +53846,8 @@ var postFalla = 'falla_save';
       });
     },
     onChangeUser: function onChangeUser(obj) {
-      this.user.id = obj.value;
+      this.user.user_id = obj.value;
+      //console.log(obj)
     },
     onChange: function onChange(obj) {
       this.numero.id = obj.value;
@@ -53891,6 +53892,7 @@ var postFalla = 'falla_save';
       axios.get('tecnicos').then(function (response) {
 
         _this4.u = response.data;
+        console.log(response.data);
       });
     },
     saveFalla: function saveFalla(newFalla) {
@@ -53912,7 +53914,7 @@ var postFalla = 'falla_save';
           type: 'error'
         });
       } else {
-        this.newFalla.user_id = this.user.id;
+        this.newFalla.user_id = this.user.user_id;
         this.newFalla.customer_id = this.cl.id;
         this.newFalla.number_telephone_id = this.numero.id;
         this.newFalla.address = this.place;
@@ -53939,6 +53941,8 @@ var postFalla = 'falla_save';
 
       var input = this.editFalla;
       var update = '/update_f/' + input.id;
+      this.editFalla.user_id = this.user.user_id;
+
       axios.put(update, input).then(function (response) {
         swal({
           title: "Success",
@@ -55944,14 +55948,14 @@ var postUsers = '/users_save';
       showModal: false,
       showModal1: false,
       editUser: {
-        name: '',
+        nombre: '',
         pass: '',
         email: '',
         status: '',
         role_id: ''
       },
       newUser: {
-        name: '',
+        nombre: '',
         pass: '',
         email: '',
         status: '',
@@ -56009,7 +56013,7 @@ var postUsers = '/users_save';
         _this.users = response.data.data.data;
         _this.pagination = response.data.pagination;
         _this.role = response.data.role;
-        //console.log(response.data);
+        console.log(response.data);
         //  console.log(response.data.pagination);
         //  this.$set('users', response.data.data.data);
         //this.$set('pagination', response.data.pagination);
@@ -56044,12 +56048,12 @@ var postUsers = '/users_save';
       var _this2 = this;
 
       var input = this.newUser;
-      var name = input['name'];
+      var nombre = input['nombre'];
       var email = input['email'];
       var password = input['password'];
       var status = input['status'];
 
-      if ((name && email && password && status) == "") {
+      if ((nombre && email && password && status) == "") {
 
         this.hasError = false;
         this.hasDeleted = true;
@@ -56104,6 +56108,7 @@ var postUsers = '/users_save';
       that.showModal1 = true;
       axios.get(showUser + b.id).then(function (response) {
         _this3.editUser = response.data;
+        console.log(response.data);
       });
     },
     updateUser: function updateUser(editUser) {
@@ -95464,7 +95469,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.users), function(b) {
     return _c('tr', {
       staticClass: "row-content"
-    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.name))]), _vm._v(" "), (b.roles[0]) ? _c('td', [_vm._v(_vm._s(b.roles[0].rol))]) : _c('td', [_vm._v("Sin rol Asignado")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.status))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', [_c('a', {
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.nombre))]), _vm._v(" "), (b.roles[0]) ? _c('td', [_vm._v(_vm._s(b.roles[0].name))]) : _c('td', [_vm._v("Sin rol Asignado")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.status))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.email))]), _vm._v(" "), _c('td', [_c('a', {
       staticClass: "btn-top  btn btn-primary",
       on: {
         "click": function($event) {
@@ -95552,36 +95557,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.newUser.name),
-      expression: "newUser.name"
+      value: (_vm.newUser.nombre),
+      expression: "newUser.nombre"
     }],
     staticClass: "form-control",
     class: {
-      'input': true, 'is-danger': _vm.errors.has('name')
+      'input': true, 'is-danger': _vm.errors.has('nombre')
     },
     attrs: {
-      "data-vv-name": "name",
+      "data-vv-name": "nombre",
       "type": "text",
       "placeholder": "Nombre de Usuario"
     },
     domProps: {
-      "value": (_vm.newUser.name)
+      "value": (_vm.newUser.nombre)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.newUser.name = $event.target.value
+        _vm.newUser.nombre = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.errors.has('name')),
-      expression: "errors.has('name')"
+      value: (_vm.errors.has('nombre')),
+      expression: "errors.has('nombre')"
     }],
     staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('nombre')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-envelope",
@@ -95752,36 +95757,36 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.editUser.name),
-      expression: "editUser.name"
+      value: (_vm.editUser.nombre),
+      expression: "editUser.nombre"
     }],
     staticClass: "form-control",
     class: {
-      'input': true, 'is-danger': _vm.errors.has('name')
+      'input': true, 'is-danger': _vm.errors.has('nombre')
     },
     attrs: {
-      "data-vv-name": "name",
+      "data-vv-name": "nombre",
       "type": "text",
       "placeholder": "Nombre de Usuario"
     },
     domProps: {
-      "value": (_vm.editUser.name)
+      "value": (_vm.editUser.nombre)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.editUser.name = $event.target.value
+        _vm.editUser.nombre = $event.target.value
       }
     }
   }), _vm._v(" "), _c('span', {
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.errors.has('name')),
-      expression: "errors.has('name')"
+      value: (_vm.errors.has('nombre')),
+      expression: "errors.has('nombre')"
     }],
     staticClass: "help is-danger"
-  }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.errors.first('nombre')))])]), _vm._v(" "), _c('div', {
     staticClass: "form-group inner-addon left-addon"
   }, [_c('i', {
     staticClass: "fa fa-envelope",
@@ -96025,7 +96030,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.falla), function(b) {
     return _c('tr', {
       staticClass: "row-content"
-    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.number.number))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.type_failure) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.status))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.cliente.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.users.name))]), _vm._v(" "), _c('td', {
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.number.number))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.type_failure) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.status))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.cliente.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.users.nombre))]), _vm._v(" "), _c('td', {
       on: {
         "click": function($event) {
           $event.preventDefault();
