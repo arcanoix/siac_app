@@ -37000,7 +37000,7 @@ var postCliente = 'clientes_save';
 
         //  this.clientes = response.data.clientes;
         _this.clientes = response.data.data.data;
-        console.log(response.data);
+        //console.log(response.data);
         _this.pagination = response.data.pagination;
       });
     },
@@ -37102,7 +37102,9 @@ var postCliente = 'clientes_save';
       var _this9 = this;
 
       var input = this.editCliente;
-      var update = '/update_c/' + input.id;
+      var update = '/update_cli/' + input.id;
+
+      this.editCliente.number_telephone_id = this.numero.id;
 
       axios.put(update, input).then(function (response) {
         swal({
@@ -37858,6 +37860,8 @@ var postBusiness = 'business_save';
 
       var input = this.editBusiness;
       var update = '/update_b/' + input.id;
+
+      this.editBusiness.number_telephone_id = this.numero.id;
 
       axios.put(update, input).then(function (response) {
         swal({
@@ -46499,7 +46503,6 @@ module.exports = function(Chart) {
 			return meta;
 		},
 
-<<<<<<< HEAD
 		getVisibleDatasetCount: function() {
 			var count = 0;
 			for (var i = 0, ilen = this.data.datasets.length; i < ilen; ++i) {
@@ -46509,21 +46512,6 @@ module.exports = function(Chart) {
 			}
 			return count;
 		},
-=======
-        //  this.clientes = response.data.clientes;
-        _this.clientes = response.data.data.data;
-        //console.log(response.data);
-        _this.pagination = response.data.pagination;
-      });
-    },
-    changePage: function changePage(page) {
-      //console.log(page);
-      this.pagination.current_page = page;
-      this.fetchCliente(page);
-    },
-    fetchN: function fetchN() {
-      var _this2 = this;
->>>>>>> 6fddf92cc6d1880051e3d528757b325572afb17e
 
 		isDatasetVisible: function(datasetIndex) {
 			var meta = this.getDatasetMeta(datasetIndex);
@@ -46590,7 +46578,6 @@ module.exports = function(Chart) {
 			}, me);
 		},
 
-<<<<<<< HEAD
 		/**
 		 * @private
 		 */
@@ -46600,12 +46587,6 @@ module.exports = function(Chart) {
 			var listener = function() {
 				me.eventHandler.apply(me, arguments);
 			};
-=======
-      var input = this.editCliente;
-      var update = '/update_cli/' + input.id;
-
-      this.editCliente.number_telephone_id = this.numero.id;
->>>>>>> 6fddf92cc6d1880051e3d528757b325572afb17e
 
 			helpers.each(me.options.events, function(type) {
 				platform.addEventListener(me, type, listener);
@@ -46848,32 +46829,11 @@ module.exports = function(Chart) {
 		 */
 		datasetElementType: null,
 
-<<<<<<< HEAD
 		/**
 		 * Element type used to generate a meta data (e.g. Chart.element.Point).
 		 * @type {Chart.core.element}
 		 */
 		dataElementType: null,
-=======
-      this.editBusiness.number_telephone_id = this.numero.id;
-
-      axios.put(update, input).then(function (response) {
-        swal({
-          title: "Success",
-          text: 'Registro actualizado',
-          type: 'success',
-          animation: 'slide-from-bottom',
-          timer: 3000
-        });
-        _this9.fetchBusiness();
-        _this9.showModal1 = false;
-      });
-    },
-    onDelete: function onDelete(b) {
-      var that = this;
-      var delBusiness = '/business_delete/';
-      //console.log(delUsers + "/"+ b.id);
->>>>>>> 6fddf92cc6d1880051e3d528757b325572afb17e
 
 		initialize: function(chart, datasetIndex) {
 			var me = this;
