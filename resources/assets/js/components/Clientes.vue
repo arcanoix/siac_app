@@ -390,7 +390,7 @@ export default {
 
           //  this.clientes = response.data.clientes;
             this.clientes = response.data.data.data;
-            console.log(response.data);
+            //console.log(response.data);
             this.pagination = response.data.pagination;
         });
 
@@ -481,8 +481,10 @@ export default {
       },
       updateCliente(editCliente){
         var input = this.editCliente;
-        var update = '/update_c/' + input.id;
+        var update = '/update_cli/' + input.id;
 
+        
+          this.editCliente.number_telephone_id = this.numero.id;
 
         axios.put(update, input).then(response => {
           swal({

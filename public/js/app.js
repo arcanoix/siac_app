@@ -52575,7 +52575,7 @@ var postCliente = 'clientes_save';
 
         //  this.clientes = response.data.clientes;
         _this.clientes = response.data.data.data;
-        console.log(response.data);
+        //console.log(response.data);
         _this.pagination = response.data.pagination;
       });
     },
@@ -52677,7 +52677,9 @@ var postCliente = 'clientes_save';
       var _this9 = this;
 
       var input = this.editCliente;
-      var update = '/update_c/' + input.id;
+      var update = '/update_cli/' + input.id;
+
+      this.editCliente.number_telephone_id = this.numero.id;
 
       axios.put(update, input).then(function (response) {
         swal({

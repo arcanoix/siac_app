@@ -74,6 +74,8 @@ class ClientesController extends Controller
         $cliente_new->sector_id = $request->sector_id;
         $cliente_new->number_telephone_id = $request->number_telephone_id;
 
+        //dd($cliente_new);
+
         $cliente_new->save();
         
         return $cliente_new;

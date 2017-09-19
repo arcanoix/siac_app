@@ -80,7 +80,7 @@ Route::get('numero_espera','NumeroTController@numeroE');
 Route::get('clientes', 'ClientesController@index');
 Route::post('clientes_save','ClientesController@store');
 Route::get('/showCliente/{id}', 'ClientesController@show');
-Route::put('/update_c/{id}', 'ClientesController@update');
+Route::put('/update_cli/{id}', 'ClientesController@update');
 Route::delete('/cliente_delete/{id}','ClientesController@destroy');
 
 //rutas para ads
