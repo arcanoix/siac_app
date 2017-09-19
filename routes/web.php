@@ -56,6 +56,7 @@ Route::get('tecnicos','UserController@getTecnicos');
 
 /* Ruta modulo empresas */
 Route::get('/business', 'BusinessController@index');
+Route::get('/businessC', 'BusinessController@indexB');
 Route::post('/business_save', 'BusinessController@store');
 Route::get('/showBusiness/{id}', 'BusinessController@show');
 Route::put('/update_b/{id}', 'BusinessController@update');
@@ -100,13 +101,21 @@ Route::get('/show_s/{id}','ServicioController@show');
 Route::put('/update_s/{id}','ServicioController@update');
 Route::delete('/servicio_del/{id}','ServicioController@destroy');
 
-//rutas para las fallas
+//rutas para las fallas abonados
 Route::get('fallas','FallaController@index');
 Route::post('falla_save','FallaController@store');
 Route::get('/show_f/{id}','FallaController@show');
 Route::put('/update_f/{id}','FallaController@update');
 Route::delete('/falla_del/{id}','FallaController@destroy');
 Route::get('mapa','FallaController@mapa');
+
+
+//rutas para las fallas empresarial
+Route::get('fallasE','FallasEController@index');
+Route::post('fallaE_save','FallasEController@store');
+Route::get('/show_fE/{id}','FallasEController@show');
+Route::put('/update_fE/{id}','FallasEController@update');
+Route::delete('/fallaE_del/{id}','FallasEController@destroy');
 
 //rutas para tanques
 Route::get('tanques','TanqueController@index');

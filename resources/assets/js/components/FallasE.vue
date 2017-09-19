@@ -13,7 +13,7 @@
 <div class="tabled">
     <br>
 
-    <h3 style="text-align: center;">Fallas Abonados</h3>
+    <h3 style="text-align: center;">Fallas Empresarial</h3>
 
     <div style="padding: 5px">
 
@@ -41,7 +41,7 @@
         <td>{{ b.number.number }}</td>
         <td>{{ b.type_failure }} </td>
         <td>{{ b.status }}</td>
-        <td>{{ b.cliente.name }}</td>
+        <td>{{ b.empresa.name }}</td>
         <td>{{ b.address }}</td>
         <td>{{ b.users.nombre }}</td>
 
@@ -76,7 +76,7 @@
 
       <modal :display="showModal" @close="showModal = false">
         <div slot="header">
-          <i class="fa fa-user"></i> Registro de Fallas Abonados
+          <i class="fa fa-user"></i> Registro de Fallas Empresarial
 
         </div>
         <div slot="body">
@@ -96,7 +96,7 @@
                 <v-select v-model="newFalla.status" placeholder="Selecciona un Estatus" :options="Estatus" ></v-select>
             </div>
             <div class="form-group inner-addon left-addon">
-                <v-select :value="cliente.id" v-model="newFalla.customer_id" placeholder="Selecciona un Cliente" :options="SelectCliente" :on-change="onChangeCliente"><span slot="no-options">Porfavor Carga un cliente en su modulo</span></v-select>
+                <v-select :value="cliente.id" v-model="newFalla.business_id" placeholder="Selecciona una Empresa" :options="SelectCliente" :on-change="onChangeCliente"><span slot="no-options">Porfavor Carga un cliente en su modulo</span></v-select>
             </div>
             <div class="form-group inner-addon left-addon">
              <i class="fa fa-key" aria-hidden="true"></i>
@@ -133,7 +133,7 @@
 
       <modal :display="showModal1" @close="showModal1 = false">
         <div slot="header">
-          <i class="fa fa-user"></i> Actualizacion de Registro de Fallas Abonados
+          <i class="fa fa-user"></i> Actualizacion de Registro de Fallas Empresarial
 
         </div>
         <div slot="body">
@@ -158,7 +158,7 @@
               <v-select v-model="editFalla.status"  :options="Estatus" ></v-select>
             </div>
             <div class="form-group inner-addon left-addon">
-                <v-select :value="cliente.id" v-model="editFalla.customer_id"  :options="SelectCliente" :on-change="onChangeCliente"></v-select>
+                <v-select :value="cliente.id" v-model="editFalla.business_id"  :options="SelectCliente" :on-change="onChangeCliente"></v-select>
             </div>
             <div class="form-group inner-addon left-addon">
              <i class="fa fa-globe" aria-hidden="true"></i>
@@ -209,8 +209,8 @@ Vue.use(VueGoogleMaps, {
 
 Vue.component('v-select', vSelect)
 
-var getFalla = 'fallas';
-var postFalla = 'falla_save';
+var getFalla = 'fallasE';
+var postFalla = 'fallaE_save';
 
 export default {
 
@@ -249,7 +249,7 @@ export default {
           number_telephone_id:'',
           type_failure:'',
           status:'',
-          customer_id:'',
+          business_id:'',
           address:'',
           user_id:'',
           latitude:'',
@@ -259,7 +259,7 @@ export default {
           number_telephone_id:'',
           type_failure:'',
           status:'',
-          customer_id:'',
+          business_id:'',
           address:'',
           user_id:'',
           latitude:'',
@@ -381,7 +381,7 @@ export default {
               },
     fetchFallas(page){
 
-         axios.get('/fallas?page=' + page).then(response => {
+         axios.get('/fallasE?page=' + page).then(response => {
 
            this.falla = response.data.data.data;
            this.pagination = response.data.pagination;
@@ -394,8 +394,8 @@ export default {
           this.fetchFallas(page);
       },
       fetchCustomer(){
-          axios.get('clientes').then(response => {
-            this.cliente = response.data.data.data;
+          axios.get('/businessC').then(response => {
+            this.cliente = response.data;
           })
       },
       fetchNumber(){
@@ -435,7 +435,7 @@ export default {
         else
         {
             this.newFalla.user_id = this.user.user_id;
-            this.newFalla.customer_id = this.cl.id;
+            this.newFalla.business_id = this.cl.id;
             this.newFalla.number_telephone_id = this.numero.id;
             this.newFalla.address = this.place;
             this.newFalla.latitude = this.latitude;
@@ -459,7 +459,7 @@ export default {
       },
       updateFalla(editFalla){
         var input = this.editFalla;
-        var update = '/update_f/' + input.id;
+        var update = '/update_fE/' + input.id;
          this.editFalla.user_id = this.user.user_id;
 
         axios.put(update, input).then(response => {
@@ -475,7 +475,7 @@ export default {
         });
       },
       onEdit(b){
-        var showUser = '/show_f/';
+        var showUser = '/show_fE/';
         var that = this;
         that.showModal1 = true;
         axios.get(showUser + b.id).then(response => {
@@ -484,7 +484,7 @@ export default {
       },
       onDelete(b){
         var that = this;
-        var delFalla = '/falla_del/';
+        var delFalla = '/falla_delE/';
         //console.log(delFalla + "/"+ b.id);
 
         swal({

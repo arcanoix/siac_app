@@ -56990,6 +56990,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_Sector_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_Sector_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_Logs_vue__ = __webpack_require__(459);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_Logs_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_Logs_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_FallasE_vue__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_FallasE_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_FallasE_vue__);
+
 
 
 
@@ -57052,6 +57055,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
 	}, {
 		path: "/log",
 		component: __WEBPACK_IMPORTED_MODULE_14__components_Logs_vue___default.a
+	}, {
+		path: "/fallasE",
+		component: __WEBPACK_IMPORTED_MODULE_15__components_FallasE_vue___default.a
 	}],
 	linkActiveClass: 'active' /* <---- proceso para que el menu quede selected activo */
 });
@@ -96001,7 +96007,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticStyle: {
       "text-align": "center"
     }
-  }, [_vm._v("Fallas")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Fallas Abonados")]), _vm._v(" "), _c('div', {
     staticStyle: {
       "padding": "5px"
     }
@@ -96088,7 +96094,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Registro de Fallas\n\n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Registro de Fallas Abonados\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -96282,7 +96288,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     slot: "header"
   }, [_c('i', {
     staticClass: "fa fa-user"
-  }), _vm._v(" Actualizacion de Registro de Fallas\n\n        ")]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Actualizacion de Registro de Fallas Abonados\n\n        ")]), _vm._v(" "), _c('div', {
     slot: "body"
   }, [_c('form', {
     staticClass: "form"
@@ -100068,6 +100074,1094 @@ if(false) {
  if(!content.locals) {
    module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5cd694dd\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Logs.vue", function() {
      var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5cd694dd\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Logs.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 464 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_select___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_select__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_google_maps__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue2_google_maps___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue2_google_maps__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+window.axios = __webpack_require__(39);
+
+window.axios.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest'
+};
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue2_google_maps__, {
+  load: {
+    key: 'AIzaSyCEyxtNeLPsOWjABwIKLWrA4gDnm0sRUv0'
+  }
+});
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('v-select', __WEBPACK_IMPORTED_MODULE_1_vue_select___default.a);
+
+var getFalla = 'fallasE';
+var postFalla = 'fallaE_save';
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      latitude: '',
+      place: '',
+      active: true,
+      longitude: '',
+      falla: [],
+      showModal: false,
+      showModal1: false,
+      Estatus: ['En proceso', 'Listo'],
+      customer: {
+        id: '',
+        name: ''
+      },
+      users: {
+        id: '',
+        nombre: ''
+      },
+      numero: {
+        id: ''
+      },
+      cl: {
+        id: ''
+      },
+      user: {
+        id: ''
+      },
+      selected: null,
+      number: [],
+      cliente: [],
+      u: [],
+      newFalla: {
+        number_telephone_id: '',
+        type_failure: '',
+        status: '',
+        business_id: '',
+        address: '',
+        user_id: '',
+        latitude: '',
+        longitude: ''
+      },
+      editFalla: {
+        number_telephone_id: '',
+        type_failure: '',
+        status: '',
+        business_id: '',
+        address: '',
+        user_id: '',
+        latitude: '',
+        longitude: ''
+      },
+
+      pagination: {
+        total: 0,
+        per_page: 7,
+        from: 1,
+        to: 0,
+        current_page: 1
+      },
+      offset: 4
+
+    };
+  },
+
+  watch: {
+    place: function place() {
+      this.longitude = '';
+      this.latitude = '';
+      this.active = true;
+      if (this.place.length >= 4) {
+        this.lookupCoordinates();
+        this.active = false;
+      }
+    }
+  },
+  created: function created() {
+    this.fetchFallas(this.pagination.current_page);
+    this.fetchCustomer();
+    this.fetchNumber();
+    this.fetchUser();
+  },
+
+  computed: {
+    SelectUser: function SelectUser() {
+      return this.u.map(function (g) {
+        return {
+          label: g.nombre,
+          value: g.user_id
+        };
+      });
+    },
+    SelectCliente: function SelectCliente() {
+      return this.cliente.map(function (g) {
+        return {
+          label: g.name,
+          value: g.id
+        };
+      });
+    },
+    Selectnumber: function Selectnumber() {
+      return this.number.map(function (g) {
+        return {
+          label: g.number,
+          value: g.id
+        };
+      });
+    },
+    isActived: function isActived() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function pagesNumber() {
+      if (!this.pagination.to) {
+        return [];
+      }
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
+
+  methods: {
+    lookupCoordinates: function lookupCoordinates() {
+      var app = this;
+      app.longitude = "Ubicando.....";
+      app.latitude = "Ubicando.....";
+
+      axios.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + app.place).then(function (response) {
+        //console.log(response);
+        app.longitude = response.data.results[0].geometry.location.lng;
+        app.latitude = response.data.results[0].geometry.location.lat;
+      }).catch(function (error) {
+        app.longitude = "Ubicacion no Valida";
+        app.latitude = "Ubicacion no Valida";
+      });
+    },
+    onChangeUser: function onChangeUser(obj) {
+      this.user.user_id = obj.value;
+      //console.log(obj)
+    },
+    onChange: function onChange(obj) {
+      this.numero.id = obj.value;
+      //this.newFalla.number_telephone_id = obj.value;
+    },
+    onChangeCliente: function onChangeCliente(obj) {
+      this.cl.id = obj.value;
+    },
+    fetchFallas: function fetchFallas(page) {
+      var _this = this;
+
+      axios.get('/fallasE?page=' + page).then(function (response) {
+
+        _this.falla = response.data.data.data;
+        _this.pagination = response.data.pagination;
+      });
+    },
+    changePage: function changePage(page) {
+      //console.log(page);
+      this.pagination.current_page = page;
+      this.fetchFallas(page);
+    },
+    fetchCustomer: function fetchCustomer() {
+      var _this2 = this;
+
+      axios.get('/businessC').then(function (response) {
+        _this2.cliente = response.data;
+      });
+    },
+    fetchNumber: function fetchNumber() {
+      var _this3 = this;
+
+      axios.get('numero_telefonico1').then(function (response) {
+
+        _this3.number = response.data;
+        //console.log(response.data.data.data);
+      });
+    },
+    fetchUser: function fetchUser() {
+      var _this4 = this;
+
+      axios.get('tecnicos').then(function (response) {
+
+        _this4.u = response.data;
+        console.log(response.data);
+      });
+    },
+    saveFalla: function saveFalla(newFalla) {
+      var _this5 = this;
+
+      var input = this.newFalla;
+      var type_failure = input['type_failure'];
+      var status = input['status'];
+      var address = input['place'];
+
+      if ((status && type_failure && address) == "") {
+
+        this.hasError = false;
+        this.hasDeleted = true;
+
+        swal({
+          title: "Oops...",
+          text: 'Tiene campos en blanco!',
+          type: 'error'
+        });
+      } else {
+        this.newFalla.user_id = this.user.user_id;
+        this.newFalla.business_id = this.cl.id;
+        this.newFalla.number_telephone_id = this.numero.id;
+        this.newFalla.address = this.place;
+        this.newFalla.latitude = this.latitude;
+        this.newFalla.longitude = this.longitude;
+        this.hasError = true;
+        axios.post(postFalla, this.newFalla).then(function (response) {
+
+          swal({
+            title: "Success",
+            text: 'Registro Guardado',
+            type: 'success',
+            animation: 'slide-from-bottom',
+            timer: 3000
+          });
+
+          _this5.fetchFallas();
+          _this5.showModal = false;
+        });
+      }
+    },
+    updateFalla: function updateFalla(editFalla) {
+      var _this6 = this;
+
+      var input = this.editFalla;
+      var update = '/update_fE/' + input.id;
+      this.editFalla.user_id = this.user.user_id;
+
+      axios.put(update, input).then(function (response) {
+        swal({
+          title: "Success",
+          text: 'Registro actualizado',
+          type: 'success',
+          animation: 'slide-from-bottom',
+          timer: 3000
+        });
+        _this6.fetchFallas();
+        _this6.showModal1 = false;
+      });
+    },
+    onEdit: function onEdit(b) {
+      var _this7 = this;
+
+      var showUser = '/show_fE/';
+      var that = this;
+      that.showModal1 = true;
+      axios.get(showUser + b.id).then(function (response) {
+        _this7.editFalla = response.data;
+      });
+    },
+    onDelete: function onDelete(b) {
+      var that = this;
+      var delFalla = '/falla_delE/';
+      //console.log(delFalla + "/"+ b.id);
+
+      swal({
+        title: '¿Estas seguro de eliminar el registro?',
+        text: 'Luego de eliminar no podras recuperar el registro',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No'
+      }).then(function () {
+        axios.delete(delFalla + b.id).then(function (response) {
+          //console.log("eliminado");
+          that.fetchFallas();
+        });
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 465 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)();
+exports.push([module.i, "\n.simple-root {\r\n  margin-top: 20%;\r\n  margin-left: auto;\r\n  margin-right: auto;\n}\n.help.is-danger {\r\n  color: red;\n}\n.form-control.is-danger {\r\n  border: 1px solid red;\n}\r\n\r\n\r\n\r\n/* enable absolute positioning */\n.inner-addon {\r\n    position: relative;\n}\r\n\r\n/* style icon */\n.inner-addon .fa {\r\n  position: absolute;\r\n  padding: 10px;\r\n  pointer-events: none;\n}\r\n\r\n/* align icon */\n.left-addon .fa  { left:  0px;\n}\n.right-addon .fa { right: 0px;\n}\r\n\r\n/* add padding  */\n.left-addon input  { padding-left:  30px;\n}\n.right-addon input { padding-right: 30px;\n}\n.tabled{\r\n    background-color: white;\r\n     opacity:0.9; /* Opacidad 90% */\r\n     border-radius: 2px;\r\n     border-bottom: 2px;\n}\r\n/* Table css Start */\na.del\r\n{\r\n    background:#d9534f;\r\n    border-radius: 2px;\r\n    width: 35px;\r\n    height:28px;\r\n    padding-left:12px;\r\n    line-height:10px;\n}\na.edit\r\n{\r\n    padding-left:10px;\r\n    background:#337ab7;\r\n    color:#fff;\r\n    border-radius:2px;\r\n    border:none;\n}\ntr.row-name\r\n{\r\n    font-size: 18px;\r\n    color:#448aff;\n}\ntr.row-content\r\n{\r\n    color:#6c7173;\n}\nth  {\r\n   text-align: center;\r\n  padding-top: 10px;\r\npadding-right: 10px;\r\npadding-bottom: 10px;\r\npadding-left: 30px;\n}\ntd  {\r\n  text-align: center;\r\n padding-top: 10px;\r\npadding-right: 10px;\r\npadding-bottom: 10px;\r\npadding-left: 30px;\n}\ntable\r\n{\r\n    border-bottom: 8px solid #448aff;\n}\ntd.check\r\n{\r\n    text-align: center;\n}\n.table-striped>tbody>tr:nth-of-type(odd)\r\n{\r\n    background:#F0F2F2 !important;\n}\na.btn-danger:hover\r\n{\r\n    background: #de6c69;\n}\na.btn-danger\r\n{\r\n    background:#d9534f;\n}\na.btn-top\r\n{\r\n    /*background:#448aff;*/\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\n}\na.btn-top:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\na.btn-t\r\n{\r\n\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\r\n    width: 20%;\n}\na.btn-t:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\r\n/* Table css End */\r\n\r\n/*modal*/\n.Modal__container {\r\n    max-width: 700px;\r\n    width: 90%;\r\n    background: white;\r\n    border-radius: 2px;\r\n    -webkit-animation-duration: 0.3s;\r\n            animation-duration: 0.3s;\r\n    -webkit-animation-delay: 0s;\r\n            animation-delay: 0s;\n}\n.Modal__header {\r\n    border-bottom: 1px solid white;\r\n    padding: 15px 10px;\r\n    background-color: silver;\r\n    color: white;\r\n    border-radius: 2px;\n}\n.Modal__header > h1 {\r\n    font-size: 27px;\r\n    font-weight: normal;\r\n    margin: 0;\n}\n.Modal__content {\r\n    padding: 10px;\n}\n.Modal__footer {\r\n    padding: 5px;\n}\n.u-overlay {\r\n    position: fixed;\r\n    z-index: 1000;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(0,0,0,0.8);\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n        -ms-flex-align: center;\r\n            align-items: center;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\n}\n.naked-link {\r\n    color: inherit;\r\n    text-decoration: inherit;\n}\r\n\r\n", ""]);
+
+/***/ }),
+/* 466 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(468)
+
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(464),
+  /* template */
+  __webpack_require__(467),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\xampp\\htdocs\\siac_app\\resources\\assets\\js\\components\\FallasE.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] FallasE.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-65e697ba", Component.options)
+  } else {
+    hotAPI.reload("data-v-65e697ba", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 467 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container-fluid"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "tabled"
+  }, [_c('br'), _vm._v(" "), _c('h3', {
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_vm._v("Fallas Empresarial")]), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "padding": "5px"
+    }
+  }, [_c('a', {
+    staticClass: "btn-t btn-primary pull-left",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showModal = true
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-user-plus",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("Nueva Falla")])]), _vm._v(" "), _c('table', {
+    staticClass: "table table-striped"
+  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.falla), function(b) {
+    return _c('tr', {
+      staticClass: "row-content"
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.number.number))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.type_failure) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.status))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.empresa.name))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.users.nombre))]), _vm._v(" "), _c('td', {
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.onEdit(b)
+        }
+      }
+    }, [_vm._m(2, true)])])
+  })], 2), _vm._v(" "), _c('nav', [_c('ul', {
+    staticClass: "pagination"
+  }, [(_vm.pagination.current_page > 1) ? _c('li', [_c('a', {
+    attrs: {
+      "aria-label": "Previous"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.changePage(_vm.pagination.current_page - 1)
+      }
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("«")])])]) : _vm._e(), _vm._v(" "), _vm._l((_vm.pagesNumber), function(page) {
+    return _c('li', {
+      class: [page == _vm.isActived ? 'active' : '']
+    }, [_c('a', {
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.changePage(page)
+        }
+      }
+    }, [_vm._v(_vm._s(page))])])
+  }), _vm._v(" "), (_vm.pagination.current_page < _vm.pagination.last_page) ? _c('li', [_c('a', {
+    attrs: {
+      "aria-label": "Next"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.changePage(_vm.pagination.current_page + 1)
+      }
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("»")])])]) : _vm._e()], 2)]), _vm._v(" "), _c('br'), _vm._v(" "), _c('modal', {
+    attrs: {
+      "display": _vm.showModal
+    },
+    on: {
+      "close": function($event) {
+        _vm.showModal = false
+      }
+    }
+  }, [_c('div', {
+    slot: "header"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  }), _vm._v(" Registro de Fallas Empresarial\n\n        ")]), _vm._v(" "), _c('div', {
+    slot: "body"
+  }, [_c('form', {
+    staticClass: "form"
+  }, [_c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.numero.id,
+      "placeholder": "Selecciona un numero",
+      "options": _vm.Selectnumber,
+      "on-change": _vm.onChange
+    },
+    model: {
+      value: (_vm.newFalla.number_telephone_id),
+      callback: function($$v) {
+        _vm.newFalla.number_telephone_id = $$v
+      },
+      expression: "newFalla.number_telephone_id"
+    }
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Carga datos en el modulo numero telefonico")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-envelope",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.newFalla.type_failure),
+      expression: "newFalla.type_failure"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('type_failure')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Tipo de falla",
+      "name": "type_failure"
+    },
+    domProps: {
+      "value": (_vm.newFalla.type_failure)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.newFalla.type_failure = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('type_failure')),
+      expression: "errors.has('type_failure')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('type_failure')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "placeholder": "Selecciona un Estatus",
+      "options": _vm.Estatus
+    },
+    model: {
+      value: (_vm.newFalla.status),
+      callback: function($$v) {
+        _vm.newFalla.status = $$v
+      },
+      expression: "newFalla.status"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.cliente.id,
+      "placeholder": "Selecciona una Empresa",
+      "options": _vm.SelectCliente,
+      "on-change": _vm.onChangeCliente
+    },
+    model: {
+      value: (_vm.newFalla.business_id),
+      callback: function($$v) {
+        _vm.newFalla.business_id = $$v
+      },
+      expression: "newFalla.business_id"
+    }
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Porfavor Carga un cliente en su modulo")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-key",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.place),
+      expression: "place"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Direccion"
+    },
+    domProps: {
+      "value": (_vm.place)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.place = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.user.id,
+      "placeholder": "Selecciona un Tecnico",
+      "options": _vm.SelectUser,
+      "on-change": _vm.onChangeUser
+    },
+    model: {
+      value: (_vm.newFalla.user_id),
+      callback: function($$v) {
+        _vm.newFalla.user_id = $$v
+      },
+      expression: "newFalla.user_id"
+    }
+  }, [_c('span', {
+    slot: "no-options"
+  }, [_vm._v("Porfavor Carga un Tecnico en su modulo")])])], 1), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 Map"
+  }, [_c('h3', [_vm._v(" Latitude : " + _vm._s(_vm.latitude))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6 Map"
+  }, [_c('h3', [_vm._v(" Longitude : " + _vm._s(_vm.longitude))])]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-12 Map",
+    class: {
+      'not-visible': _vm.active
+    },
+    staticStyle: {
+      "display": "none"
+    }
+  })])]), _vm._v(" "), _c('div', {
+    slot: "footer"
+  }, [_c('a', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.saveFalla()
+      }
+    }
+  }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showModal = false
+      }
+    }
+  }, [_vm._v("Cerrar")])])]), _vm._v(" "), _c('modal', {
+    attrs: {
+      "display": _vm.showModal1
+    },
+    on: {
+      "close": function($event) {
+        _vm.showModal1 = false
+      }
+    }
+  }, [_c('div', {
+    slot: "header"
+  }, [_c('i', {
+    staticClass: "fa fa-user"
+  }), _vm._v(" Actualizacion de Registro de Fallas Empresarial\n\n        ")]), _vm._v(" "), _c('div', {
+    slot: "body"
+  }, [_c('form', {
+    staticClass: "form"
+  }, [_c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-user",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('v-select', {
+    attrs: {
+      "value": _vm.numero.id,
+      "options": _vm.Selectnumber,
+      "on-change": _vm.onChange
+    },
+    model: {
+      value: (_vm.editFalla.number_telephone_id),
+      callback: function($$v) {
+        _vm.editFalla.number_telephone_id = $$v
+      },
+      expression: "editFalla.number_telephone_id"
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('number_telephone_id')),
+      expression: "errors.has('number_telephone_id')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('number_telephone_id')))])], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-envelope",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editFalla.type_failure),
+      expression: "editFalla.type_failure"
+    }],
+    staticClass: "form-control",
+    class: {
+      'input': true, 'is-danger': _vm.errors.has('type_failure')
+    },
+    attrs: {
+      "type": "text",
+      "placeholder": "Tipo de falla",
+      "name": "type_failure"
+    },
+    domProps: {
+      "value": (_vm.editFalla.type_failure)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editFalla.type_failure = $event.target.value
+      }
+    }
+  }), _vm._v(" "), _c('span', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.errors.has('type_failure')),
+      expression: "errors.has('type_failure')"
+    }],
+    staticClass: "help is-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('type_failure')))])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "options": _vm.Estatus
+    },
+    model: {
+      value: (_vm.editFalla.status),
+      callback: function($$v) {
+        _vm.editFalla.status = $$v
+      },
+      expression: "editFalla.status"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.cliente.id,
+      "options": _vm.SelectCliente,
+      "on-change": _vm.onChangeCliente
+    },
+    model: {
+      value: (_vm.editFalla.business_id),
+      callback: function($$v) {
+        _vm.editFalla.business_id = $$v
+      },
+      expression: "editFalla.business_id"
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('i', {
+    staticClass: "fa fa-globe",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.editFalla.address),
+      expression: "editFalla.address"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placeholder": "Direccion"
+    },
+    domProps: {
+      "value": (_vm.editFalla.address)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.editFalla.address = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group inner-addon left-addon"
+  }, [_c('v-select', {
+    attrs: {
+      "value": _vm.user.id,
+      "options": _vm.SelectUser,
+      "on-change": _vm.onChangeUser
+    },
+    model: {
+      value: (_vm.editFalla.user_id),
+      callback: function($$v) {
+        _vm.editFalla.user_id = $$v
+      },
+      expression: "editFalla.user_id"
+    }
+  })], 1)])]), _vm._v(" "), _c('div', {
+    slot: "footer"
+  }, [_c('a', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.updateFalla()
+      }
+    }
+  }, [_vm._v("Guardar")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-default",
+    attrs: {
+      "href": "#"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.showModal1 = false
+      }
+    }
+  }, [_vm._v("Cerrar")])])])], 1)])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_c('small')]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-dashboard"
+  }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
+    staticClass: "active"
+  }, [_vm._v("Falla")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('tr', {
+    staticClass: "row-name"
+  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Numero telefonico")]), _vm._v(" "), _c('th', [_vm._v("Tipo De Falla")]), _vm._v(" "), _c('th', [_vm._v("Estatus")]), _vm._v(" "), _c('th', [_vm._v("Cliente")]), _vm._v(" "), _c('th', [_vm._v("Direccion")]), _vm._v(" "), _c('th', [_vm._v("Tecnico Asignado")]), _vm._v(" "), _c('th', [_vm._v("Editar")])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
+    staticClass: "btn-top  btn btn-primary"
+  }, [_c('i', {
+    staticClass: "fa fa-pencil-square-o",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-65e697ba", module.exports)
+  }
+}
+
+/***/ }),
+/* 468 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(465);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("303a68ef", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-65e697ba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FallasE.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-65e697ba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./FallasE.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

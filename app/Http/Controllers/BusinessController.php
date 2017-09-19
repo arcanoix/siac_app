@@ -36,6 +36,15 @@ class BusinessController extends Controller
 
     }
 
+     public function indexb()
+    {
+      $business = Business::with('num')->get();
+      
+
+  return $business;
+
+    }
+
 	public function store(Request $request)
 	{
       $empresa = New Business();

@@ -210,10 +210,26 @@
             </router-link>
 
             @endrole
+            <li class="treeview">
+                      <a href="#"><i class="fa fa-link"></i> <span>Registro de Fallas</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                          
+                                   <router-link tag="li" to="/fallas">
+                                        <a> <i class="fa fa-link"></i> <span>Fallas Abonados</span></a>
+                                      </router-link>
+                                       <router-link tag="li" to="/fallasE">
+                                        <a> <i class="fa fa-link"></i> <span>Fallas Empresas</span></a>
+                                      </router-link>
+                          
+                      </ul>
+                 </li>
 
-           <router-link tag="li" to="/fallas">
-              <a> <i class="fa fa-link"></i> <span>Fallas</span></a>
-            </router-link>
+
+          
 
             
 

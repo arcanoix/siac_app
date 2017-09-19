@@ -14,6 +14,7 @@ import Tanque from './components/Tanque.vue'
 import Central from './components/CentralT.vue'
 import Sector from './components/Sector.vue'
 import Log from './components/Logs.vue'
+import FallasE from './components/FallasE.vue'
 
 
 Vue.use(VueRouter)
@@ -75,6 +76,10 @@ const router = new VueRouter({
 		{
 			path:"/log",
 			component:Log
+		},
+		{
+			path:"/fallasE",
+			component:FallasE
 		}
 	],
 	linkActiveClass: 'active' /* <---- proceso para que el menu quede selected activo */
