@@ -101121,7 +101121,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-dashboard"
   }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
     staticClass: "active"
-  }, [_vm._v("Falla")])])])
+  }, [_vm._v("Falla Empresarial")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('tr', {
     staticClass: "row-name"
