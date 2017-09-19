@@ -71,6 +71,7 @@ Route::get('numero_telefonico', 'NumeroTController@index');
 Route::post('numero_save','NumeroTController@store');
 Route::get('/showNum/{id}','NumeroTController@show');
 Route::put('/update_N/{id}','NumeroTController@update');
+Route::get('numero_telefonico1','NumeroTController@indexn');
 Route::delete('/numero_delete/{id}','NumeroTController@destroy');
 
 Route::get('numero_espera','NumeroTController@numeroE');

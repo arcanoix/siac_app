@@ -141,7 +141,9 @@ desired effect
 
 
       var socket = io("http://socket-seac.herokuapp.com:80", {transports: ['websocket', 'polling', 'flashsocket']});
+
    // var socket = io('http://127.0.0.1:8080', {transports: ['websocket', 'polling', 'flashsocket']});
+
 
      // console.log(socket);
 

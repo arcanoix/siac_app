@@ -398,9 +398,9 @@ export default {
           })
       },
       fetchNumber(){
-          axios.get('numero_telefonico').then(response => {
+          axios.get('numero_telefonico1').then(response => {
 
-            this.number = response.data.data.data;
+            this.number = response.data;
             //console.log(response.data.data.data);
           })
       },
@@ -415,9 +415,11 @@ export default {
         var type_failure = input['type_failure']
         var status = input['status']
         var address = input['place']
-        
 
-         if((status && type_failure && address ) == ""){
+          
+
+         if((status && type_failure && address) == ""){
+
          
           this.hasError = false;
           this.hasDeleted = true;
