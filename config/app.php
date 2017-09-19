@@ -187,6 +187,8 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
+
     ],
 
     /*
@@ -242,6 +244,8 @@ return [
         'Mapper'      => Cornford\Googlmapper\Facades\MapperFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+
+        'Activity' => Spatie\Activitylog\ActivitylogFacade::class,
     ],
 
 ];

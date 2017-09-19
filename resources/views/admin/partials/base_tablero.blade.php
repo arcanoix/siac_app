@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -79,13 +79,13 @@ desired effect
 </div>
  
 <div class="container">
-            <div id="chat" style="position: fixed;">Open Chat</div>
+            <div id="chat" style="position: fixed;">Abrir Chat Room</div>
               
               <div id="chata">
                 <div id="chat-box" style="position: fixed;">
                 
                 <div id="chat-bar">
-                  <p>Chat SIAC</p>
+                  <p>Chat Room Siac</p>
                   <span class="fa fa-close"></span>
                 </div>
                 
@@ -94,7 +94,7 @@ desired effect
                        <b>@{{ nickname }}</b><span> se a unido </span> 
                    </div>
                    <div class="chat-message" v-for="message in messages">
-                                            <p><small>@{{ message[1] }} : </small>@{{ message[2] }} </p>
+                                            <p><b>@{{ message[1] }} : </b>@{{ message[2] }} </p>
 
                     </div>
                 </div>
@@ -140,8 +140,8 @@ desired effect
     <script>
 
 
-      var socket = io("http://socket-seac.herokuapp.com:80", {transports: ['websocket', 'polling', 'flashsocket']});
-    //var socket = io('http://127.0.0.1:8080', {transports: ['websocket', 'polling', 'flashsocket']});
+     // var socket = io("http://socket-seac.herokuapp.com:80", {transports: ['websocket', 'polling', 'flashsocket']});
+    var socket = io('http://127.0.0.1:8080', {transports: ['websocket', 'polling', 'flashsocket']});
 
      // console.log(socket);
 

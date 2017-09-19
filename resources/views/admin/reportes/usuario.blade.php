@@ -99,6 +99,11 @@ table {
                 <div class="col-md-12">
                     <div class="box-header with-border">
                         <h1 class="box-title">Usuarios del Sistema</h1>
+                        <div class="pull-right">
+                            <img src="img/Cantv_logo.PNG" style="width: 90px; height: 30px">  
+                        </div>
+                        
+
                         <div class="box-body">
                             @if (!$usuarios->isEmpty())
                                 <table class="table table-bordered">
@@ -131,7 +136,7 @@ table {
 
                             @endif
                               <br>
-                            SIAC | 2017
+                            SIAC | 2017 
 
                         </div>
                     </div>

@@ -197,6 +197,8 @@
                           <router-link tag="li" to="/sector">
                                 <a> <i class="fa fa-suitcase"></i> <span>Sector</span></a>
                           </router-link>
+
+                          
                       </ul>
                  </li>
 
@@ -206,7 +208,9 @@
               <a> <i class="fa fa-link"></i> <span>Fallas</span></a>
             </router-link>
 
-
+            <router-link tag="li" to="/log">
+                            <a><i></i><span>Log</span></a>
+            </router-link>
 
             <li class="treeview">
               <a href="#"><i class="fa fa-book"></i> <span>Reportes</span>
@@ -217,7 +221,7 @@
               <ul class="treeview-menu">
                   <li><a href="http://127.0.0.1:8000/falla_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Fallas</span></a></li>
                   <li>  <a href="http://127.0.0.1:8000/cliente_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Clientes</span></a></li>
-                  <li>  <a href="http://127.0.0.1:8000/usuario_reporte" targe="_blank"> <i class="fa fa-suitcase"></i> <span>Usuarios</span></a></li>
+                  <li>  <a href="http://127.0.0.1:8000/usuario_reporte" target="_blank"> <i class="fa fa-suitcase"></i> <span>Usuarios</span></a></li>
 
               </ul>
             </li>
@@ -253,8 +257,10 @@
     <!-- Main Footer -->
     <footer class="main-footer">
       <!-- To the right -->
+        
       <div class="pull-right hidden-xs">
-      <b>SIAC</b>
+      
+       <img src="{{ asset('img/Cantv_logo.PNG')}}" alt="" style="width: 90px; height: 30px">
       </div>
       <!-- Default to the left -->
       <strong>2017 <a href="#">Sistema de Identificación de Averias | CANTV</h3></a>.</strong> Todos los derechos reservados.

@@ -105,7 +105,7 @@
             </div>
 
             <div class="form-group inner-addon left-addon">
-              <v-select :value="user.id" v-model="newFalla.user_id" placeholder="Selecciona un Usuario" :options="SelectUser" :on-change="onChangeUser"><span slot="no-options">Porfavor Carga un Tecnico en su modulo</span></v-select>
+              <v-select :value="user.id" v-model="newFalla.user_id" placeholder="Selecciona un Tecnico" :options="SelectUser" :on-change="onChangeUser"><span slot="no-options">Porfavor Carga un Tecnico en su modulo</span></v-select>
 
             </div>
 

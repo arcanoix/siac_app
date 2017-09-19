@@ -33,6 +33,8 @@
         <th>Cedula</th>
         <th>Email</th>
         <th>Direccion</th>
+        <th>Numero Telefonico</th>
+       
         <th>Editar</th>
 
 
@@ -42,8 +44,11 @@
         <td>{{ b.name }}</td>
         <td>{{ b.last_name }}</td>
         <td>{{ b.identification_card }}</td>
+         <td>{{ b.email }}</td>
         <td>{{ b.address }}</td>
-        <td>{{ b.email }}</td>
+        
+         <td>{{ b.num.code }} - {{ b.num.number }}</td>
+       
 
 
         <td v-on:click.prevent="onEdit(b)"><a class="btn-top  btn btn-primary"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
@@ -385,6 +390,7 @@ export default {
 
           //  this.clientes = response.data.clientes;
             this.clientes = response.data.data.data;
+            console.log(response.data);
             this.pagination = response.data.pagination;
         });
 

@@ -31,7 +31,7 @@
         <th>Direccion</th>
         <th>Parroquia</th>
         <th>Sector</th>
-        <th>Tanquilla</th>
+        <th>Tanque</th>
         <th>Editar</th>
 
 

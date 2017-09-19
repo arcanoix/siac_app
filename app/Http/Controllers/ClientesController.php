@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Clientes;
+use App\NumeroT;
+
 class ClientesController extends Controller
 {
     //
     public function index()
     {
-      $clientes = Clientes::paginate(5);
+      $clientes = Clientes::with('num')->paginate(5);
 
       $response = [
        'pagination' => [
