@@ -38298,9 +38298,9 @@ var postFalla = 'falla_save';
     fetchNumber: function fetchNumber() {
       var _this3 = this;
 
-      axios.get('numero_telefonico').then(function (response) {
+      axios.get('numero_telefonico1').then(function (response) {
 
-        _this3.number = response.data.data.data;
+        _this3.number = response.data;
         //console.log(response.data.data.data);
       });
     },
@@ -46955,7 +46955,6 @@ module.exports = function(Chart) {
 				elements[i].transition(easingValue);
 			}
 
-<<<<<<< HEAD
 			if (meta.dataset) {
 				meta.dataset.transition(easingValue);
 			}
@@ -46966,16 +46965,6 @@ module.exports = function(Chart) {
 			var elements = meta.data || [];
 			var ilen = elements.length;
 			var i = 0;
-=======
-      axios.get('numero_telefonico1').then(function (response) {
-
-        _this3.number = response.data;
-        //console.log(response.data.data.data);
-      });
-    },
-    fetchUser: function fetchUser() {
-      var _this4 = this;
->>>>>>> a5808d48541a21dff33e651f22622c05a2a3b97d
 
 			if (meta.dataset) {
 				meta.dataset.draw();
@@ -46986,7 +46975,6 @@ module.exports = function(Chart) {
 			}
 		},
 
-<<<<<<< HEAD
 		removeHoverStyle: function(element, elementOpts) {
 			var dataset = this.chart.data.datasets[element._datasetIndex];
 			var index = element._index;
@@ -46998,14 +46986,6 @@ module.exports = function(Chart) {
 			model.borderColor = custom.borderColor ? custom.borderColor : valueOrDefault(dataset.borderColor, index, elementOpts.borderColor);
 			model.borderWidth = custom.borderWidth ? custom.borderWidth : valueOrDefault(dataset.borderWidth, index, elementOpts.borderWidth);
 		},
-=======
-      var input = this.newFalla;
-      var type_failure = input['type_failure'];
-      var status = input['status'];
-      var address = input['place'];
-
-      if ((status && type_failure && address) == "") {
->>>>>>> a5808d48541a21dff33e651f22622c05a2a3b97d
 
 		setHoverStyle: function(element) {
 			var dataset = this.chart.data.datasets[element._datasetIndex];
@@ -49708,7 +49688,6 @@ module.exports = function(Chart) {
 		};
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Helper to get the reset model for the tooltip
 	 * @param tooltipOpts {Object} the tooltip options
@@ -49716,24 +49695,6 @@ module.exports = function(Chart) {
 	function getBaseModel(tooltipOpts) {
 		var globalDefaults = defaults.global;
 		var valueOrDefault = helpers.valueOrDefault;
-=======
-  methods: {
-    fillData: function fillData() {
-      this.renderChart({
-        labels: ['Septiembre', 'Octubre', 'Noviembre'],
-        datasets: [{
-          label: 'En Proceso',
-          backgroundColor: '#FC2525',
-          data: this.data
-        }, {
-          label: 'Listo',
-          backgroundColor: '#05CBE1',
-          data: this.listo
-        }]
-      }, { responsive: true, maintainAspectRatio: false });
-    }
-  }
->>>>>>> a5808d48541a21dff33e651f22622c05a2a3b97d
 
 		return {
 			// Positioning
