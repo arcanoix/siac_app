@@ -151,15 +151,15 @@
 
             <div class="form-group inner-addon left-addon">
              <select class="form-control" v-model="editUser.role_id">
-                  <option  v-for="rol in role" :value="rol.id">{{rol.rol}}</option>
+                  <option  v-for="rol in role" :value="rol.id">{{rol.name}}</option>
 
               </select>
             </div>
             <div class="form-group inner-addon left-addon">
-                <i class="fa fa-circle" aria-hidden="true"></i>
+                
                <select  v-model="editUser.status" class="form-control">
-                 <option value="Activo">&nbsp; Activo</option>
-                 <option value="Inactivo">&nbsp; Inactivo</option>
+                 <option value="Activo">Activo</option>
+                 <option value="Inactivo">Inactivo</option>
                </select>
                </div>
 

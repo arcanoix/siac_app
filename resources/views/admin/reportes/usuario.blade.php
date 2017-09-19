@@ -124,7 +124,7 @@ table {
                                       @foreach ($usuarios as $deliveryReport)
                                         <tr>
                                           <td>{{ $deliveryReport->id }}</td>
-                                          <td>{{ $deliveryReport->name }}</td>
+                                          <td>{{ $deliveryReport->nombre }}</td>
                                           <td>{{ $deliveryReport->email }}</td>
                                           <td>{{ $deliveryReport->status }}</td>
 

@@ -104,7 +104,7 @@ desired effect
                                     <input class="send" v-model="input" autocomplete="off" placeholder="Escribe un mensaje..." @keyup.enter="post" />
 
                                     <input type="hidden" v-model="channel" value="">
-                                    <input type="hidden" v-model="userName" value="{{ Auth::user()->name }}">
+                                    <input style="display: none;" type="text" v-model="userName" value="{{ Auth::user()->nombre }}">
 
                                     <button @click="post" class="btn btn-primary">Enviar</button>
                               
@@ -141,7 +141,9 @@ desired effect
 
 
       var socket = io("http://socket-seac.herokuapp.com:80", {transports: ['websocket', 'polling', 'flashsocket']});
-    //var socket = io('http://127.0.0.1:8080', {transports: ['websocket', 'polling', 'flashsocket']});
+
+   // var socket = io('http://127.0.0.1:8080', {transports: ['websocket', 'polling', 'flashsocket']});
+
 
      // console.log(socket);
 

@@ -90,7 +90,7 @@
 
             </div>
             <div class="form-group inner-addon left-addon">
-               <v-select :value="adds.id" v-model="newTanque.ads_id" placeholder="Selecciona un ADS"  :options="SelectS" :on-change="onChangeS"><span slot="no-options">Por favor debe cargar un ADS en su modulo</span></v-select>
+               <v-select :value="adds.id" v-model="newTanque.ads_id" placeholder="Selecciona la direccion de un ADS"  :options="SelectS" :on-change="onChangeS"><span slot="no-options">Por favor debe cargar un ADS en su modulo</span></v-select>
             </div>
 
           </form>
@@ -201,7 +201,8 @@ export default {
     SelectS(){
       return this.ads.map(g =>(
         {
-          label:g.name,
+          label:g.address,
+
            value:g.id
          }
       ))

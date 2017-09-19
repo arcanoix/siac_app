@@ -96,7 +96,7 @@ class UserController extends Controller
                   if(is_null($request->pass)){
                     $find_user->password;
                   }else{
-                    $find_user->password = $request->pass;
+                    $find_user->password = bcrypt($request->pass);
                   }
 
                   if($request->input('role_id') == null)

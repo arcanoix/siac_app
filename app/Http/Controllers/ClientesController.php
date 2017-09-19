@@ -114,7 +114,25 @@ class ClientesController extends Controller
            }
 
         //dd($cliente_new);
+
+ if($find_number = NumeroT::find($request->number_telephone_id))
+          {
+              $valor = $find_number->status;
+
+                if($valor != "Activo")
+                {
+                  $find_number->status = "Activo";
+                }else{
+                  $find_number->status = $valor;
+                return  response()->json([
+                    "error" => "Error al asignar numero telefonico"
+                  ]);
+                }
+                $find_number->save();
+           }
+
             Activity::log('Ha actualizado un cliente');
+
         $cliente_new->save();
         
         return $cliente_new;

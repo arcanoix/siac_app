@@ -59,7 +59,9 @@
 
 
                   <p>
+
                     {{ Auth::user()->nombre }} - 
+
                     <small>Miembro desde: {{ Auth::user()->created_at }}</small>
                   </p>
                 </li>

@@ -347,6 +347,7 @@ export default {
 
   methods:{
 
+
      lookupCoordinates() {
       var app = this;
       app.longitude = "Ubicando.....";
@@ -365,6 +366,7 @@ export default {
               app.latitude = "Ubicacion no Valida";              
             })
     }, 
+
 
     onChangeUser(obj){
       this.user.user_id = obj.value;
@@ -415,10 +417,11 @@ export default {
         var type_failure = input['type_failure']
         var status = input['status']
         var address = input['place']
-       
+
           
 
          if((status && type_failure && address) == ""){
+
          
           this.hasError = false;
           this.hasDeleted = true;

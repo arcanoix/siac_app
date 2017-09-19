@@ -33,7 +33,7 @@
         <th>Cable Local</th>
         <th>Par Central</th>
         <th>Par Local</th>
-        <th>Direccion</th>
+        <th>Direcciòn</th>
 
         <th>Editar</th>
 

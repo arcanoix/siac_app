@@ -324,8 +324,8 @@ export default {
         this.manga.id = obj.value;
     },
     fetchSleeve(){
-        axios.get('manga').then(response => {
-            this.man = response.data.data.data;
+        axios.get('manga1').then(response => {
+            this.man = response.data;
         });
     },
       fetchNumber(page){

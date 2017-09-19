@@ -36,6 +36,17 @@ class MangaController extends Controller
 
     }
 
+    public function indexm()
+    {
+        //
+        $manga = Manga::all();
+
+        
+
+     return $manga;
+
+    }
+
 
     public function store(Request $request)
     {
