@@ -114,7 +114,7 @@ class ClientesController extends Controller
            }
 
         //dd($cliente_new);
-<<<<<<< HEAD
+
  if($find_number = NumeroT::find($request->number_telephone_id))
           {
               $valor = $find_number->status;
@@ -130,9 +130,9 @@ class ClientesController extends Controller
                 }
                 $find_number->save();
            }
-=======
+
             Activity::log('Ha actualizado un cliente');
->>>>>>> 45ad2f934f7d50c3891ee3fcfd75a6666d598f96
+
         $cliente_new->save();
         
         return $cliente_new;

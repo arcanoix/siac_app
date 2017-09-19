@@ -63,6 +63,7 @@ Route::delete('/business_delete/{id}','BusinessController@destroy');
 
 //rutas para mangas
 Route::get('manga','MangaController@index');
+Route::get('manga1','MangaController@indexm');
 Route::post('manga_save','MangaController@store');
 Route::get('/show_m/{id}','MangaController@show');
 Route::put('/update_m/{id}','MangaController@update');
