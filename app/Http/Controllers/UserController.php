@@ -5,6 +5,9 @@ use App\User;
 use App\Role;
 use DB;
 use Intervention\Image\ImageManagerStatic as Image;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 
 
 class UserController extends Controller
@@ -58,6 +61,8 @@ class UserController extends Controller
     		$user->email = $request->email;
     		$user->password = bcrypt($request->pass);
         $user->status = $request->status;
+
+        Activity::log('Ha registrado un usuario');
 
     		$user->save();
         $user->roles()->attach((2));
@@ -120,6 +125,8 @@ class UserController extends Controller
 
 
                               //dd($find_user);
+                              Activity::log('Ha actualizado un usuario');
+
                 $find_user->save();
 
             return $find_user;

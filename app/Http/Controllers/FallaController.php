@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Falla;
 use DB;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 
 class FallaController extends Controller
 {
@@ -92,7 +95,7 @@ class FallaController extends Controller
       $falla_save->longitud = $r->longitude;
 
      //dd($falla_save);
-
+ Activity::log('Ha registrado una Falla');
       $falla_save->save();
 
       return response()->json([
@@ -122,7 +125,7 @@ class FallaController extends Controller
         $falla_save->user_id = $r->user_id;
 
       // dd($falla_save);
-
+         Activity::log('Ha actualizado una falla');
         $falla_save->save();
         return $falla_save;
       }else{
@@ -133,6 +136,7 @@ class FallaController extends Controller
     public function destroy($id)
     {
       $falla_del = Falla::find($id);
+       Activity::log('Ha eliminado una falla');
       $falla_del->delete();
 
       return response()->json([

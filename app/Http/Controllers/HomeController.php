@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
+
+
+
+
 
 class HomeController extends Controller
 {
@@ -25,5 +30,10 @@ class HomeController extends Controller
     {
         
         return view('admin.tablero');
+    }
+
+    public function log(){
+                $latestActivities = Activity::with('user')->latest()->limit(100)->get();
+                return $latestActivities;
     }
 }

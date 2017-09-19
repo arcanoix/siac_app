@@ -7,6 +7,9 @@ use App\State;
 use App\Municipality;
 use App\Parish;
 use App\Sector;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 
 class EstateController extends Controller
 {
@@ -27,7 +30,7 @@ class EstateController extends Controller
       $sector->name = $request->name;
       $sector->parish_id = $request->parish_id;
       $sector->codigo_postal = $request->codigo_postal;
-
+ Activity::log('Ha registrado un sector');
       $sector->save();
 
       return response()->json($sector);
@@ -125,7 +128,7 @@ class EstateController extends Controller
         $sector->name = $request->name;
         $sector->parish_id = $request->parish_id;
         $sector->codigo_postal = $request->codigo_postal;
-
+         Activity::log('Ha actualizado un Sector');
         $sector->save();
         return $sector;
       }else{

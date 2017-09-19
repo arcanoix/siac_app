@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Servicio;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 
 class ServicioController extends Controller
 {
@@ -26,7 +29,7 @@ class ServicioController extends Controller
             $servicio_save->description = $request->description;
 
             $servicio_save->save();
-
+            Activity::log('Ha registrado un servicio');
             return response()->json([
                 'servicio_save' => $servicio_save
             ]);
@@ -47,7 +50,7 @@ class ServicioController extends Controller
       if($servicio_save = Servicio::find($id)){
         $servicio_save->name = $request->name;
         $servicio_save->description = $request->description;
-
+        Activity::log('Ha actualizado un servicio');
         $servicio_save->save();
         return $servicio_save;
       }else{
@@ -58,6 +61,7 @@ class ServicioController extends Controller
     public function destroy($id)
     {
           $find_servicio = Servicio::find($id);
+          Activity::log('Ha eliminado un Servicio');
           $find_servicio->delete();
 
           return response()->json([

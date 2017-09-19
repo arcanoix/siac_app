@@ -34,6 +34,8 @@ Route::get('/site',function(){
 });
 
 
+Route::get('log','HomeController@log');
+
 /*ruta de reportes*/
 
 Route::get('falla_reporte', 'PdfController@fallas');

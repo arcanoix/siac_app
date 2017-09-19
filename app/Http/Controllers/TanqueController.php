@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tanque;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 
 class TanqueController extends Controller
 {
@@ -37,7 +40,7 @@ class TanqueController extends Controller
       $tanque->ads_id = $request->ads_id;
 
       //dd($tanque);
-
+Activity::log('Ha registrado un tanque');
       $tanque->save();
 
       return response()->json([
@@ -64,7 +67,7 @@ class TanqueController extends Controller
         $tanque->ads_id = $request->ads_id;
 
         //dd($tanque);
-
+Activity::log('Ha actualizado un tanque');
         $tanque->save();
         return $tanque;
       }else{
@@ -75,6 +78,7 @@ class TanqueController extends Controller
     public function destroy($id)
     {
       $tanque_del = Tanque::find($id);
+      Activity::log('Ha eliminado un tanque');
       $tanque_del->delete();
 
       return response()->json([

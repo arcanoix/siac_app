@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CentralT;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 class CentralTController extends Controller
 {
     //
@@ -36,6 +39,7 @@ class CentralTController extends Controller
       $central->tanks_id = $centralT->tanks_id;
 
       //dd($central);
+ Activity::log('Ha registrado una central telefoncica');
 
       $central->save();
 
@@ -65,6 +69,7 @@ class CentralTController extends Controller
         $central->tanks_id = $centralT->tanks_id;
 
         //dd($central);
+ Activity::log('Ha actualizado una central');
 
         $central->save();
         return $central;
@@ -76,6 +81,8 @@ class CentralTController extends Controller
     public function destroy($id)
     {
       $find_central = CentralT::find($id);
+       Activity::log('Ha eliminado una central');
+
       $find_central->delete();
 
       return response()->json([

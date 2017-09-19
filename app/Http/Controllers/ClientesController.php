@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Clientes;
 use App\NumeroT;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 
 class ClientesController extends Controller
 {
@@ -57,9 +60,11 @@ class ClientesController extends Controller
                     "error" => "Error al asignar numero telefonico"
                   ]);
                 }
+
+
                 $find_number->save();
            }
-
+ Activity::log('Ha registrado un Cliente');
       $cliente_new->save();
 
       return response()->json([
@@ -104,11 +109,12 @@ class ClientesController extends Controller
                     "error" => "Error al asignar numero telefonico"
                   ]);
                 }
+
                 $find_number->save();
            }
 
         //dd($cliente_new);
-
+            Activity::log('Ha actualizado un cliente');
         $cliente_new->save();
         
         return $cliente_new;
@@ -120,6 +126,7 @@ class ClientesController extends Controller
      public function destroy($id)
      {
        $find_cliente = Clientes::find($id);
+        Activity::log('Ha eliminado un Cliente');
        $find_cliente->delete();
 
        return response()->json([

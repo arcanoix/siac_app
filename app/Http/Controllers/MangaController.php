@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Manga;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 
 class MangaController extends Controller
 {
@@ -43,7 +46,7 @@ class MangaController extends Controller
         $manga->description = $request->description;
 
         //dd($manga);
-
+ Activity::log('Ha registrado una manga');
           $manga->save();
 
         return response()->json([
@@ -71,7 +74,7 @@ class MangaController extends Controller
         $manga->description = $request->description;
 
         //dd($manga);
-
+ Activity::log('Ha actualizado una manga');
           $manga->save();
         return $manga;
       }else{
@@ -83,6 +86,7 @@ class MangaController extends Controller
     public function destroy($id)
     {
         $manga=Manga::find($id);
+         Activity::log('Ha eliminado una manga');
         $manga->delete();
     }
 }
