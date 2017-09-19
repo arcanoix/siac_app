@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\NumeroT;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 class NumeroTController extends Controller
 {
     //
@@ -63,7 +66,7 @@ class NumeroTController extends Controller
         $numeroN->sleeve_id = $request->sleeve_id;
 
       //  dd($numeroN);
-
+ Activity::log('Ha actualizado un Numero Telefonico');
         $numeroN->save();
         return $numeroN;
       }else{
@@ -86,7 +89,7 @@ class NumeroTController extends Controller
       $numeroN->sleeve_id = $request->sleeve_id;
 
     //  dd($numeroN);
-
+Activity::log('Ha Registrado un Numero Telefonico');
       $numeroN->save();
        return response()->json([
            'numeroN' => $numeroN
@@ -96,6 +99,7 @@ class NumeroTController extends Controller
     public function destroy($id)
     {
       $findNumber = NumberT::find($request->id);
+      Activity::log('Ha Eliminado un Numero Telefonico');
       $findNumber->delete();
 
       return response()->json([

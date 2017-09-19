@@ -145,6 +145,7 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
+       
           <li class="header"></li>
           <!-- Menus enlazados con las rutas del front vuejs  -->
 
@@ -205,7 +206,7 @@
                  </li>
 
                  <router-link tag="li" to="/log">
-                            <a><i></i><span>Log</span></a>
+                            <a><i  class="fa fa-book"></i><span>Log</span></a>
             </router-link>
 
             @endrole
@@ -231,7 +232,7 @@
             </li>
       <!-- -->
           
-
+ 
         </ul>
         <!-- /.sidebar-menu -->
       </section>
@@ -247,14 +248,29 @@
       <section class="content">
 
         <!-- Your Page Content Here -->
-
+   @if(Auth::user()->status == "Activo")
       <router-view></router-view>
 
+        @else
+             <section class="content">
 
+                <!-- Your Page Content Here -->
+                    <h5>Su cuenta a sido deshabilitada, Contacte al Administrador</h5>
+             
+
+              </section>
+       @endif
+       
       </section>
+
+
+
+                
+               
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+     
 
 
 

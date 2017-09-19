@@ -104853,12 +104853,236 @@ setToStringTag(Math, 'Math', true);
 setToStringTag(global.JSON, 'JSON', true);
 
 /***/ }),
+<<<<<<< HEAD
 /* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(266);
 module.exports = __webpack_require__(267);
 
+=======
+/* 451 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(200);
+module.exports = __webpack_require__(201);
+
+
+/***/ }),
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */,
+/* 458 */,
+/* 459 */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(463)
+
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(460),
+  /* template */
+  __webpack_require__(462),
+  /* scopeId */
+  "data-v-5cd694dd",
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\xampp\\htdocs\\siac_app\\resources\\assets\\js\\components\\Logs.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Logs.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5cd694dd", Component.options)
+  } else {
+    hotAPI.reload("data-v-5cd694dd", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 460 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      logs: []
+    };
+  },
+  created: function created() {
+    this.fetchlogs();
+  },
+
+  methods: {
+    fetchlogs: function fetchlogs() {
+      var _this = this;
+
+      axios.get('log').then(function (response) {
+        console.log(response.data);
+        _this.logs = response.data;
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 461 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(6)();
+exports.push([module.i, "\n.simple-root[data-v-5cd694dd] {\r\n  margin-top: 20%;\r\n  margin-left: auto;\r\n  margin-right: auto;\n}\n.help.is-danger[data-v-5cd694dd] {\r\n  color: red;\n}\n.form-control.is-danger[data-v-5cd694dd] {\r\n  border: 1px solid red;\n}\r\n\r\n\r\n\r\n/* enable absolute positioning */\n.inner-addon[data-v-5cd694dd] {\r\n    position: relative;\n}\r\n\r\n/* style icon */\n.inner-addon .fa[data-v-5cd694dd] {\r\n  position: absolute;\r\n  padding: 10px;\r\n  pointer-events: none;\n}\r\n\r\n/* align icon */\n.left-addon .fa[data-v-5cd694dd]  { left:  0px;\n}\n.right-addon .fa[data-v-5cd694dd] { right: 0px;\n}\r\n\r\n/* add padding  */\n.left-addon input[data-v-5cd694dd]  { padding-left:  30px;\n}\n.right-addon input[data-v-5cd694dd] { padding-right: 30px;\n}\n.tabled[data-v-5cd694dd]{\r\n    background-color: white;\r\n     opacity:0.9; /* Opacidad 90% */\r\n     border-radius: 2px;\r\n     border-bottom: 2px;\n}\r\n/* Table css Start */\na.del[data-v-5cd694dd]\r\n{\r\n    background:#d9534f;\r\n    border-radius: 2px;\r\n    width: 35px;\r\n    height:28px;\r\n    padding-left:12px;\r\n    line-height:10px;\n}\na.edit[data-v-5cd694dd]\r\n{\r\n    padding-left:10px;\r\n    background:#337ab7;\r\n    color:#fff;\r\n    border-radius:2px;\r\n    border:none;\n}\ntr.row-name[data-v-5cd694dd]\r\n{\r\n    font-size: 18px;\r\n    color:#448aff;\n}\ntr.row-content[data-v-5cd694dd]\r\n{\r\n    color:#6c7173;\n}\nth[data-v-5cd694dd]  {\r\n   text-align: center;\r\n  padding-top: 10px;\r\npadding-right: 10px;\r\npadding-bottom: 10px;\r\npadding-left: 30px;\n}\ntd[data-v-5cd694dd]  {\r\n  text-align: center;\r\n padding-top: 10px;\r\npadding-right: 10px;\r\npadding-bottom: 10px;\r\npadding-left: 30px;\n}\ntable[data-v-5cd694dd]\r\n{\r\n    border-bottom: 8px solid #448aff;\n}\ntd.check[data-v-5cd694dd]\r\n{\r\n    text-align: center;\n}\n.table-striped>tbody>tr[data-v-5cd694dd]:nth-of-type(odd)\r\n{\r\n    background:#F0F2F2 !important;\n}\na.btn-danger[data-v-5cd694dd]:hover\r\n{\r\n    background: #de6c69;\n}\na.btn-danger[data-v-5cd694dd]\r\n{\r\n    background:#d9534f;\n}\na.btn-top[data-v-5cd694dd]\r\n{\r\n    /*background:#448aff;*/\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\n}\na.btn-top[data-v-5cd694dd]:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\na.btn-t[data-v-5cd694dd]\r\n{\r\n\r\n    color:#fff;\r\n    border:1px solid #448aff;\r\n    padding: 7px 10px;\r\n    border-radius:4px;\r\n    width: 20%;\n}\na.btn-t[data-v-5cd694dd]:hover\r\n{\r\n    text-decoration: none;\r\n    box-shadow:3px 3px 5px #222;\r\n    transition:box-shadow 0.5s;\n}\r\n/* Table css End */\r\n\r\n/*modal*/\n.Modal__container[data-v-5cd694dd] {\r\n    max-width: 700px;\r\n    width: 90%;\r\n    background: white;\r\n    border-radius: 2px;\r\n    -webkit-animation-duration: 0.3s;\r\n            animation-duration: 0.3s;\r\n    -webkit-animation-delay: 0s;\r\n            animation-delay: 0s;\n}\n.Modal__header[data-v-5cd694dd] {\r\n    border-bottom: 1px solid white;\r\n    padding: 15px 10px;\r\n    background-color: silver;\r\n    color: white;\r\n    border-radius: 2px;\n}\n.Modal__header > h1[data-v-5cd694dd] {\r\n    font-size: 27px;\r\n    font-weight: normal;\r\n    margin: 0;\n}\n.Modal__content[data-v-5cd694dd] {\r\n    padding: 10px;\n}\n.Modal__footer[data-v-5cd694dd] {\r\n    padding: 5px;\n}\n.u-overlay[data-v-5cd694dd] {\r\n    position: fixed;\r\n    z-index: 1000;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(0,0,0,0.8);\r\n    display: -webkit-box;\r\n    display: -ms-flexbox;\r\n    display: flex;\r\n    -webkit-box-align: center;\r\n        -ms-flex-align: center;\r\n            align-items: center;\r\n    -webkit-box-pack: center;\r\n        -ms-flex-pack: center;\r\n            justify-content: center;\n}\n.naked-link[data-v-5cd694dd] {\r\n    color: inherit;\r\n    text-decoration: inherit;\n}\r\n\r\n", ""]);
+
+/***/ }),
+/* 462 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "container-fluid"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "tabled"
+  }, [_c('br'), _vm._v(" "), _c('h3', {
+    staticStyle: {
+      "text-align": "center"
+    }
+  }, [_vm._v("Logs")]), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "padding": "5px"
+    }
+  }), _vm._v(" "), _c('table', {
+    staticClass: "table table-striped"
+  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.logs), function(b) {
+    return _c('tr', {
+      staticClass: "row-content"
+    }, [_c('td', [_vm._v(_vm._s(b.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.user.nombre))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.text) + " ")]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.ip_address))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(b.created_at))])])
+  })], 2), _vm._v(" "), _c('br')])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('section', {
+    staticClass: "content-header"
+  }, [_c('h1', [_c('small')]), _vm._v(" "), _c('ol', {
+    staticClass: "breadcrumb"
+  }, [_c('li', [_c('a', {
+    attrs: {
+      "href": "#"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-dashboard"
+  }), _vm._v(" Level")])]), _vm._v(" "), _c('li', {
+    staticClass: "active"
+  }, [_vm._v("LOGS")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('tr', {
+    staticClass: "row-name"
+  }, [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Usuario")]), _vm._v(" "), _c('th', [_vm._v("Actividad")]), _vm._v(" "), _c('th', [_vm._v("Ip")]), _vm._v(" "), _c('th', [_vm._v("Fecha")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5cd694dd", module.exports)
+  }
+}
+
+/***/ }),
+/* 463 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(461);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("745ac7d3", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5cd694dd\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Logs.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-5cd694dd\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Logs.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+>>>>>>> 45ad2f934f7d50c3891ee3fcfd75a6666d598f96
 
 /***/ })
 /******/ ]);

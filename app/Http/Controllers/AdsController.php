@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ads;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
+
+
 class AdsController extends Controller
 {
     //
@@ -48,6 +53,7 @@ class AdsController extends Controller
           $ads_new->coord_y = $request->coord_y;
 
           //dd($ads_new);
+           Activity::log('Ha registrado un Ads');
 
           $ads_new->save();
 
@@ -60,6 +66,8 @@ class AdsController extends Controller
     public function destroy($id)
     {
         $find_ads = Ads::find($id);
+         Activity::log('Ha eliminado un ads');
+
         $find_ads->delete();
 
         return response()->json([
@@ -96,6 +104,7 @@ class AdsController extends Controller
         $ads_new->coord_y = $request->coord_y;
 
         //dd($ads_new);
+         Activity::log('Ha actualizado un ads');
 
         $ads_new->save();
         return $ads_new;

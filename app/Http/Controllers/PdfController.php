@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Falla;
 use App\Clientes;
 use App\User;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 
 class PdfController extends Controller
 {

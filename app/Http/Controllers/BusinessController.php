@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Business;
 use App\NumeroT;
 use DB;
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+use Activity;
 
 class BusinessController extends Controller
 {
@@ -63,6 +66,7 @@ class BusinessController extends Controller
                 }
                 $find_number->save();
            }
+            Activity::log('Ha registrado una empresa');
 
           $empresa->save();
 
@@ -113,6 +117,7 @@ class BusinessController extends Controller
                 }
                 $find_number->save();
            }
+      Activity::log('Ha actualizado una empresa');
 
       $business->save();
       
@@ -126,6 +131,8 @@ class BusinessController extends Controller
   public function destroy($id)
   {
     $del_business = Business::find($id);
+     Activity::log('Ha eliminado una empresa');
+
     $del_business->delete();
 
     return response()->json([
