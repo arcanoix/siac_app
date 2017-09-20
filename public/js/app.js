@@ -52679,7 +52679,7 @@ var postCliente = 'clientes_save';
       var input = this.editCliente;
       var update = '/update_cli/' + input.id;
 
-      this.editCliente.number_telephone_id = this.numero.id;
+      //this.editCliente.number_telephone_id = this.numero.id;
 
       axios.put(update, input).then(function (response) {
         swal({
@@ -53437,7 +53437,7 @@ var postBusiness = 'business_save';
       var input = this.editBusiness;
       var update = '/update_b/' + input.id;
 
-      this.editBusiness.number_telephone_id = this.numero.id;
+      //this.editBusiness.number_telephone_id = this.numero.id;
 
       axios.put(update, input).then(function (response) {
         swal({

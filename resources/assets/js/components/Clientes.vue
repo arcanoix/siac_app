@@ -484,7 +484,7 @@ export default {
         var update = '/update_cli/' + input.id;
 
         
-          this.editCliente.number_telephone_id = this.numero.id;
+          //this.editCliente.number_telephone_id = this.numero.id;
 
         axios.put(update, input).then(response => {
           swal({
