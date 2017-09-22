@@ -18,7 +18,31 @@
     <h3 style="text-align: center;">Logs</h3>
 
     <div style="padding: 5px">
-
+      Busqueda por fecha:
+       <form class="form-inline" role="search">
+                          
+                          <div class="form-group">
+                            <div id="from" class="input-append input-group dtpicker">
+                              <input data-format="yyyy-MM-dd" type="text" class="form-control" placeholder="from" v-model="findlog.date1" required>
+                              <span class="input-group-addon add-on">
+                                <i  data-date-icon="fa fa-calendar"></i>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div id="to" class="input-append input-group dtpicker">
+                              <input data-format="yyyy-MM-dd" type="text" class="form-control" placeholder="to" v-model="findlog.date2" required>
+                              <span class="input-group-addon add-on">
+                                <i  data-date-icon="fa fa-calendar"></i>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <a class="btn btn-primary" v-on:click.prevent="getLogs()">buscar</a>
+                            <a href="#" class="btn btn-danger" v-on:click.prevent="fetchlogs()">Reset</a>
+                          </div>
+                        </form>
+      
      
     </div>
 
@@ -46,6 +70,26 @@
       </tr>
 
     </table>
+
+     <nav>
+                <ul class="pagination">
+                    <li v-if="pagination.current_page > 1">
+                        <a  aria-label="Previous"
+                           v-on:click.prevent="changePage(pagination.current_page - 1)">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li v-for="page in pagesNumber"
+                        :class="[ page == isActived ? 'active' : '']">
+                        <a  v-on:click.prevent="changePage(page)">{{ page }}</a>
+                    </li>
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a aria-label="Next" v-on:click.prevent="changePage(pagination.current_page + 1)">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
     <br>
 
      
@@ -59,20 +103,86 @@
 export default {
   data () {
     return {
-      logs:[]
+      logs:[],
+      findlog:{
+         date1:'',
+         date2:''
+      },
+      
+      find:'',
+       pagination:{
+          total:0,
+          per_page : 7,
+          from:1,
+          to:0,
+          current_page:1
+        },
+        offset: 4,
     }
   },
    created(){
-    this.fetchlogs();
+    this.fetchlogs(this.pagination.current_page)
+    
 
   },
+  computed:{
+      isActived(){
+        return this.pagination.current_page;
+      },
+      pagesNumber(){
+        if (!this.pagination.to) {
+                 return [];
+             }
+             var from = this.pagination.current_page - this.offset;
+             if (from < 1) {
+                 from = 1;
+             }
+             var to = from + (this.offset * 2);
+             if (to >= this.pagination.last_page) {
+                 to = this.pagination.last_page;
+             }
+             var pagesArray = [];
+             while (from <= to) {
+                 pagesArray.push(from);
+                 from++;
+             }
+             return pagesArray;
+      }
+  },
+  
   methods:{
-    fetchlogs(){
-      axios.get('log').then(response => {
-        console.log(response.data)
-        this.logs = response.data
+    fetchlogs(page){
+      this.findlog.date1 = ''
+      this.findlog.date2 = ''
+      axios.get('/log?page=' + page).then(response => {
+        //console.log(response.data)
+        this.logs = response.data.data.data;
+        this.pagination = response.data.pagination;
       })
-    }
+    },
+    findLog(findlog){
+          axios.post('buscar_logs', this.findlog).then(response => {
+            //console.log(response.data)
+             this.fetchlogs()
+          })
+    },
+
+    getLogs(findlog){
+
+      axios.get('/buscar_logs/'+ this.findlog.date1 + '/' + this.findlog.date2).then(response => {
+        //console.log(response.data)
+        this.logs = response.data.data.data;
+        this.pagination = response.data.pagination;
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    changePage(page){
+          //console.log(page);
+          this.pagination.current_page = page;
+          this.fetchlogs(page);
+      }
+    
   }
 };
 </script>

@@ -39,6 +39,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css')}}">
   <link rel="stylesheet" href="{{ asset('css/chating.css')}}">
+  <!-- Date picker -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css')}}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -133,9 +135,10 @@ desired effect
 <script src="{{ asset('js/sweetalert2.min.js')}}"></script>
 <script src="{{asset('js/moment.js')}}"></script>
 <script src="{{asset('js/moment-with-locales.js')}}"></script>
-
+<script src="{{ asset('js/bootstrap-datetimepicker.min.js')}}"></script> <!-- Date picker -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+ 
 
     <script>
 

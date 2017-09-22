@@ -35,6 +35,7 @@ Route::get('/site',function(){
 
 
 Route::get('log','HomeController@log');
+Route::get('/buscar_logs/{dato1?}/{dato2?}', 'HomeController@buscar');
 
 /*ruta de reportes*/
 

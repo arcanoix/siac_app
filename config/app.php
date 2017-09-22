@@ -189,6 +189,8 @@ return [
 
         Spatie\Activitylog\ActivitylogServiceProvider::class,
 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ],
 
     /*
@@ -246,6 +248,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
 
         'Activity' => Spatie\Activitylog\ActivitylogFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class
     ],
 
 ];

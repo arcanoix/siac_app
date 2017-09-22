@@ -72,7 +72,7 @@
 
                                        <gmap-map
 																			  :center="{lat:10.1, lng:-67.9}"
-																			  :zoom="8"
+																			  :zoom="10"
 																			  map-type-id="terrain"
 																			  style="width: 900px; height: 300px"
 
