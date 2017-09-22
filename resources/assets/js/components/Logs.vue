@@ -23,7 +23,7 @@
                           
                           <div class="form-group">
                             <div id="from" class="input-append input-group dtpicker">
-                              <input data-format="yyyy-MM-dd" type="text" class="form-control" placeholder="from" v-model="findlog.date1" required>
+                              <input data-format="yyyy-MM-dd" type="date" class="form-control" placeholder="from" v-model="findlog.date1" required>
                               <span class="input-group-addon add-on">
                                 <i  data-date-icon="fa fa-calendar"></i>
                               </span>
@@ -31,7 +31,7 @@
                           </div>
                           <div class="form-group">
                             <div id="to" class="input-append input-group dtpicker">
-                              <input data-format="yyyy-MM-dd" type="text" class="form-control" placeholder="to" v-model="findlog.date2" required>
+                              <input data-format="yyyy-MM-dd" type="date" class="form-control" placeholder="to" v-model="findlog.date2" required>
                               <span class="input-group-addon add-on">
                                 <i  data-date-icon="fa fa-calendar"></i>
                               </span>
@@ -105,8 +105,8 @@ export default {
     return {
       logs:[],
       findlog:{
-         date1:'',
-         date2:''
+         date1:'2017-09-01',
+         date2:'2017-09-01'
       },
       
       find:'',
@@ -151,6 +151,7 @@ export default {
   },
   
   methods:{
+
     fetchlogs(page){
       this.findlog.date1 = ''
       this.findlog.date2 = ''
@@ -160,6 +161,7 @@ export default {
         this.pagination = response.data.pagination;
       })
     },
+
     findLog(findlog){
           axios.post('buscar_logs', this.findlog).then(response => {
             //console.log(response.data)
@@ -168,15 +170,31 @@ export default {
     },
 
     getLogs(findlog){
+      console.log(this.findlog.date1 < this.findlog.date2)
+     
+     if(this.findlog.date1 <= this.findlog.date2)
+     {
+         axios.get('/buscar_logs/'+ this.findlog.date1 + '/' + this.findlog.date2).then(response => {
+            console.log(response.data)
+            this.logs = response.data.data.data
+            this.pagination = response.data.pagination
+          }).catch(error => {
+            console.log(error)
+          })
 
-      axios.get('/buscar_logs/'+ this.findlog.date1 + '/' + this.findlog.date2).then(response => {
-        //console.log(response.data)
-        this.logs = response.data.data.data;
-        this.pagination = response.data.pagination;
-      }).catch(error => {
-        console.log(error)
-      })
+     }else{
+       swal({
+            title: "Oops...",
+              text:  'La fecha1 debe ser mayor que la fecha2 !',
+               type: 'error' 
+              })
+       this.fetchlogs()
+     }
+         
+
     },
+
+
     changePage(page){
           //console.log(page);
           this.pagination.current_page = page;

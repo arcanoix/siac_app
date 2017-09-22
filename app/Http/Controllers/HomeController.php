@@ -60,7 +60,7 @@ class HomeController extends Controller
         //dd($dato1,$dato2);
        //$dato1 = Carbon::parse($dato1)->subDay(1);
           $dato1 = Carbon::parse($dato1);               
-         // $dato2 = Carbon::parse($dato2);
+         //$dato2 = Carbon::parse($dato2)->subDay(1);
           $dato2 = Carbon::parse($dato2)->addDay(1);
 
      

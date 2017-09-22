@@ -54614,8 +54614,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       logs: [],
       findlog: {
-        date1: '',
-        date2: ''
+        date1: '2017-09-01',
+        date2: '2017-09-01'
       },
 
       find: '',
@@ -54681,13 +54681,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getLogs: function getLogs(findlog) {
       var _this3 = this;
 
-      axios.get('/buscar_logs/' + this.findlog.date1 + '/' + this.findlog.date2).then(function (response) {
-        //console.log(response.data)
-        _this3.logs = response.data.data.data;
-        _this3.pagination = response.data.pagination;
-      }).catch(function (error) {
-        console.log(error);
-      });
+      console.log(this.findlog.date1 < this.findlog.date2);
+
+      if (this.findlog.date1 <= this.findlog.date2) {
+        axios.get('/buscar_logs/' + this.findlog.date1 + '/' + this.findlog.date2).then(function (response) {
+          console.log(response.data);
+          _this3.logs = response.data.data.data;
+          _this3.pagination = response.data.pagination;
+        }).catch(function (error) {
+          console.log(error);
+        });
+      } else {
+        swal({
+          title: "Oops...",
+          text: 'La fecha1 debe ser mayor que la fecha2 !',
+          type: 'error'
+        });
+        this.fetchlogs();
+      }
     },
     changePage: function changePage(page) {
       //console.log(page);
@@ -93868,7 +93879,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "data-format": "yyyy-MM-dd",
-      "type": "text",
+      "type": "date",
       "placeholder": "from",
       "required": ""
     },
@@ -93898,7 +93909,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "data-format": "yyyy-MM-dd",
-      "type": "text",
+      "type": "date",
       "placeholder": "to",
       "required": ""
     },
